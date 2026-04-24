@@ -55,7 +55,7 @@ import academicPreview from "../assets/images/academic-preview.png";
 import pedagogicalPreview from "../assets/images/pedagogical-preview.png";
 
 /* ================================================================== */
-/*  CONSTANTS                                                          */
+/*  CONSTANTS (v3)                                                      */
 /* ================================================================== */
 
 const NAV_LINKS = ["Features", "Why Us", "How It Works", "Screens", "Pricing", "Testimonials"] as const;
