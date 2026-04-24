@@ -1,6 +1,0 @@
-{
-  "name": "CovenantERP",
-  "description": "A privacy-first, zero-trust ERP for theological institutions featuring multi-tenant isolation and end-to-end encryption for sensitive records.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
-}
