@@ -139,7 +139,7 @@ export function ChurchManagement() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600">Spiritual Oversight</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600">Spiritual Oversight</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Liturgy</span>
           </div>
@@ -159,7 +159,7 @@ export function ChurchManagement() {
           {activeTab === 'prayer' && (
             <button 
               onClick={() => setIsRequestModalOpen(true)}
-              className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-100"
+              className="px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-xs font-bold hover:from-fuchsia-700 hover:to-violet-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-fuchsia-100"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Submit Request</span>
@@ -168,7 +168,7 @@ export function ChurchManagement() {
           {activeTab === 'congregation' && (
             <button 
               onClick={() => setIsMemberModalOpen(true)}
-              className="px-6 py-3 bg-slate-950 text-white rounded-xl text-xs font-bold hover:bg-indigo-600 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200"
+              className="px-6 py-3 bg-slate-950 text-white rounded-xl text-xs font-bold hover:from-fuchsia-700 hover:to-violet-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200"
             >
               <Users className="w-4 h-4" />
               <span>Register Member</span>
@@ -190,12 +190,12 @@ export function ChurchManagement() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={cn(
                   "flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative py-2",
-                  activeTab === tab.id ? "text-indigo-600" : "text-slate-400 hover:text-slate-600"
+                  activeTab === tab.id ? "text-fuchsia-600" : "text-slate-400 hover:text-slate-600"
                 )}
               >
                 <tab.icon className="w-4 h-4" />
                 <span>{tab.label}</span>
-                {activeTab === tab.id && <motion.div layoutId="church-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600 rounded-full" />}
+                {activeTab === tab.id && <motion.div layoutId="church-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-full" />}
               </button>
             ))}
           </div>
@@ -212,7 +212,7 @@ export function ChurchManagement() {
         <div className="p-6 min-h-[500px]">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center h-80 gap-4">
-              <div className="w-12 h-12 border-4 border-indigo-500/10 border-t-indigo-600 rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-fuchsia-500/10 border-t-fuchsia-600 rounded-full animate-spin"></div>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Syncing Ecclesiastical Data...</p>
             </div>
           ) : (
@@ -231,11 +231,11 @@ export function ChurchManagement() {
                     </div>
                   ) : (
                     events.map((event) => (
-                      <div key={event.id} className="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all group">
+                      <div key={event.id} className="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-fuchsia-500/5 transition-all group">
                          <div className="flex items-center justify-between mb-6">
                             <span className={cn(
                               "px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest",
-                              event.type === 'liturgy' ? "bg-indigo-50 text-indigo-600" : "bg-emerald-50 text-emerald-600"
+                              event.type === 'liturgy' ? "bg-fuchsia-50 text-fuchsia-600" : "bg-emerald-50 text-emerald-600"
                             )}>
                               {event.type}
                             </span>
@@ -244,7 +244,7 @@ export function ChurchManagement() {
                                <p className="text-[9px] font-mono text-slate-400 uppercase">{event.time}</p>
                             </div>
                          </div>
-                         <h3 className="text-xl font-bold text-slate-900  tracking-tight mb-3 group-hover:text-indigo-600 transition-colors uppercase leading-tight">
+                         <h3 className="text-xl font-bold text-slate-900  tracking-tight mb-3 group-hover:text-fuchsia-600 transition-colors uppercase leading-tight">
                            {event.title}
                          </h3>
                          <p className="text-sm text-slate-500 line-clamp-2 mb-6">{event.description}</p>
@@ -273,11 +273,11 @@ export function ChurchManagement() {
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {prayers.map((prayer) => (
-                        <div key={prayer.id} className="p-6 bg-slate-50/50 border border-slate-100 rounded-3xl hover:bg-white hover:border-indigo-100 transition-all group">
+                        <div key={prayer.id} className="p-6 bg-slate-50/50 border border-slate-100 rounded-3xl hover:bg-white hover:border-fuchsia-200 transition-all group">
                            <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-3">
                                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center">
-                                    <Sparkles className="w-5 h-5 text-indigo-400" />
+                                    <Sparkles className="w-5 h-5 text-fuchsia-400" />
                                  </div>
                                  <div>
                                     <p className="text-sm font-bold text-slate-900 ">{prayer.userName}</p>
@@ -332,7 +332,7 @@ export function ChurchManagement() {
                           <tr key={member.id} className="hover:bg-slate-50/50 transition-colors cursor-pointer group">
                             <td className="px-8 py-6">
                                <div className="flex items-center gap-4">
-                                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all uppercase">
+                                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:from-fuchsia-700 hover:to-violet-700 group-hover:text-white transition-all uppercase">
                                     {member.name.split(' ').map(n => n[0]).join('')}
                                   </div>
                                   <div>
@@ -356,7 +356,7 @@ export function ChurchManagement() {
                                </div>
                             </td>
                             <td className="px-8 py-6 text-right">
-                               <div className="flex items-center justify-end gap-2 text-slate-200 group-hover:text-indigo-600 transition-colors">
+                               <div className="flex items-center justify-end gap-2 text-slate-200 group-hover:text-fuchsia-600 transition-colors">
                                   <ShieldCheck className="w-4 h-4" />
                                   <span className="text-[8px] font-black uppercase tracking-widest text-slate-300">Verified</span>
                                </div>
@@ -416,7 +416,7 @@ export function ChurchManagement() {
                    </div>
                    <div className="pt-4 flex gap-3">
                       <button type="button" onClick={() => setIsEventModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Cancel</button>
-                      <button type="submit" className="flex-1 py-3 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-xl shadow-indigo-100">Establish Registry</button>
+                      <button type="submit" className="flex-1 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-bold text-sm shadow-xl shadow-fuchsia-100">Establish Registry</button>
                    </div>
                 </form>
             </motion.div>
@@ -439,7 +439,7 @@ export function ChurchManagement() {
                    </div>
                    <div className="pt-4 flex gap-3">
                       <button type="button" onClick={() => setIsRequestModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Cancel</button>
-                      <button type="submit" className="flex-1 py-3 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-xl shadow-indigo-100">Submit for Intercession</button>
+                      <button type="submit" className="flex-1 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-bold text-sm shadow-xl shadow-fuchsia-100">Submit for Intercession</button>
                    </div>
                 </form>
             </motion.div>

@@ -191,7 +191,7 @@ export function FacultyManagement() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600">Institutional Governance</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600">Institutional Governance</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Personnel Registry</span>
           </div>
@@ -242,7 +242,7 @@ export function FacultyManagement() {
                 placeholder="Search staff registry..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-2xl text-sm outline-none focus:ring-4 focus:ring-indigo-100 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-2xl text-sm outline-none focus:ring-4 focus:ring-fuchsia-100 transition-all placeholder:text-slate-300 font-medium"
               />
             </div>
             <button className="px-5 py-3 border border-slate-200 rounded-xl text-slate-500 hover:bg-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all">
@@ -254,7 +254,7 @@ export function FacultyManagement() {
           <div className="bg-white rounded-3xl border border-slate-200/60 shadow-sm overflow-hidden min-h-[400px]">
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-40 gap-4">
-                <div className="w-12 h-12 border-4 border-indigo-500/10 border-t-indigo-600 rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-fuchsia-500/10 border-t-fuchsia-600 rounded-full animate-spin"></div>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Authenticating Staff Registry...</p>
               </div>
             ) : filteredFaculty.length === 0 ? (
@@ -280,7 +280,7 @@ export function FacultyManagement() {
                     <tr key={member.id} className="hover:bg-slate-50/50 transition-colors group cursor-pointer">
                       <td className="px-8 py-6">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm uppercase">
+                          <div className="w-12 h-12 overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:from-fuchsia-700 hover:to-violet-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase">
                             {member.photoUrl ? (
                               <img src={member.photoUrl} alt={member.name} className="w-full h-full object-cover" />
                             ) : (
@@ -291,7 +291,7 @@ export function FacultyManagement() {
                             <p className="font-bold text-slate-900 tracking-tight italic-serif">{member.name}</p>
                             <div className="flex gap-2 items-center mt-0.5">
                               {member.facultyId && (
-                                <span className="text-[9px] uppercase font-black tracking-widest text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded">{member.facultyId}</span>
+                                <span className="text-[9px] uppercase font-black tracking-widest text-fuchsia-600 bg-fuchsia-50 px-1.5 py-0.5 rounded">{member.facultyId}</span>
                               )}
                               <p className="text-[10px] uppercase font-bold text-slate-400">{member.email}</p>
                             </div>
@@ -346,7 +346,7 @@ export function FacultyManagement() {
                 <div className="flex items-center justify-between border-b border-slate-100 pb-6">
                   <div>
                     <h2 className="font-bold text-slate-900 italic-serif text-xl tracking-tight">Staff Dossier</h2>
-                    <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mt-0.5 underline">Secured Record</p>
+                    <p className="text-[10px] font-black text-fuchsia-500 uppercase tracking-widest mt-0.5 underline">Secured Record</p>
                   </div>
                   <button onClick={() => setSelectedFaculty(null)} className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
                     <X className="w-4 h-4" />
@@ -355,11 +355,11 @@ export function FacultyManagement() {
 
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-6">
-                    <div className="w-24 h-24 rounded-[40%] bg-indigo-50 border-2 border-indigo-100 flex items-center justify-center shadow-xl shadow-indigo-100/20 overflow-hidden">
+                    <div className="w-24 h-24 rounded-[40%] bg-fuchsia-50 border-2 border-fuchsia-200 flex items-center justify-center shadow-xl shadow-fuchsia-100/20 overflow-hidden">
                       {selectedFaculty.photoUrl ? (
                          <img src={selectedFaculty.photoUrl} alt={selectedFaculty.name} className="w-full h-full object-cover" />
                       ) : (
-                         <Users className="w-10 h-10 text-indigo-600" />
+                         <Users className="w-10 h-10 text-fuchsia-600" />
                       )}
                     </div>
                     <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 border-4 border-white rounded-full flex items-center justify-center">
@@ -377,7 +377,7 @@ export function FacultyManagement() {
                   <div className="flex items-center gap-2 mt-4 w-full justify-center">
                     <button 
                       onClick={() => alert(`Printing ID Card for ${selectedFaculty.name}...`)}
-                      className="flex-1 px-4 py-2 bg-indigo-50 text-indigo-600 border border-indigo-100 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 px-4 py-2 bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 hover:text-white transition-colors flex items-center justify-center gap-2"
                     >
                       <Download className="w-3 h-3" />
                       Print ID Card
@@ -399,37 +399,37 @@ export function FacultyManagement() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 gap-3">
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-indigo-600 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-fuchsia-600 transition-colors">
                         <Phone className="w-4 h-4" />
                       </div>
                       <div>
                          <div className="flex items-center gap-1.5 mb-1">
                            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-slate-400 leading-none">Phone</p>
-                           <ShieldCheck className="w-2.5 h-2.5 text-indigo-400" />
+                           <ShieldCheck className="w-2.5 h-2.5 text-fuchsia-400" />
                          </div>
                          <p className="text-sm font-bold text-slate-900">{selectedFaculty.phone || 'Not Configured'}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-indigo-600 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-fuchsia-600 transition-colors">
                         <Mail className="w-4 h-4" />
                       </div>
                       <div>
                          <div className="flex items-center gap-1.5 mb-1">
                            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-slate-400 leading-none">Email</p>
-                           <ShieldCheck className="w-2.5 h-2.5 text-indigo-400" />
+                           <ShieldCheck className="w-2.5 h-2.5 text-fuchsia-400" />
                          </div>
                          <p className="text-sm font-bold text-slate-900 truncate max-w-[140px]">{selectedFaculty.email}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-indigo-600 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-fuchsia-600 transition-colors">
                         <Briefcase className="w-4 h-4" />
                       </div>
                       <div>
                          <div className="flex items-center gap-1.5 mb-1">
                            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-slate-400 leading-none">Chair / Department</p>
-                           <ShieldCheck className="w-2.5 h-2.5 text-indigo-400" title="Restricted Academic Access" />
+                           <ShieldCheck className="w-2.5 h-2.5 text-fuchsia-400" title="Restricted Academic Access" />
                          </div>
                          <p className="text-sm font-bold text-slate-900">{selectedFaculty.department}</p>
                       </div>
@@ -469,7 +469,7 @@ export function FacultyManagement() {
                       <div className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100 italic-serif relative overflow-hidden group">
                         <div className="flex items-center gap-2 mb-2">
                           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Academic Biography</p>
-                          <ShieldCheck className="w-3 h-3 text-slate-200 group-hover:text-indigo-400 transition-colors" />
+                          <ShieldCheck className="w-3 h-3 text-slate-200 group-hover:text-fuchsia-400 transition-colors" />
                         </div>
                         <p className="text-xs leading-relaxed text-slate-600 font-medium">{selectedFaculty.bio}</p>
                       </div>
@@ -483,7 +483,7 @@ export function FacultyManagement() {
                            <div className="flex items-center justify-between mb-4">
                              <div className="flex items-center gap-2">
                                <p className="text-[10px] font-black uppercase tracking-widest text-slate-900">Assigned Subjects</p>
-                               <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-black">{assignedSubjects.length}</span>
+                               <span className="px-2 py-0.5 bg-fuchsia-50 text-fuchsia-600 rounded-full text-[9px] font-black">{assignedSubjects.length}</span>
                              </div>
                              <ShieldCheck className="w-3.5 h-3.5 text-slate-300" />
                            </div>
@@ -508,17 +508,17 @@ export function FacultyManagement() {
                   </div>
 
                     {canManageFinance && (
-                      <div className="p-5 bg-indigo-50/30 rounded-2xl border border-indigo-100 group">
+                      <div className="p-5 bg-fuchsia-50/30 rounded-2xl border border-fuchsia-200 group">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-indigo-400 shadow-sm group-hover:text-indigo-600 transition-all">
+                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-fuchsia-400 shadow-sm group-hover:text-fuchsia-600 transition-all">
                               <Lock className="w-5 h-5" />
                             </div>
                             <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Financial Vault</span>
                           </div>
                           <button 
                             onClick={() => setIsViewingSalary(!isViewingSalary)}
-                            className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-colors"
+                            className="px-3 py-1.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-colors"
                           >
                             {isViewingSalary ? 'Seal' : 'Decrypt'}
                           </button>
@@ -534,9 +534,9 @@ export function FacultyManagement() {
                               { label: 'Annual Stipend', value: `$${(selectedFaculty.salary || 0).toLocaleString()}.00` },
                               { label: 'Bank Account', value: selectedFaculty.bankAccount || 'Not Provided' },
                             ].map((row, i) => (
-                               <div key={i} className="flex justify-between items-center py-2 border-t border-indigo-100/30 group">
+                               <div key={i} className="flex justify-between items-center py-2 border-t border-fuchsia-200/30 group">
                                  <div className="flex items-center gap-2">
-                                   <span className="text-[9px] text-indigo-400 font-black uppercase tracking-widest">{row.label}</span>
+                                   <span className="text-[9px] text-fuchsia-400 font-black uppercase tracking-widest">{row.label}</span>
                                    <ShieldCheck className="w-2.5 h-2.5 text-indigo-300 opacity-50" />
                                  </div>
                                  <span className="text-sm font-bold text-slate-900 font-mono tracking-tight">{row.value}</span>
@@ -544,9 +544,9 @@ export function FacultyManagement() {
                             ))}
                           </motion.div>
                         ) : (
-                          <div className="py-6 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-indigo-100 rounded-xl bg-white/50 opacity-60">
+                          <div className="py-6 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-fuchsia-200 rounded-xl bg-white/50 opacity-60">
                             <Shield className="w-6 h-6 text-indigo-300" />
-                            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-indigo-400 font-mono">Secured Layer 4</span>
+                            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-fuchsia-400 font-mono">Secured Layer 4</span>
                           </div>
                         )}
                       </div>
@@ -556,7 +556,7 @@ export function FacultyManagement() {
                   {isAdmin && (
                     <button 
                       onClick={() => setIsPermissionModalOpen(true)}
-                      className="w-full py-5 bg-slate-950 text-white rounded-2xl font-bold text-[11px] uppercase tracking-[0.3em] hover:bg-indigo-600 shadow-xl shadow-slate-200 transition-all flex items-center justify-center gap-3 group"
+                      className="w-full py-5 bg-slate-950 text-white rounded-2xl font-bold text-[11px] uppercase tracking-[0.3em] hover:from-fuchsia-700 hover:to-violet-700 shadow-xl shadow-slate-200 transition-all flex items-center justify-center gap-3 group"
                     >
                       <Lock className="w-4 h-4 group-hover:animate-pulse" />
                       <span>Configure Access</span>
@@ -601,11 +601,11 @@ export function FacultyManagement() {
               <form onSubmit={handleSaveMember} className="space-y-6">
                 <div className="flex flex-col items-center justify-center mb-6">
                   <div className="relative group cursor-pointer w-24 h-24">
-                    <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-indigo-400 transition-colors">
+                    <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-fuchsia-400 transition-colors">
                       {newMember.photoUrl ? (
                         <img src={newMember.photoUrl} alt="Preview" className="w-full h-full object-cover" />
                       ) : (
-                        <Users className="w-8 h-8 text-slate-300 group-hover:text-indigo-400 transition-colors" />
+                        <Users className="w-8 h-8 text-slate-300 group-hover:text-fuchsia-400 transition-colors" />
                       )}
                     </div>
                     <input 
@@ -632,7 +632,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-bold text-xs transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-indigo-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-fuchsia-100" : "opacity-70 cursor-not-allowed"
                       )}
                     />
                   </div>
@@ -643,7 +643,7 @@ export function FacultyManagement() {
                       value={newMember.photoUrl || ''}
                       onChange={(e) => setNewMember({...newMember, photoUrl: e.target.value})}
                       placeholder="https://..."
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none font-bold text-xs"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none font-bold text-xs"
                     />
                   </div>
                 </div>
@@ -659,7 +659,7 @@ export function FacultyManagement() {
                     disabled={!isAdmin}
                     className={cn(
                       "w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl outline-none font-medium italic-serif text-xl placeholder:text-slate-200 transition-all",
-                      isAdmin ? "focus:bg-white focus:ring-8 focus:ring-indigo-100" : "opacity-70 cursor-not-allowed"
+                      isAdmin ? "focus:bg-white focus:ring-8 focus:ring-fuchsia-100" : "opacity-70 cursor-not-allowed"
                     )}
                   />
                 </div>
@@ -673,7 +673,7 @@ export function FacultyManagement() {
                       value={newMember.email}
                       onChange={(e) => setNewMember({...newMember, email: e.target.value})}
                       placeholder="email@covenant.edu"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold"
                     />
                   </div>
                   <div className="space-y-2">
@@ -684,7 +684,7 @@ export function FacultyManagement() {
                       value={newMember.phone}
                       onChange={(e) => setNewMember({...newMember, phone: e.target.value})}
                       placeholder="+1 (555) 000-0000"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold font-mono"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold font-mono"
                     />
                   </div>
                 </div>
@@ -698,7 +698,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[10px] font-black uppercase tracking-widest appearance-none transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-indigo-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-fuchsia-100" : "opacity-70 cursor-not-allowed"
                       )}
                     >
                       <option>Theology</option>
@@ -716,7 +716,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[10px] font-black uppercase tracking-widest appearance-none transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-indigo-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-4 focus:ring-fuchsia-100" : "opacity-70 cursor-not-allowed"
                       )}
                     >
                       <option>Professor</option>
@@ -735,7 +735,7 @@ export function FacultyManagement() {
                     value={newMember.expertise}
                     onChange={(e) => setNewMember({...newMember, expertise: e.target.value})}
                     placeholder="e.g. Reformation History, Systematic Theology"
-                    className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold"
+                    className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold"
                   />
                 </div>
 
@@ -747,7 +747,7 @@ export function FacultyManagement() {
                       value={newMember.officeHours}
                       onChange={(e) => setNewMember({...newMember, officeHours: e.target.value})}
                       placeholder="e.g. Mon/Wed 2pm-4pm"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold"
                     />
                   </div>
                 </div>
@@ -759,7 +759,7 @@ export function FacultyManagement() {
                     onChange={(e) => setNewMember({...newMember, bio: e.target.value})}
                     placeholder="Brief academic background and research focus..."
                     rows={3}
-                    className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-medium resize-none"
+                    className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-medium resize-none"
                   />
                 </div>
 
@@ -775,7 +775,7 @@ export function FacultyManagement() {
                          value={newMember.salary}
                          onChange={(e) => setNewMember({...newMember, salary: Number(e.target.value)})}
                          placeholder="72000"
-                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold"
+                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold"
                        />
                     </div>
                     <div className="space-y-2">
@@ -788,7 +788,7 @@ export function FacultyManagement() {
                          value={newMember.bankAccount}
                          onChange={(e) => setNewMember({...newMember, bankAccount: e.target.value})}
                          placeholder="XXXX-XXXX-XXXX"
-                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-xs font-bold font-mono"
+                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-xs font-bold font-mono"
                        />
                     </div>
                   </div>
@@ -804,7 +804,7 @@ export function FacultyManagement() {
                   </button>
                   <button 
                     type="submit"
-                    className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-indigo-600 shadow-2xl shadow-slate-200 transition-all flex items-center justify-center gap-2"
+                    className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:from-fuchsia-700 hover:to-violet-700 shadow-2xl shadow-slate-200 transition-all flex items-center justify-center gap-2"
                   >
                     <Plus className="w-4 h-4" />
                     <span>{newMember.id ? 'Save Changes' : 'Integrate Staff'}</span>
@@ -836,8 +836,8 @@ export function FacultyManagement() {
               <div className="mb-8 flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600">Administrative Protocol</span>
-                    <ShieldCheck className="w-3 h-3 text-indigo-600" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-fuchsia-600">Administrative Protocol</span>
+                    <ShieldCheck className="w-3 h-3 text-fuchsia-600" />
                   </div>
                   <h2 className="text-3xl font-bold text-slate-900 tracking-tight italic-serif">Access Control Matrix</h2>
                   <p className="text-sm text-slate-500 mt-1">Assigning institutional permissions for <span className="font-bold text-slate-900">{selectedFaculty.name}</span>.</p>
@@ -866,8 +866,8 @@ export function FacultyManagement() {
                       className={cn(
                         "p-4 rounded-2xl border text-left transition-all flex items-center justify-between group",
                         isActive 
-                          ? "bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-100" 
-                          : "bg-slate-50 border-slate-100 text-slate-600 hover:border-indigo-200"
+                          ? "bg-gradient-to-r from-fuchsia-600 to-violet-600 border-fuchsia-500 text-white shadow-lg shadow-fuchsia-100" 
+                          : "bg-slate-50 border-slate-100 text-slate-600 hover:border-fuchsia-300"
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -881,7 +881,7 @@ export function FacultyManagement() {
                       </div>
                       <div className={cn(
                         "w-5 h-5 rounded-full flex items-center justify-center border-2 transition-all",
-                        isActive ? "bg-white border-white text-indigo-600" : "border-slate-200 text-transparent"
+                        isActive ? "bg-white border-white text-fuchsia-600" : "border-slate-200 text-transparent"
                       )}>
                         <Check className="w-3 h-3" />
                       </div>
@@ -900,7 +900,7 @@ export function FacultyManagement() {
                 <button 
                   onClick={() => handleUpdatePermissions(selectedFaculty.permissions || [])}
                   disabled={isUpdatingPermissions}
-                  className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-indigo-600 shadow-2xl shadow-slate-200 transition-all flex items-center justify-center gap-2"
+                  className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:from-fuchsia-700 hover:to-violet-700 shadow-2xl shadow-slate-200 transition-all flex items-center justify-center gap-2"
                 >
                   {isUpdatingPermissions ? (
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />

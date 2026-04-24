@@ -26,8 +26,13 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-slate-950">
-        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0f0a1e, #1a0e2e, #12082a)' }}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center shadow-2xl shadow-fuchsia-500/30 animate-pulse">
+            <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-fuchsia-300/60">Initializing Covenant</p>
+        </div>
       </div>
     );
   }

@@ -97,9 +97,9 @@ export function Settings() {
         {sections.map((section) => (
           <button 
             key={section.title}
-            className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-slate-200 hover:border-indigo-200 shadow-sm transition-all text-left group"
+            className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-slate-200 hover:border-fuchsia-300 shadow-sm transition-all text-left group"
           >
-            <div className="p-3 rounded-xl bg-slate-50 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-all">
+            <div className="p-3 rounded-xl bg-slate-50 text-slate-400 group-hover:bg-fuchsia-50 group-hover:text-fuchsia-600 transition-all">
               <section.icon className="w-6 h-6" />
             </div>
             <div>
@@ -113,7 +113,7 @@ export function Settings() {
       {/* Branding Section */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-sm">
         <div className="p-6 border-b border-slate-100 flex items-center gap-3">
-          <ImageIcon className="w-5 h-5 text-indigo-600" />
+          <ImageIcon className="w-5 h-5 text-fuchsia-600" />
           <h2 className="font-bold text-slate-900  uppercase tracking-widest text-xs">Branding & Logistics</h2>
         </div>
         <div className="px-6 py-8 space-y-5">
@@ -158,7 +158,7 @@ export function Settings() {
       {/* Core Profile Section */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-sm">
         <div className="p-6 border-b border-slate-100 flex items-center gap-3">
-          <ShieldCheck className="w-5 h-5 text-indigo-600" />
+          <ShieldCheck className="w-5 h-5 text-fuchsia-600" />
           <h2 className="font-bold text-slate-900  uppercase tracking-widest text-xs">Environment Configuration</h2>
         </div>
         <div className="px-6 py-8 space-y-5">
@@ -174,7 +174,7 @@ export function Settings() {
                     type="text" 
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all font-bold "
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all font-bold "
                  />
               </div>
               <div className="space-y-1">
@@ -183,7 +183,7 @@ export function Settings() {
                     type="text" 
                     value={formData.deanName}
                     onChange={e => setFormData({...formData, deanName: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all font-medium"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all font-medium"
                  />
               </div>
               
@@ -246,7 +246,7 @@ export function Settings() {
                <select 
                 value={formData.timezone}
                 onChange={e => setFormData({...formData, timezone: e.target.value})}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-100 transition-all font-medium text-sm"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all font-medium text-sm"
                >
                  <option value="UTC">Universal Coordinated Time (UTC)</option>
                  <option value="EST">Eastern Standard Time (EST)</option>
@@ -265,7 +265,7 @@ export function Settings() {
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                 Active: Zero-Trust Backend
               </div>
-              <button className="text-[10px] font-black text-indigo-600 uppercase tracking-widest px-4">Audit Logs</button>
+              <button className="text-[10px] font-black text-fuchsia-600 uppercase tracking-widest px-4">Audit Logs</button>
             </div>
           </div>
 

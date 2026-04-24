@@ -82,9 +82,9 @@ export function Login() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-indigo-900/20 border border-slate-800/10">
+        <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-fuchsia-900/20 border border-slate-800/10">
           <div className="flex flex-col items-center text-center mb-10">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-violet-600 flex items-center justify-center shadow-lg shadow-fuchsia-500/20 mb-6">
               <ShieldCheck className="text-white w-8 h-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight ">CovenantERP</h1>
@@ -103,11 +103,11 @@ export function Login() {
                 >
                   {/* Institutional Admin Path */}
                   <div className="space-y-4">
-                    <h2 className="text-xl font-bold text-slate-900 border-l-4 border-indigo-600 pl-3">Institutional Login</h2>
+                    <h2 className="text-xl font-bold text-slate-900 border-l-4 border-fuchsia-500 pl-3">Institutional Login</h2>
                     <form onSubmit={handleEmailLogin} className="space-y-3">
                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Admin Email" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl" />
                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl" />
-                       <button type="submit" disabled={isLoading} className="w-full py-4 bg-indigo-600 text-white rounded-xl font-black disabled:opacity-50">Login as Admin</button>
+                       <button type="submit" disabled={isLoading} className="w-full py-4 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-black disabled:opacity-50">Login as Admin</button>
                     </form>
                     
                     <button 
@@ -208,7 +208,7 @@ export function Login() {
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
               <div className="flex gap-3">
-                <LogIn className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+                <LogIn className="w-5 h-5 text-fuchsia-600 shrink-0 mt-0.5" />
                 <div className="text-xs text-slate-600 leading-relaxed">
                   <p className="font-bold text-slate-900 mb-1">Zero-Trust Protocol</p>
                   Your keys never leave your device. All sensitive faculty & student data is encrypted client-side.

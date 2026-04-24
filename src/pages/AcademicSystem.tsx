@@ -236,7 +236,7 @@ export default function AcademicSystem() {
      return (
        <div className="flex items-center justify-center min-h-screen bg-slate-50">
          <div className="flex flex-col items-center gap-4">
-           <div className="w-12 h-12 border-4 border-slate-200 border-t-indigo-600 rounded-full animate-spin" />
+           <div className="w-12 h-12 border-4 border-slate-200 border-t-fuchsia-600 rounded-full animate-spin" />
            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Loading Governance Matrix...</p>
          </div>
        </div>
@@ -280,13 +280,13 @@ export default function AcademicSystem() {
             </div>
 
             <div className="relative group">
-               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
+               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-fuchsia-500 transition-colors" />
                <input 
                  type="text" 
                  placeholder="Search programs..." 
                  value={searchQuery}
                  onChange={(e) => setSearchQuery(e.target.value)}
-                 className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-indigo-100 focus:ring-4 focus:ring-indigo-50/50 transition-all font-medium" 
+                 className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:border-fuchsia-200 focus:ring-4 focus:ring-fuchsia-50/50 transition-all font-medium" 
                />
             </div>
 
@@ -327,12 +327,12 @@ export default function AcademicSystem() {
             </div>
           </div>
 
-          <div className="bg-indigo-600 rounded-[2.5rem] p-6 text-white relative overflow-hidden group shadow-2xl shadow-indigo-200">
+          <div className="bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-[2.5rem] p-6 text-white relative overflow-hidden group shadow-2xl shadow-fuchsia-200">
              <div className="relative z-10">
                 <ShieldCheck className="w-10 h-10 mb-6 opacity-80" />
                 <h3 className="text-xl font-bold  mb-2">Curriculum Audit</h3>
                 <p className="text-xs text-indigo-100 font-medium leading-relaxed mb-6">Internal review of subject syllabi and faculty credentials required for ISO-9001 compliance.</p>
-                <button className="px-6 py-2.5 bg-white text-indigo-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-xl">
+                <button className="px-6 py-2.5 bg-white text-fuchsia-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-xl">
                    Start Session Review
                 </button>
              </div>
@@ -351,7 +351,7 @@ export default function AcademicSystem() {
               <div className="bg-white rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/50 p-6 relative overflow-hidden">
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-6">
-                    <span className="px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-widest">Active Curriculum</span>
+                    <span className="px-4 py-1.5 bg-fuchsia-50 text-fuchsia-600 rounded-full text-[10px] font-black uppercase tracking-widest">Active Curriculum</span>
                     <span className="px-4 py-1.5 bg-slate-50 text-slate-400 rounded-full text-[10px] font-black uppercase tracking-widest">{selectedCourse.department} Department</span>
                   </div>
                   <h1 className="text-4xl font-bold text-slate-900  tracking-tight leading-tight mb-8">
@@ -360,7 +360,7 @@ export default function AcademicSystem() {
                   
                   <div className="grid grid-cols-4 gap-6">
                     {[
-                      { label: 'Total Modules', value: subjects.filter(s => s.courseId === selectedCourse.id).length, icon: Layers, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+                      { label: 'Total Modules', value: subjects.filter(s => s.courseId === selectedCourse.id).length, icon: Layers, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50' },
                       { label: 'Enrolled Candidates', value: '1,240', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
                       { label: 'Average Credits', value: '3.0', icon: Target, color: 'text-amber-600', bg: 'bg-amber-50' },
                       { label: 'Session Velocity', value: '94%', icon: Activity, color: 'text-rose-600', bg: 'bg-rose-50' },
@@ -373,14 +373,14 @@ export default function AcademicSystem() {
                     ))}
                   </div>
                 </div>
-                <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-indigo-50/30 to-transparent pointer-none" />
+                <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-fuchsia-50/30 to-transparent pointer-none" />
               </div>
 
               {/* Subject Grid Hub */}
               <div className="space-y-6">
                 <div className="flex items-center justify-between px-4">
                    <div className="flex items-center gap-3">
-                      <BookOpen className="w-5 h-5 text-indigo-600" />
+                      <BookOpen className="w-5 h-5 text-fuchsia-600" />
                       <h2 className="text-xl font-bold text-slate-900 ">Module Catalog</h2>
                    </div>
                    <button 
@@ -394,9 +394,9 @@ export default function AcademicSystem() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {subjects.filter(s => s.courseId === selectedCourse.id).map(subject => (
-                     <div key={subject.id} className="group p-6 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:shadow-indigo-50/50 hover:border-indigo-100 transition-all duration-500">
+                     <div key={subject.id} className="group p-6 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:shadow-fuchsia-50/50 hover:border-fuchsia-200 transition-all duration-500">
                         <div className="flex items-start justify-between mb-8">
-                           <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-inner">
+                           <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold group-hover:from-fuchsia-700 hover:to-violet-700 group-hover:text-white transition-all shadow-inner">
                               {subject.code[0]}
                            </div>
                            <button 
@@ -409,7 +409,7 @@ export default function AcademicSystem() {
                         <h4 className="text-xl font-bold text-slate-900  mb-2 line-clamp-1">{subject.title}</h4>
                         <div className="flex items-center gap-3 mb-6">
                            <span className="text-[10px] font-black tracking-widest uppercase text-slate-400">{subject.code}</span>
-                           <span className="text-[10px] font-black tracking-widest uppercase text-indigo-500">• {subject.creditHours} Credits</span>
+                           <span className="text-[10px] font-black tracking-widest uppercase text-fuchsia-500">• {subject.creditHours} Credits</span>
                         </div>
                         <div className="flex flex-wrap gap-2 mb-8">
                            <div className="px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center gap-2">
@@ -417,7 +417,7 @@ export default function AcademicSystem() {
                               <span className="text-[10px] font-bold text-slate-600 uppercase tracking-tighter">Moderated View</span>
                            </div>
                            <div className="px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-100 flex items-center gap-2">
-                              <GraduationCap className="w-3.5 h-3.5 text-indigo-400" />
+                              <GraduationCap className="w-3.5 h-3.5 text-fuchsia-400" />
                               <span className="text-[10px] font-bold text-slate-600 uppercase tracking-tighter">Academic Lead</span>
                            </div>
                         </div>
@@ -430,12 +430,12 @@ export default function AcademicSystem() {
 
                   <button 
                     onClick={() => openSubjectModal()}
-                    className="p-12 border-4 border-dashed border-slate-100 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 hover:border-indigo-100 hover:bg-indigo-50/10 transition-all group"
+                    className="p-12 border-4 border-dashed border-slate-100 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 hover:border-fuchsia-200 hover:bg-fuchsia-50/10 transition-all group"
                   >
                      <div className="w-14 h-14 bg-slate-50 text-slate-300 rounded-2xl flex items-center justify-center group-hover:animate-bounce">
                         <Plus className="w-6 h-6" />
                      </div>
-                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 group-hover:text-indigo-400 transition-colors">Establish Additional Module</p>
+                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 group-hover:text-fuchsia-400 transition-colors">Establish Additional Module</p>
                   </button>
                 </div>
               </div>
@@ -495,7 +495,7 @@ export default function AcademicSystem() {
                         disabled={!!selectedCourse?.id}
                         className={cn(
                           "w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none text-sm font-bold tracking-widest uppercase appearance-none transition-all",
-                          !!selectedCourse?.id ? "opacity-60 cursor-not-allowed bg-slate-100" : "focus:bg-white focus:ring-8 focus:ring-indigo-100"
+                          !!selectedCourse?.id ? "opacity-60 cursor-not-allowed bg-slate-100" : "focus:bg-white focus:ring-8 focus:ring-fuchsia-100"
                         )}
                       >
                       <option value="">Select Parent Course</option>
@@ -513,7 +513,7 @@ export default function AcademicSystem() {
                       value={newSubject.title}
                       onChange={(e) => setNewSubject({...newSubject, title: e.target.value})}
                       placeholder="e.g. History of the First 500 Years"
-                      className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-indigo-100 transition-all outline-none font-medium  text-xl placeholder:text-slate-200"
+                      className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-medium  text-xl placeholder:text-slate-200"
                     />
                   </div>
 
@@ -526,7 +526,7 @@ export default function AcademicSystem() {
                         value={newSubject.code}
                         onChange={(e) => setNewSubject({...newSubject, code: e.target.value})}
                         placeholder="TH-102-A"
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-indigo-100 transition-all outline-none text-sm font-bold tracking-widest uppercase placeholder:text-slate-200"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-sm font-bold tracking-widest uppercase placeholder:text-slate-200"
                       />
                     </div>
                     <div className="space-y-2">
@@ -536,7 +536,7 @@ export default function AcademicSystem() {
                         type="number" 
                         value={newSubject.creditHours}
                         onChange={(e) => setNewSubject({...newSubject, creditHours: parseInt(e.target.value)})}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-indigo-100 transition-all outline-none text-sm font-bold placeholder:text-slate-200"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-sm font-bold placeholder:text-slate-200"
                       />
                     </div>
                   </div>
@@ -549,10 +549,10 @@ export default function AcademicSystem() {
                           type="button"
                           onClick={handleAIGenerateDescription}
                           disabled={isGenerating || isGeneratingSyllabus}
-                          className="flex items-center gap-1.5 text-[9px] font-black uppercase text-indigo-500 tracking-widest hover:text-indigo-700 transition-colors disabled:opacity-50"
+                          className="flex items-center gap-1.5 text-[9px] font-black uppercase text-fuchsia-500 tracking-widest hover:text-fuchsia-700 transition-colors disabled:opacity-50"
                         >
                           {isGenerating ? (
-                            <div className="w-2.5 h-2.5 border border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                            <div className="w-2.5 h-2.5 border border-fuchsia-500 border-t-transparent rounded-full animate-spin" />
                           ) : (
                             <Sparkles className="w-2.5 h-2.5" />
                           )}
@@ -578,7 +578,7 @@ export default function AcademicSystem() {
                       onChange={(e) => setNewSubject({...newSubject, syllabus: e.target.value})}
                       placeholder="Enter scholastic inquiry objectives..."
                       rows={4}
-                      className="w-full px-6 py-5 bg-slate-50/50 border border-slate-100 rounded-[2rem] focus:bg-white focus:ring-8 focus:ring-indigo-100 transition-all outline-none text-xs font-medium leading-relaxed resize-none"
+                      className="w-full px-6 py-5 bg-slate-50/50 border border-slate-100 rounded-[2rem] focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-xs font-medium leading-relaxed resize-none"
                     />
                   </div>
 
@@ -586,7 +586,7 @@ export default function AcademicSystem() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between px-1">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Moderator Assignment</label>
-                      <span className="text-[9px] font-black uppercase text-indigo-500 tracking-widest">Multi-Select Enabled</span>
+                      <span className="text-[9px] font-black uppercase text-fuchsia-500 tracking-widest">Multi-Select Enabled</span>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar p-1">
                       {faculty
@@ -612,7 +612,7 @@ export default function AcademicSystem() {
                             >
                               <div className={cn(
                                 "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-[10px]",
-                                isAssigned ? "bg-indigo-600" : "bg-slate-100 text-slate-400"
+                                isAssigned ? "bg-gradient-to-r from-fuchsia-600 to-violet-600" : "bg-slate-100 text-slate-400"
                               )}>
                                 {f.name.split(' ').map(n => n[0]).join('')}
                               </div>
@@ -638,7 +638,7 @@ export default function AcademicSystem() {
                                placeholder="Find candidates..." 
                                value={studentSearch}
                                onChange={(e) => setStudentSearch(e.target.value)}
-                               className="pl-8 pr-3 py-1.5 bg-slate-50 border-none rounded-lg text-[9px] font-bold outline-none focus:ring-2 focus:ring-indigo-100 uppercase tracking-tight w-32"
+                               className="pl-8 pr-3 py-1.5 bg-slate-50 border-none rounded-lg text-[9px] font-bold outline-none focus:ring-2 focus:ring-fuchsia-100 uppercase tracking-tight w-32"
                              />
                            </div>
                            <div className="flex h-6 bg-slate-100 rounded-lg p-0.5">
@@ -650,7 +650,7 @@ export default function AcademicSystem() {
                                   className={cn(
                                     "px-2 py-0.5 rounded text-[7px] font-black uppercase tracking-widest transition-all",
                                     enrollmentFilter === mode 
-                                      ? "bg-white text-indigo-600 shadow-sm" 
+                                      ? "bg-white text-fuchsia-600 shadow-sm" 
                                       : "text-slate-400 hover:text-slate-600"
                                   )}
                                 >
@@ -677,25 +677,25 @@ export default function AcademicSystem() {
                                className={cn(
                                  "group flex items-center justify-between p-3 rounded-2xl cursor-pointer transition-all border",
                                  isEnrolled 
-                                   ? "bg-indigo-50/50 border-indigo-100" 
+                                   ? "bg-fuchsia-50/50 border-fuchsia-200" 
                                    : "bg-white border-slate-100 hover:border-slate-300"
                                )}
                              >
                                <div className="flex items-center gap-3">
                                  <div className={cn(
                                    "w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-bold transition-colors",
-                                   isEnrolled ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"
+                                   isEnrolled ? "bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"
                                  )}>
                                    {student.name.split(' ').map(n => n[0]).join('')}
                                  </div>
                                  <div className="min-w-0 pr-4">
-                                   <p className={cn("text-[11px] font-bold truncate", isEnrolled ? "text-indigo-900" : "text-slate-700")}>{student.name}</p>
+                                   <p className={cn("text-[11px] font-bold truncate", isEnrolled ? "text-fuchsia-900" : "text-slate-700")}>{student.name}</p>
                                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">{student.program}</p>
                                  </div>
                                </div>
                                <div className={cn(
                                  "w-6 h-6 rounded-lg flex items-center justify-center transition-all",
-                                 isEnrolled ? "bg-indigo-600 text-white" : "bg-slate-50 text-slate-300 opacity-10 group-hover:opacity-100"
+                                 isEnrolled ? "bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white" : "bg-slate-50 text-slate-300 opacity-10 group-hover:opacity-100"
                                )}>
                                  {isEnrolled ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                                </div>
@@ -725,7 +725,7 @@ export default function AcademicSystem() {
                   )}
                   <button 
                     type="submit"
-                    className="flex-2 py-5 bg-slate-900 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] hover:bg-indigo-600 shadow-2xl shadow-indigo-100 transition-all flex items-center justify-center gap-2"
+                    className="flex-2 py-5 bg-slate-900 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] hover:from-fuchsia-700 hover:to-violet-700 shadow-2xl shadow-fuchsia-100 transition-all flex items-center justify-center gap-2"
                   >
                     {editingSubject ? <Save className="w-4 h-4 shadow-sm" /> : <Plus className="w-4 h-4" />}
                     <span>{editingSubject ? 'Save Changes' : 'Establish Subject'}</span>

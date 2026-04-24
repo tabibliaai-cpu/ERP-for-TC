@@ -152,7 +152,7 @@ export function Messaging() {
               placeholder="Search faculty..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500/10 transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-fuchsia-500/10 transition-all"
             />
           </div>
         </div>
@@ -160,7 +160,7 @@ export function Messaging() {
           {filteredFaculty.map((fac) => (
             <div key={fac.id} onClick={() => { setActiveChat(fac); setIsUnlocked(false); setPassphrase(''); }} className={cn(
               "p-4 hover:bg-slate-50 cursor-pointer transition-colors border-l-4",
-              activeChat?.id === fac.id ? "bg-indigo-50/30 border-indigo-600" : "border-transparent"
+              activeChat?.id === fac.id ? "bg-fuchsia-50/30 border-fuchsia-500" : "border-transparent"
             )}>
               <div className="flex justify-between items-start mb-1">
                 <span className="font-bold text-slate-900  tracking-tight">{fac.name}</span>
@@ -183,7 +183,7 @@ export function Messaging() {
           <>
             <div className="h-16 border-b border-slate-100 bg-white px-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs ring-2 ring-white">
+                <div className="w-9 h-9 rounded-full bg-fuchsia-50 text-fuchsia-600 flex items-center justify-center font-bold text-xs ring-2 ring-white">
                   {activeChat.name[0]}
                 </div>
                 <div>
@@ -195,9 +195,9 @@ export function Messaging() {
                 </div>
               </div>
               <div className="flex items-center gap-4 text-slate-400">
-                <Phone className="w-4 h-4 hover:text-indigo-600 cursor-pointer" />
-                <Video className="w-4 h-4 hover:text-indigo-600 cursor-pointer" />
-                <MoreVertical className="w-4 h-4 hover:text-indigo-600 cursor-pointer" />
+                <Phone className="w-4 h-4 hover:text-fuchsia-600 cursor-pointer" />
+                <Video className="w-4 h-4 hover:text-fuchsia-600 cursor-pointer" />
+                <MoreVertical className="w-4 h-4 hover:text-fuchsia-600 cursor-pointer" />
               </div>
             </div>
 
@@ -209,8 +209,8 @@ export function Messaging() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center h-full text-center space-y-4 max-w-sm mx-auto"
                   >
-                    <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center border-2 border-indigo-100">
-                      <Lock className="w-8 h-8 text-indigo-600" />
+                    <div className="w-16 h-16 bg-fuchsia-50 rounded-full flex items-center justify-center border-2 border-fuchsia-200">
+                      <Lock className="w-8 h-8 text-fuchsia-600" />
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900">End-to-End Encrypted</h4>
@@ -223,11 +223,11 @@ export function Messaging() {
                         value={passphrase}
                         onChange={(e) => setPassphrase(e.target.value)}
                         onKeyPress={e => e.key === 'Enter' && handleUnlock()}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-indigo-100 transition-all text-center"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-fuchsia-100 transition-all text-center"
                       />
                       <button 
                         onClick={handleUnlock}
-                        className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all"
+                        className="w-full py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-fuchsia-100 hover:from-fuchsia-700 hover:to-violet-700 transition-all"
                       >
                         Unlock Conversation
                       </button>
@@ -253,14 +253,14 @@ export function Messaging() {
                         <div className={cn(
                           "px-4 py-3 rounded-2xl text-sm relative group",
                           msg.senderId === user?.uid 
-                            ? "bg-indigo-600 text-white rounded-tr-none shadow-md shadow-indigo-100" 
+                            ? "bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-tr-none shadow-md shadow-fuchsia-100" 
                             : "bg-white text-slate-900 border border-slate-100 rounded-tl-none shadow-sm"
                         )}>
                           {isUnlocked && msg.id ? (decryptedTexts[msg.id] || '[Decrypting...]') : '[Encrypted Payload]'}
                           {msg.isEncrypted && (
                             <ShieldCheck className={cn(
                               "w-3 h-3 absolute -bottom-4 right-0",
-                              msg.senderId === user?.uid ? "text-indigo-400" : "text-slate-300"
+                              msg.senderId === user?.uid ? "text-fuchsia-400" : "text-slate-300"
                             )} />
                           )}
                         </div>
@@ -284,14 +284,14 @@ export function Messaging() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                      className="w-full pl-4 pr-12 py-3 bg-slate-50 border-none rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                      className="w-full pl-4 pr-12 py-3 bg-slate-50 border-none rounded-xl text-sm outline-none focus:ring-2 focus:ring-fuchsia-500/10 transition-all"
                     />
                     <ShieldCheck className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-500 opacity-50" title="Auto-encrypted" />
                   </div>
                   <button 
                     onClick={handleSend}
                     disabled={!input}
-                    className="p-3 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all group disabled:opacity-50"
+                    className="p-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl shadow-lg shadow-fuchsia-100 hover:from-fuchsia-700 hover:to-violet-700 transition-all group disabled:opacity-50"
                   >
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>

@@ -83,7 +83,7 @@ function InputField({ label, value, onChange, type = 'text', placeholder, requir
       <input type={type} value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} disabled={disabled}
         className={cn(
           "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-bold text-sm transition-all",
-          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-4 focus:ring-indigo-100",
+          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-4 focus:ring-fuchsia-100",
           type === 'number' && "font-mono"
         )} />
     </FormField>
@@ -97,7 +97,7 @@ function SelectField({ label, value, onChange, options, required, span }: {
   return (
     <FormField label={label} required={required} span={span}>
       <select value={value ?? ''} onChange={e => onChange(e.target.value)}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[11px] font-black uppercase tracking-widest appearance-none transition-all focus:bg-white focus:ring-4 focus:ring-indigo-100">
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[11px] font-black uppercase tracking-widest appearance-none transition-all focus:bg-white focus:ring-4 focus:ring-fuchsia-100">
         <option value="">Select...</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -112,7 +112,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3, span }: 
   return (
     <FormField label={label} span={span}>
       <textarea value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-medium text-sm transition-all focus:bg-white focus:ring-4 focus:ring-indigo-100 resize-none placeholder:text-slate-300" />
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-medium text-sm transition-all focus:bg-white focus:ring-4 focus:ring-fuchsia-100 resize-none placeholder:text-slate-300" />
     </FormField>
   );
 }
@@ -127,7 +127,7 @@ function CheckboxGroup({ label, options, selected, onToggle }: {
           <button key={opt} type="button" onClick={() => onToggle(opt)}
             className={cn("px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all border",
               selected.includes(opt)
-                ? "bg-indigo-50 text-indigo-600 border-indigo-200"
+                ? "bg-fuchsia-50 text-fuchsia-600 border-fuchsia-200"
                 : "bg-slate-50 text-slate-400 border-slate-100 hover:bg-slate-100"
             )}>
             {opt}
@@ -143,8 +143,8 @@ function SectionHeader({ section, isOpen, onToggle, sectionIndex }: { section: S
     <button type="button" onClick={onToggle}
       className="w-full flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-all group">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
-          <section.icon className="w-5 h-5 text-indigo-600" />
+        <div className="w-12 h-12 rounded-2xl bg-fuchsia-50 flex items-center justify-center group-hover:bg-fuchsia-100 transition-colors">
+          <section.icon className="w-5 h-5 text-fuchsia-600" />
         </div>
         <div className="text-left">
           <div className="flex items-center gap-3">
@@ -154,8 +154,8 @@ function SectionHeader({ section, isOpen, onToggle, sectionIndex }: { section: S
           <p className="text-[10px] text-slate-400 mt-0.5">{section.description}</p>
         </div>
       </div>
-      <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
-        {isOpen ? <ChevronUp className="w-4 h-4 text-indigo-600" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+      <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-fuchsia-50 transition-colors">
+        {isOpen ? <ChevronUp className="w-4 h-4 text-fuchsia-600" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
       </div>
     </button>
   );
@@ -289,7 +289,7 @@ export function TeacherEnrollment() {
       {/* Page Header */}
       <div className="border-b border-slate-100 pb-10">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600">Teacher Management</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600">Teacher Management</span>
           <ChevronRight className="w-3 h-3 text-slate-300" />
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{editId ? 'Edit Profile' : 'New Enrollment'}</span>
         </div>
@@ -325,11 +325,11 @@ export function TeacherEnrollment() {
         {/* Photo Upload Section */}
         <div className="flex justify-center py-6">
           <div className="relative group cursor-pointer w-28 h-28">
-            <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-indigo-400 transition-colors">
+            <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-fuchsia-400 transition-colors">
               {formData.photoUrl ? (
                 <img src={formData.photoUrl} alt="Preview" className="w-full h-full object-cover" />
               ) : (
-                <Users className="w-10 h-10 text-slate-300 group-hover:text-indigo-400 transition-colors" />
+                <Users className="w-10 h-10 text-slate-300 group-hover:text-fuchsia-400 transition-colors" />
               )}
             </div>
             <input type="file" accept="image/*" onChange={handlePhotoUpload}
@@ -397,7 +397,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('spiritual') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl border border-purple-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Date of Conversion" value={formData.spiritual?.conversionDate} onChange={v => updateNested('spiritual', 'conversionDate', v)} type="date" />
                     <div className="space-y-2">
@@ -406,7 +406,7 @@ export function TeacherEnrollment() {
                         <label className="flex items-center gap-2 cursor-pointer">
                           <input type="checkbox" checked={formData.spiritual?.isBaptized || false}
                             onChange={e => updateNested('spiritual', 'isBaptized', e.target.checked)}
-                            className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                            className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                           <span className="text-sm font-bold text-slate-700">Yes</span>
                         </label>
                       </div>
@@ -537,7 +537,7 @@ export function TeacherEnrollment() {
             {openSections.has('payroll') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                 <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest bg-indigo-50 p-3 rounded-xl flex items-center gap-2">
+                  <p className="text-[10px] font-black text-fuchsia-600 uppercase tracking-widest bg-fuchsia-50 p-3 rounded-xl flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4" /> All financial data is encrypted end-to-end
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -581,7 +581,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.accommodation?.hostelAssigned || false}
                           onChange={e => updateNested('accommodation', 'hostelAssigned', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, assigned</span>
                       </label>
                     </div>
@@ -590,7 +590,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.accommodation?.transportFacility || false}
                           onChange={e => updateNested('accommodation', 'transportFacility', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, provided</span>
                       </label>
                     </div>
@@ -728,7 +728,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('permissions') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl border border-indigo-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-fuchsia-50 to-blue-50 rounded-2xl border border-fuchsia-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="System Role" value={formData.adminConfig?.systemRole} onChange={v => updateNested('adminConfig', 'systemRole', v)}
                       options={[
@@ -770,7 +770,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canUploadLectureNotes || false}
                           onChange={e => updateNested('contentConfig', 'canUploadLectureNotes', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, allowed</span>
                       </label>
                     </div>
@@ -779,7 +779,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateVideoClasses || false}
                           onChange={e => updateNested('contentConfig', 'canCreateVideoClasses', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, allowed</span>
                       </label>
                     </div>
@@ -788,7 +788,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateAssignments || false}
                           onChange={e => updateNested('contentConfig', 'canCreateAssignments', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, allowed</span>
                       </label>
                     </div>
@@ -797,7 +797,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateExams || false}
                           onChange={e => updateNested('contentConfig', 'canCreateExams', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, allowed</span>
                       </label>
                     </div>
@@ -806,7 +806,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canSubmitGrades || false}
                           onChange={e => updateNested('contentConfig', 'canSubmitGrades', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, allowed</span>
                       </label>
                     </div>
@@ -848,7 +848,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.activityMonitoring || false}
                           onChange={e => updateNested('adminConfig', 'activityMonitoring', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, enabled</span>
                       </label>
                     </div>
@@ -857,7 +857,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.loginTracking || false}
                           onChange={e => updateNested('adminConfig', 'loginTracking', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, enabled</span>
                       </label>
                     </div>
@@ -866,7 +866,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.twoFactorAuth || false}
                           onChange={e => updateNested('adminConfig', 'twoFactorAuth', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Yes, required</span>
                       </label>
                     </div>
@@ -896,7 +896,7 @@ export function TeacherEnrollment() {
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Personal Data Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.personalDataEncrypted ?? true} disabled
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
                       </label>
                     </div>
@@ -904,7 +904,7 @@ export function TeacherEnrollment() {
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Spiritual Records Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.spiritualDataEncrypted ?? true} disabled
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
                       </label>
                     </div>
@@ -912,7 +912,7 @@ export function TeacherEnrollment() {
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Financial Data Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.financialDataEncrypted ?? true} disabled
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
                       </label>
                     </div>
@@ -928,7 +928,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.dataSharingConsent || false}
                           onChange={e => updateNested('securityConfig', 'dataSharingConsent', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">I consent to institutional data sharing</span>
                       </label>
                     </div>
@@ -937,7 +937,7 @@ export function TeacherEnrollment() {
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.gdprCompliant || false}
                           onChange={e => updateNested('securityConfig', 'gdprCompliant', e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                          className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
                         <span className="text-sm font-bold text-slate-700">Compliant with data protection regulations</span>
                       </label>
                     </div>
@@ -955,7 +955,7 @@ export function TeacherEnrollment() {
             Cancel
           </button>
           <button type="submit" disabled={isSaving}
-            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-indigo-600 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-fuchsia-700 hover:to-violet-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed">
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Saving...' : editId ? 'Update Profile' : 'Enroll Teacher'}</span>
           </button>

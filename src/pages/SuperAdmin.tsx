@@ -128,7 +128,7 @@ const SuccessModal: React.FC<{
             <div>
               <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Email Address</label>
               <div className="flex items-center gap-2 mt-1">
-                <Mail className="w-4 h-4 text-indigo-500" />
+                <Mail className="w-4 h-4 text-fuchsia-500" />
                 <span className="font-mono text-gray-800 text-sm break-all">{result.email}</span>
               </div>
             </div>
@@ -136,7 +136,7 @@ const SuccessModal: React.FC<{
               <div className="border-t border-gray-200 pt-3">
                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Temporary Password</label>
                 <div className="flex items-center gap-2 mt-1">
-                  <Key className="w-4 h-4 text-indigo-500" />
+                  <Key className="w-4 h-4 text-fuchsia-500" />
                   <span className="font-mono text-gray-800 text-sm flex-1">
                     {showPassword ? result.tempPassword : '••••••••••'}
                   </span>
@@ -158,7 +158,7 @@ const SuccessModal: React.FC<{
                 'flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all',
                 copied
                   ? 'bg-green-500 text-white'
-                  : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
+                  : 'bg-fuchsia-100 text-fuchsia-700 hover:bg-fuchsia-200'
               )}
             >
               {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -174,7 +174,7 @@ const SuccessModal: React.FC<{
           </div>
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors"
+            className="w-full py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-sm font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-colors"
           >
             Done
           </button>
@@ -507,7 +507,7 @@ export function SuperAdmin() {
       <div className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-indigo-600 rounded-xl p-2.5">
+            <div className="bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-xl p-2.5">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -517,7 +517,7 @@ export function SuperAdmin() {
           </div>
           <button
             onClick={() => { setIsAddModalOpen(true); setProvisionStep(1); }}
-            className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors shadow-md"
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-colors shadow-md"
           >
             <Plus className="w-5 h-5" />
             Add Institution
@@ -534,7 +534,7 @@ export function SuperAdmin() {
                 <p className="text-sm text-gray-500 font-medium">Total Institutions</p>
                 <p className="text-3xl font-bold text-gray-900 mt-1">{stats.total}</p>
               </div>
-              <Building2 className="w-10 h-10 text-indigo-600 opacity-50" />
+              <Building2 className="w-10 h-10 text-fuchsia-600 opacity-50" />
             </div>
           </div>
           <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-200">
@@ -575,7 +575,7 @@ export function SuperAdmin() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search institutions by name or admin email..."
-              className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -584,7 +584,7 @@ export function SuperAdmin() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           {isLoading ? (
             <div className="p-12 text-center">
-              <div className="animate-spin w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full mx-auto mb-3"></div>
+              <div className="animate-spin w-8 h-8 border-4 border-fuchsia-500 border-t-transparent rounded-full mx-auto mb-3"></div>
               <p className="text-gray-500">Loading institutions...</p>
             </div>
           ) : filtered.length === 0 ? (
@@ -609,7 +609,7 @@ export function SuperAdmin() {
                   <tr key={inst.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <Building2 className="w-5 h-5 text-indigo-600" />
+                        <Building2 className="w-5 h-5 text-fuchsia-600" />
                         <div>
                           <div className="font-semibold text-gray-900">{inst.name}</div>
                           {inst.subdomain && <div className="text-xs text-gray-500">{inst.subdomain}.covenant-erp.com</div>}
@@ -641,7 +641,7 @@ export function SuperAdmin() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleSelectInstitution(inst)}
-                          className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                          className="p-2 text-fuchsia-600 hover:bg-fuchsia-50 rounded-lg transition-colors"
                           title="Manage"
                         >
                           <ChevronRight className="w-5 h-5" />
@@ -680,7 +680,7 @@ export function SuperAdmin() {
                   type="text"
                   value={newInstitution.name}
                   onChange={(e) => setNewInstitution({ ...newInstitution, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500"
                   placeholder="e.g., Westminster Theological Seminary"
                 />
               </div>
@@ -689,7 +689,7 @@ export function SuperAdmin() {
                 <select
                   value={newInstitution.institutionType}
                   onChange={(e) => setNewInstitution({ ...newInstitution, institutionType: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500"
                 >
                   <option value="seminary">Seminary</option>
                   <option value="bible-college">Bible College</option>
@@ -703,7 +703,7 @@ export function SuperAdmin() {
                   type="email"
                   value={newInstitution.adminEmail}
                   onChange={(e) => setNewInstitution({ ...newInstitution, adminEmail: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500"
                   placeholder="admin@institution.com"
                 />
               </div>
@@ -731,7 +731,7 @@ export function SuperAdmin() {
                   type="text"
                   value={newInstitution.subdomain}
                   onChange={(e) => setNewInstitution({ ...newInstitution, subdomain: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500"
                   placeholder="e.g., westminster"
                 />
               </div>
@@ -745,7 +745,7 @@ export function SuperAdmin() {
                 <button
                   onClick={handleAddInstitution}
                   disabled={isSavingTenant}
-                  className="flex-1 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 disabled:opacity-50"
+                  className="flex-1 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 disabled:opacity-50"
                 >
                   {isSavingTenant ? 'Saving...' : 'Create Institution'}
                 </button>
@@ -814,7 +814,7 @@ export function SuperAdmin() {
                     tenantAdmins.map((admin) => (
                       <div key={admin.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
                         <div className="flex items-center gap-3">
-                          <Users className="w-5 h-5 text-indigo-600" />
+                          <Users className="w-5 h-5 text-fuchsia-600" />
                           <div>
                             <p className="font-semibold text-gray-900">{admin.displayName || admin.email}</p>
                             <p className="text-sm text-gray-500">{admin.email}</p>
@@ -843,7 +843,7 @@ export function SuperAdmin() {
                       type="email"
                       value={newAdminEmail}
                       onChange={(e) => setNewAdminEmail(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500"
                       placeholder="admin@example.com"
                     />
                   </div>
@@ -855,7 +855,7 @@ export function SuperAdmin() {
                           type={showNewAdminPassword ? 'text' : 'password'}
                           value={newAdminPassword}
                           onChange={(e) => setNewAdminPassword(e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 pr-10"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 pr-10"
                         />
                         <button
                           onClick={() => setShowNewAdminPassword(!showNewAdminPassword)}
@@ -883,7 +883,7 @@ export function SuperAdmin() {
                   <button
                     onClick={handleProvisionAdmin}
                     disabled={isProvisioning}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isProvisioning ? (
                       <>

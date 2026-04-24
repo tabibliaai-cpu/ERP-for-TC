@@ -171,7 +171,7 @@ export function StudentProfile() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] gap-4">
-        <div className="w-12 h-12 border-4 border-indigo-500/10 border-t-indigo-600 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-fuchsia-500/10 border-t-fuchsia-600 rounded-full animate-spin"></div>
         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Accessing Secure Records...</p>
       </div>
     );
@@ -187,7 +187,7 @@ export function StudentProfile() {
         <p className="text-slate-400 text-sm mt-1 max-w-[280px]">The requested student ID does not match any entry in the current registry.</p>
         <button 
           onClick={() => navigate('/admissions')}
-          className="mt-8 px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-indigo-600 transition-all flex items-center gap-2"
+          className="mt-8 px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 transition-all flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Return to Registry
@@ -202,12 +202,12 @@ export function StudentProfile() {
       <nav className="flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-500">
         <Link 
           to="/admissions" 
-          className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-indigo-600 transition-colors"
+          className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-fuchsia-600 transition-colors"
         >
           Admissions Registry
         </Link>
         <ChevronRight className="w-3 h-3 text-slate-300" />
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 italic-serif">
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600 italic-serif">
           Candidate Profile
         </span>
       </nav>
@@ -216,7 +216,7 @@ export function StudentProfile() {
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <div className="w-24 h-24 rounded-[32px] overflow-hidden bg-indigo-600 text-white flex items-center justify-center text-3xl font-bold shadow-2xl shadow-indigo-200">
+            <div className="w-24 h-24 rounded-[32px] overflow-hidden bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white flex items-center justify-center text-3xl font-bold shadow-2xl shadow-fuchsia-200">
               {student.photoUrl ? (
                 <img src={student.photoUrl} alt="Profile" className="w-full h-full object-cover" />
               ) : (
@@ -236,7 +236,7 @@ export function StudentProfile() {
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600">Student Profile</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600">Student Profile</span>
             </div>
             <h1 className="text-4xl font-bold text-slate-950 tracking-tight italic-serif">{student.name}</h1>
             <div className="flex items-center gap-4 mt-2">
@@ -261,21 +261,21 @@ export function StudentProfile() {
           <div className="flex items-center gap-2">
             <button 
               onClick={() => alert(`Printing ID Card for ${student.name}...`)}
-              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-widest hover:text-indigo-600 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50 transition-all shadow-sm flex items-center gap-2"
+              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-widest hover:text-fuchsia-600 hover:border-fuchsia-200 hover:shadow-lg hover:shadow-fuchsia-50 transition-all shadow-sm flex items-center gap-2"
               title="Print ID Card"
             >
               <User className="w-4 h-4" /> ID Card
             </button>
             <button 
               onClick={() => alert(`Generating Admit Card for ${student.name}...`)}
-              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-widest hover:text-indigo-600 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50 transition-all shadow-sm flex items-center gap-2"
+              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-widest hover:text-fuchsia-600 hover:border-fuchsia-200 hover:shadow-lg hover:shadow-fuchsia-50 transition-all shadow-sm flex items-center gap-2"
               title="Print Admit Card"
             >
               <FileText className="w-4 h-4" /> Admit Card
             </button>
             <button 
               onClick={() => setIsEditModalOpen(true)}
-              className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-indigo-600 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50 transition-all shadow-sm"
+              className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-fuchsia-600 hover:border-fuchsia-200 hover:shadow-lg hover:shadow-fuchsia-50 transition-all shadow-sm"
               title="Edit Profile"
             >
               <Edit3 className="w-4 h-4" />
@@ -296,7 +296,7 @@ export function StudentProfile() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
         <div className="bg-white p-6 rounded-[32px] border border-slate-200/60 shadow-sm flex items-center gap-5">
-          <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+          <div className="w-14 h-14 rounded-2xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600">
             <TrendingUp className="w-7 h-7" />
           </div>
           <div>
@@ -333,7 +333,7 @@ export function StudentProfile() {
             onClick={() => setActiveTab('overview')}
             className={cn(
               "px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all outline-none",
-              activeTab === 'overview' ? "bg-white text-indigo-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              activeTab === 'overview' ? "bg-white text-fuchsia-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
             )}
           >
             Overview
@@ -342,7 +342,7 @@ export function StudentProfile() {
             onClick={() => setActiveTab('academic')}
             className={cn(
               "px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all outline-none",
-              activeTab === 'academic' ? "bg-white text-indigo-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              activeTab === 'academic' ? "bg-white text-fuchsia-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
             )}
           >
             Academic
@@ -351,7 +351,7 @@ export function StudentProfile() {
             onClick={() => setActiveTab('spiritual')}
             className={cn(
               "px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all outline-none",
-              activeTab === 'spiritual' ? "bg-white text-indigo-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              activeTab === 'spiritual' ? "bg-white text-fuchsia-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
             )}
           >
             Spiritual
@@ -360,7 +360,7 @@ export function StudentProfile() {
             onClick={() => setActiveTab('financial')}
             className={cn(
               "px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all outline-none",
-              activeTab === 'financial' ? "bg-white text-indigo-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              activeTab === 'financial' ? "bg-white text-fuchsia-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
             )}
           >
             Financial
@@ -369,7 +369,7 @@ export function StudentProfile() {
             onClick={() => setActiveTab('documents')}
             className={cn(
               "px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all outline-none",
-              activeTab === 'documents' ? "bg-white text-indigo-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              activeTab === 'documents' ? "bg-white text-fuchsia-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
             )}
           >
             Documents
@@ -413,7 +413,7 @@ export function StudentProfile() {
             <div className="bg-white rounded-[32px] border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                  <div className="w-10 h-10 rounded-xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600">
                     <Book className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-widest">Enrolled Subjects</h3>
@@ -431,7 +431,7 @@ export function StudentProfile() {
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-0.5">{subject.code}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Active Enrollment</p>
+                        <p className="text-[10px] font-black text-fuchsia-600 uppercase tracking-widest">Active Enrollment</p>
                         <p className="text-[9px] font-mono text-slate-400 mt-0.5 whitespace-nowrap">Cohort 2024</p>
                       </div>
                     </div>
@@ -443,14 +443,14 @@ export function StudentProfile() {
             <div className="bg-white rounded-[32px] border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                  <div className="w-10 h-10 rounded-xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600">
                     <TrendingUp className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-widest">Performance Matrix</h3>
                 </div>
                 <button 
                   onClick={() => alert(`Opening public result portal for ${student.name}...`)}
-                  className="px-4 py-2 bg-white text-indigo-600 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50 transition-all flex items-center gap-2"
+                  className="px-4 py-2 bg-white text-fuchsia-600 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:border-fuchsia-200 hover:shadow-lg hover:shadow-fuchsia-50 transition-all flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" /> View Result Sheet
                 </button>
@@ -466,10 +466,10 @@ export function StudentProfile() {
 
                     if (isEditing) {
                       return (
-                        <div key={grade.id} className="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 flex items-center justify-between">
+                        <div key={grade.id} className="p-4 bg-fuchsia-50/50 rounded-2xl border border-fuchsia-200 flex items-center justify-between">
                           <div className="flex items-center gap-4 flex-1">
                             <div>
-                              <p className="font-bold text-slate-900 italic-serif tracking-tight">{subject?.title || 'Unknown Subject'} <span className="text-xs text-indigo-600 ml-2">(Editing)</span></p>
+                              <p className="font-bold text-slate-900 italic-serif tracking-tight">{subject?.title || 'Unknown Subject'} <span className="text-xs text-fuchsia-600 ml-2">(Editing)</span></p>
                               <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-0.5">{grade.type} Assessment</p>
                             </div>
                           </div>
@@ -478,14 +478,14 @@ export function StudentProfile() {
                               type="number" 
                               value={editGradeScore} 
                               onChange={e => setEditGradeScore(Number(e.target.value))}
-                              className="w-16 px-2 py-1 text-right border border-slate-200 rounded outline-none focus:border-indigo-400 text-sm font-bold" 
+                              className="w-16 px-2 py-1 text-right border border-slate-200 rounded outline-none focus:border-fuchsia-400 text-sm font-bold" 
                             />
                             <span className="text-slate-400 text-sm font-bold">/</span>
                             <input 
                               type="number" 
                               value={editGradeMaxScore} 
                               onChange={e => setEditGradeMaxScore(Number(e.target.value))}
-                              className="w-16 px-2 py-1 border border-slate-200 rounded outline-none focus:border-indigo-400 text-sm font-bold" 
+                              className="w-16 px-2 py-1 border border-slate-200 rounded outline-none focus:border-fuchsia-400 text-sm font-bold" 
                             />
                             <div className="flex items-center gap-1 ml-2">
                               <button 
@@ -533,7 +533,7 @@ export function StudentProfile() {
                                 setEditGradeScore(grade.score);
                                 setEditGradeMaxScore(grade.maxScore);
                               }}
-                              className="p-2 border border-slate-200 rounded-lg text-slate-400 hover:text-indigo-600 hover:border-indigo-100 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                              className="p-2 border border-slate-200 rounded-lg text-slate-400 hover:text-fuchsia-600 hover:border-fuchsia-200 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                             >
                               <Edit3 className="w-4 h-4" />
                             </button>
@@ -585,7 +585,7 @@ export function StudentProfile() {
             <div className="bg-white rounded-[32px] border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                  <div className="w-10 h-10 rounded-xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600">
                     <CreditCard className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-widest">Financial Transaction Ledger</h3>
@@ -647,7 +647,7 @@ export function StudentProfile() {
           <div className="bg-white rounded-[32px] border border-slate-200/60 shadow-sm overflow-hidden">
             <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <div className="w-10 h-10 rounded-xl bg-fuchsia-50 flex items-center justify-center text-fuchsia-600">
                   <Clock className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-widest">Live Attendance Log</h3>
@@ -790,7 +790,7 @@ export function StudentProfile() {
                 ].map((doc, i) => (
                   <div key={i} className="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-2xl">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-fuchsia-50 text-fuchsia-600 flex items-center justify-center">
                         <FileText className="w-5 h-5" />
                       </div>
                       <div>
@@ -801,11 +801,11 @@ export function StudentProfile() {
                       </div>
                     </div>
                     {doc.url ? (
-                      <a href={doc.url} target="_blank" rel="noopener noreferrer" className="p-2 border border-slate-200 rounded-xl hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-100 transition-all">
+                      <a href={doc.url} target="_blank" rel="noopener noreferrer" className="p-2 border border-slate-200 rounded-xl hover:bg-fuchsia-50 hover:text-fuchsia-600 hover:border-fuchsia-200 transition-all">
                         <Download className="w-4 h-4" />
                       </a>
                     ) : (
-                      <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-indigo-600 hover:border-indigo-100 transition-all">
+                      <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-fuchsia-600 hover:border-fuchsia-200 transition-all">
                         Upload
                       </button>
                     )}
@@ -920,7 +920,7 @@ export function StudentProfile() {
 
             <div className="space-y-8">
               <div className="bg-slate-900 text-white rounded-[32px] p-8 shadow-xl shadow-slate-200 border border-slate-800">
-                <h3 className="text-lg font-bold italic-serif uppercase tracking-widest mb-6 text-indigo-400">Emergency Protocol</h3>
+                <h3 className="text-lg font-bold italic-serif uppercase tracking-widest mb-6 text-fuchsia-400">Emergency Protocol</h3>
                 <div className="space-y-6">
                   <div>
                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">Designated Contact</p>
@@ -971,7 +971,7 @@ export function StudentProfile() {
                       type="text" 
                       value={editData.studentId || ''}
                       onChange={e => setEditData({...editData, studentId: e.target.value})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     />
                   </div>
                   <div className="space-y-2">
@@ -980,7 +980,7 @@ export function StudentProfile() {
                       type="url" 
                       value={editData.photoUrl || ''}
                       onChange={e => setEditData({...editData, photoUrl: e.target.value})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     />
                   </div>
                 </div>
@@ -992,7 +992,7 @@ export function StudentProfile() {
                       type="text" 
                       value={editData.name}
                       onChange={e => setEditData({...editData, name: e.target.value})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     />
                   </div>
                   <div className="space-y-2">
@@ -1000,7 +1000,7 @@ export function StudentProfile() {
                     <select 
                       value={editData.gender}
                       onChange={e => setEditData({...editData, gender: e.target.value})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -1014,7 +1014,7 @@ export function StudentProfile() {
                     value={editData.address}
                     onChange={e => setEditData({...editData, address: e.target.value})}
                     rows={3}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif resize-none"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif resize-none"
                   />
                 </div>
 
@@ -1025,7 +1025,7 @@ export function StudentProfile() {
                       type="text" 
                       value={editData.program}
                       onChange={e => setEditData({...editData, program: e.target.value})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     />
                   </div>
                   <div className="space-y-2">
@@ -1033,7 +1033,7 @@ export function StudentProfile() {
                     <select 
                       value={editData.status}
                       onChange={e => setEditData({...editData, status: e.target.value as any})}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-bold italic-serif"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-3xl outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-50 transition-all font-bold italic-serif"
                     >
                       <option value="active">Active</option>
                       <option value="graduated">Graduated</option>
@@ -1048,7 +1048,7 @@ export function StudentProfile() {
                 <button 
                   onClick={handleUpdate}
                   disabled={isSaving}
-                  className="px-10 py-3 bg-indigo-600 text-white rounded-3xl font-bold uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-indigo-100 flex items-center gap-2"
+                  className="px-10 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-3xl font-bold uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-fuchsia-100 flex items-center gap-2"
                 >
                   {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   {isSaving ? 'Saving...' : 'Archive Changes'}

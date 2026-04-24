@@ -35,7 +35,7 @@ const METHOD_STYLES: Record<string, { label: string; color: string; bg: string }
   case_study: { label: 'Case Study', color: 'text-amber-600', bg: 'bg-amber-50' },
   sermon_based: { label: 'Sermon-Based', color: 'text-purple-600', bg: 'bg-purple-50' },
   field_based: { label: 'Field-Based', color: 'text-rose-600', bg: 'bg-rose-50' },
-  interactive: { label: 'Interactive', color: 'text-indigo-600', bg: 'bg-indigo-50' },
+  interactive: { label: 'Interactive', color: 'text-fuchsia-600', bg: 'bg-fuchsia-50' },
 };
 
 const RESOURCE_ICONS: Record<string, any> = {
@@ -287,7 +287,7 @@ export default function SubjectPortal() {
   const StatusBadge = ({ status }: { status: string }) => {
     const m: Record<string, string> = {
       active: 'bg-emerald-50 text-emerald-600', draft: 'bg-amber-50 text-amber-600',
-      published: 'bg-blue-50 text-blue-600', completed: 'bg-indigo-50 text-indigo-600',
+      published: 'bg-blue-50 text-blue-600', completed: 'bg-fuchsia-50 text-fuchsia-600',
       submitted: 'bg-amber-50 text-amber-600', reviewed: 'bg-emerald-50 text-emerald-600',
       returned: 'bg-rose-50 text-rose-600', paused: 'bg-amber-50 text-amber-600',
     };
@@ -299,7 +299,7 @@ export default function SubjectPortal() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#F8FAFC]">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-slate-200 border-t-indigo-600 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-slate-200 border-t-fuchsia-600 rounded-full animate-spin" />
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Loading Pedagogical Portal...</p>
         </div>
       </div>
@@ -314,7 +314,7 @@ export default function SubjectPortal() {
     </div>
   );
 
-  const inputCls = 'bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-sm outline-none focus:bg-white focus:ring-8 focus:ring-indigo-100 transition-all w-full';
+  const inputCls = 'bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all w-full';
   const btnCls = 'w-full py-3.5 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2 disabled:opacity-40';
 
   const renderDrawer = () => {
@@ -396,7 +396,7 @@ export default function SubjectPortal() {
           <DrawerField label="Student"><select className={inputCls} value={f.studentId} onChange={e => setEngagementForm(p => ({ ...p, studentId: e.target.value }))} required><option value="">Select student...</option>{students.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}</select></DrawerField>
           <DrawerField label="Type"><select className={inputCls} value={f.type} onChange={e => setEngagementForm(p => ({ ...p, type: e.target.value as any }))}><option value="participation">Participation</option><option value="assignment">Assignment</option><option value="discussion">Discussion</option><option value="devotion">Devotion</option><option value="prayer">Prayer</option><option value="bible_study">Bible Study</option><option value="reflection">Reflection</option></select></DrawerField>
           <DrawerField label="Score (1-10)">
-            <div className="flex items-center gap-4"><input type="range" min="1" max="10" value={f.score} onChange={e => setEngagementForm(p => ({ ...p, score: +e.target.value }))} className="flex-1" /><span className="text-2xl font-bold text-indigo-600 w-8 text-center">{f.score}</span></div>
+            <div className="flex items-center gap-4"><input type="range" min="1" max="10" value={f.score} onChange={e => setEngagementForm(p => ({ ...p, score: +e.target.value }))} className="flex-1" /><span className="text-2xl font-bold text-fuchsia-600 w-8 text-center">{f.score}</span></div>
           </DrawerField>
           <DrawerField label="Date"><input type="date" className={inputCls} value={f.date} onChange={e => setEngagementForm(p => ({ ...p, date: e.target.value }))} required /></DrawerField>
           <DrawerField label="Details"><textarea className={cn(inputCls, 'h-20 resize-none')} value={f.details} onChange={e => setEngagementForm(p => ({ ...p, details: e.target.value }))} /></DrawerField>
@@ -482,7 +482,7 @@ export default function SubjectPortal() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Lesson Plans', value: lessonPlans.length, icon: FileText, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+            { label: 'Lesson Plans', value: lessonPlans.length, icon: FileText, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50' },
             { label: 'Active Mentorships', value: mentorships.filter(m => m.status === 'active').length, icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
             { label: 'Avg Engagement', value: avgEngagement, icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-50' },
             { label: 'Resources', value: resources.length, icon: FolderOpen, color: 'text-rose-600', bg: 'bg-rose-50' },
@@ -515,13 +515,13 @@ export default function SubjectPortal() {
             <div className="flex items-center justify-between">
               <div><h2 className="text-2xl font-bold text-slate-900">Lesson Plans</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Planning, Sermon Builder & Content Calendar</p></div>
               <div className="flex items-center gap-3">
-                <div className="relative"><Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" /><input type="text" placeholder="Search plans..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-indigo-100 w-64" /></div>
+                <div className="relative"><Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" /><input type="text" placeholder="Search plans..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 w-64" /></div>
                 <button onClick={() => { setLessonForm({ topic: '', date: '', duration: 60, objectives: '', teachingMethodId: '', materialsRequired: '', activitiesPlanned: '', scriptureReferences: '', ministryApplications: '', status: 'draft', sermonTopic: '', sermonScripture: '', sermonOutline: '', sermonApplication: '' }); openDrawer('lesson'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Create Plan</button>
               </div>
             </div>
             {/* Content Calendar Preview */}
             <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
-              <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Calendar className="w-4 h-4 text-indigo-600" /> Content Calendar — This Week</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Calendar className="w-4 h-4 text-fuchsia-600" /> Content Calendar — This Week</h3>
               <div className="grid grid-cols-7 gap-3">
                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => {
                   const d = new Date(); d.setDate(d.getDate() - d.getDay() + 1 + i);
@@ -530,7 +530,7 @@ export default function SubjectPortal() {
                     <div key={day} className="text-center p-3 rounded-2xl bg-slate-50 min-h-[80px]">
                       <p className="text-[9px] font-black uppercase text-slate-400">{day}</p>
                       <p className="text-sm font-bold text-slate-900 mt-1">{d.getDate()}</p>
-                      {dayPlans.length > 0 && <div className="mt-2 w-2 h-2 bg-indigo-600 rounded-full mx-auto" title={`${dayPlans.length} plan(s)`} />}
+                      {dayPlans.length > 0 && <div className="mt-2 w-2 h-2 bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-full mx-auto" title={`${dayPlans.length} plan(s)`} />}
                     </div>
                   );
                 })}
@@ -538,10 +538,10 @@ export default function SubjectPortal() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
               {lessonPlans.filter(lp => !searchQuery || lp.topic.toLowerCase().includes(searchQuery.toLowerCase())).map(lp => (
-                <div key={lp.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-indigo-100 transition-all group">
+                <div key={lp.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-fuchsia-200 transition-all group">
                   <div className="flex items-start justify-between mb-4">
                     <div><StatusBadge status={lp.status} /><span className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-2">{lp.duration}min</span></div>
-                    {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button onClick={() => { setLessonForm({ topic: lp.topic, date: lp.date, duration: lp.duration, objectives: lp.objectives?.join(', ') || '', teachingMethodId: lp.teachingMethodId || '', materialsRequired: lp.materialsRequired?.join(', ') || '', activitiesPlanned: lp.activitiesPlanned?.join(', ') || '', scriptureReferences: lp.scriptureReferences?.join(', ') || '', ministryApplications: lp.ministryApplications?.join(', ') || '', status: lp.status, sermonTopic: lp.sermonOutline?.topic || '', sermonScripture: lp.sermonOutline?.scripture || '', sermonOutline: lp.sermonOutline?.outline || '', sermonApplication: lp.sermonOutline?.application || '' }); openDrawer('lesson', lp); }} className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(lessonPlanService, lp.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
+                    {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button onClick={() => { setLessonForm({ topic: lp.topic, date: lp.date, duration: lp.duration, objectives: lp.objectives?.join(', ') || '', teachingMethodId: lp.teachingMethodId || '', materialsRequired: lp.materialsRequired?.join(', ') || '', activitiesPlanned: lp.activitiesPlanned?.join(', ') || '', scriptureReferences: lp.scriptureReferences?.join(', ') || '', ministryApplications: lp.ministryApplications?.join(', ') || '', status: lp.status, sermonTopic: lp.sermonOutline?.topic || '', sermonScripture: lp.sermonOutline?.scripture || '', sermonOutline: lp.sermonOutline?.outline || '', sermonApplication: lp.sermonOutline?.application || '' }); openDrawer('lesson', lp); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(lessonPlanService, lp.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">{lp.topic}</h3>
                   <p className="text-[10px] text-slate-400 mb-3">{lp.date} &middot; {lp.teachingMethodName || 'No method'}</p>
@@ -577,11 +577,11 @@ export default function SubjectPortal() {
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Zap className="w-4 h-4 text-amber-500" /> Pre-built Pedagogy Templates</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {TEMPLATES.map((t, i) => (
-                  <button key={i} onClick={() => fillTemplate(t)} className="p-5 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-[2rem] border border-indigo-100 text-left hover:shadow-xl hover:border-indigo-200 transition-all group">
-                    <div className="w-10 h-10 bg-indigo-100 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-all"><Sparkles className="w-5 h-5 text-indigo-600 group-hover:text-white" /></div>
+                  <button key={i} onClick={() => fillTemplate(t)} className="p-5 bg-gradient-to-br from-fuchsia-50 to-purple-50 rounded-[2rem] border border-fuchsia-200 text-left hover:shadow-xl hover:border-fuchsia-300 transition-all group">
+                    <div className="w-10 h-10 bg-fuchsia-100 rounded-2xl flex items-center justify-center mb-3 group-hover:from-fuchsia-700 hover:to-violet-700 group-hover:text-white transition-all"><Sparkles className="w-5 h-5 text-fuchsia-600 group-hover:text-white" /></div>
                     <h4 className="text-sm font-bold text-slate-900 mb-1">{t.name}</h4>
                     <p className="text-xs text-slate-500 leading-relaxed">{t.description}</p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">{t.outcomes.map((o, j) => <span key={j} className="px-2 py-0.5 bg-white/60 rounded-lg text-[7px] font-black uppercase text-indigo-600">{o}</span>)}</div>
+                    <div className="flex flex-wrap gap-1.5 mt-3">{t.outcomes.map((o, j) => <span key={j} className="px-2 py-0.5 bg-white/60 rounded-lg text-[7px] font-black uppercase text-fuchsia-600">{o}</span>)}</div>
                   </button>
                 ))}
               </div>
@@ -595,7 +595,7 @@ export default function SubjectPortal() {
                     <div className="flex items-start justify-between mb-4">
                       <span className={cn('px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase', styleInfo.bg, styleInfo.color)}>{styleInfo.label}</span>
                       {m.isTemplate && <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg text-[7px] font-black uppercase">Template</span>}
-                      {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100"><button onClick={() => { setMethodForm({ name: m.name, description: m.description || '', style: m.style, expectedOutcomes: m.expectedOutcomes?.join(', ') || '', isTemplate: m.isTemplate || false, templateCategory: m.templateCategory || 'custom' }); openDrawer('method', m); }} className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(teachingMethodService, m.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
+                      {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100"><button onClick={() => { setMethodForm({ name: m.name, description: m.description || '', style: m.style, expectedOutcomes: m.expectedOutcomes?.join(', ') || '', isTemplate: m.isTemplate || false, templateCategory: m.templateCategory || 'custom' }); openDrawer('method', m); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(teachingMethodService, m.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{m.name}</h3>
                     <p className="text-xs text-slate-500 leading-relaxed mb-4">{m.description}</p>
@@ -642,7 +642,7 @@ export default function SubjectPortal() {
                 return (
                   <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all group">
                     <div className="flex items-start justify-between mb-4">
-                      <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center', r.type === 'sermon' ? 'bg-purple-50 text-purple-600' : 'bg-indigo-50 text-indigo-600')}><Icon className="w-6 h-6" /></div>
+                      <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center', r.type === 'sermon' ? 'bg-purple-50 text-purple-600' : 'bg-fuchsia-50 text-fuchsia-600')}><Icon className="w-6 h-6" /></div>
                       {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100"><button onClick={() => deleteItem(teachingResourceService, r.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                     </div>
                     <h3 className="text-sm font-bold text-slate-900 mb-1">{r.title}</h3>
@@ -671,7 +671,7 @@ export default function SubjectPortal() {
             {/* Teaching Effectiveness Mini-Dashboard */}
             <div className="grid grid-cols-3 gap-4">
               {[
-                { label: 'Teaching Score', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'participation').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'participation').length)) : 0, icon: Target, color: 'text-indigo-600', bg: 'bg-indigo-50', suffix: '/10' },
+                { label: 'Teaching Score', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'participation').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'participation').length)) : 0, icon: Target, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50', suffix: '/10' },
                 { label: 'Clarity Index', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'discussion').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'discussion').length)) : 0, icon: Brain, color: 'text-emerald-600', bg: 'bg-emerald-50', suffix: '/10' },
                 { label: 'Satisfaction', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'assignment').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'assignment').length)) : 0, icon: Heart, color: 'text-rose-600', bg: 'bg-rose-50', suffix: '/10' },
               ].map((m, i) => (
@@ -679,7 +679,7 @@ export default function SubjectPortal() {
               ))}
             </div>
             {/* Spiritual Formation */}
-            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-[2rem] border border-purple-100 p-6">
+            <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-[2rem] border border-purple-100 p-6">
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Flame className="w-4 h-4 text-purple-600" /> Spiritual Formation Overview</h3>
               <div className="grid grid-cols-3 gap-4">
                 {(['devotion', 'prayer', 'bible_study'] as const).map(type => {
@@ -712,7 +712,7 @@ export default function SubjectPortal() {
                 <table className="w-full text-left">
                   <thead><tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100"><th className="px-6 py-4">Student</th><th className="px-6 py-4">Type</th><th className="px-6 py-4">Score</th><th className="px-6 py-4">Level</th><th className="px-6 py-4">Points</th><th className="px-6 py-4">Date</th></tr></thead>
                   <tbody className="divide-y divide-slate-100">{engagementLogs.slice(-10).reverse().map(e => (
-                    <tr key={e.id} className="hover:bg-slate-50/50"><td className="px-6 py-4 text-sm font-medium text-slate-900">{getStudentName(e.studentId)}</td><td className="px-6 py-4"><span className="px-2.5 py-1 bg-indigo-50 text-indigo-600 rounded-lg text-[8px] font-black uppercase">{e.type}</span></td><td className="px-6 py-4 text-sm font-bold">{e.score}/10</td><td className="px-6 py-4"><StatusBadge status={e.engagementLevel} /></td><td className="px-6 py-4 text-sm font-bold text-amber-600">{e.gamificationPoints || 0}</td><td className="px-6 py-4 text-xs text-slate-400">{e.date}</td></tr>
+                    <tr key={e.id} className="hover:bg-slate-50/50"><td className="px-6 py-4 text-sm font-medium text-slate-900">{getStudentName(e.studentId)}</td><td className="px-6 py-4"><span className="px-2.5 py-1 bg-fuchsia-50 text-fuchsia-600 rounded-lg text-[8px] font-black uppercase">{e.type}</span></td><td className="px-6 py-4 text-sm font-bold">{e.score}/10</td><td className="px-6 py-4"><StatusBadge status={e.engagementLevel} /></td><td className="px-6 py-4 text-sm font-bold text-amber-600">{e.gamificationPoints || 0}</td><td className="px-6 py-4 text-xs text-slate-400">{e.date}</td></tr>
                   ))}{engagementLogs.length === 0 && <tr><td colSpan={6} className="py-10 text-center text-[10px] font-black uppercase text-slate-300">No engagement logs</td></tr>}</tbody>
                 </table>
               </div>
@@ -732,12 +732,12 @@ export default function SubjectPortal() {
             </div>
             {/* Mentorships */}
             <div>
-              <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Users className="w-4 h-4 text-indigo-600" /> Active Mentorships ({mentorships.filter(m => m.status === 'active').length})</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Users className="w-4 h-4 text-fuchsia-600" /> Active Mentorships ({mentorships.filter(m => m.status === 'active').length})</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 {mentorships.map(m => (
                   <div key={m.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">{getFacultyName(m.facultyId)[0]}</div>
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white flex items-center justify-center font-bold text-xs">{getFacultyName(m.facultyId)[0]}</div>
                       <ArrowRight className="w-4 h-4 text-slate-300" />
                       <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">{getStudentName(m.studentId)[0]}</div>
                     </div>
@@ -763,7 +763,7 @@ export default function SubjectPortal() {
                   <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all">
                     <div className="flex items-start justify-between mb-3">
                       <div><StatusBadge status={r.status} /><span className="px-2 py-0.5 bg-slate-50 rounded-lg text-[7px] font-black uppercase text-slate-500 ml-2">{r.type.replace('_', ' ')}</span></div>
-                      {canEdit && r.status === 'submitted' && <button onClick={() => { const fb = prompt('Enter teacher feedback:'); if (fb) addFeedbackToReflection(r.id!, fb); }} className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl"><MessageSquare className="w-3.5 h-3.5" /></button>}
+                      {canEdit && r.status === 'submitted' && <button onClick={() => { const fb = prompt('Enter teacher feedback:'); if (fb) addFeedbackToReflection(r.id!, fb); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl"><MessageSquare className="w-3.5 h-3.5" /></button>}
                     </div>
                     <h4 className="text-sm font-bold text-slate-900 mb-1">{r.title}</h4>
                     <p className="text-xs text-slate-500 line-clamp-3 mb-3">{r.content}</p>
@@ -794,14 +794,14 @@ export default function SubjectPortal() {
               {reports.map(r => (
                 <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3"><span className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-lg text-[9px] font-black uppercase">{r.type.replace('_', ' ')}</span><span className="text-[9px] text-slate-400">{r.period}</span></div>
+                    <div className="flex items-center gap-3"><span className="px-3 py-1 bg-fuchsia-50 text-fuchsia-600 rounded-lg text-[9px] font-black uppercase">{r.type.replace('_', ' ')}</span><span className="text-[9px] text-slate-400">{r.period}</span></div>
                     {r.facultyId && <span className="text-[9px] font-black text-slate-500">{getFacultyName(r.facultyId)}</span>}
                   </div>
                   {/* Metrics Grid */}
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     {r.metrics && Object.entries(r.metrics).map(([key, val]) => {
                       const labels: Record<string, string> = { teachingScore: 'Teaching Score', clarityIndex: 'Clarity Index', studentSatisfaction: 'Satisfaction', avgEngagement: 'Avg Engagement', attendanceRate: 'Attendance', spiritualGrowthIndex: 'Spiritual Growth', assignmentCompletionRate: 'Assignment Completion' };
-                      const colors = ['text-indigo-600', 'text-emerald-600', 'text-amber-600', 'text-rose-600', 'text-blue-600', 'text-purple-600', 'text-teal-600'];
+                      const colors = ['text-fuchsia-600', 'text-emerald-600', 'text-amber-600', 'text-rose-600', 'text-blue-600', 'text-purple-600', 'text-teal-600'];
                       const idx = Object.keys(r.metrics || {}).indexOf(key);
                       return (
                         <div key={key} className="p-3 bg-slate-50 rounded-xl text-center">
@@ -835,7 +835,7 @@ export default function SubjectPortal() {
               )}
             </div>
             {/* Adaptive Teaching Insight */}
-            <div className="bg-gradient-to-r from-slate-900 to-indigo-900 rounded-[2.5rem] p-8 text-white">
+            <div className="bg-gradient-to-r from-slate-900 to-violet-900 rounded-[2.5rem] p-8 text-white">
               <div className="flex items-center gap-3 mb-4"><Brain className="w-6 h-6 text-indigo-300" /><h3 className="text-lg font-bold">Adaptive Teaching Engine</h3></div>
               <p className="text-sm text-slate-300 leading-relaxed mb-6">The system analyzes engagement data to suggest optimal teaching methods and identify students who need additional support. Based on current data, here are the key insights:</p>
               <div className="grid grid-cols-3 gap-4">
