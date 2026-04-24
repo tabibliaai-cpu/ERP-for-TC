@@ -410,5 +410,64 @@ service cloud.firestore {
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
       allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
     }
+
+    // ===================================================================
+    // PEDAGOGICAL PORTAL — Teaching Methods, Lesson Plans, Resources,
+    // Engagement, Reflections, Mentorships, Reports
+    // ===================================================================
+
+    match /teaching_methods/{tmId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /lesson_plans/{lpId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /teaching_resources/{trId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /engagement_logs/{elId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update, delete: if false; // Engagement logs are immutable
+    }
+
+    match /reflections/{rfId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /mentorships/{mId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /pedagogy_reports/{prId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update, delete: if false; // Reports are immutable once generated
+    }
   }
 }

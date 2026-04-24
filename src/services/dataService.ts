@@ -1746,3 +1746,254 @@ export const gradingConfigService = {
   }
 };
 
+// ===================================================================
+// PEDAGOGICAL PORTAL — Teaching Methods, Lesson Plans, Resources,
+// Engagement, Reflections, Mentorships, Reports
+// ===================================================================
+
+export interface TeachingMethod {
+  id?: string;
+  name: string;
+  description: string;
+  style: 'lecture' | 'discussion' | 'case_study' | 'sermon_based' | 'field_based' | 'interactive';
+  courseIds?: string[];
+  expectedOutcomes: string[];
+  isTemplate?: boolean;
+  templateCategory?: 'bible_study' | 'theology_lecture' | 'ministry_training' | 'custom';
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+  createdBy?: string;
+}
+
+export const teachingMethodService = {
+  async addMethod(method: TeachingMethod) {
+    return await addDoc(collection(db, 'teaching_methods'), { ...method, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'teaching_methods'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as TeachingMethod));
+  },
+  async update(id: string, data: Partial<TeachingMethod>) {
+    return await updateDoc(doc(db, 'teaching_methods', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'teaching_methods', id));
+  }
+};
+
+export interface LessonPlan {
+  id?: string;
+  facultyId: string;
+  courseId?: string;
+  subjectId?: string;
+  topic: string;
+  date: string;
+  duration: number;
+  objectives: string[];
+  teachingMethodId?: string;
+  teachingMethodName?: string;
+  materialsRequired: string[];
+  activitiesPlanned: string[];
+  scriptureReferences: string[];
+  ministryApplications: string[];
+  sermonOutline?: { topic: string; scripture: string; outline: string; application: string; };
+  status: 'draft' | 'published' | 'completed';
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const lessonPlanService = {
+  async addPlan(plan: LessonPlan) {
+    return await addDoc(collection(db, 'lesson_plans'), { ...plan, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'lesson_plans'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LessonPlan));
+  },
+  async getByFaculty(facultyId: string) {
+    const q = query(collection(db, 'lesson_plans'), where('facultyId', '==', facultyId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LessonPlan));
+  },
+  async update(id: string, data: Partial<LessonPlan>) {
+    return await updateDoc(doc(db, 'lesson_plans', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'lesson_plans', id));
+  }
+};
+
+export interface TeachingResource {
+  id?: string;
+  title: string;
+  type: 'note' | 'sermon' | 'video' | 'pdf' | 'link' | 'presentation';
+  url?: string;
+  courseId?: string;
+  subjectId?: string;
+  topic?: string;
+  scriptureTags?: string[];
+  facultyId: string;
+  description?: string;
+  downloadCount?: number;
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const teachingResourceService = {
+  async addResource(resource: TeachingResource) {
+    return await addDoc(collection(db, 'teaching_resources'), { ...resource, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), downloadCount: 0 });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'teaching_resources'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as TeachingResource));
+  },
+  async update(id: string, data: Partial<TeachingResource>) {
+    return await updateDoc(doc(db, 'teaching_resources', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'teaching_resources', id));
+  }
+};
+
+export interface EngagementLog {
+  id?: string;
+  studentId: string;
+  facultyId: string;
+  courseId?: string;
+  subjectId?: string;
+  type: 'participation' | 'assignment' | 'discussion' | 'devotion' | 'prayer' | 'bible_study' | 'reflection';
+  score: number;
+  details?: string;
+  date: string;
+  engagementLevel: 'active' | 'moderate' | 'low';
+  gamificationPoints?: number;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const engagementLogService = {
+  async addLog(log: EngagementLog) {
+    return await addDoc(collection(db, 'engagement_logs'), { ...log, createdAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'engagement_logs'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as EngagementLog));
+  },
+  async getByStudent(studentId: string) {
+    const q = query(collection(db, 'engagement_logs'), where('studentId', '==', studentId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as EngagementLog));
+  },
+  async getByFaculty(facultyId: string) {
+    const q = query(collection(db, 'engagement_logs'), where('facultyId', '==', facultyId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as EngagementLog));
+  }
+};
+
+export interface Reflection {
+  id?: string;
+  studentId: string;
+  facultyId: string;
+  courseId?: string;
+  type: 'journal' | 'ministry_experience' | 'spiritual_growth';
+  title: string;
+  content: string;
+  scriptureReferenced?: string;
+  teacherFeedback?: string;
+  feedbackDate?: string;
+  status: 'submitted' | 'reviewed' | 'returned';
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const reflectionService = {
+  async addReflection(reflection: Reflection) {
+    return await addDoc(collection(db, 'reflections'), { ...reflection, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'reflections'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Reflection));
+  },
+  async update(id: string, data: Partial<Reflection>) {
+    return await updateDoc(doc(db, 'reflections', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'reflections', id));
+  }
+};
+
+export interface Mentorship {
+  id?: string;
+  facultyId: string;
+  studentId: string;
+  type: 'academic' | 'spiritual' | 'ministry';
+  status: 'active' | 'paused' | 'completed';
+  meetingCount: number;
+  lastMeetingDate?: string;
+  nextMeetingDate?: string;
+  guidanceNotes?: string;
+  spiritualGrowthNotes?: string;
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const mentorshipService = {
+  async addMentorship(mentorship: Mentorship) {
+    return await addDoc(collection(db, 'mentorships'), { ...mentorship, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'mentorships'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Mentorship));
+  },
+  async update(id: string, data: Partial<Mentorship>) {
+    return await updateDoc(doc(db, 'mentorships', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'mentorships', id));
+  }
+};
+
+export interface PedagogyReport {
+  id?: string;
+  type: 'teaching_quality' | 'student_engagement' | 'spiritual_growth' | 'course_effectiveness';
+  facultyId?: string;
+  courseId?: string;
+  period: string;
+  metrics: {
+    teachingScore?: number;
+    clarityIndex?: number;
+    studentSatisfaction?: number;
+    avgEngagement?: number;
+    attendanceRate?: number;
+    spiritualGrowthIndex?: number;
+    assignmentCompletionRate?: number;
+  };
+  recommendations?: string[];
+  aiSuggestions?: string[];
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const pedagogyReportService = {
+  async addReport(report: PedagogyReport) {
+    return await addDoc(collection(db, 'pedagogy_reports'), { ...report, createdAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'pedagogy_reports'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as PedagogyReport));
+  }
+};
+
