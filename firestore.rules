@@ -469,5 +469,73 @@ service cloud.firestore {
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update, delete: if false; // Reports are immutable once generated
     }
+
+    // ===================================================================
+    // THEOLOGICAL LIBRARY SYSTEM — Manuscripts, categories, authors,
+    // borrow logs, bookmarks, notes, access controls, versions
+    // ===================================================================
+
+    match /manuscripts/{msId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().contributedBy == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().contributedBy == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /library_categories/{lcId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /library_authors/{laId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || incoming().contributedBy == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /library_borrow_logs/{lblId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && (isMember(resource.data.tenantId) || resource.data.userId == request.auth.uid);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().userId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /library_bookmarks/{lbId} {
+      allow list: if isVerified() && (resource == null || (isMember(resource.data.tenantId) && resource.data.userId == request.auth.uid));
+      allow get: if isVerified() && isMember(resource.data.tenantId) && resource.data.userId == request.auth.uid;
+      allow create: if isVerified() && isMember(incoming().tenantId) && incoming().userId == request.auth.uid;
+      allow update: if isVerified() && existing().userId == request.auth.uid;
+      allow delete: if isVerified() && existing().userId == request.auth.uid;
+    }
+
+    match /library_notes/{lnId} {
+      allow list: if isVerified() && (resource == null || (isMember(resource.data.tenantId) && resource.data.userId == request.auth.uid));
+      allow get: if isVerified() && isMember(resource.data.tenantId) && resource.data.userId == request.auth.uid;
+      allow create: if isVerified() && isMember(incoming().tenantId) && incoming().userId == request.auth.uid;
+      allow update: if isVerified() && existing().userId == request.auth.uid;
+      allow delete: if isVerified() && existing().userId == request.auth.uid;
+    }
+
+    match /library_access_controls/{lacId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /manuscript_versions/{mvId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().createdBy == request.auth.uid);
+      allow update, delete: if false; // Versions are immutable once created
+    }
   }
 }

@@ -1997,3 +1997,307 @@ export const pedagogyReportService = {
   }
 };
 
+// ===================================================================
+// THEOLOGICAL LIBRARY SYSTEM — Full manuscript & knowledge engine
+// ===================================================================
+
+export interface Manuscript {
+  id?: string;
+  title: string;
+  author: string;
+  authorId?: string;
+  category: string;
+  categoryId?: string;
+  type: 'book' | 'research_paper' | 'sermon' | 'commentary' | 'thesis' | 'journal' | 'manuscript';
+  language: string;
+  publicationYear?: number;
+  isbn?: string;
+  status: 'available' | 'borrowed' | 'reserved' | 'draft' | 'under_review' | 'published';
+  accessLevel: 'public' | 'students' | 'faculty' | 'admin';
+  scriptureReferences?: string[];
+  keywords?: string[];
+  abstract?: string;
+  fileUrl?: string;
+  fileType?: string;
+  tenantId: string;
+  contributedBy?: string;
+  approvedBy?: string;
+  approvedAt?: any;
+  viewCount?: number;
+  referenceCount?: number;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const manuscriptService = {
+  async addManuscript(manuscript: Manuscript) {
+    return await addDoc(collection(db, 'manuscripts'), {
+      ...manuscript,
+      viewCount: 0,
+      referenceCount: 0,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'manuscripts'), where('tenantId', '==', tenantId), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Manuscript));
+  },
+  async getByCategory(tenantId: string, category: string) {
+    const q = query(collection(db, 'manuscripts'), where('tenantId', '==', tenantId), where('category', '==', category));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Manuscript));
+  },
+  async getByType(tenantId: string, type: string) {
+    const q = query(collection(db, 'manuscripts'), where('tenantId', '==', tenantId), where('type', '==', type));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Manuscript));
+  },
+  async getPendingReview(tenantId: string) {
+    const q = query(collection(db, 'manuscripts'), where('tenantId', '==', tenantId), where('status', '==', 'under_review'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Manuscript));
+  },
+  async getById(id: string) {
+    const snap = await getDoc(doc(db, 'manuscripts', id));
+    return snap.exists() ? ({ id: snap.id, ...snap.data() } as Manuscript) : null;
+  },
+  async update(id: string, data: Partial<Manuscript>) {
+    return await updateDoc(doc(db, 'manuscripts', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async incrementViews(id: string) {
+    const snap = await getDoc(doc(db, 'manuscripts', id));
+    if (snap.exists()) {
+      const current = (snap.data().viewCount as number) || 0;
+      await updateDoc(doc(db, 'manuscripts', id), { viewCount: current + 1 });
+    }
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'manuscripts', id));
+  },
+};
+
+export interface LibraryCategory {
+  id?: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  sortOrder: number;
+  isActive: boolean;
+  color?: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const libraryCategoryService = {
+  async addCategory(category: LibraryCategory) {
+    return await addDoc(collection(db, 'library_categories'), { ...category, createdAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'library_categories'), where('tenantId', '==', tenantId), orderBy('sortOrder', 'asc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryCategory));
+  },
+  async update(id: string, data: Partial<LibraryCategory>) {
+    return await updateDoc(doc(db, 'library_categories', id), data);
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'library_categories', id));
+  },
+};
+
+export interface LibraryAuthor {
+  id?: string;
+  name: string;
+  bio?: string;
+  expertise?: string[];
+  affiliation?: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const libraryAuthorService = {
+  async addAuthor(author: LibraryAuthor) {
+    return await addDoc(collection(db, 'library_authors'), { ...author, createdAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'library_authors'), where('tenantId', '==', tenantId), orderBy('name', 'asc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryAuthor));
+  },
+  async update(id: string, data: Partial<LibraryAuthor>) {
+    return await updateDoc(doc(db, 'library_authors', id), data);
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'library_authors', id));
+  },
+};
+
+export interface LibraryBorrowLog {
+  id?: string;
+  manuscriptId: string;
+  manuscriptTitle?: string;
+  userId: string;
+  userName?: string;
+  borrowDate: any;
+  dueDate: any;
+  returnDate?: any;
+  status: 'borrowed' | 'returned' | 'overdue';
+  fineAmount?: number;
+  notes?: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const libraryBorrowService = {
+  async borrowManuscript(log: Omit<LibraryBorrowLog, 'id' | 'borrowDate' | 'createdAt' | 'status'>) {
+    const docRef = await addDoc(collection(db, 'library_borrow_logs'), {
+      ...log,
+      status: 'borrowed',
+      borrowDate: serverTimestamp(),
+      createdAt: serverTimestamp(),
+    });
+    await updateDoc(doc(db, 'manuscripts', log.manuscriptId), { status: 'borrowed' });
+    return docRef.id;
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'library_borrow_logs'), where('tenantId', '==', tenantId), orderBy('borrowDate', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryBorrowLog));
+  },
+  async getByUser(tenantId: string, userId: string) {
+    const q = query(collection(db, 'library_borrow_logs'), where('tenantId', '==', tenantId), where('userId', '==', userId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryBorrowLog));
+  },
+  async returnManuscript(borrowId: string, manuscriptId: string) {
+    await updateDoc(doc(db, 'library_borrow_logs', borrowId), {
+      returnDate: serverTimestamp(),
+      status: 'returned',
+    });
+    await updateDoc(doc(db, 'manuscripts', manuscriptId), { status: 'available' });
+  },
+  async markOverdue(borrowId: string) {
+    await updateDoc(doc(db, 'library_borrow_logs', borrowId), { status: 'overdue' });
+  },
+};
+
+export interface LibraryBookmark {
+  id?: string;
+  userId: string;
+  manuscriptId: string;
+  manuscriptTitle?: string;
+  collectionName?: string;
+  notes?: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const libraryBookmarkService = {
+  async addBookmark(bookmark: LibraryBookmark) {
+    return await addDoc(collection(db, 'library_bookmarks'), { ...bookmark, createdAt: serverTimestamp() });
+  },
+  async getByUser(tenantId: string, userId: string) {
+    const q = query(collection(db, 'library_bookmarks'), where('tenantId', '==', tenantId), where('userId', '==', userId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryBookmark));
+  },
+  async getCollections(tenantId: string, userId: string) {
+    const q = query(collection(db, 'library_bookmarks'), where('tenantId', '==', tenantId), where('userId', '==', userId));
+    const snap = await getDocs(q);
+    const bookmarks = snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryBookmark));
+    const collections = new Map<string, LibraryBookmark[]>();
+    bookmarks.forEach(b => {
+      const name = b.collectionName || 'Uncategorized';
+      if (!collections.has(name)) collections.set(name, []);
+      collections.get(name)!.push(b);
+    });
+    return collections;
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'library_bookmarks', id));
+  },
+};
+
+export interface LibraryNote {
+  id?: string;
+  userId: string;
+  manuscriptId: string;
+  manuscriptTitle?: string;
+  content: string;
+  highlightText?: string;
+  pageNumber?: number;
+  chapter?: string;
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const libraryNoteService = {
+  async addNote(note: LibraryNote) {
+    return await addDoc(collection(db, 'library_notes'), { ...note, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByUser(tenantId: string, userId: string) {
+    const q = query(collection(db, 'library_notes'), where('tenantId', '==', tenantId), where('userId', '==', userId), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryNote));
+  },
+  async getByManuscript(tenantId: string, manuscriptId: string) {
+    const q = query(collection(db, 'library_notes'), where('tenantId', '==', tenantId), where('manuscriptId', '==', manuscriptId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryNote));
+  },
+  async update(id: string, data: Partial<LibraryNote>) {
+    return await updateDoc(doc(db, 'library_notes', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'library_notes', id));
+  },
+};
+
+export interface ManuscriptVersion {
+  id?: string;
+  manuscriptId: string;
+  versionNumber: number;
+  fileUrl?: string;
+  changeDescription?: string;
+  createdBy: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const manuscriptVersionService = {
+  async addVersion(version: ManuscriptVersion) {
+    return await addDoc(collection(db, 'manuscript_versions'), { ...version, createdAt: serverTimestamp() });
+  },
+  async getByManuscript(tenantId: string, manuscriptId: string) {
+    const q = query(collection(db, 'manuscript_versions'), where('tenantId', '==', tenantId), where('manuscriptId', '==', manuscriptId), orderBy('versionNumber', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ManuscriptVersion));
+  },
+};
+
+export interface LibraryAccessControl {
+  id?: string;
+  manuscriptId: string;
+  accessLevel: 'public' | 'students' | 'faculty' | 'admin';
+  grantedBy: string;
+  tenantId: string;
+  createdAt?: any;
+}
+
+export const libraryAccessControlService = {
+  async setAccess(control: LibraryAccessControl) {
+    return await addDoc(collection(db, 'library_access_controls'), { ...control, createdAt: serverTimestamp() });
+  },
+  async getByManuscript(tenantId: string, manuscriptId: string) {
+    const q = query(collection(db, 'library_access_controls'), where('tenantId', '==', tenantId), where('manuscriptId', '==', manuscriptId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as LibraryAccessControl));
+  },
+  async update(id: string, data: Partial<LibraryAccessControl>) {
+    return await updateDoc(doc(db, 'library_access_controls', id), data);
+  },
+};
+
