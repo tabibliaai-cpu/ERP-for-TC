@@ -213,7 +213,7 @@ export function Finance() {
     setIsLoading(true);
     setErrorHeader(null);
     try {
-      const [st, fs, sf, pm, inv, sp, sc, lt] = await Promise.all([
+      const results = await Promise.allSettled([
         studentService.getStudentsByTenant(user.tenantId),
         feeStructureService.getByTenant(user.tenantId),
         studentFeeService.getByTenant(user.tenantId),
@@ -223,6 +223,15 @@ export function Finance() {
         scholarshipService.getByTenant(user.tenantId),
         financeService.getTransactionsByTenant(user.tenantId),
       ]);
+      const val = <T,>(r: PromiseSettledResult<T>): T => r.status === 'fulfilled' ? r.value : [] as unknown as T;
+      const st = val(results[0]);
+      const fs = val(results[1]);
+      const sf = val(results[2]);
+      const pm = val(results[3]);
+      const inv = val(results[4]);
+      const sp = val(results[5]);
+      const sc = val(results[6]);
+      const lt = val(results[7]);
       setStudents(st);
       setFeeStructures(fs);
       setStudentFees(sf);

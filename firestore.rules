@@ -115,7 +115,7 @@ service cloud.firestore {
       allow create: if isSuperAdmin() && isValidInstitution(incoming());
       
       match /records/{recordId} {
-        allow list: if isVerified() && isMember(tenantId) && resource.data.tenantId == tenantId;
+        allow list: if isVerified() && (resource == null || (isMember(tenantId) && resource.data.tenantId == tenantId));
         allow get: if isVerified() && isMember(tenantId);
         allow create: if isVerified() && isMember(tenantId) && isValidId(recordId) && isValidRecord(incoming(), tenantId);
         allow update: if isVerified() && isMember(tenantId) && (
@@ -127,7 +127,7 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow get: if isVerified() && (request.auth.uid == userId || (resource != null && resource.data.email == request.auth.token.email) || (resource != null && isMember(resource.data.tenantId)) || isSuperAdmin());
-      allow list: if isVerified() && (isSuperAdmin() || (resource != null && isMember(resource.data.tenantId)) || resource.data.email == request.auth.token.email);
+      allow list: if isVerified() && (resource == null || isSuperAdmin() || (resource != null && isMember(resource.data.tenantId)) || (resource != null && resource.data.email == request.auth.token.email));
       allow create: if isVerified() && (request.auth.uid == userId || isSuperAdmin()) && isValidUser(incoming());
       allow update: if isVerified() && (request.auth.uid == userId || isSuperAdmin());
       allow delete: if isSuperAdmin();
@@ -135,13 +135,13 @@ service cloud.firestore {
 
     match /messages/{messageId} {
       allow create: if isVerified() && isMember(incoming().tenantId) && incoming().senderId == request.auth.uid;
-      allow read: if isVerified() && isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid);
-      allow list: if isVerified() && isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid);
+      allow read: if isVerified() && (resource == null || (isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid)));
+      allow list: if isVerified() && (resource == null || (isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid)));
       allow update, delete: if false;
     }
 
     match /students/{studentId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidStudent(incoming(), incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId) && isValidStudent(incoming(), existing().tenantId);
@@ -149,7 +149,7 @@ service cloud.firestore {
     }
 
     match /faculty/{facultyId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidFaculty(incoming(), incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId) && isValidFaculty(incoming(), existing().tenantId);
@@ -157,7 +157,7 @@ service cloud.firestore {
     }
 
     match /courses/{courseId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -165,7 +165,7 @@ service cloud.firestore {
     }
 
     match /subjects/{subjectId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidSubject(incoming(), incoming().tenantId);
       allow update: if isVerified() && (
@@ -176,13 +176,13 @@ service cloud.firestore {
     }
 
     match /grades/{gradeId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
     }
 
     match /finance/{txId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
       allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
     }
@@ -193,24 +193,25 @@ service cloud.firestore {
     }
 
     match /prayer_requests/{reqId} {
-      allow list, get: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isMember(incoming().tenantId);
       allow update: if isVerified() && (isMember(existing().tenantId) && (incoming().diff(existing()).affectedKeys().hasOnly(['status'])));
       allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
     }
 
     match /congregation/{memberId} {
-      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow read: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
     }
 
     match /books/{bookId} {
-      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow read: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
     }
 
     match /book_borrowing/{borrowId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && (isMember(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
       allow create: if isVerified() && isMember(incoming().tenantId);
       allow update: if isVerified() && (isMember(existing().tenantId) && (incoming().diff(existing()).affectedKeys().hasOnly(['status', 'returnDate'])));
@@ -218,18 +219,18 @@ service cloud.firestore {
     }
 
     match /payroll/{entryId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.facultyId == request.auth.uid);
       allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
     }
 
     match /institutional_documents/{docId} {
-      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow read: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow write: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
     }
 
     match /attendance/{atId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow write: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
     }
@@ -239,7 +240,7 @@ service cloud.firestore {
     // ===================================================================
 
     match /teaching_assignments/{taId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(incoming().tenantId);
@@ -247,14 +248,14 @@ service cloud.firestore {
     }
 
     match /teacher_performance/{tpId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update, delete: if false; // Reviews are immutable once created
     }
 
     match /teacher_leave/{tlId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isMember(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(resource.data.tenantId);
@@ -262,7 +263,7 @@ service cloud.firestore {
     }
 
     match /sermon_archive/{saId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
       allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
@@ -270,7 +271,7 @@ service cloud.firestore {
     }
 
     match /teacher_attendance/{tAtId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
       allow update: if isVerified() && isTenantAdmin(incoming().tenantId);
@@ -278,7 +279,7 @@ service cloud.firestore {
     }
 
     match /learning_materials/{lmId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
       allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
@@ -286,7 +287,7 @@ service cloud.firestore {
     }
 
     match /activity_logs/{alId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow create: if isVerified() && isMember(incoming().tenantId);
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow update, delete: if false; // Audit logs are immutable
@@ -297,7 +298,7 @@ service cloud.firestore {
     // ===================================================================
 
     match /fee_structures/{fsId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -305,14 +306,14 @@ service cloud.firestore {
     }
 
     match /student_fees/{sfId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
     }
 
     match /payments/{payId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -320,7 +321,7 @@ service cloud.firestore {
     }
 
     match /invoices/{invId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -328,7 +329,7 @@ service cloud.firestore {
     }
 
     match /sponsors/{spId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -336,7 +337,7 @@ service cloud.firestore {
     }
 
     match /scholarships/{schId} {
-      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
       allow get: if isVerified() && isMember(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
@@ -344,14 +345,14 @@ service cloud.firestore {
     }
 
     match /refunds/{refId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow get: if isVerified() && isTenantAdmin(resource.data.tenantId);
       allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
       allow update: if isVerified() && isTenantAdmin(existing().tenantId);
     }
 
     match /transaction_log/{tlId} {
-      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow list: if isVerified() && (resource == null || isTenantAdmin(resource.data.tenantId));
       allow create: if isVerified() && isMember(incoming().tenantId);
       allow get: if isVerified() && isMember(resource.data.tenantId);
       // Audit logs are immutable — no update or delete
