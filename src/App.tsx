@@ -56,12 +56,16 @@ export default function App() {
     );
   }
 
-  // ─── Not logged in: Public Marketing Site ───
+  // ─── Not logged in: Public Marketing Site with Login route ───
   if (!user) {
     return (
-      <PublicLayout>
-        <MarketingLanding onNavigate={(path: string) => { window.location.href = path; }} />
-      </PublicLayout>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MarketingLanding onNavigate={(path: string) => { window.location.href = path; }} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
     );
   }
 

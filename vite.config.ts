@@ -9,15 +9,24 @@ export default defineConfig(({mode}) => {
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.BUILD_VERSION': JSON.stringify(Date.now().toString()),
     },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      // Append timestamp to output filenames to bust CDN/browser cache
+      rollupOptions: {
+        output: {
+          entryFileNames: `assets/[name].[hash].${Date.now()}.js`,
+          chunkFileNames: `assets/[name].[hash].${Date.now()}.js`,
+          assetFileNames: `assets/[name].[hash].${Date.now()}.[ext]`,
+        },
+      },
+    },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
   };
