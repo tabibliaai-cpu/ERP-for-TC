@@ -989,7 +989,7 @@ function Footer() {
 
 export function MarketingLanding({ onNavigate }: { onNavigate: (path: string) => void }) {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden" data-version="3.1">
       <Navbar onNavigate={onNavigate} />
       <HeroSection onNavigate={onNavigate} />
       <TrustSection />
