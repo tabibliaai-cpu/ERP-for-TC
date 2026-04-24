@@ -1,24 +1,23 @@
 ---
 Task ID: 1
 Agent: Super Z (Main)
-Task: Fix SuperAdmin - institution creation, password generation, routing
+Task: Build comprehensive Teacher Management System for CovenantERP
 
 Work Log:
-- Cloned latest repo from https://github.com/tabibliaai-cpu/ERP-for-TC
-- Thoroughly analyzed all files: SuperAdmin.tsx, Login.tsx, AuthProvider.tsx, App.tsx, firestore.rules, useStore.ts, permissions.ts
-- Identified 5 critical bugs causing user-reported issues
-- Fixed firestore.rules: Added institutions collection match block (was completely missing)
-- Fixed firestore.rules: Added delete permission for users, added isSuperAdmin() to list/get
-- Created vercel.json with SPA rewrites (fixes hard refresh 404)
-- Fixed SuperAdmin.tsx: institutionId → tenantId in handleProvisionAdmin
-- Fixed SuperAdmin.tsx: institutionId → tenantId in loadTenantAdmins query
-- Fixed SuperAdmin.tsx: Added adminPassword to newInstitution state (auto-generated)
-- Fixed SuperAdmin.tsx: Added password field UI to Add Institution modal
-- Fixed SuperAdmin.tsx: Enhanced handleAddInstitution to auto-provision admin account
-- Fixed SuperAdmin.tsx: Removed plaintext manualPassword from fallback
-- Committed all changes locally (push needs manual auth)
+- Explored existing codebase structure, routing, data models, UI patterns
+- Expanded Faculty interface in dataService.ts with all 17 sections (Basic Info, Contact, Spiritual Profile, Academic Qualifications, Employment, Ministry/Calling, Payroll, Accommodation, Medical, Documents, Performance, Bio)
+- Added 7 new sub-collection services: teaching_assignments, teacher_performance, teacher_leave, sermon_archive, teacher_attendance, learning_materials, activity_logs
+- Added profile completion percentage calculator to facultyService
+- Built TeacherManagement.tsx with 12-tab dashboard (Overview, Classes, Students, Assignments, Spiritual, Payroll, Documents, Performance, Attendance, Leave, Sermons, Activity)
+- Built TeacherEnrollment.tsx with 11 collapsible section enrollment form
+- Added Firestore rules for all 7 new collections with proper tenant-based access control
+- Updated App.tsx with /teachers and /teacher-enrollment routes
+- Updated Sidebar.tsx with Teachers nav item using BookMarked icon
+- Pushed to GitHub (commit fa31741)
 
 Stage Summary:
-- 3 files modified: firestore.rules, src/pages/SuperAdmin.tsx, vercel.json (new)
-- Commit a845abc created but push failed due to missing GitHub auth
-- User needs to: git push origin main, deploy firestore rules, ensure Email/Password auth is enabled in Firebase Console
+- 6 files changed, 2474 lines added
+- New files: TeacherManagement.tsx, TeacherEnrollment.tsx
+- Modified: dataService.ts, firestore.rules, App.tsx, Sidebar.tsx
+- Pushed to: https://github.com/tabibliaai-cpu/ERP-for-TC
+- Note: Firestore rules need to be deployed to named database via REST API with fresh OAuth token (stored token expired)
