@@ -2301,3 +2301,266 @@ export const libraryAccessControlService = {
   },
 };
 
+// ===================================================================
+// SUPER ADMIN SERVICE — SaaS Platform Control Center
+// ===================================================================
+
+export interface PlatformSubscription {
+  id?: string;
+  institutionId: string;
+  institutionName?: string;
+  plan: 'free' | 'basic' | 'premium' | 'enterprise';
+  status: 'active' | 'trial' | 'past_due' | 'cancelled';
+  monthlyPrice: number;
+  startDate: any;
+  endDate?: any;
+  features?: string[];
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export interface FeatureFlag {
+  id?: string;
+  institutionId: string;
+  module: string;
+  enabled: boolean;
+  updatedAt?: any;
+}
+
+export interface PlatformAnnouncement {
+  id?: string;
+  title: string;
+  content: string;
+  type: 'info' | 'warning' | 'maintenance' | 'feature';
+  targetInstitutions?: string[]; // empty = all institutions
+  isActive: boolean;
+  createdBy: string;
+  createdAt?: any;
+  expiresAt?: any;
+}
+
+export interface PlatformAuditLog {
+  id?: string;
+  userId: string;
+  userEmail?: string;
+  userName?: string;
+  action: string;
+  module: string;
+  institutionId?: string;
+  institutionName?: string;
+  details?: string;
+  ipAddress?: string;
+  timestamp?: any;
+}
+
+export interface PlatformStats {
+  totalInstitutions: number;
+  activeInstitutions: number;
+  totalUsers: number;
+  totalStudents: number;
+  totalFaculty: number;
+  totalRevenue: number;
+  monthlyActiveUsers: number;
+  totalAnnouncements: number;
+  totalAuditLogs: number;
+}
+
+export const superAdminService = {
+  // ─── Institution Management ───
+  async getAllInstitutions(): Promise<any[]> {
+    const snap = await getDocs(collection(db, 'institutions'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async getInstitution(id: string): Promise<any | null> {
+    const snap = await getDoc(doc(db, 'institutions', id));
+    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+  },
+  async createInstitution(data: any): Promise<string> {
+    const ref = await addDoc(collection(db, 'institutions'), {
+      ...data,
+      status: 'active',
+      studentCount: 0,
+      facultyCount: 0,
+      userCount: 0,
+      createdAt: serverTimestamp(),
+      lastActivity: serverTimestamp(),
+    });
+    return ref.id;
+  },
+  async updateInstitution(id: string, data: any) {
+    await updateDoc(doc(db, 'institutions', id), { ...data, lastActivity: serverTimestamp() });
+  },
+  async deleteInstitution(id: string) {
+    await deleteDoc(doc(db, 'institutions', id));
+  },
+
+  // ─── Global User Management ───
+  async getAllUsers(): Promise<any[]> {
+    const snap = await getDocs(collection(db, 'users'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async getUsersByInstitution(institutionId: string): Promise<any[]> {
+    const q = query(collection(db, 'users'), where('institutionId', '==', institutionId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async updateUser(id: string, data: any) {
+    await updateDoc(doc(db, 'users', id), data);
+  },
+  async deleteUser(id: string) {
+    await deleteDoc(doc(db, 'users', id));
+  },
+
+  // ─── Subscription Management ───
+  async getAllSubscriptions(): Promise<any[]> {
+    const snap = await getDocs(collection(db, 'subscriptions'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async getSubscription(institutionId: string): Promise<any | null> {
+    const q = query(collection(db, 'subscriptions'), where('institutionId', '==', institutionId));
+    const snap = await getDocs(q);
+    return snap.empty ? null : { id: snap.docs[0].id, ...snap.docs[0].data() };
+  },
+  async createSubscription(data: Omit<PlatformSubscription, 'id'>): Promise<string> {
+    const ref = await addDoc(collection(db, 'subscriptions'), {
+      ...data,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+    return ref.id;
+  },
+  async updateSubscription(id: string, data: any) {
+    await updateDoc(doc(db, 'subscriptions', id), { ...data, updatedAt: serverTimestamp() });
+  },
+
+  // ─── Feature Flags ───
+  async getFeatureFlags(institutionId?: string): Promise<any[]> {
+    if (institutionId) {
+      const q = query(collection(db, 'feature_flags'), where('institutionId', '==', institutionId));
+      const snap = await getDocs(q);
+      return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    }
+    const snap = await getDocs(collection(db, 'feature_flags'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async setFeatureFlag(institutionId: string, module: string, enabled: boolean) {
+    const q = query(collection(db, 'feature_flags'), where('institutionId', '==', institutionId), where('module', '==', module));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      await addDoc(collection(db, 'feature_flags'), {
+        institutionId, module, enabled, updatedAt: serverTimestamp(),
+      });
+    } else {
+      await updateDoc(doc(db, 'feature_flags', snap.docs[0].id), { enabled, updatedAt: serverTimestamp() });
+    }
+  },
+  async batchSetFeatureFlags(institutionId: string, flags: Record<string, boolean>) {
+    for (const [module, enabled] of Object.entries(flags)) {
+      await this.setFeatureFlag(institutionId, module, enabled);
+    }
+  },
+  async getInstitutionFeatureFlags(institutionId: string): Promise<Record<string, boolean>> {
+    const flags = await this.getFeatureFlags(institutionId);
+    const result: Record<string, boolean> = {};
+    flags.forEach(f => { result[f.module] = f.enabled; });
+    return result;
+  },
+
+  // ─── Announcements ───
+  async getAllAnnouncements(): Promise<any[]> {
+    const snap = await getDocs(collection(db, 'announcements'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+  async createAnnouncement(data: Omit<PlatformAnnouncement, 'id'>): Promise<string> {
+    const ref = await addDoc(collection(db, 'announcements'), {
+      ...data,
+      createdAt: serverTimestamp(),
+    });
+    return ref.id;
+  },
+  async updateAnnouncement(id: string, data: any) {
+    await updateDoc(doc(db, 'announcements', id), data);
+  },
+  async deleteAnnouncement(id: string) {
+    await deleteDoc(doc(db, 'announcements', id));
+  },
+  async toggleAnnouncement(id: string, isActive: boolean) {
+    await updateDoc(doc(db, 'announcements', id), { isActive });
+  },
+
+  // ─── Audit Logs ───
+  async getAuditLogs(limit = 100): Promise<any[]> {
+    const snap = await getDocs(collection(db, 'platform_audit_logs'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a: any, b: any) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0))
+      .slice(0, limit);
+  },
+  async getAuditLogsByInstitution(institutionId: string, limit = 50): Promise<any[]> {
+    const q = query(collection(db, 'platform_audit_logs'), where('institutionId', '==', institutionId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a: any, b: any) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0))
+      .slice(0, limit);
+  },
+  async logAudit(entry: Omit<PlatformAuditLog, 'id' | 'timestamp'>) {
+    await addDoc(collection(db, 'platform_audit_logs'), {
+      ...entry,
+      timestamp: serverTimestamp(),
+    });
+  },
+
+  // ─── Platform Statistics ───
+  async getPlatformStats(): Promise<PlatformStats> {
+    const [instSnap, userSnap, subSnap, annSnap, logSnap] = await Promise.all([
+      getDocs(collection(db, 'institutions')),
+      getDocs(collection(db, 'users')),
+      getDocs(collection(db, 'subscriptions')),
+      getDocs(collection(db, 'announcements')),
+      getDocs(collection(db, 'platform_audit_logs')),
+    ]);
+
+    const institutions = instSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const users = userSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const subs = subSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    return {
+      totalInstitutions: institutions.length,
+      activeInstitutions: institutions.filter((i: any) => i.status === 'active').length,
+      totalUsers: users.length,
+      totalStudents: users.filter((u: any) => u.role === 'student').length,
+      totalFaculty: users.filter((u: any) => u.role === 'faculty' || u.role === 'teacher').length,
+      totalRevenue: subs.reduce((sum: number, s: any) => sum + (s.monthlyPrice || 0), 0),
+      monthlyActiveUsers: users.filter((u: any) => u.status !== 'suspended').length,
+      totalAnnouncements: annSnap.size,
+      totalAuditLogs: logSnap.size,
+    };
+  },
+
+  // ─── Available Modules ───
+  getAvailableModules(): { id: string; label: string; description: string; category: string }[] {
+    return [
+      { id: 'admissions', label: 'Admissions', description: 'Student enrollment and registration', category: 'Core' },
+      { id: 'faculty', label: 'Faculty Management', description: 'Teacher profiles and HR', category: 'Core' },
+      { id: 'courses', label: 'Academic Courses', description: 'Course and subject management', category: 'Academic' },
+      { id: 'academic-config', label: 'Academic Config', description: 'Programs, semesters, grading', category: 'Academic' },
+      { id: 'classroom', label: 'Pedagogical Portal', description: 'Teaching and learning', category: 'Academic' },
+      { id: 'finance', label: 'Finance', description: 'Billing, fees, payroll', category: 'Operations' },
+      { id: 'library', label: 'Library', description: 'Manuscripts, borrowing', category: 'Academic' },
+      { id: 'messaging', label: 'Messaging', description: 'Internal communications', category: 'Operations' },
+      { id: 'church', label: 'Church Operations', description: 'Events, congregation', category: 'Ministry' },
+      { id: 'settings', label: 'Settings', description: 'Platform configuration', category: 'System' },
+      { id: 'super-admin', label: 'Super Admin', description: 'Platform administration', category: 'System' },
+    ];
+  },
+
+  // ─── Subscription Plans ───
+  getSubscriptionPlans(): { id: string; name: string; price: number; features: string[]; maxUsers: number; description: string }[] {
+    return [
+      { id: 'free', name: 'Free', price: 0, maxUsers: 25, features: ['admissions', 'faculty', 'courses'], description: 'Basic features for small seminaries' },
+      { id: 'basic', name: 'Basic', price: 29, maxUsers: 100, features: ['admissions', 'faculty', 'courses', 'academic-config', 'classroom', 'finance'], description: 'Standard features for growing institutions' },
+      { id: 'premium', name: 'Premium', price: 79, maxUsers: 500, features: ['admissions', 'faculty', 'courses', 'academic-config', 'classroom', 'finance', 'library', 'messaging'], description: 'Full suite with library and messaging' },
+      { id: 'enterprise', name: 'Enterprise', price: 199, maxUsers: 9999, features: ['admissions', 'faculty', 'courses', 'academic-config', 'classroom', 'finance', 'library', 'messaging', 'church', 'settings'], description: 'Complete platform access with all modules' },
+    ];
+  },
+};
+
