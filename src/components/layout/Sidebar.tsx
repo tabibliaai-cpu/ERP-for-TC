@@ -37,7 +37,7 @@ const navItems = [
   { name: 'Messaging', href: '/messages', icon: MessageSquare, feature: 'messaging', gradient: 'from-pink-500 to-rose-500' },
   { name: 'Library', href: '/library', icon: BookOpen, feature: 'library', gradient: 'from-fuchsia-500 to-violet-500' },
   { name: 'Church Operations', href: '/church', icon: Heart, feature: 'church', gradient: 'from-red-500 to-orange-500' },
-  { name: 'Super Admin', href: '/super-admin', icon: ShieldCheck, feature: 'super-admin', gradient: 'from-slate-400 to-slate-600' },
+  { name: 'Super Admin', href: '/super-admin', icon: ShieldCheck, feature: 'super-admin', gradient: 'from-fuchsia-500 to-violet-600' },
   { name: 'Settings', href: '/settings', icon: Settings, feature: 'settings', gradient: 'from-gray-400 to-gray-600' },
 ];
 
