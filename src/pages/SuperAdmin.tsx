@@ -6,7 +6,8 @@ import {
   Lock, Unlock, Bell, Settings, BarChart3, ToggleLeft, ToggleRight,
   Megaphone, FileText, Shield, Zap, Crown, Sparkles, ChevronDown, Filter,
   Calendar, Clock, UserCheck, UserX, Power, Globe2, Layers, BookOpen,
-  Heart, MessageSquare, Presentation, KeyRound, GraduationCap, Brain, HardDrive
+  Heart, MessageSquare, Presentation, KeyRound, GraduationCap, Brain, HardDrive,
+  ArrowLeftRight, Wifi, WifiOff, StopCircle
 } from 'lucide-react';
 import { RolesPermissionsTab } from './superadmin/RolesPermissionsTab';
 import { AcademicsControlTab } from './superadmin/AcademicsControlTab';
@@ -20,6 +21,9 @@ import { collection, getDocs, addDoc, deleteDoc, doc, setDoc, query, where, upda
 import { superAdminService } from '../services/dataService';
 import type { PlatformSubscription, FeatureFlag, PlatformAnnouncement, PlatformAuditLog, PlatformStats } from '../services/dataService';
 import { cn } from '../lib/utils';
+import { institutionService, impersonationService, auditLogService } from '../services/institutionService';
+import type { ImpersonationToken } from '../services/institutionService';
+import { useAppStore, useAuthStore } from '../store/useStore';
 
 // ─── Firebase secondary app for creating users without signing out super admin ───
 const SECONDARY_APP_NAME = 'secondary-app';
@@ -282,6 +286,22 @@ export function SuperAdmin() {
   // ─── Platform Stats State ───
   const [platformStats, setPlatformStats] = useState<PlatformStats | null>(null);
 
+  // ─── Impersonation State ───
+  const [impersonateModalOpen, setImpersonateModalOpen] = useState(false);
+  const [impersonateTarget, setImpersonateTarget] = useState<Institution | null>(null);
+  const [impersonateReason, setImpersonateReason] = useState('Support troubleshooting');
+  const [impersonateTTL, setImpersonateTTL] = useState(2);
+  const [isGeneratingToken, setIsGeneratingToken] = useState(false);
+  const [activeTokens, setActiveTokens] = useState<ImpersonationToken[]>([]);
+  const [showActiveTokens, setShowActiveTokens] = useState(false);
+
+  // ─── Real-time Sync State ───
+  const [isLive, setIsLive] = useState(false);
+  const [lastSyncTime, setLastSyncTime] = useState<number | null>(null);
+
+  const { isImpersonating, impersonationContext, startImpersonation, stopImpersonation, isRealtimeSynced, setRealtimeSynced, setLastSyncTime: setStoreLastSync } = useAppStore();
+  const { user } = useAuthStore();
+
   // ─── New institution form state ───
   const [newInstitution, setNewInstitution] = useState({
     name: '',
@@ -321,6 +341,112 @@ export function SuperAdmin() {
     loadInstitutions();
     loadPlatformStats();
   }, [loadInstitutions, loadPlatformStats]);
+
+  // ─── Real-time Sync for Institutions ───
+  useEffect(() => {
+    const unsubscribe = institutionService.subscribeToInstitutions((data) => {
+      setInstitutions(data.map(d => ({
+        id: d.id,
+        name: d.name,
+        institutionType: d.institutionType,
+        status: d.status as Institution['status'],
+        subdomain: d.subdomain,
+        customDomain: d.customDomain,
+        studentCount: d.studentCount || 0,
+        facultyCount: d.facultyCount || 0,
+        adminEmail: d.adminEmail,
+        logoUrl: d.logoUrl,
+        createdAt: d.createdAt,
+        lastActivity: d.lastActivity,
+        modules: d.modules || [],
+        tradition: d.tradition,
+        userCount: d.userCount || 0,
+        location: d.location,
+        subscriptionPlan: d.subscriptionPlan,
+      })));
+      setIsLive(true);
+      setIsLoading(false);
+      const now = Date.now();
+      setLastSyncTime(now);
+      setStoreLastSync(now);
+      setRealtimeSynced(true);
+    });
+    return () => unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ─── Impersonation Handlers ───
+  const handleOpenImpersonate = (inst: Institution) => {
+    setImpersonateTarget(inst);
+    setImpersonateReason('Support troubleshooting');
+    setImpersonateTTL(2);
+    setImpersonateModalOpen(true);
+  };
+
+  const handleGenerateImpersonationToken = async () => {
+    if (!impersonateTarget || !user) return;
+    setIsGeneratingToken(true);
+    try {
+      const tokenId = await impersonationService.generateToken(
+        impersonateTarget.id,
+        impersonateTarget.name,
+        impersonateTarget.adminEmail,
+        user.email || 'super-admin',
+        impersonateReason,
+        impersonateTTL
+      );
+
+      // Validate and start impersonation
+      const token = await impersonationService.validateToken(tokenId);
+      if (token) {
+        startImpersonation({
+          institutionId: token.institutionId,
+          institutionName: token.institutionName,
+          adminEmail: token.adminEmail,
+          tokenId: token.id,
+          startedAt: Date.now(),
+          reason: impersonateReason,
+        });
+
+        await auditLogService.logImpersonationAction(
+          user.uid, user.email || 'super-admin', 'impersonate_start',
+          token.institutionId, token.institutionName, token.id
+        );
+
+        setImpersonateModalOpen(false);
+        setImpersonateTarget(null);
+      }
+    } catch (err) {
+      console.error('Failed to generate impersonation token:', err);
+      alert('Failed to generate impersonation token.');
+    } finally {
+      setIsGeneratingToken(false);
+    }
+  };
+
+  const handleStopImpersonation = async () => {
+    if (!impersonationContext || !user) return;
+    try {
+      await impersonationService.revokeToken(impersonationContext.tokenId);
+      await auditLogService.logImpersonationAction(
+        user.uid, user.email || 'super-admin', 'impersonate_end',
+        impersonationContext.institutionId, impersonationContext.institutionName, impersonationContext.tokenId
+      );
+    } catch (err) {
+      console.error('Failed to revoke token:', err);
+    }
+    stopImpersonation();
+  };
+
+  const loadActiveTokens = async () => {
+    try {
+      const tokens = await impersonationService.getActiveTokens();
+      setActiveTokens(tokens);
+      setShowActiveTokens(true);
+    } catch (err) {
+      console.error('Failed to load active tokens:', err);
+    }
+  };
 
   // Load tab-specific data when tab changes
   useEffect(() => {
@@ -568,15 +694,55 @@ export function SuperAdmin() {
               <p className="text-xs text-gray-500">Platform Operating System</p>
             </div>
           </div>
-          <button
-            onClick={() => { setIsAddModalOpen(true); setActiveTab('institutions'); }}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 text-sm"
-          >
-            <Plus className="w-4 h-4" />
-            Add Institution
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={loadActiveTokens}
+              className="flex items-center gap-2 px-4 py-2.5 bg-white text-gray-700 border border-gray-200 rounded-xl font-semibold hover:bg-gray-50 transition-all text-sm"
+            >
+              <ArrowLeftRight className="w-4 h-4" />
+              Tokens
+            </button>
+            <button
+              onClick={() => { setIsAddModalOpen(true); setActiveTab('institutions'); }}
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 text-sm"
+            >
+              <Plus className="w-4 h-4" />
+              Add Institution
+            </button>
+            {/* Real-time Sync Indicator */}
+            <div className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium', isLive ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500')}>
+              {isLive ? <Wifi className="w-3.5 h-3.5" /> : <WifiOff className="w-3.5 h-3.5" />}
+              {isLive ? 'Live Sync' : 'Offline'}
+              {lastSyncTime && <span className="text-[10px] opacity-70">{new Date(lastSyncTime).toLocaleTimeString()}</span>}
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* ─── Impersonation Banner ─── */}
+      {isImpersonating && impersonationContext && (
+        <div className="bg-amber-500 text-white px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="bg-amber-600 rounded-full p-1.5">
+              <Eye className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="font-bold text-sm">Impersonation Mode Active</p>
+              <p className="text-amber-100 text-xs">
+                Viewing as <span className="font-semibold">{impersonationContext.institutionName}</span> ({impersonationContext.adminEmail})
+                {impersonationContext.reason && <> — {impersonationContext.reason}</>}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleStopImpersonation}
+            className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-colors"
+          >
+            <StopCircle className="w-4 h-4" />
+            Exit Impersonation
+          </button>
+        </div>
+      )}
 
       {/* ─── Pill Tab Navigation ─── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
@@ -791,6 +957,7 @@ export function SuperAdmin() {
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-1">
                               <button onClick={() => handleSelectInstitution(inst)} className="p-2 text-fuchsia-600 hover:bg-fuchsia-100 rounded-lg transition-colors" title="Manage"><ChevronRight className="w-5 h-5" /></button>
+                              <button onClick={() => handleOpenImpersonate(inst)} className="p-2 text-amber-600 hover:bg-amber-100 rounded-lg transition-colors" title="Impersonate"><Eye className="w-4 h-4" /></button>
                               <button onClick={() => handleDeleteInstitution(inst.id)} className="p-2 text-rose-600 hover:bg-rose-100 rounded-lg transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
                             </div>
                           </td>
@@ -1648,6 +1815,149 @@ export function SuperAdmin() {
       {/* Success Modal */}
       {provisioningResult && (
         <SuccessModal result={provisioningResult} onClose={() => setProvisioningResult(null)} />
+      )}
+
+      {/* ─── IMPERSONATION MODAL ─── */}
+      {impersonateModalOpen && impersonateTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+            <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-white">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 rounded-full p-2">
+                  <Eye className="w-8 h-8" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold">Impersonate Institution</h2>
+                  <p className="text-amber-100 text-sm">{impersonateTarget.name}</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 space-y-4">
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <div className="flex items-center gap-2 text-amber-700 mb-2">
+                  <AlertCircle className="w-4 h-4" />
+                  <span className="font-semibold text-sm">Warning: Read-Only Mode</span>
+                </div>
+                <p className="text-amber-600 text-xs">You will view the admin portal as this institution. All actions are audited. The token expires automatically.</p>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-4 space-y-2 border border-gray-200">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Institution</span>
+                  <span className="font-semibold text-gray-900">{impersonateTarget.name}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Admin Email</span>
+                  <span className="font-mono text-gray-900 text-xs">{impersonateTarget.adminEmail}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Status</span>
+                  <span className={cn('px-2 py-0.5 rounded text-xs font-semibold', impersonateTarget.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600')}>{impersonateTarget.status}</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Reason</label>
+                <input type="text" value={impersonateReason} onChange={(e) => setImpersonateReason(e.target.value)} placeholder="Why are you impersonating?" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Token Expiry</label>
+                <select value={impersonateTTL} onChange={(e) => setImpersonateTTL(Number(e.target.value))} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-amber-500">
+                  <option value={1}>1 Hour</option>
+                  <option value={2}>2 Hours</option>
+                  <option value={4}>4 Hours</option>
+                  <option value={8}>8 Hours</option>
+                </select>
+              </div>
+
+              <div className="flex gap-3">
+                <button onClick={() => setImpersonateModalOpen(false)} className="flex-1 py-2.5 bg-gray-100 text-gray-700 rounded-xl text-sm font-semibold hover:bg-gray-200 transition-colors">Cancel</button>
+                <button onClick={handleGenerateImpersonationToken} disabled={isGeneratingToken} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-sm font-semibold hover:from-amber-600 hover:to-orange-600 disabled:opacity-50 transition-all shadow-lg shadow-amber-500/25">
+                  {isGeneratingToken ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Eye className="w-4 h-4" />}
+                  {isGeneratingToken ? 'Generating...' : 'Start Impersonation'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─── ACTIVE TOKENS PANEL ─── */}
+      {showActiveTokens && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
+            <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-6 text-white flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <KeyRound className="w-6 h-6" />
+                <h2 className="text-lg font-bold">Active Impersonation Tokens</h2>
+              </div>
+              <button onClick={() => setShowActiveTokens(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 max-h-96 overflow-y-auto">
+              {activeTokens.length === 0 ? (
+                <div className="text-center py-8">
+                  <KeyRound className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                  <p className="text-gray-500">No active tokens</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {activeTokens.map(token => (
+                    <div key={token.id} className="border border-gray-200 rounded-xl p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-gray-900 text-sm">{token.institutionName}</span>
+                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs font-semibold">Active</span>
+                      </div>
+                      <div className="text-xs text-gray-500 space-y-1">
+                        <div className="flex justify-between"><span>Admin:</span><span className="font-mono">{token.adminEmail}</span></div>
+                        <div className="flex justify-between"><span>Created by:</span><span>{token.createdBy}</span></div>
+                        <div className="flex justify-between"><span>Expires:</span><span>{token.expiresAt?.toDate?.()?.toLocaleString() || '-'}</span></div>
+                        <div className="flex justify-between"><span>Used:</span><span>{token.usageCount} times</span></div>
+                        {token.reason && <div className="flex justify-between"><span>Reason:</span><span>{token.reason}</span></div>}
+                      </div>
+                      <div className="flex gap-2 pt-2">
+                        <button
+                          onClick={async () => {
+                            const validToken = await impersonationService.validateToken(token.id);
+                            if (validToken && user) {
+                              startImpersonation({
+                                institutionId: validToken.institutionId,
+                                institutionName: validToken.institutionName,
+                                adminEmail: validToken.adminEmail,
+                                tokenId: validToken.id,
+                                startedAt: Date.now(),
+                                reason: validToken.reason,
+                              });
+                              await auditLogService.logImpersonationAction(
+                                user.uid, user.email || 'super-admin', 'impersonate_start',
+                                validToken.institutionId, validToken.institutionName, validToken.id
+                              );
+                              setShowActiveTokens(false);
+                            }
+                          }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-amber-100 text-amber-700 rounded-lg text-xs font-semibold hover:bg-amber-200 transition-colors"
+                        >
+                          <Eye className="w-3.5 h-3.5" /> Use Token
+                        </button>
+                        <button
+                          onClick={async () => {
+                            await impersonationService.revokeToken(token.id);
+                            setActiveTokens(prev => prev.filter(t => t.id !== token.id));
+                          }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-rose-100 text-rose-700 rounded-lg text-xs font-semibold hover:bg-rose-200 transition-colors"
+                        >
+                          <X className="w-3.5 h-3.5" /> Revoke
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

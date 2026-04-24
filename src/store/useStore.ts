@@ -37,16 +37,54 @@ interface Tenant {
   institutionType: string;
 }
 
+// ─── Impersonation Context ───
+export interface ImpersonationContext {
+  institutionId: string;
+  institutionName: string;
+  adminEmail: string;
+  tokenId: string;
+  startedAt: number;
+  reason?: string;
+}
+
 interface AppState {
   currentTenant: Tenant | null;
   setCurrentTenant: (tenant: Tenant | null) => void;
+  
+  // ─── Impersonation State ───
   isImpersonating: boolean;
   setImpersonating: (value: boolean) => void;
+  impersonationContext: ImpersonationContext | null;
+  startImpersonation: (context: ImpersonationContext) => void;
+  stopImpersonation: () => void;
+  
+  // ─── Real-time Sync Indicator ───
+  isRealtimeSynced: boolean;
+  setRealtimeSynced: (value: boolean) => void;
+  lastSyncTime: number | null;
+  setLastSyncTime: (time: number | null) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
   currentTenant: null,
   setCurrentTenant: (currentTenant) => set({ currentTenant }),
+  
+  // Impersonation
   isImpersonating: false,
   setImpersonating: (isImpersonating) => set({ isImpersonating }),
+  impersonationContext: null,
+  startImpersonation: (context) => set({
+    isImpersonating: true,
+    impersonationContext: context,
+  }),
+  stopImpersonation: () => set({
+    isImpersonating: false,
+    impersonationContext: null,
+  }),
+  
+  // Real-time sync
+  isRealtimeSynced: false,
+  setRealtimeSynced: (isRealtimeSynced) => set({ isRealtimeSynced }),
+  lastSyncTime: null,
+  setLastSyncTime: (lastSyncTime) => set({ lastSyncTime }),
 }));

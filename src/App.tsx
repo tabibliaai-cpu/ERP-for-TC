@@ -17,7 +17,7 @@ import { Login } from './pages/Login';
 import { OnboardingWizard } from './pages/OnboardingWizard';
 import { MarketingLanding } from './pages/MarketingLanding';
 import { Pricing } from './pages/Pricing';
-import { useAuthStore } from './store/useStore';
+import { useAuthStore, useAppStore } from './store/useStore';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './lib/firebase';
@@ -42,6 +42,7 @@ function OnboardingLayout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const { user, isLoading, appView } = useAuthStore();
+  const { isImpersonating, impersonationContext } = useAppStore();
 
   // ─── Loading State ───
   if (isLoading) {
@@ -119,7 +120,36 @@ export default function App() {
 
   // Gate 4: Full Access — The main app
   if (appView === 'app') {
-    // Super Admin goes straight to super-admin dashboard
+    // Super Admin: Impersonation Mode → Show regular admin dashboard
+    if (user.role === 'super_admin' && isImpersonating && impersonationContext) {
+      return (
+        <Router>
+          <DashboardLayout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/messages" element={<Messaging />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/admissions/:studentId" element={<StudentProfile />} />
+              <Route path="/faculty" element={<FacultyManagement />} />
+              <Route path="/courses" element={<AcademicSystem />} />
+              <Route path="/finance" element={<Finance />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/church" element={<ChurchManagement />} />
+              <Route path="/classroom" element={<SubjectPortal />} />
+              <Route path="/super-admin" element={
+                <ProtectedRoute feature="super-admin">
+                  <SuperAdmin />
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </DashboardLayout>
+        </Router>
+      );
+    }
+
+    // Super Admin: Normal Mode → Go to Super Admin panel
     if (user.role === 'super_admin') {
       return (
         <Router>

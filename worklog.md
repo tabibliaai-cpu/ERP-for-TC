@@ -59,3 +59,27 @@ Stage Summary:
 - FIX: Explicit build config + fresh API-triggered deployments
 - NEW UI: Vibrant fuchsia/violet hero, colorful gradient tabs, dramatic color palette throughout
 - Production URL: https://erp-for-tc.vercel.app (serving new assets index-VUc_cNi9.js)
+
+---
+Task ID: 3
+Agent: Main Agent
+Task: Institutional SaaS Onboarding & Management System — Full Funnel Implementation
+
+Work Log:
+- Built MarketingLanding.tsx (1,099 lines) — Premium dark-themed SaaS landing page with 9 sections
+- Built Pricing.tsx (687 lines) — 3-tier pricing with monthly/annual toggle, comparison table, FAQ accordion
+- Built OnboardingWizard.tsx (1,266 lines) — 6-step wizard with animated transitions, Firestore persistence
+- Rewrote AuthProvider.tsx with 4-gate gatekeeper logic (no profile → public, no subscription → pricing, no onboarding → wizard, complete → app)
+- Rewrote App.tsx with 3 view modes (public, onboarding, app) and proper routing per gate
+- Updated useStore.ts with new fields: appView, isSubscribed, onboardingComplete, institutionId, isImpersonating
+- Super Admin auto-redirects to /super-admin on login
+- Build succeeds, pushed to GitHub (commit 32fb274), auto-deploying to Vercel
+
+Stage Summary:
+- Full SaaS funnel implemented: Marketing → Signup → Payment → Onboarding Wizard → Dashboard
+- Gatekeeper logic ensures correct routing based on user state
+- Public visitors see the marketing landing page
+- New users without subscription see pricing page
+- Subscribed users without profile see onboarding wizard
+- Complete users see the full ERP dashboard
+- Super admins bypass all gates and go directly to /super-admin

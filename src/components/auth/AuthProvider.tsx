@@ -11,6 +11,7 @@ import {
   getDocs,
   deleteDoc
 } from 'firebase/firestore';
+import { auditLogService } from '../../services/institutionService';
 import { auth, db } from '../../lib/firebase';
 import { useAuthStore, useAppStore } from '../../store/useStore';
 
@@ -55,6 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 tenantId: 'covenant-hq',
                 displayName: (normalizedEmail === 'rajesh@sibbc.org' || normalizedEmail === 'rajesh@sibbc.com') ? 'Rajesh (Governance)' : 'Principal Governance'
              }, { merge: true }).catch(console.error);
+
+             auditLogService.logAuthAction(firebaseUser.uid, firebaseUser.email || 'phone', 'login_super_admin', 'Super admin authenticated via bypass').catch(() => {});
 
              setLoading(false);
              return;
@@ -101,6 +104,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 isSubscribed: false,
                 onboardingComplete: false,
               }, { merge: true });
+
+              auditLogService.logAuthAction(firebaseUser.uid, firebaseUser.email || '', 'account_created', 'New user profile created via first login').catch(() => {});
 
               setUser({
                 uid: firebaseUser.uid,
@@ -174,6 +179,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             setAppView('app'); // → Full dashboard
 
+            auditLogService.logAuthAction(firebaseUser.uid, firebaseUser.email || '', 'login_success', `Full access granted. Role: ${userData.role || 'unknown'}, Tenant: ${userData.tenantId || 'none'}`).catch(() => {});
+
             // Load tenant data
             const tenantId = userData.tenantId || userData.institutionId;
             if (tenantId) {
@@ -216,6 +223,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(null);
         setCurrentTenant(null);
         setAppView('public');
+        auditLogService.logAuthAction('unknown', 'unknown', 'logout', 'User signed out').catch(() => {});
       }
       setLoading(false);
     });

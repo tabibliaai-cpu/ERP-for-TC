@@ -1,3 +1,4 @@
 node_modules/\ndist/\n.env\n.env.local\n*.log\nskills/\ndownload/\nworklog.md\n.gitignore_full\n.gitignore_tmp
 .vercel
 dist/
+firebase-debug.log
