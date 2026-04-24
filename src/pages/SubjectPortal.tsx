@@ -62,17 +62,18 @@ export default function SubjectPortal() {
     setLoading(true);
     setErrorHeader(null);
     try {
-      const [allSub, allFac, allStu, allCou] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+      const [allSub, allFac, allStu, allCou] = await Promise.allSettled([
         subjectService.getSubjectsByTenant(user.tenantId),
         facultyService.getFacultyByTenant(user.tenantId),
         studentService.getStudentsByTenant(user.tenantId),
         courseService.getCoursesByTenant(user.tenantId)
       ]);
-      setSubjects(allSub);
-      setAllFaculty(allFac);
-      setStudents(allStu);
-      setCourses(allCou);
-      if (allSub.length > 0) setSelectedSubject(allSub[0]);
+      setSubjects(val(allSub));
+      setAllFaculty(val(allFac));
+      setStudents(val(allStu));
+      setCourses(val(allCou));
+      if (val(allSub).length > 0) setSelectedSubject(val(allSub)[0]);
     } catch (error: any) {
       console.error('Failed to load portal data:', error);
       setErrorHeader({ message: "Repository Sync Failure: Could not establish a secure connection to the academic vault.", type: 'error' });

@@ -70,12 +70,13 @@ export function FacultyManagement() {
     setIsLoading(true);
     setErrorHeader(null);
     try {
-      const [facData, subData] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+      const [facData, subData] = await Promise.allSettled([
         facultyService.getFacultyByTenant(user!.tenantId!),
         subjectService.getSubjectsByTenant(user!.tenantId!)
       ]);
-      setFaculty(facData);
-      setSubjects(subData);
+      setFaculty(val(facData));
+      setSubjects(val(subData));
     } catch (error: any) {
       console.error("Failed to load faculty & subjects:", error);
       setErrorHeader({ message: "Network Interruption: Failed to synchronize personnel records.", type: 'error' });

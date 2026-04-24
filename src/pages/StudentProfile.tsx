@@ -90,7 +90,9 @@ export function StudentProfile() {
       }
       const tId = studentData.tenantId;
 
-      const [subjectsData, gradesData, txData, attendanceData] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+
+      const [subjectsData, gradesData, txData, attendanceData] = await Promise.allSettled([
         subjectService.getSubjectsByStudent(studentId!, tId),
         gradeService.getGradesByStudent(studentId!, tId),
         financeService.getTransactionsByStudent(studentId!, tId),
@@ -99,10 +101,10 @@ export function StudentProfile() {
 
       setStudent(studentData);
       setEditData(studentData || {});
-      setSubjects(subjectsData);
-      setGrades(gradesData);
-      setTransactions(txData);
-      setAttendance(attendanceData);
+      setSubjects(val(subjectsData));
+      setGrades(val(gradesData));
+      setTransactions(val(txData));
+      setAttendance(val(attendanceData));
     } catch (error) {
       console.error("Failed to load student profile:", error);
     } finally {

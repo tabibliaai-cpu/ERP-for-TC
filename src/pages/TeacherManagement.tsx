@@ -140,7 +140,8 @@ export function TeacherManagement() {
     setIsLoading(true);
     setErrorBanner(null);
     try {
-      const [facData, subData, assignData, leaveData, perfData, sermonData, matData] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+      const [facData, subData, assignData, leaveData, perfData, sermonData, matData] = await Promise.allSettled([
         facultyService.getFacultyByTenant(user!.tenantId!),
         subjectService.getSubjectsByTenant(user!.tenantId!),
         teachingAssignmentService.getByTenant(user!.tenantId!),
@@ -149,13 +150,13 @@ export function TeacherManagement() {
         sermonArchiveService.getByTenant(user!.tenantId!),
         learningMaterialService.getByTenant(user!.tenantId!),
       ]);
-      setFaculty(facData);
-      setSubjects(subData);
-      setAssignments(assignData);
-      setLeaves(leaveData);
-      setPerformanceReviews(perfData);
-      setSermons(sermonData);
-      setMaterials(matData);
+      setFaculty(val(facData));
+      setSubjects(val(subData));
+      setAssignments(val(assignData));
+      setLeaves(val(leaveData));
+      setPerformanceReviews(val(perfData));
+      setSermons(val(sermonData));
+      setMaterials(val(matData));
     } catch (error: any) {
       console.error("Failed to load teacher data:", error);
       setErrorBanner("Network error: Could not synchronize teacher records.");

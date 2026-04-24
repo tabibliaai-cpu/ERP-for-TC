@@ -77,17 +77,18 @@ export default function AcademicSystem() {
     if (!user?.tenantId) return;
     setLoading(true);
     try {
-      const [c, f, s, sub] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+      const [c, f, s, sub] = await Promise.allSettled([
         courseService.getCoursesByTenant(user.tenantId),
         facultyService.getFacultyByTenant(user.tenantId),
         studentService.getStudentsByTenant(user.tenantId),
         subjectService.getSubjectsByTenant(user.tenantId)
       ]);
-      setCourses(c);
-      setFaculty(f);
-      setAllStudents(s);
-      setSubjects(sub);
-      if (c.length > 0) setSelectedCourse(c[0]);
+      setCourses(val(c));
+      setFaculty(val(f));
+      setAllStudents(val(s));
+      setSubjects(val(sub));
+      if (val(c).length > 0) setSelectedCourse(val(c)[0]);
     } catch (error) {
       console.error('Failed to load academic data:', error);
     } finally {

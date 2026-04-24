@@ -71,14 +71,15 @@ export function ChurchManagement() {
   const loadData = async () => {
     setIsLoading(true);
     try {
-      const [eventsData, prayersData, membersData] = await Promise.all([
+      const val = <T,>(p: PromiseSettledResult<T>): T => p.status === 'fulfilled' ? p.value : [] as T;
+      const [eventsData, prayersData, membersData] = await Promise.allSettled([
         churchService.getEventsByTenant(user!.tenantId!),
         prayerService.getRequestsByTenant(user!.tenantId!),
         congregationService.getMembersByTenant(user!.tenantId!)
       ]);
-      setEvents(eventsData);
-      setPrayers(prayersData);
-      setMembers(membersData);
+      setEvents(val(eventsData));
+      setPrayers(val(prayersData));
+      setMembers(val(membersData));
     } catch (error) {
       console.error("Failed to load church data:", error);
     } finally {
