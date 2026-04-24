@@ -6,8 +6,12 @@ import {
   Lock, Unlock, Bell, Settings, BarChart3, ToggleLeft, ToggleRight,
   Megaphone, FileText, Shield, Zap, Crown, Sparkles, ChevronDown, Filter,
   Calendar, Clock, UserCheck, UserX, Power, Globe2, Layers, BookOpen,
-  Heart, MessageSquare, Presentation
+  Heart, MessageSquare, Presentation, KeyRound, GraduationCap, Brain, HardDrive
 } from 'lucide-react';
+import { RolesPermissionsTab } from './superadmin/RolesPermissionsTab';
+import { AcademicsControlTab } from './superadmin/AcademicsControlTab';
+import { AICenterTab } from './superadmin/AICenterTab';
+import { BackupRecoveryTab } from './superadmin/BackupRecoveryTab';
 import { motion } from 'motion/react';
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -85,10 +89,14 @@ const TABS = [
   { id: 'overview', label: 'Overview', icon: BarChart3 },
   { id: 'institutions', label: 'Institutions', icon: Building2 },
   { id: 'users', label: 'Users', icon: Users },
-  { id: 'features', label: 'Feature Toggles', icon: Layers },
+  { id: 'roles', label: 'Roles', icon: KeyRound },
+  { id: 'academics', label: 'Academics', icon: GraduationCap },
+  { id: 'features', label: 'Features', icon: Layers },
   { id: 'finance', label: 'Finance', icon: DollarSign },
+  { id: 'ai-center', label: 'AI Center', icon: Brain },
   { id: 'security', label: 'Security', icon: Shield },
-  { id: 'announcements', label: 'Announcements', icon: Megaphone },
+  { id: 'announcements', label: 'Announce', icon: Megaphone },
+  { id: 'backup', label: 'Backup', icon: HardDrive },
   { id: 'settings', label: 'Settings', icon: Settings },
 ] as const;
 
@@ -1333,7 +1341,27 @@ export function SuperAdmin() {
         )}
 
         {/* ═══════════════════════════════════════════════════════════
-            TAB 8: SETTINGS
+            TAB 4: ROLES & PERMISSIONS
+        ═══════════════════════════════════════════════════════════ */}
+        {activeTab === 'roles' && <RolesPermissionsTab />}
+
+        {/* ═══════════════════════════════════════════════════════════
+            TAB 5: ACADEMICS CONTROL
+        ═══════════════════════════════════════════════════════════ */}
+        {activeTab === 'academics' && <AcademicsControlTab />}
+
+        {/* ═══════════════════════════════════════════════════════════
+            TAB 8: AI CENTER
+        ═══════════════════════════════════════════════════════════ */}
+        {activeTab === 'ai-center' && <AICenterTab />}
+
+        {/* ═══════════════════════════════════════════════════════════
+            TAB 11: BACKUP & RECOVERY
+        ═══════════════════════════════════════════════════════════ */}
+        {activeTab === 'backup' && <BackupRecoveryTab />}
+
+        {/* ═══════════════════════════════════════════════════════════
+            TAB 12: SETTINGS
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'settings' && (
           <div className="space-y-6">
