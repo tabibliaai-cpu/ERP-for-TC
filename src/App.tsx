@@ -25,7 +25,7 @@ import { db } from './lib/firebase';
 // ─── Public Site Layout (no sidebar) ───
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-white">
       {children}
     </div>
   );

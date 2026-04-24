@@ -40,101 +40,180 @@ import {
   MessageSquare,
   Lock,
   Cloud,
-  Cpu,
+  Monitor,
+  Presentation,
+  Layers,
+  Building2,
+  Palette,
+  UserCheck,
+  Briefcase,
 } from "lucide-react";
 
-/* ------------------------------------------------------------------ */
-/*  Constants                                                          */
-/* ------------------------------------------------------------------ */
+import dashboardPreview from "../assets/images/dashboard-preview.png";
+import libraryPreview from "../assets/images/library-preview.png";
+import academicPreview from "../assets/images/academic-preview.png";
+import pedagogicalPreview from "../assets/images/pedagogical-preview.png";
 
-const NAV_LINKS = ["Features", "About", "How It Works", "Pricing", "Testimonials", "Contact"] as const;
+/* ================================================================== */
+/*  CONSTANTS                                                          */
+/* ================================================================== */
+
+const NAV_LINKS = ["Features", "Why Us", "How It Works", "Screens", "Pricing", "Testimonials"] as const;
+
+const MODULES = [
+  { icon: GraduationCap, label: "Student Management", desc: "Enrollment, profiles, academic progress" },
+  { icon: BookOpen, label: "Academic System", desc: "Programs, curricula, grading, exams" },
+  { icon: Briefcase, label: "Faculty Portal", desc: "Profiles, HR, workload scheduling" },
+  { icon: Library, label: "Library", desc: "Catalog, borrowing, rare manuscripts" },
+  { icon: DollarSign, label: "Finance", desc: "Billing, scholarships, donor tracking" },
+  { icon: Presentation, label: "Pedagogical Portal", desc: "Lesson planning, engagement, classroom" },
+];
 
 const FEATURES = [
   {
-    icon: GraduationCap,
-    title: "Student Lifecycle Management",
+    icon: UserCheck,
+    title: "Student Enrollment & Profiles",
     description:
-      "Track every student from admissions inquiry through graduation — applications, enrollment, academic progress, and alumni records in one seamless flow. Automate repetitive tasks and never lose track of a student again.",
+      "End-to-end student lifecycle management — from inquiry and application through enrollment, academic tracking, and graduation. Automated workflows reduce paperwork by 80% and keep every record accessible in real time.",
     color: "from-indigo-500 to-blue-500",
-    bgColor: "bg-indigo-50",
-    textColor: "text-indigo-600",
-  },
-  {
-    icon: Users,
-    title: "Faculty & HR Suite",
-    description:
-      "Comprehensive faculty profiles, payroll processing, leave management, performance reviews, and workload scheduling — all automated. Reduce administrative overhead by up to 70% with intelligent scheduling tools.",
-    color: "from-violet-500 to-purple-500",
-    bgColor: "bg-violet-50",
-    textColor: "text-violet-600",
+    bg: "bg-indigo-50",
+    text: "text-indigo-600",
   },
   {
     icon: BookOpen,
-    title: "Academic Configuration",
+    title: "Academic & Curriculum Management",
     description:
-      "Design programs, define curricula, set grading rubrics, schedule classes, and manage examinations with fine-grained control. Support for B.Th, M.Div, Th.M, PhD, and D.Min programs out of the box.",
+      "Design programs for B.Th, M.Div, Th.M, PhD, and D.Min with fine-grained control. Define curricula, set grading rubrics, schedule classes, manage examinations, and track academic performance across every department.",
+    color: "from-violet-500 to-purple-500",
+    bg: "bg-violet-50",
+    text: "text-violet-600",
+  },
+  {
+    icon: Users,
+    title: "Faculty & Teaching Tools",
+    description:
+      "Comprehensive faculty profiles, workload scheduling, leave management, performance reviews, and payroll — all automated. Give your faculty the tools they need to focus on teaching rather than administration.",
     color: "from-amber-500 to-orange-500",
-    bgColor: "bg-amber-50",
-    textColor: "text-amber-600",
+    bg: "bg-amber-50",
+    text: "text-amber-600",
   },
   {
     icon: Library,
-    title: "Smart Library System",
+    title: "Theological Library System",
     description:
-      "Digitize catalogs, manage borrowing cycles, track rare manuscripts, and provide students with a modern discovery and reservation experience. Integrated barcode scanning and overdue notification system included.",
+      "Digitize your entire catalog, manage borrowing cycles, track rare manuscripts, and provide a modern discovery experience. Integrated barcode scanning, overdue alerts, and reservation system for students.",
     color: "from-emerald-500 to-teal-500",
-    bgColor: "bg-emerald-50",
-    textColor: "text-emerald-600",
+    bg: "bg-emerald-50",
+    text: "text-emerald-600",
   },
   {
     icon: DollarSign,
-    title: "Financial Operations",
+    title: "Billing & Sponsorship Tracking",
     description:
-      "Fee collection, invoice generation, scholarship management, donor tracking, and real-time financial reporting at your fingertips. Generate GST-compliant receipts and export reports for audits in one click.",
+      "Comprehensive financial operations — fee collection, GST-compliant invoice generation, scholarship management, sponsor tracking, and real-time reporting. Generate audit-ready financial statements in one click.",
     color: "from-rose-500 to-pink-500",
-    bgColor: "bg-rose-50",
-    textColor: "text-rose-600",
+    bg: "bg-rose-50",
+    text: "text-rose-600",
   },
   {
-    icon: Church,
-    title: "Church & Ministry Integration",
+    icon: Presentation,
+    title: "Pedagogical Portal",
     description:
-      "Coordinate chapel services, manage ministry placements, track congregation engagement, and archive sermon libraries effortlessly. Purpose-built for institutions where faith and academics intersect.",
+      "Purpose-built teaching hub — lesson planning, classroom engagement tracking, assignment management, and real-time student interaction. Empower faculty with tools designed for theological pedagogy.",
     color: "from-sky-500 to-cyan-500",
-    bgColor: "bg-sky-50",
-    textColor: "text-sky-600",
+    bg: "bg-sky-50",
+    text: "text-sky-600",
+  },
+];
+
+const UNIQUE_VALUES = [
+  {
+    icon: Target,
+    title: "Theology-Focused System",
+    description:
+      "Unlike generic ERP platforms retrofitted for education, CovenantERP was built from day one for theological institutions. Every module — from chapel management to sermon archiving — reflects the unique rhythms of seminary life. We understand that a Bible college operates fundamentally differently from a business school.",
   },
   {
-    icon: MessageSquare,
-    title: "Built-in Messaging",
+    icon: Heart,
+    title: "Ministry & Spiritual Tracking",
     description:
-      "Internal communication system connecting administrators, faculty, students, and staff. Share announcements, send targeted messages, and keep everyone in the loop without external tools.",
-    color: "from-fuchsia-500 to-violet-500",
-    bgColor: "bg-fuchsia-50",
-    textColor: "text-fuchsia-600",
+      "Track ministry placements, chapel attendance, spiritual formation progress, and congregation engagement alongside academic records. CovenantERP recognizes that theological education is not just about grades — it's about holistic formation of future leaders for the Church.",
   },
   {
-    icon: Cpu,
-    title: "AI-Powered Analytics",
+    icon: Building2,
+    title: "Multi-Institution SaaS",
     description:
-      "Leverage Google Gemini AI for intelligent insights — predictive enrollment analytics, automated report generation, smart recommendations for curriculum optimization, and natural language data queries.",
-    color: "from-cyan-500 to-blue-500",
-    bgColor: "bg-cyan-50",
-    textColor: "text-cyan-600",
+      "Built on a true multi-tenant architecture with centralized Super Admin control. Manage multiple campuses, oversee dozens of institutions from a single dashboard, and maintain full data isolation between tenants. Scale from one campus to a nationwide network seamlessly.",
+  },
+  {
+    icon: Palette,
+    title: "White-Label Branding",
+    description:
+      "Every institution gets a fully branded experience — custom logos, colors, email templates, and login pages. Your students and faculty see your brand, not ours. Deploy your institution's visual identity across every touchpoint with zero technical effort.",
+  },
+];
+
+const HOW_STEPS = [
+  {
+    num: "01",
+    title: "Create Institution",
+    description:
+      "Sign up with your institutional email, verify in under 60 seconds. No credit card required. Your 14-day free trial starts immediately with full access to every module and feature.",
+    icon: Globe,
+    gradient: "from-indigo-500 to-violet-500",
+  },
+  {
+    num: "02",
+    title: "Configure Academic & Faculty",
+    description:
+      "Use our guided setup wizard to define your programs (B.Th, M.Div, Th.M, PhD, D.Min), configure grading systems, set up departments, and invite your faculty. Import existing data with our CSV migration tool.",
+    icon: Layers,
+    gradient: "from-violet-500 to-purple-500",
+  },
+  {
+    num: "03",
+    title: "Start Managing & Teaching",
+    description:
+      "Begin enrolling students, scheduling classes, managing library resources, and tracking finances from day one. Your entire institution runs on one secure, beautifully designed platform.",
+    icon: Monitor,
+    gradient: "from-amber-500 to-orange-500",
+  },
+];
+
+const SCREENS = [
+  {
+    title: "Dashboard",
+    description: "Real-time institutional overview with enrollment stats, financial summaries, and activity feeds",
+    src: dashboardPreview,
+  },
+  {
+    title: "Library Portal",
+    description: "Modern catalog discovery with borrowing management, reservation system, and overdue tracking",
+    src: libraryPreview,
+  },
+  {
+    title: "Academic System",
+    description: "Program configuration, curriculum management, examination scheduling, and grade tracking",
+    src: academicPreview,
+  },
+  {
+    title: "Pedagogical Portal",
+    description: "Lesson planning, classroom engagement, assignment management, and student interaction tools",
+    src: pedagogicalPreview,
   },
 ];
 
 const PRICING = [
   {
-    name: "Starter",
+    name: "Basic",
     price: "$29",
-    period: "/month",
-    description: "Perfect for small Bible colleges getting started with digital management",
+    period: "/mo",
+    description: "For small Bible colleges getting started",
     features: [
       "Up to 200 students",
-      "Basic admissions portal",
+      "Student enrollment & profiles",
+      "Basic academic configuration",
       "Faculty management",
-      "Simple grade reports",
       "Library catalog",
       "Email support",
       "5 GB storage",
@@ -143,16 +222,17 @@ const PRICING = [
     cta: "Start Free Trial",
   },
   {
-    name: "Professional",
+    name: "Pro",
     price: "$79",
-    period: "/month",
-    description: "For established seminaries that need the complete academic and financial suite",
+    period: "/mo",
+    description: "For established seminaries with full needs",
     features: [
       "Up to 2,000 students",
       "Full academic suite",
-      "Library management",
-      "Financial operations",
-      "Church integration",
+      "Complete library system",
+      "Financial operations & billing",
+      "Church & ministry integration",
+      "Pedagogical portal",
       "AI-powered analytics",
       "Priority support",
       "25 GB storage",
@@ -163,13 +243,14 @@ const PRICING = [
   {
     name: "Enterprise",
     price: "$199",
-    period: "/month",
-    description: "For theological universities with multi-campus operations and custom needs",
+    period: "/mo",
+    description: "For theological universities at scale",
     features: [
       "Unlimited students",
       "Multi-campus support",
+      "White-label branding",
       "Advanced AI analytics",
-      "Custom integrations",
+      "Custom integrations & API",
       "Dedicated account manager",
       "On-site training",
       "SLA guarantee",
@@ -199,7 +280,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "We evaluated five ERP systems before choosing CovenantERP. None of them understood the unique needs of theological education like this platform does. The church integration module is absolutely brilliant.",
+      "We evaluated five ERP systems before choosing CovenantERP. None of them understood the unique needs of theological education. The church integration and ministry tracking modules are absolutely brilliant.",
     name: "Prof. David Kurian",
     role: "Director of IT",
     institution: "Covenant Theological University, Kerala",
@@ -207,33 +288,17 @@ const TESTIMONIALS = [
   },
 ];
 
-const TRUSTED_LOGOS = [
-  "Grace Seminary",
-  "Bethel College",
-  "New Life Theological",
-  "Covenant University",
-  "India Bible College",
-  "SABC Bangalore",
+const TRUSTED = [
+  "Grace Seminary", "Bethel College", "New Life Theological",
+  "Covenant University", "India Bible College", "SABC Bangalore",
 ];
 
-const STATS = [
-  { value: "120+", label: "Institutions", icon: GraduationCap },
-  { value: "50,000+", label: "Students Managed", icon: Users },
-  { value: "99.9%", label: "Platform Uptime", icon: Cloud },
-  { value: "4.9/5", label: "User Rating", icon: Star },
-  { value: "2M+", label: "Records Processed", icon: BarChart3 },
-  { value: "< 60s", label: "Average Response Time", icon: Clock },
-];
+/* ================================================================== */
+/*  REUSABLES                                                          */
+/* ================================================================== */
 
-/* ------------------------------------------------------------------ */
-/*  Reusable animation wrapper                                        */
-/* ------------------------------------------------------------------ */
-
-function FadeInSection({
-  children,
-  className,
-  delay = 0,
-  direction = "up",
+function FadeIn({
+  children, className = "", delay = 0, direction = "up",
 }: {
   children: React.ReactNode;
   className?: string;
@@ -241,57 +306,54 @@ function FadeInSection({
   direction?: "up" | "down" | "left" | "right";
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
-  const directionOffset = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const offsets: Record<string, { x?: number; y?: number }> = {
+    up: { y: 36 }, down: { y: -36 }, left: { x: 36 }, right: { x: -36 },
   };
-
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{
-        opacity: 0,
-        ...directionOffset[direction],
-      }}
-      animate={
-        isInView
-          ? { opacity: 1, x: 0, y: 0 }
-          : { opacity: 0, ...directionOffset[direction] }
-      }
-      transition={{
-        duration: 0.7,
-        delay,
-        ease: [0.21, 0.47, 0.32, 0.98],
-      }}
-    >
+    <motion.div ref={ref} className={className}
+      initial={{ opacity: 0, ...offsets[direction] }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...offsets[direction] }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 0.61, 0.36, 1] }}>
       {children}
     </motion.div>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  1. Navigation Bar                                                  */
-/* ------------------------------------------------------------------ */
+function SectionBadge({ icon: Icon, children }: { icon: React.ElementType; children: React.ReactNode }) {
+  return (
+    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5">
+      <Icon className="h-3.5 w-3.5 text-indigo-500" />
+      <span className="text-xs font-semibold text-indigo-600">{children}</span>
+    </div>
+  );
+}
+
+function GradientHeading({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={cn("bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent", className)}>
+      {children}
+    </span>
+  );
+}
+
+/* ================================================================== */
+/*  1. NAVBAR                                                          */
+/* ================================================================== */
 
 function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fn = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   const scrollTo = (id: string) => {
     setMobileOpen(false);
-    const el = document.getElementById(id.toLowerCase().replace(/\s+/g, "-"));
-    el?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id.toLowerCase().replace(/\s+/g, "-"))?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -299,36 +361,26 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
       <motion.nav
         className={cn(
           "fixed left-0 right-0 top-0 z-50 transition-all duration-500",
-          scrolled
-            ? "border-b border-white/10 bg-[#070714]/90 backdrop-blur-2xl shadow-lg shadow-black/10"
-            : "bg-transparent"
+          scrolled ? "border-b border-slate-200/80 bg-white/85 backdrop-blur-2xl shadow-sm" : "bg-white/60 backdrop-blur-lg"
         )}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+        initial={{ y: -80 }} animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-8">
           {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/25">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/30 transition-shadow">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-bold text-white font-display">
-              Covenant<span className="text-indigo-400">ERP</span>
+            <span className="text-lg font-bold text-slate-900 font-display">
+              Covenant<span className="text-indigo-600">ERP</span>
             </span>
           </button>
 
           {/* Desktop links */}
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => (
-              <button
-                key={link}
-                onClick={() => scrollTo(link)}
-                className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
-              >
+              <button key={link} onClick={() => scrollTo(link)}
+                className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">
                 {link}
               </button>
             ))}
@@ -336,79 +388,43 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
 
           {/* Desktop CTAs */}
           <div className="hidden items-center gap-3 lg:flex">
-            <button
-              onClick={() => onNavigate("/login")}
-              className="rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
-            >
+            <button onClick={() => onNavigate("/login")}
+              className="px-4 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900">
               Sign In
             </button>
-            <button
-              onClick={() => onNavigate("/login")}
-              className="rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/30 hover:brightness-110"
-            >
-              Get Started Free
+            <button onClick={() => onNavigate("/login")}
+              className="rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:shadow-xl hover:shadow-indigo-500/30 hover:brightness-110">
+              Get Started
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
+          {/* Mobile toggle */}
+          <button className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100 lg:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 bg-[#070714]/98 backdrop-blur-2xl pt-24 lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="flex flex-col items-center gap-2 px-6">
+          <motion.div className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl pt-20 lg:hidden"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+            <div className="flex flex-col gap-1 px-6">
               {NAV_LINKS.map((link, i) => (
-                <motion.button
-                  key={link}
-                  onClick={() => scrollTo(link)}
-                  className="w-full rounded-xl py-3.5 text-center text-lg font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-white"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.04 + 0.05 }}
-                >
+                <motion.button key={link} onClick={() => scrollTo(link)}
+                  className="w-full rounded-xl py-3.5 text-left text-base font-medium text-slate-700 hover:bg-slate-50"
+                  initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 + 0.05 }}>
                   {link}
                 </motion.button>
               ))}
-              <motion.div
-                className="mt-6 flex w-full flex-col gap-3"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
-              >
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    onNavigate("/login");
-                  }}
-                  className="w-full rounded-xl border border-white/10 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/5"
-                >
-                  Sign In
-                </button>
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    onNavigate("/login");
-                  }}
-                  className="w-full rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 py-3.5 text-sm font-semibold text-white shadow-lg"
-                >
-                  Get Started Free
-                </button>
-              </motion.div>
+              <div className="mt-6 flex flex-col gap-3" >
+                <button onClick={() => { setMobileOpen(false); onNavigate("/login"); }}
+                  className="w-full rounded-xl border border-slate-200 py-3.5 text-sm font-semibold text-slate-700">Sign In</button>
+                <button onClick={() => { setMobileOpen(false); onNavigate("/login"); }}
+                  className="w-full rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 py-3.5 text-sm font-semibold text-white shadow-lg">Get Started</button>
+              </div>
             </div>
           </motion.div>
         )}
@@ -417,219 +433,177 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  2. Hero Section                                                    */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  2. HERO                                                            */
+/* ================================================================== */
 
 function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
-
   return (
-    <section
-      id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#070714] px-6 pt-20"
-    >
-      {/* Animated gradient mesh background */}
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-20">
+      {/* Decorative gradients */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[150px]" />
-        <div className="absolute right-1/4 top-1/4 h-[500px] w-[500px] translate-x-1/4 rounded-full bg-violet-600/15 blur-[150px]" />
-        <div className="absolute bottom-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-blue-600/10 blur-[150px]" />
-        {/* Subtle grid */}
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
-          }}
-        />
+        <div className="absolute -left-40 top-20 h-[600px] w-[600px] rounded-full bg-indigo-200/30 blur-[120px]" />
+        <div className="absolute -right-40 top-40 h-[500px] w-[500px] rounded-full bg-violet-200/25 blur-[120px]" />
+        <div className="absolute left-1/3 bottom-0 h-[300px] w-[400px] rounded-full bg-purple-100/20 blur-[100px]" />
       </div>
 
-      <motion.div
-        className="relative z-10 mx-auto max-w-5xl text-center"
-        style={{ y: heroY, opacity: heroOpacity }}
-      >
-        {/* Badge */}
-        <motion.div
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-5 py-2 backdrop-blur-sm"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Zap className="h-3.5 w-3.5 text-indigo-400" />
-          <span className="text-xs font-semibold text-indigo-300 tracking-wide">
-            Trusted by 120+ theological institutions across India
-          </span>
-        </motion.div>
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-16 lg:px-8 lg:py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left: Copy */}
+          <div>
+            <motion.div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-4 py-1.5 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+              <Zap className="h-3.5 w-3.5 text-indigo-500" />
+              <span className="text-xs font-semibold text-indigo-600">Built for Seminaries & Bible Colleges</span>
+            </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          className="mb-6 font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
-          The Complete
-          <br />
-          <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-amber-400 bg-clip-text text-transparent">
-            ERP Platform
-          </span>
-          <br />
-          for Theological Education
-        </motion.h1>
+            <motion.h1 className="mb-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-[3.5rem]"
+              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 0.61, 0.36, 1] }}>
+              Run Your Entire Theological Institution on{" "}
+              <GradientHeading>One Platform</GradientHeading>
+            </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p
-          className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg md:text-xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-        >
-          From admissions to graduation, faculty to finance, library to chapel — manage your
-          entire seminary ecosystem in one powerful, beautifully designed platform.
-        </motion.p>
+            <motion.p className="mb-10 max-w-lg text-base leading-relaxed text-slate-500 sm:text-lg"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
+              Manage students, faculty, academics, library, finance, and ministry training — all in one secure ERP built exclusively for theological education.
+            </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          <button
-            onClick={() => onNavigate("/login")}
-            className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-2xl shadow-indigo-500/25 transition-all hover:shadow-indigo-500/40 hover:brightness-110"
-          >
-            Start Your Free Trial
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <button className="group flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
-              <Play className="h-3.5 w-3.5 fill-white text-white" />
-            </div>
-            Watch Demo
-          </button>
-        </motion.div>
+            <motion.div className="flex flex-col gap-3.5 sm:flex-row"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.55 }}>
+              <button onClick={() => onNavigate("/login")}
+                className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/35 hover:brightness-110">
+                Get Started <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
+              <button
+                className="group flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md">
+                <Play className="h-4 w-4 text-indigo-500" />
+                Request Demo
+              </button>
+            </motion.div>
 
-        {/* Trust signals */}
-        <motion.div
-          className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-white/[0.06] pt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          {[
-            { value: "120+", label: "Institutions" },
-            { value: "50K+", label: "Students" },
-            { value: "99.9%", label: "Uptime" },
-            { value: "4.9/5", label: "Rating" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-xl font-bold text-white sm:text-2xl">
-                {stat.value}
+            {/* Mini trust bar */}
+            <motion.div className="mt-10 flex flex-wrap items-center gap-6 border-t border-slate-200/60 pt-6"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }}>
+              {[{ v: "120+", l: "Institutions" }, { v: "50K+", l: "Students" }, { v: "99.9%", l: "Uptime" }, { v: "4.9/5", l: "Rating" }].map((s) => (
+                <div key={s.l}>
+                  <div className="text-lg font-bold text-slate-900">{s.v}</div>
+                  <div className="text-xs text-slate-400 font-medium">{s.l}</div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right: Dashboard mockup */}
+          <motion.div className="relative"
+            initial={{ opacity: 0, y: 40, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 0.61, 0.36, 1] }}>
+            {/* Glow behind */}
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-indigo-200 via-violet-200 to-purple-200 opacity-40 blur-2xl" />
+            <div className="relative rounded-2xl border border-slate-200/80 bg-white p-1.5 shadow-2xl shadow-indigo-500/10">
+              <img
+                src={dashboardPreview}
+                alt="CovenantERP Dashboard Preview"
+                className="w-full rounded-xl object-cover"
+                loading="eager"
+              />
+              {/* Browser chrome */}
+              <div className="absolute left-0 right-0 top-0 flex items-center gap-1.5 rounded-t-xl bg-slate-100 px-3 py-2.5">
+                <div className="flex gap-1.5">
+                  <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                </div>
+                <div className="ml-3 flex-1 rounded-md bg-white/80 px-3 py-1 text-[10px] text-slate-400">
+                  app.covenanterp.com/dashboard
+                </div>
               </div>
-              <div className="mt-0.5 text-xs text-slate-500 font-medium">{stat.label}</div>
             </div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent" />
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  3. Trusted By Section                                              */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  3. TRUST INDICATORS                                                */
+/* ================================================================== */
 
-function TrustedBySection() {
+function TrustSection() {
   return (
-    <section className="relative bg-white py-16 px-6">
+    <section className="relative bg-white py-14 px-5 border-y border-slate-100">
       <div className="mx-auto max-w-7xl">
-        <FadeInSection>
-          <p className="mb-10 text-center text-sm font-semibold uppercase tracking-widest text-slate-400">
-            Trusted by leading theological institutions
+        <FadeIn className="text-center mb-10">
+          <p className="text-sm font-semibold uppercase tracking-widest text-slate-400">
+            Trusted by seminaries & Bible colleges worldwide
           </p>
+        </FadeIn>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {MODULES.map((m, i) => (
+            <FadeIn key={m.label} delay={i * 0.06}>
+              <div className="group flex flex-col items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center transition-all hover:border-indigo-200 hover:bg-indigo-50/30 hover:shadow-sm">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 shadow-sm">
+                  <m.icon className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-indigo-700 transition-colors">{m.label}</p>
+                  <p className="mt-0.5 text-[11px] text-slate-400 leading-snug">{m.desc}</p>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <FadeIn className="mt-10">
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-            {TRUSTED_LOGOS.map((name, i) => (
-              <motion.div
-                key={name}
-                className="flex h-12 items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 px-5 text-sm font-semibold text-slate-400 transition-all hover:border-slate-200 hover:text-slate-600 md:h-14 md:px-6 md:text-base"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-              >
-                <GraduationCap className="h-4 w-4" />
+            {TRUSTED.map((name, i) => (
+              <div key={name} className="flex h-11 items-center gap-2 rounded-lg border border-slate-100 bg-white px-4 text-xs font-semibold text-slate-400">
+                <GraduationCap className="h-3.5 w-3.5" />
                 {name}
-              </motion.div>
+              </div>
             ))}
           </div>
-        </FadeInSection>
+        </FadeIn>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  4. Features Section                                               */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  4. FEATURES GRID                                                   */
+/* ================================================================== */
 
-function FeaturesGrid() {
+function FeaturesSection() {
   return (
-    <section id="features" className="relative bg-slate-50 py-28 px-6">
+    <section id="features" className="relative bg-slate-50 py-24 px-5">
       <div className="mx-auto max-w-7xl">
-        <FadeInSection className="mb-20 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5">
-            <Zap className="h-3.5 w-3.5 text-indigo-500" />
-            <span className="text-xs font-semibold text-indigo-600">Complete Platform</span>
-          </div>
-          <h2 className="mb-5 font-display text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
-            Everything your institution needs,{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              in one place
-            </span>
+        <FadeIn className="mb-16 max-w-2xl">
+          <SectionBadge icon={Layers}>Complete Platform</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            Six powerful modules. <GradientHeading>One unified system.</GradientHeading>
           </h2>
-          <p className="mx-auto max-w-2xl text-base text-slate-500 md:text-lg leading-relaxed">
-            Purpose-built for theological education. Eight powerful modules designed with deep
-            understanding of how seminaries and Bible colleges actually operate.
+          <p className="mt-4 text-base text-slate-500 leading-relaxed">
+            Every feature purpose-built for theological education — not generic ERP retrofitted with a theological label.
           </p>
-        </FadeInSection>
+        </FadeIn>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {FEATURES.map((feature, i) => (
-            <FadeInSection key={feature.title} delay={i * 0.06}>
-              <div className="group h-full rounded-2xl border border-slate-200/80 bg-white p-7 transition-all duration-500 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1">
-                {/* Icon */}
-                <div
-                  className={cn(
-                    "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl shadow-lg",
-                    feature.bgColor,
-                  )}
-                >
-                  <feature.icon className={cn("h-6 w-6", feature.textColor)} />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((f, i) => (
+            <FadeIn key={f.title} delay={i * 0.06}>
+              <div className="group h-full rounded-2xl border border-slate-200/80 bg-white p-7 transition-all duration-400 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 hover:-translate-y-1">
+                <div className={cn("mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl shadow-sm", f.bg)}>
+                  <f.icon className={cn("h-6 w-6", f.text)} />
                 </div>
-
-                <h3 className="mb-2.5 text-base font-bold text-slate-900">
-                  {feature.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-500">
-                  {feature.description}
-                </p>
-
-                {/* Hover arrow */}
+                <h3 className="mb-2.5 text-base font-bold text-slate-900">{f.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-500">{f.description}</p>
                 <div className="mt-5 pt-4 border-t border-slate-100">
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-500 transition-colors group-hover:text-indigo-700">
-                    Learn more
-                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-500 group-hover:text-indigo-700 transition-colors">
+                    Learn more <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -637,162 +611,39 @@ function FeaturesGrid() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  5. About Us Section                                               */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  5. UNIQUE VALUE                                                    */
+/* ================================================================== */
 
-function AboutSection() {
-  const values = [
-    {
-      icon: Target,
-      title: "Our Mission",
-      description:
-        "To empower every theological institution with world-class management tools that are affordable, secure, and designed specifically for the unique rhythms of faith-based education.",
-    },
-    {
-      icon: Heart,
-      title: "Our Heart",
-      description:
-        "We believe that administrative burden should never distract from the sacred work of theological education. Every feature we build is aimed at freeing administrators and faculty to focus on what truly matters — shaping lives.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Our Vision",
-      description:
-        "A future where every seminary and Bible college, regardless of size or budget, has access to the same enterprise-grade technology that transforms institutional efficiency and student success.",
-    },
-  ];
-
+function UniqueValueSection() {
   return (
-    <section id="about" className="relative bg-white py-28 px-6 overflow-hidden">
-      {/* Decorative gradient */}
-      <div className="pointer-events-none absolute -right-40 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-violet-100/40 blur-[120px]" />
+    <section id="why-us" className="relative bg-white py-24 px-5 overflow-hidden">
+      {/* Decorative */}
+      <div className="pointer-events-none absolute -right-60 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/30 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-60 bottom-0 h-[500px] w-[500px] rounded-full bg-violet-100/30 blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Top part — Company story */}
-        <div className="mb-20 grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <FadeInSection direction="right">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 mb-6">
-              <Award className="h-3.5 w-3.5 text-indigo-500" />
-              <span className="text-xs font-semibold text-indigo-600">About CovenantERP</span>
-            </div>
-            <h2 className="mb-6 font-display text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl leading-tight">
-              Built for people who{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                build the future
-              </span>
-              <br />of the Church
-            </h2>
-            <div className="space-y-4 text-base leading-relaxed text-slate-600">
-              <p>
-                CovenantERP was born from a simple observation: theological institutions across India
-                were struggling with outdated systems, scattered spreadsheets, and generic software
-                that failed to understand their unique needs. Faculty members spent more time on
-                paperwork than on pastoral preparation, and administrators were drowning in manual
-                processes that should have been automated years ago.
-              </p>
-              <p>
-                Founded in 2023 by a team of technologists and theological educators, CovenantERP
-                set out to change that narrative. We spent hundreds of hours visiting seminaries,
-                sitting in on administrative meetings, and understanding the daily realities of
-                running a Bible college. The result is a platform that speaks the language of
-                theological education — not generic enterprise software with a theological label
-                slapped on.
-              </p>
-            </div>
-          </FadeInSection>
-
-          <FadeInSection direction="left" delay={0.15}>
-            <div className="relative">
-              <div className="rounded-3xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 p-1">
-                <div className="rounded-[22px] bg-slate-900 p-8 md:p-10">
-                  <div className="space-y-6">
-                    {[
-                      { label: "Founded", value: "2023", sub: "Bangalore, India" },
-                      { label: "Team Size", value: "25+", sub: "Engineers & Theologians" },
-                      { label: "Mission", value: "120+", sub: "Institutions Served" },
-                    ].map((item, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-4 rounded-xl bg-white/5 p-4 border border-white/10"
-                      >
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20">
-                          <span className="text-lg font-bold text-indigo-400">{item.value}</span>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-white">{item.label}</p>
-                          <p className="text-xs text-slate-400">{item.sub}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              {/* Floating decoration */}
-              <div className="absolute -right-4 -bottom-4 h-24 w-24 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 opacity-20 blur-2xl" />
-            </div>
-          </FadeInSection>
-        </div>
-
-        {/* Bottom part — Values */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {values.map((value, i) => (
-            <FadeInSection key={value.title} delay={i * 0.1}>
-              <div className="h-full rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-lg hover:border-indigo-100">
-                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20">
-                  <value.icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="mb-3 text-lg font-bold text-slate-900">{value.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-500">{value.description}</p>
-              </div>
-            </FadeInSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  6. Stats / Numbers Section                                         */
-/* ------------------------------------------------------------------ */
-
-function StatsSection() {
-  return (
-    <section className="relative bg-[#070714] py-28 px-6 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-indigo-600/15 blur-[150px]" />
-        <div className="absolute right-1/4 bottom-0 h-[400px] w-[400px] rounded-full bg-violet-600/15 blur-[150px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <FadeInSection className="mb-16 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">
-            By the Numbers
-          </p>
-          <h2 className="mb-4 font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-            Impact that speaks{" "}
-            <span className="bg-gradient-to-r from-indigo-400 to-amber-400 bg-clip-text text-transparent">
-              for itself
-            </span>
+        <FadeIn className="mb-16 max-w-2xl mx-auto text-center">
+          <SectionBadge icon={Award}>Why CovenantERP</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            What makes us <GradientHeading>fundamentally different</GradientHeading>
           </h2>
-          <p className="mx-auto max-w-xl text-base text-slate-400">
-            Real metrics from real institutions. See how CovenantERP is transforming theological education management.
+          <p className="mt-4 text-base text-slate-500 leading-relaxed">
+            We didn't adapt a generic ERP for theological education. We built one from the ground up.
           </p>
-        </FadeInSection>
+        </FadeIn>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {STATS.map((stat, i) => (
-            <FadeInSection key={stat.label} delay={i * 0.08}>
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-7 transition-all hover:border-indigo-500/20 hover:bg-white/[0.05]">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10">
-                  <stat.icon className="h-5 w-5 text-indigo-400" />
+        <div className="grid gap-6 md:grid-cols-2">
+          {UNIQUE_VALUES.map((v, i) => (
+            <FadeIn key={v.title} delay={i * 0.08} direction={i % 2 === 0 ? "right" : "left"}>
+              <div className="h-full rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-lg hover:border-indigo-100">
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/15">
+                  <v.icon className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-1 font-display">{stat.value}</div>
-                <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
+                <h3 className="mb-3 text-lg font-bold text-slate-900">{v.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-500">{v.description}</p>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -800,88 +651,42 @@ function StatsSection() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  7. How It Works                                                    */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  6. HOW IT WORKS                                                    */
+/* ================================================================== */
 
 function HowItWorks() {
-  const steps = [
-    {
-      num: "01",
-      title: "Sign Up",
-      description:
-        "Create your institution's account with your official email. Our verification process takes under 60 seconds and requires no credit card to get started with your 14-day free trial.",
-      icon: Mail,
-      color: "from-indigo-500 to-blue-500",
-    },
-    {
-      num: "02",
-      title: "Configure",
-      description:
-        "Complete your institution profile through our guided setup wizard. Define your academic programs (B.Th, M.Div, Th.M, PhD, D.Min), configure grading systems, and import existing data.",
-      icon: Zap,
-      color: "from-violet-500 to-purple-500",
-    },
-    {
-      num: "03",
-      title: "Launch",
-      description:
-        "Start managing your seminary with full access to every module. Invite your team, onboard faculty and students, and watch your institution's efficiency soar from day one.",
-      icon: Globe,
-      color: "from-amber-500 to-orange-500",
-    },
-  ];
-
   return (
-    <section id="how-it-works" className="relative bg-white py-28 px-6">
+    <section id="how-it-works" className="relative bg-gradient-to-b from-slate-50 to-white py-24 px-5">
       <div className="mx-auto max-w-5xl">
-        <FadeInSection className="mb-20 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5">
-            <Clock className="h-3.5 w-3.5 text-indigo-500" />
-            <span className="text-xs font-semibold text-indigo-600">Quick Setup</span>
-          </div>
-          <h2 className="mb-5 font-display text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
-            Up and running in{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              under 15 minutes
-            </span>
+        <FadeIn className="mb-16 text-center">
+          <SectionBadge icon={Clock}>Quick Setup</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            Up and running in <GradientHeading>three steps</GradientHeading>
           </h2>
-          <p className="mx-auto max-w-xl text-base text-slate-500">
-            From sign-up to full deployment, we've made every step effortless so you can focus on what matters most.
-          </p>
-        </FadeInSection>
+          <p className="mt-4 text-base text-slate-500">No credit card required. Full access from day one.</p>
+        </FadeIn>
 
         <div className="relative">
-          {/* Connecting line (desktop) */}
-          <div className="absolute left-0 right-0 top-20 hidden h-px bg-gradient-to-r from-transparent via-indigo-300 to-transparent md:block" />
+          {/* Connecting line */}
+          <div className="absolute left-0 right-0 top-[52px] hidden h-px bg-gradient-to-r from-transparent via-indigo-300 to-transparent md:block" />
 
-          <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-            {steps.map((step, i) => (
-              <FadeInSection key={step.num} delay={i * 0.15}>
+          <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+            {HOW_STEPS.map((s, i) => (
+              <FadeIn key={s.num} delay={i * 0.15}>
                 <div className="relative flex flex-col items-center text-center">
-                  {/* Step circle */}
-                  <div className="relative mb-8">
-                    <div className={cn(
-                      "flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br shadow-xl",
-                      step.color,
-                      "shadow-indigo-500/20"
-                    )}>
-                      <step.icon className="h-9 w-9 text-white" />
+                  <div className="relative mb-7">
+                    <div className={cn("flex h-[76px] w-[76px] items-center justify-center rounded-2xl bg-gradient-to-br shadow-xl", s.gradient, "shadow-indigo-500/15")}>
+                      <s.icon className="h-8 w-8 text-white" />
                     </div>
-                    {/* Number badge */}
-                    <div className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-bold text-slate-900 shadow-lg ring-2 ring-slate-100">
-                      {step.num}
+                    <div className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-bold text-slate-900 shadow-md ring-2 ring-slate-100">
+                      {s.num}
                     </div>
                   </div>
-
-                  <h3 className="mb-3 text-xl font-bold text-slate-900">
-                    {step.title}
-                  </h3>
-                  <p className="max-w-xs text-sm leading-relaxed text-slate-500">
-                    {step.description}
-                  </p>
+                  <h3 className="mb-2 text-lg font-bold text-slate-900">{s.title}</h3>
+                  <p className="max-w-xs text-sm leading-relaxed text-slate-500">{s.description}</p>
                 </div>
-              </FadeInSection>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -890,42 +695,148 @@ function HowItWorks() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  8. Pricing Preview                                                 */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  7. SCREENS PREVIEW                                                 */
+/* ================================================================== */
 
-function PricingPreview({ onNavigate }: { onNavigate: (path: string) => void }) {
+function ScreensPreview() {
+  const [active, setActive] = useState(0);
+
   return (
-    <section id="pricing" className="relative bg-slate-50 py-28 px-6">
-      <div className="mx-auto max-w-6xl">
-        <FadeInSection className="mb-20 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5">
-            <DollarSign className="h-3.5 w-3.5 text-indigo-500" />
-            <span className="text-xs font-semibold text-indigo-600">Transparent Pricing</span>
-          </div>
-          <h2 className="mb-5 font-display text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
-            Plans that grow{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              with you
-            </span>
+    <section id="screens" className="relative bg-white py-24 px-5">
+      <div className="mx-auto max-w-7xl">
+        <FadeIn className="mb-14 text-center">
+          <SectionBadge icon={Monitor}>Live Preview</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            See CovenantERP <GradientHeading>in action</GradientHeading>
           </h2>
-          <p className="mx-auto max-w-xl text-base text-slate-500">
-            No hidden fees. No long-term contracts. Start with a 14-day free trial and choose the plan that fits your institution.
-          </p>
-        </FadeInSection>
+          <p className="mt-4 text-base text-slate-500">Real screens from the platform your institution will use every day.</p>
+        </FadeIn>
+
+        <FadeIn>
+          <div>
+            {/* Tabs */}
+            <div className="mb-8 flex flex-wrap justify-center gap-2">
+              {SCREENS.map((s, i) => (
+                <button key={s.title} onClick={() => setActive(i)}
+                  className={cn(
+                    "rounded-xl px-5 py-2.5 text-sm font-semibold transition-all",
+                    active === i
+                      ? "bg-gradient-to-r from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/20"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  )}>
+                  {s.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Preview card */}
+            <div className="mx-auto max-w-4xl">
+              <AnimatePresence mode="wait">
+                <motion.div key={active}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.35 }}>
+                  <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-3 shadow-xl shadow-slate-200/50">
+                    {/* Browser chrome */}
+                    <div className="mb-3 flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 border border-slate-100">
+                      <div className="flex gap-1.5">
+                        <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                        <div className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                        <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                      </div>
+                      <div className="ml-3 flex-1 rounded-md bg-slate-100 px-3 py-1 text-[10px] text-slate-400 font-mono">
+                        app.covenanterp.com/{SCREENS[active].title.toLowerCase().replace(/\s+/g, "-")}
+                      </div>
+                    </div>
+                    <img
+                      src={SCREENS[active].src}
+                      alt={SCREENS[active].title}
+                      className="w-full rounded-xl object-cover"
+                    />
+                  </div>
+                  <p className="mt-4 text-center text-sm text-slate-500">{SCREENS[active].description}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================== */
+/*  8. TESTIMONIALS                                                    */
+/* ================================================================== */
+
+function TestimonialsSection() {
+  return (
+    <section id="testimonials" className="relative bg-slate-50 py-24 px-5">
+      <div className="mx-auto max-w-7xl">
+        <FadeIn className="mb-16 text-center">
+          <SectionBadge icon={Star}>Social Proof</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            Trusted by <GradientHeading>administrators</GradientHeading> nationwide
+          </h2>
+          <p className="mt-4 text-base text-slate-500">Hear from the leaders who transformed their institutions.</p>
+        </FadeIn>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t, i) => (
+            <FadeIn key={i} delay={i * 0.1}>
+              <div className="group h-full rounded-2xl border border-slate-200/80 bg-white p-7 transition-all hover:shadow-lg hover:border-indigo-100 md:p-8">
+                <Quote className="mb-5 h-7 w-7 text-indigo-100" />
+                <p className="mb-6 text-sm leading-relaxed text-slate-600 italic">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: 5 }).map((_, si) => (
+                    <Star key={si} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+                    {t.avatar}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">{t.name}</p>
+                    <p className="text-xs text-slate-400">{t.role}, {t.institution}</p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================== */
+/*  9. PRICING                                                         */
+/* ================================================================== */
+
+function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) {
+  return (
+    <section id="pricing" className="relative bg-white py-24 px-5">
+      <div className="mx-auto max-w-6xl">
+        <FadeIn className="mb-16 text-center">
+          <SectionBadge icon={DollarSign}>Pricing</SectionBadge>
+          <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
+            Simple, transparent <GradientHeading>pricing</GradientHeading>
+          </h2>
+          <p className="mt-4 text-base text-slate-500">No hidden fees. No long-term contracts. Start with a 14-day free trial.</p>
+        </FadeIn>
 
         <div className="grid gap-6 md:grid-cols-3">
           {PRICING.map((plan, i) => (
-            <FadeInSection key={plan.name} delay={i * 0.1}>
-              <div
-                className={cn(
-                  "relative flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-all hover:shadow-xl",
-                  plan.highlighted
-                    ? "border-indigo-200 bg-white shadow-2xl shadow-indigo-500/10 scale-[1.02]"
-                    : "border-slate-200 bg-white hover:border-indigo-100"
-                )}
-              >
-                {/* Popular badge */}
+            <FadeIn key={plan.name} delay={i * 0.1}>
+              <div className={cn(
+                "relative flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-all hover:shadow-xl",
+                plan.highlighted
+                  ? "border-indigo-200 bg-white shadow-2xl shadow-indigo-500/10 scale-[1.02]"
+                  : "border-slate-200 bg-white hover:border-indigo-100"
+              )}>
                 {plan.highlighted && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                     <div className="rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 px-5 py-1.5 text-xs font-semibold text-white shadow-lg shadow-indigo-500/25">
@@ -935,46 +846,37 @@ function PricingPreview({ onNavigate }: { onNavigate: (path: string) => void }) 
                 )}
 
                 <div className="mb-6">
-                  <h3 className="mb-1 text-lg font-bold text-slate-900">
-                    {plan.name}
-                  </h3>
+                  <h3 className="mb-1 text-lg font-bold text-slate-900">{plan.name}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{plan.description}</p>
                 </div>
 
                 <div className="mb-8">
-                  <span className="text-5xl font-bold text-slate-900 font-display">
-                    {plan.price}
-                  </span>
+                  <span className="text-5xl font-bold text-slate-900 font-display">{plan.price}</span>
                   <span className="text-slate-400 font-medium">{plan.period}</span>
                 </div>
 
                 <ul className="mb-8 flex flex-1 flex-col gap-3">
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-3 text-sm text-slate-600"
-                    >
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-center gap-3 text-sm text-slate-600">
                       <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-50">
                         <Check className="h-3 w-3 text-indigo-500" />
                       </div>
-                      {feature}
+                      {f}
                     </li>
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => onNavigate("/login")}
+                <button onClick={() => onNavigate("/login")}
                   className={cn(
                     "w-full rounded-xl py-3.5 text-sm font-semibold transition-all",
                     plan.highlighted
                       ? "bg-gradient-to-r from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:brightness-110"
                       : "border border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50"
-                  )}
-                >
+                  )}>
                   {plan.cta}
                 </button>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -982,245 +884,60 @@ function PricingPreview({ onNavigate }: { onNavigate: (path: string) => void }) 
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  9. Testimonial Section                                             */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  10. FINAL CTA                                                      */
+/* ================================================================== */
 
-function TestimonialSection() {
+function FinalCTA({ onNavigate }: { onNavigate: (path: string) => void }) {
   return (
-    <section id="testimonials" className="relative bg-white py-28 px-6">
-      <div className="mx-auto max-w-7xl">
-        <FadeInSection className="mb-20 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5">
-            <Star className="h-3.5 w-3.5 text-amber-500" />
-            <span className="text-xs font-semibold text-amber-700">Testimonials</span>
-          </div>
-          <h2 className="mb-5 font-display text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
-            Loved by{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              administrators
-            </span>{" "}
-            nationwide
-          </h2>
-          <p className="mx-auto max-w-xl text-base text-slate-500">
-            Hear from the leaders who transformed their institutions with CovenantERP.
-          </p>
-        </FadeInSection>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <FadeInSection key={i} delay={i * 0.1}>
-              <div className="group relative h-full rounded-2xl border border-slate-100 bg-slate-50/50 p-7 transition-all hover:border-indigo-100 hover:bg-white hover:shadow-xl hover:shadow-indigo-500/5 md:p-8">
-                <Quote className="mb-5 h-8 w-8 text-indigo-200" />
-                <p className="mb-6 text-sm leading-relaxed text-slate-600 italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="mt-auto flex items-center gap-1 mb-3">
-                  {Array.from({ length: 5 }).map((_, si) => (
-                    <Star
-                      key={si}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
-                    />
-                  ))}
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">{t.name}</p>
-                    <p className="text-xs text-slate-500">
-                      {t.role}, {t.institution}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </FadeInSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  10. Security / Trust Section                                       */
-/* ------------------------------------------------------------------ */
-
-function SecuritySection() {
-  const features = [
-    {
-      icon: Lock,
-      title: "End-to-End Encryption",
-      description: "All sensitive data is encrypted client-side before it ever leaves your device. Your keys never touch our servers.",
-    },
-    {
-      icon: Shield,
-      title: "SOC-2 Compliant",
-      description: "Built with enterprise-grade security standards. Regular third-party audits ensure your data is always protected.",
-    },
-    {
-      icon: Cloud,
-      title: "99.9% Uptime SLA",
-      description: "Hosted on Google Cloud Platform with redundant backups, automatic failover, and 24/7 infrastructure monitoring.",
-    },
-    {
-      icon: Globe,
-      title: "GDPR Ready",
-      description: "Full data portability, right to erasure, and consent management built in. Your data, your control, always.",
-    },
-  ];
-
-  return (
-    <section className="relative bg-slate-50 py-28 px-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <FadeInSection direction="right">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 mb-6">
-              <Shield className="h-3.5 w-3.5 text-emerald-600" />
-              <span className="text-xs font-semibold text-emerald-700">Enterprise Security</span>
-            </div>
-            <h2 className="mb-5 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              Your data security is{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                non-negotiable
-              </span>
-            </h2>
-            <p className="mb-8 text-base text-slate-500 leading-relaxed">
-              We understand that institutional data — student records, financial information, personnel
-              files — requires the highest level of protection. That's why security isn't a feature we
-              bolt on; it's the foundation everything is built upon. From encryption at rest and in
-              transit to granular access controls, every layer of CovenantERP is designed with a
-              zero-trust philosophy.
-            </p>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {features.map((feature, i) => (
-                <div key={i} className="flex gap-3 rounded-xl bg-white p-4 border border-slate-100">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50">
-                    <feature.icon className="h-4.5 w-4.5 text-indigo-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900 mb-0.5">{feature.title}</p>
-                    <p className="text-xs text-slate-500 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeInSection>
-
-          <FadeInSection direction="left" delay={0.15}>
-            <div className="relative">
-              <div className="rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 p-1">
-                <div className="rounded-[22px] bg-slate-900 p-8">
-                  {/* Visual security metaphor */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 rounded-xl bg-white/5 p-4 border border-white/10">
-                      <div className="h-3 w-3 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-sm font-medium text-emerald-300">Secure Connection Active</span>
-                      <span className="ml-auto text-xs text-slate-500 font-mono">TLS 1.3</span>
-                    </div>
-                    {[
-                      { label: "Encryption", value: "AES-256-GCM", status: "Active" },
-                      { label: "Authentication", value: "OAuth 2.0 + MFA", status: "Active" },
-                      { label: "Data Residency", value: "India (Mumbai)", status: "Active" },
-                      { label: "Backup", value: "Every 6 hours", status: "Active" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg bg-white/[0.03] px-4 py-3 border border-white/[0.04]">
-                        <span className="text-sm text-slate-400">{item.label}</span>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs text-slate-500 font-mono">{item.value}</span>
-                          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
-                            {item.status}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeInSection>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  11. CTA Section                                                    */
-/* ------------------------------------------------------------------ */
-
-function CTASection({ onNavigate }: { onNavigate: (path: string) => void }) {
-  return (
-    <section id="contact" className="relative bg-[#070714] py-28 px-6 overflow-hidden">
+    <section className="relative bg-[#070714] py-24 px-5 overflow-hidden">
+      {/* Gradients */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/3 top-0 h-[500px] w-[500px] rounded-full bg-indigo-600/20 blur-[150px]" />
         <div className="absolute right-1/3 bottom-0 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[150px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl">
-        <FadeInSection>
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-amber-500/5 p-12 text-center md:p-20">
-            <h2 className="mb-5 font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl leading-tight">
-              Ready to transform
-              <br />
-              <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-amber-400 bg-clip-text text-transparent">
-                your institution?
-              </span>
-            </h2>
-            <p className="mx-auto mb-10 max-w-lg text-base text-slate-400 md:text-lg leading-relaxed">
-              Start your 14-day free trial today. No credit card required. Full access
-              to every module, every feature, from day one.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <button
-                onClick={() => onNavigate("/login")}
-                className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-2xl shadow-indigo-500/25 transition-all hover:shadow-indigo-500/40 hover:brightness-110"
-              >
-                Get Started Free
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white transition-all hover:border-white/20 hover:bg-white/10">
-                <Phone className="h-4 w-4" />
-                Schedule a Demo
-              </button>
-            </div>
-            <p className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-slate-500">
-              <span className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-indigo-400" />
-                SOC-2 Compliant
-              </span>
-              <span className="hidden sm:inline text-slate-700">|</span>
-              <span className="flex items-center gap-1.5">
-                <Lock className="h-3.5 w-3.5 text-indigo-400" />
-                256-bit Encryption
-              </span>
-              <span className="hidden sm:inline text-slate-700">|</span>
-              <span className="flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-indigo-400" />
-                GDPR Ready
-              </span>
-            </p>
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <FadeIn>
+          <h2 className="mb-5 font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl leading-tight">
+            Start Your Institution&apos;s{" "}
+            <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-amber-400 bg-clip-text text-transparent">
+              Digital Transformation
+            </span>{" "}
+            Today
+          </h2>
+          <p className="mx-auto mb-10 max-w-lg text-base text-slate-400 leading-relaxed">
+            Join 120+ theological institutions that have already modernized their operations. 14-day free trial, no credit card required.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <button onClick={() => onNavigate("/login")}
+              className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-2xl shadow-indigo-500/25 transition-all hover:shadow-indigo-500/40 hover:brightness-110">
+              Get Started <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-white/10">
+              <Phone className="h-4 w-4" /> Request Demo
+            </button>
           </div>
-        </FadeInSection>
+          <p className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-indigo-400" /> SOC-2 Compliant</span>
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-indigo-400" /> 256-bit Encryption</span>
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <span className="flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-indigo-400" /> GDPR Ready</span>
+          </p>
+        </FadeIn>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  12. Footer                                                         */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  11. FOOTER                                                         */
+/* ================================================================== */
 
-function Footer({ onNavigate }: { onNavigate: (path: string) => void }) {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id.toLowerCase().replace(/\s+/g, "-"));
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
-
+function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] bg-[#070714] px-6 pt-16 pb-8">
+    <footer className="relative bg-[#070714] border-t border-white/[0.06] px-5 pt-16 pb-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
@@ -1229,100 +946,33 @@ function Footer({ onNavigate }: { onNavigate: (path: string) => void }) {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/25">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="text-lg font-bold text-white font-display">
-                Covenant<span className="text-indigo-400">ERP</span>
-              </span>
+              <span className="text-lg font-bold text-white font-display">Covenant<span className="text-indigo-400">ERP</span></span>
             </div>
-            <p className="mb-6 max-w-sm text-sm leading-relaxed text-slate-500">
-              The all-in-one management platform built exclusively for theological colleges,
-              seminaries, and Bible institutes across India and beyond.
+            <p className="mb-6 max-w-xs text-sm leading-relaxed text-slate-500">
+              The all-in-one management platform built exclusively for theological colleges, seminaries, and Bible institutes.
             </p>
-            <div className="flex gap-3">
-              {[
-                { icon: "X", label: "Twitter" },
-                { icon: "in", label: "LinkedIn" },
-                { icon: "G", label: "GitHub" },
-              ].map((social) => (
-                <button
-                  key={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.06] text-xs font-bold text-slate-500 transition-all hover:border-indigo-500/30 hover:bg-indigo-500/10 hover:text-indigo-400"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </button>
-              ))}
-            </div>
           </div>
 
-          {/* Product */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-white">Product</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { label: "Features", id: "features" },
-                { label: "Pricing", id: "pricing" },
-                { label: "Security", id: "security" },
-                { label: "Integrations", id: "features" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <button
-                    onClick={() => scrollTo(item.id)}
-                    className="text-sm text-slate-500 transition-colors hover:text-indigo-400"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-white">Company</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { label: "About Us", id: "about" },
-                { label: "Blog", id: "features" },
-                { label: "Careers", id: "features" },
-                { label: "Contact", id: "contact" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <button
-                    onClick={() => scrollTo(item.id)}
-                    className="text-sm text-slate-500 transition-colors hover:text-indigo-400"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-white">Legal</h4>
-            <ul className="flex flex-col gap-3">
-              {["Privacy Policy", "Terms of Service", "Cookie Policy", "Security"].map(
-                (item) => (
-                  <li key={item}>
-                    <button
-                      onClick={() => scrollTo("contact")}
-                      className="text-sm text-slate-500 transition-colors hover:text-indigo-400"
-                    >
-                      {item}
-                    </button>
+          {[
+            { title: "Product", links: ["Features", "Pricing", "Security", "Integrations"] },
+            { title: "Company", links: ["About", "Blog", "Careers", "Contact"] },
+            { title: "Legal", links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Security"] },
+          ].map((col) => (
+            <div key={col.title}>
+              <h4 className="mb-4 text-sm font-semibold text-white">{col.title}</h4>
+              <ul className="flex flex-col gap-3">
+                {col.links.map((link) => (
+                  <li key={link}>
+                    <button className="text-sm text-slate-500 transition-colors hover:text-indigo-400">{link}</button>
                   </li>
-                )
-              )}
-            </ul>
-          </div>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 md:flex-row">
-          <p className="text-xs text-slate-600">
-            &copy; {new Date().getFullYear()} Covenant Research Systems. All rights reserved.
-          </p>
+          <p className="text-xs text-slate-600">&copy; {new Date().getFullYear()} CovenantERP. All rights reserved.</p>
           <div className="flex items-center gap-2 text-xs text-slate-600">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             All systems operational
@@ -1333,25 +983,24 @@ function Footer({ onNavigate }: { onNavigate: (path: string) => void }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Main Export                                                        */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  MAIN EXPORT                                                        */
+/* ================================================================== */
 
 export function MarketingLanding({ onNavigate }: { onNavigate: (path: string) => void }) {
   return (
     <div className="overflow-x-hidden">
       <Navbar onNavigate={onNavigate} />
       <HeroSection onNavigate={onNavigate} />
-      <TrustedBySection />
-      <FeaturesGrid />
-      <AboutSection />
-      <StatsSection />
+      <TrustSection />
+      <FeaturesSection />
+      <UniqueValueSection />
       <HowItWorks />
-      <SecuritySection />
-      <PricingPreview onNavigate={onNavigate} />
-      <TestimonialSection />
-      <CTASection onNavigate={onNavigate} />
-      <Footer onNavigate={onNavigate} />
+      <ScreensPreview />
+      <TestimonialsSection />
+      <PricingSection onNavigate={onNavigate} />
+      <FinalCTA onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }
