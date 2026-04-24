@@ -1719,7 +1719,7 @@ export const electiveGroupService = {
   async getByTenant(tenantId: string) {
     const q = query(collection(db, 'electives'), where('tenantId', '==', tenantId));
     const snap = await getDocs(q);
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ElectiveGroup);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ElectiveGroup));
   },
   async update(id: string, data: Partial<ElectiveGroup>) {
     return await updateDoc(doc(db, 'electives', id), { ...data, updatedAt: serverTimestamp() });

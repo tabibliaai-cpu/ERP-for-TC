@@ -5,7 +5,7 @@ import {
   Layers, ArrowRight, Eye, Pencil, ChevronDown, Check, AlertCircle,
   BookMarked, ToggleLeft, ToggleRight, CalendarDays, Star, Hash, Tag,
   Briefcase, BarChart3, ArrowUpDown, Filter, MoreHorizontal,
-  Globe, Share2, Sparkles, AlertTriangle, Lock, Download, Zap
+  Globe, Share2, Sparkles, AlertTriangle, Lock, Download, Zap, ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
