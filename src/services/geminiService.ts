@@ -100,5 +100,102 @@ export const geminiService = {
       console.error("AI Syllabus Error:", error);
       throw error;
     }
+  },
+
+  // ── AI Curriculum Generator ─────────────────────────────
+  async generateFullCurriculum(programName: string, programCode: string, totalSemesters: number, department: string) {
+    const ai = getGenAI();
+    if (!ai) throw new Error("AI Service Unavailable");
+
+    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = `
+      You are a senior academic curriculum designer for a prestigious theological seminary.
+      Generate a complete ${totalSemesters}-semester curriculum for the program "${programName}" (${programCode})
+      in the ${department} department.
+      
+      For EACH semester, provide 4-6 courses with:
+      - Course code (e.g. OT-101, NT-201)
+      - Course name (concise, academic)
+      - Credits (2, 3, or 4)
+      - Type (core or elective)
+      
+      Respond STRICTLY in this JSON format (no markdown, no code fences):
+      {"semesters":[{"semesterNumber":1,"courses":[{"code":"OT-101","name":"Old Testament Survey","credits":3,"type":"core"}]}]}
+    `;
+
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text().trim();
+      const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      const parsed = JSON.parse(cleaned);
+      if (!parsed.semesters || !Array.isArray(parsed.semesters)) {
+        throw new Error("Invalid AI response format");
+      }
+      return parsed.semesters as { semesterNumber: number; courses: { code: string; name: string; credits: number; type: string }[] }[];
+    } catch (error) {
+      console.error("AI Curriculum Generation Error:", error);
+      throw error;
+    }
+  },
+
+  async suggestCourses(programName: string, department: string, existingCourses: string[]) {
+    const ai = getGenAI();
+    if (!ai) throw new Error("AI Service Unavailable");
+
+    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = `
+      You are an academic advisor for a theological seminary.
+      The program "${programName}" in ${department} already has these courses: ${existingCourses.join(', ')}.
+      Suggest 5 additional courses that would complement this program.
+      
+      For each course provide: code, name, credits, type (core/elective), and a brief rationale.
+      
+      Respond STRICTLY in this JSON format (no markdown, no code fences):
+      {"suggestions":[{"code":"TH-401","name":"Advanced Hermeneutics","credits":3,"type":"elective","rationale":"Builds on foundational exegesis skills"}]}
+    `;
+
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text().trim();
+      const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      const parsed = JSON.parse(cleaned);
+      return parsed.suggestions || [];
+    } catch (error) {
+      console.error("AI Course Suggestion Error:", error);
+      throw error;
+    }
+  },
+
+  async validatePrerequisites(courseName: string, courseCode: string, prerequisiteNames: string[]) {
+    const ai = getGenAI();
+    if (!ai) throw new Error("AI Service Unavailable");
+
+    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = `
+      You are an academic curriculum validator.
+      Course: "${courseName}" (${courseCode})
+      Proposed prerequisites: ${prerequisiteNames.join(', ') || 'None'}
+      
+      Analyze if these prerequisites make academic sense. Check for:
+      1. Logical progression (prerequisites should be foundational)
+      2. No circular dependencies
+      3. Appropriate difficulty level
+      
+      Respond STRICTLY in this JSON format (no markdown, no code fences):
+      {"isValid":true,"issues":[],"suggestions":["Consider adding NT-101 as a prerequisite"]}
+    `;
+
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text().trim();
+      const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      return JSON.parse(cleaned) as { isValid: boolean; issues: string[]; suggestions: string[] };
+    } catch (error) {
+      console.error("AI Validation Error:", error);
+      throw error;
+    }
   }
 };
