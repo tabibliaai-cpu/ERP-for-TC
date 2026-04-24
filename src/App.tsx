@@ -60,7 +60,7 @@ export default function App() {
   if (!user) {
     return (
       <PublicLayout>
-        <MarketingLanding onNavigate={() => {}} />
+        <MarketingLanding onNavigate={(path: string) => { window.location.href = path; }} />
       </PublicLayout>
     );
   }
@@ -74,7 +74,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={
             <PublicLayout>
-              <MarketingLanding onNavigate={(path) => window.location.hash = path} />
+              <MarketingLanding onNavigate={(path) => window.location.href = path} />
             </PublicLayout>
           } />
           <Route path="/pricing" element={
