@@ -1,7 +1,8 @@
 import React from 'react';
 import { Sidebar } from './Sidebar';
-import { Bell, Search, User, Sparkles } from 'lucide-react';
+import { Bell, Search, User, Sparkles, ExternalLink } from 'lucide-react';
 import { useAuthStore } from '../../store/useStore';
+import { useNavigate } from 'react-router-dom';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
   return (
     <div className="flex h-screen overflow-hidden font-sans" style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #f0f0ff 30%, #f0fdfa 60%, #faf5ff 100%)' }}>
       <Sidebar />
@@ -27,6 +29,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate('/landing')}
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+              title="View Landing Page"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Website</span>
+            </button>
             <div className="flex items-center gap-1">
               <button className="relative p-2.5 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all group">
                 <Bell className="w-5 h-5 group-hover:scale-110 transition-transform" />

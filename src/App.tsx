@@ -127,6 +127,7 @@ export default function App() {
           <DashboardLayout>
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/landing" element={<PublicLayout><MarketingLanding onNavigate={() => window.location.reload()} /></PublicLayout>} />
               <Route path="/messages" element={<Messaging />} />
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/admissions/:studentId" element={<StudentProfile />} />
@@ -156,6 +157,7 @@ export default function App() {
           <DashboardLayout>
             <Routes>
               <Route path="/" element={<Navigate to="/super-admin" replace />} />
+              <Route path="/landing" element={<PublicLayout><MarketingLanding onNavigate={() => window.location.reload()} /></PublicLayout>} />
               <Route path="/super-admin" element={
                 <ProtectedRoute feature="super-admin">
                   <SuperAdmin />
@@ -173,6 +175,7 @@ export default function App() {
         <DashboardLayout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/landing" element={<PublicLayout><MarketingLanding onNavigate={() => window.location.reload()} /></PublicLayout>} />
             <Route path="/messages" element={
               <ProtectedRoute feature="messaging">
                 <Messaging />
