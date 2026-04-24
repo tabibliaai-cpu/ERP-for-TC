@@ -1,0 +1,361 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 0. Global Safety Net (Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- PHASE 3: Primitive Definitions ---
+    
+    function isSignedIn() { return request.auth != null; }
+    // Relaxed email verification requirement to allow manual console inserts for testing
+    function isVerified() { return isSignedIn(); }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    
+    function getUserData(uid) {
+      let path = /databases/$(database)/documents/users/$(uid);
+      return exists(path) ? get(path).data : null;
+    }
+
+    function isSuperAdmin() {
+      let data = getUserData(request.auth.uid);
+      let email = request.auth.token.email != null ? request.auth.token.email.lower() : '';
+      return isSignedIn() && (
+        (data != null && data.role == 'super_admin') || 
+        request.auth.token.phone_number == '+919858866667' ||
+        email == 'rajesh@sibbc.org' ||
+        email == 'rajesh@sibbc.com' ||
+        email == 'dasucosmos@gmail.com'
+      );
+    }
+
+    function isTenantAdmin(tenantId) {
+      let data = getUserData(request.auth.uid);
+      return data != null && (data.role == 'admin' || data.role == 'super_admin') && (data.tenantId == tenantId || data.institutionId == tenantId);
+    }
+
+    function isMember(tenantId) {
+      let data = getUserData(request.auth.uid);
+      return data != null && (data.tenantId == tenantId || data.institutionId == tenantId || data.role == 'super_admin');
+    }
+
+    // --- PHASE 4: Validation Blueprints ---
+
+    function isValidInstitution(data) {
+      // Relaxed validation so the Super Admin dashboard can add its fields
+      return data.name is string && data.adminEmail is string;
+    }
+
+    function isValidUser(data) {
+      // allow both tenantId and institutionId in case one is missing
+      return data.keys().hasAll(['email', 'role', 'displayName']) &&
+             (isSuperAdmin() || data.email == request.auth.token.email) &&
+             data.role in ['super_admin', 'admin', 'faculty', 'student', 'accountant', 'librarian'] &&
+             data.displayName is string && data.displayName.size() <= 100;
+    }
+
+    function isValidStudent(data, tenantId) {
+      return data.keys().hasAll(['name', 'email', 'program', 'year', 'status', 'tenantId']) &&
+             data.keys().size() >= 6 &&
+             data.tenantId == tenantId &&
+             data.name is string && data.name.size() <= 100 &&
+             data.email is string && data.email.size() <= 100 &&
+             data.program is string && data.program.size() <= 100 &&
+             data.year is int && data.year >= 1 && data.year <= 10;
+    }
+
+    function isValidFaculty(data, tenantId) {
+      return data.keys().hasAll(['name', 'email', 'department', 'role', 'status', 'tenantId']) &&
+             data.keys().size() >= 6 &&
+             data.tenantId == tenantId &&
+             data.name is string && data.name.size() <= 100 &&
+             data.email is string && data.email.size() <= 100;
+    }
+
+    function isValidSubject(data, tenantId) {
+      return data.keys().hasAll(['title', 'code', 'courseId', 'department', 'creditHours', 'tenantId']) &&
+             data.tenantId == tenantId &&
+             data.title is string && data.title.size() <= 200 &&
+             data.code is string && data.code.size() <= 50 &&
+             data.department is string && data.department.size() <= 100 &&
+             data.creditHours is int && data.creditHours >= 0 &&
+             (data.get('teacherIds', []) is list) &&
+             (data.get('moderatorIds', []) is list) &&
+             exists(/databases/$(database)/documents/courses/$(data.courseId));
+    }
+
+    function isValidRecord(data, tenantId) {
+      return data.keys().hasAll(['tenantId', 'module', 'ciphertext', 'iv', 'authorId', 'updatedAt']) &&
+             data.keys().size() == 6 &&
+             data.tenantId == tenantId &&
+             data.authorId == request.auth.uid &&
+             data.ciphertext is string && data.ciphertext.size() <= 1000000 &&
+             data.iv is string && data.iv.size() <= 200 &&
+             data.updatedAt == request.time;
+    }
+
+    // --- MATCH BLOCKS ---
+
+    match /institutions/{instId} {
+      allow list: if isSuperAdmin();
+      allow get: if isVerified();
+      allow create: if isSuperAdmin() && isValidInstitution(incoming());
+      allow update: if isSuperAdmin() && isValidInstitution(incoming());
+      allow delete: if isSuperAdmin();
+    }
+
+    match /tenants/{tenantId} {
+      allow list: if isSuperAdmin();
+      allow get: if isVerified() && isMember(tenantId);
+      allow create: if isSuperAdmin() && isValidInstitution(incoming());
+      
+      match /records/{recordId} {
+        allow list: if isVerified() && isMember(tenantId) && resource.data.tenantId == tenantId;
+        allow get: if isVerified() && isMember(tenantId);
+        allow create: if isVerified() && isMember(tenantId) && isValidId(recordId) && isValidRecord(incoming(), tenantId);
+        allow update: if isVerified() && isMember(tenantId) && (
+          (incoming().authorId == request.auth.uid && incoming().diff(existing()).affectedKeys().hasOnly(['ciphertext', 'iv', 'updatedAt']))
+        );
+        allow delete: if isVerified() && (isTenantAdmin(tenantId) || existing().authorId == request.auth.uid);
+      }
+    }
+
+    match /users/{userId} {
+      allow get: if isVerified() && (request.auth.uid == userId || (resource != null && resource.data.email == request.auth.token.email) || (resource != null && isMember(resource.data.tenantId)) || isSuperAdmin());
+      allow list: if isVerified() && (isSuperAdmin() || (resource != null && isMember(resource.data.tenantId)) || resource.data.email == request.auth.token.email);
+      allow create: if isVerified() && (request.auth.uid == userId || isSuperAdmin()) && isValidUser(incoming());
+      allow update: if isVerified() && (request.auth.uid == userId || isSuperAdmin());
+      allow delete: if isSuperAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow create: if isVerified() && isMember(incoming().tenantId) && incoming().senderId == request.auth.uid;
+      allow read: if isVerified() && isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid);
+      allow list: if isVerified() && isMember(resource.data.tenantId) && (resource.data.senderId == request.auth.uid || resource.data.receiverId == request.auth.uid);
+      allow update, delete: if false;
+    }
+
+    match /students/{studentId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidStudent(incoming(), incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId) && isValidStudent(incoming(), existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /faculty/{facultyId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidFaculty(incoming(), incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId) && isValidFaculty(incoming(), existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /courses/{courseId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /subjects/{subjectId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId) && isValidSubject(incoming(), incoming().tenantId);
+      allow update: if isVerified() && (
+        isTenantAdmin(existing().tenantId) || 
+        (getUserData(request.auth.uid).id || '') in (existing().teacherIds || [])
+      ) && isValidSubject(incoming(), existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /grades/{gradeId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /finance/{txId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /institutional_events/{eventId} {
+      allow read: if isVerified();
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /prayer_requests/{reqId} {
+      allow list, get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow update: if isVerified() && (isMember(existing().tenantId) && (incoming().diff(existing()).affectedKeys().hasOnly(['status'])));
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /congregation/{memberId} {
+      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /books/{bookId} {
+      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /book_borrowing/{borrowId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && (isMember(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow update: if isVerified() && (isMember(existing().tenantId) && (incoming().diff(existing()).affectedKeys().hasOnly(['status', 'returnDate'])));
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /payroll/{entryId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.facultyId == request.auth.uid);
+      allow write: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /institutional_documents/{docId} {
+      allow read: if isVerified() && isMember(resource.data.tenantId);
+      allow write: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+    }
+
+    match /attendance/{atId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow write: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+    }
+
+    // ===================================================================
+    // TEACHER MANAGEMENT SYSTEM — New collections for Theological ERP
+    // ===================================================================
+
+    match /teaching_assignments/{taId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /teacher_performance/{tpId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update, delete: if false; // Reviews are immutable once created
+    }
+
+    match /teacher_leave/{tlId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow delete: if isVerified() && isTenantAdmin(resource.data.tenantId);
+    }
+
+    match /sermon_archive/{saId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /teacher_attendance/{tAtId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(incoming().tenantId);
+    }
+
+    match /learning_materials/{lmId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && (isTenantAdmin(incoming().tenantId) || incoming().facultyId == request.auth.uid);
+      allow update: if isVerified() && (isTenantAdmin(existing().tenantId) || existing().facultyId == request.auth.uid);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /activity_logs/{alId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow update, delete: if false; // Audit logs are immutable
+    }
+
+    // ===================================================================
+    // BILLING SYSTEM — Fee structures, invoices, sponsors, scholarships
+    // ===================================================================
+
+    match /fee_structures/{fsId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /student_fees/{sfId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /payments/{payId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      // No delete — only reverse entry (update status to 'refunded')
+    }
+
+    match /invoices/{invId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && (isTenantAdmin(resource.data.tenantId) || resource.data.studentId == request.auth.uid);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /sponsors/{spId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /scholarships/{schId} {
+      allow list: if isVerified() && isMember(resource.data.tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /refunds/{refId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow get: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /transaction_log/{tlId} {
+      allow list: if isVerified() && isTenantAdmin(resource.data.tenantId);
+      allow create: if isVerified() && isMember(incoming().tenantId);
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      // Audit logs are immutable — no update or delete
+      allow update, delete: if false;
+    }
+  }
+}

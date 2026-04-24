@@ -1,0 +1,149 @@
+{
+  "entities": {
+    "Institution": {
+      "title": "Educational Institution (Tenant)",
+      "description": "Represents a single theological college or seminary.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "subdomain": { "type": "string" },
+        "config": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "subdomain"]
+    },
+    "User": {
+      "title": "User Account",
+      "description": "Represents a student, faculty member, or admin.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "tenantId": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "admin", "faculty", "student", "accountant", "librarian"] },
+        "displayName": { "type": "string" },
+        "publicKey": { "type": "string", "description": "Client-side generated RSA public key" }
+      },
+      "required": ["email", "tenantId", "role"]
+    },
+    "EncryptedRecord": {
+      "title": "E2EE Record",
+      "description": "Any sensitive data stored as an encrypted blob.",
+      "type": "object",
+      "properties": {
+        "tenantId": { "type": "string" },
+        "module": { "type": "string" },
+        "ciphertext": { "type": "string" },
+        "iv": { "type": "string" },
+        "authorId": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tenantId", "ciphertext", "iv"]
+    },
+    "Message": {
+      "title": "E2EE Message",
+      "description": "An end-to-end encrypted message between users.",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "ciphertext": { "type": "string" },
+        "iv": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderId", "receiverId", "ciphertext", "iv"]
+    },
+    "Student": {
+      "title": "Student Registry",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "program": { "type": "string" },
+        "status": { "type": "string" },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "Course": {
+      "title": "Academic Faculty Module",
+      "properties": {
+        "title": { "type": "string" },
+        "code": { "type": "string" },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "Subject": {
+      "title": "Pedagogical Subject",
+      "properties": {
+        "title": { "type": "string" },
+        "code": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "Faculty": {
+      "title": "Institutional Staff",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "InstitutionalEvent": {
+      "title": "Seminary Event",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "type": { "type": "string", "enum": ["academic", "liturgy", "community", "seminar"] },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "PrayerRequest": {
+      "title": "Community Prayer",
+      "properties": {
+        "userName": { "type": "string" },
+        "content": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "answered"] },
+        "tenantId": { "type": "string" }
+      }
+    },
+    "CongregationMember": {
+      "title": "Ecclesiastical Member",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["frequent", "occasional", "leader"] },
+        "tenantId": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/tenants/{tenantId}": {
+      "schema": "Institution",
+      "description": "Main tenant metadata."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and permissions."
+    },
+    "/tenants/{tenantId}/records/{recordId}": {
+      "schema": "EncryptedRecord",
+      "description": "Sensitive institution records (Disciplinary, Financial, etc.)."
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Encrypted chat messages."
+    },
+    "/institutional_events/{eventId}": {
+      "schema": "InstitutionalEvent",
+      "description": "High-level seminary activities."
+    },
+    "/prayer_requests/{reqId}": {
+      "schema": "PrayerRequest",
+      "description": "Community spiritual support requests."
+    },
+    "/congregation/{memberId}": {
+      "schema": "CongregationMember",
+      "description": "Ecclesiastical community registry."
+    }
+  }
+}
