@@ -16,6 +16,7 @@ import { SuperAdmin } from './pages/SuperAdmin';
 import { Login } from './pages/Login';
 import { OnboardingWizard } from './pages/OnboardingWizard';
 import { MarketingLanding } from './pages/MarketingLanding';
+import LandingPage from './pages/LandingPage';
 import { Pricing } from './pages/Pricing';
 import { useAuthStore, useAppStore } from './store/useStore';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
@@ -61,7 +62,7 @@ export default function App() {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<MarketingLanding onNavigate={(path: string) => { window.location.href = path; }} />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
