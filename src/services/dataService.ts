@@ -1501,3 +1501,248 @@ export const transactionLogService = {
   }
 };
 
+// ===================================================================
+// DYNAMIC ACADEMIC CONFIGURATION SYSTEM
+// ===================================================================
+
+export interface CurriculumSemester {
+  semesterNumber: number;
+  semesterName: string;
+  courseIds: string[];
+  totalCredits: number;
+}
+
+export interface AcademicProgram {
+  id?: string;
+  name: string;
+  code: string;
+  level: 'Undergraduate' | 'Postgraduate' | 'Certificate' | 'Diploma' | 'Doctorate';
+  department?: string;
+  durationYears: number;
+  durationSemesters: number;
+  totalCredits: number;
+  creditSystem: 'mandatory' | 'optional';
+  gradingSystem: 'marks' | 'gpa' | 'cgpa';
+  description?: string;
+  pattern: 'semester' | 'yearly' | 'trimester' | 'modular';
+  enableMinistryPracticum: boolean;
+  enableInternship: boolean;
+  enableThesis: boolean;
+  status: 'active' | 'archived' | 'draft';
+  version: number;
+  effectiveFrom?: string;
+  effectiveBatch?: string;
+  isMasterProgram?: boolean;
+  sharedWithTenants?: string[];
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+  createdBy?: string;
+}
+
+export interface ProgramVersion {
+  id?: string;
+  programId: string;
+  programName: string;
+  version: number;
+  effectiveFrom: string;
+  effectiveBatch: string;
+  curriculumSnapshot: CurriculumSemester[];
+  changes: string;
+  status: 'active' | 'superseded' | 'draft';
+  tenantId: string;
+  createdAt?: any;
+  createdBy?: string;
+}
+
+export interface CurriculumMap {
+  id?: string;
+  programId: string;
+  programName?: string;
+  academicYear: string;
+  batch?: string;
+  semesters: CurriculumSemester[];
+  totalCredits: number;
+  version: number;
+  status: 'active' | 'draft' | 'archived';
+  clonedFrom?: string;
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+  createdBy?: string;
+}
+
+export interface AcademicCourse {
+  id?: string;
+  name: string;
+  code: string;
+  department?: string;
+  credits: number;
+  courseType: 'core' | 'elective' | 'optional';
+  level?: number;
+  prerequisites?: string[];
+  description?: string;
+  syllabus?: string;
+  syllabusUrl?: string;
+  videoResources?: string[];
+  readingMaterials?: string[];
+  status: 'active' | 'archived' | 'draft';
+  version: number;
+  isMasterCourse?: boolean;
+  sharedWithTenants?: string[];
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+  createdBy?: string;
+}
+
+export interface ElectiveGroup {
+  id?: string;
+  name: string;
+  code?: string;
+  programId?: string;
+  semester?: number;
+  minElectives: number;
+  maxElectives: number;
+  eligibilityCriteria?: string;
+  courseIds: string[];
+  status: 'active' | 'archived' | 'draft';
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export interface GradeMapping {
+  grade: string;
+  minMarks: number;
+  maxMarks: number;
+  gradePoints: number;
+  description?: string;
+}
+
+export interface GradingConfig {
+  id?: string;
+  name: string;
+  programId?: string;
+  type: 'marks' | 'gpa' | 'cgpa';
+  maxMarks: number;
+  passingMarks: number;
+  gradeMappings: GradeMapping[];
+  creditSystem: 'mandatory' | 'optional';
+  creditsPerSubject?: number;
+  isDefault: boolean;
+  tenantId: string;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export const academicProgramService = {
+  async addProgram(program: AcademicProgram) {
+    return await addDoc(collection(db, 'programs'), { ...program, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'programs'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as AcademicProgram));
+  },
+  async getById(id: string) {
+    const docSnap = await getDoc(doc(db, 'programs', id));
+    return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } as AcademicProgram : null;
+  },
+  async update(id: string, data: Partial<AcademicProgram>) {
+    return await updateDoc(doc(db, 'programs', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'programs', id));
+  }
+};
+
+export const academicCourseService = {
+  async addCourse(course: AcademicCourse) {
+    return await addDoc(collection(db, 'academic_courses'), { ...course, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'academic_courses'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as AcademicCourse));
+  },
+  async update(id: string, data: Partial<AcademicCourse>) {
+    return await updateDoc(doc(db, 'academic_courses', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'academic_courses', id));
+  }
+};
+
+export const curriculumMapService = {
+  async addCurriculum(curriculum: CurriculumMap) {
+    return await addDoc(collection(db, 'curriculum_maps'), { ...curriculum, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'curriculum_maps'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as CurriculumMap));
+  },
+  async getByProgram(programId: string) {
+    const q = query(collection(db, 'curriculum_maps'), where('programId', '==', programId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as CurriculumMap));
+  },
+  async update(id: string, data: Partial<CurriculumMap>) {
+    return await updateDoc(doc(db, 'curriculum_maps', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'curriculum_maps', id));
+  }
+};
+
+export const programVersionService = {
+  async addVersion(version: ProgramVersion) {
+    return await addDoc(collection(db, 'program_versions'), { ...version, createdAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'program_versions'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ProgramVersion));
+  },
+  async getByProgram(programId: string) {
+    const q = query(collection(db, 'program_versions'), where('programId', '==', programId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ProgramVersion));
+  }
+};
+
+export const electiveGroupService = {
+  async addGroup(group: ElectiveGroup) {
+    return await addDoc(collection(db, 'electives'), { ...group, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'electives'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as ElectiveGroup);
+  },
+  async update(id: string, data: Partial<ElectiveGroup>) {
+    return await updateDoc(doc(db, 'electives', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'electives', id));
+  }
+};
+
+export const gradingConfigService = {
+  async addConfig(config: GradingConfig) {
+    return await addDoc(collection(db, 'grading_configs'), { ...config, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  },
+  async getByTenant(tenantId: string) {
+    const q = query(collection(db, 'grading_configs'), where('tenantId', '==', tenantId));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as GradingConfig));
+  },
+  async update(id: string, data: Partial<GradingConfig>) {
+    return await updateDoc(doc(db, 'grading_configs', id), { ...data, updatedAt: serverTimestamp() });
+  },
+  async delete(id: string) {
+    return await deleteDoc(doc(db, 'grading_configs', id));
+  }
+};
+

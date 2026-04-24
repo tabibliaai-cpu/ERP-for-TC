@@ -10,6 +10,7 @@ import { Admissions } from './pages/Admissions';
 import { StudentEnrollment } from './pages/StudentEnrollment';
 import { Finance } from './pages/Finance';
 import AcademicSystem from './pages/AcademicSystem';
+import AcademicConfig from './pages/AcademicConfig';
 import { StudentProfile } from './pages/StudentProfile';
 import SubjectPortal from './pages/SubjectPortal';
 import { Library } from './pages/Library';
@@ -78,6 +79,11 @@ export default function App() {
           <Route path="/courses" element={
             <ProtectedRoute feature="courses">
               <AcademicSystem />
+            </ProtectedRoute>
+          } />
+          <Route path="/academic-config" element={
+            <ProtectedRoute feature="courses">
+              <AcademicConfig />
             </ProtectedRoute>
           } />
           <Route path="/finance" element={

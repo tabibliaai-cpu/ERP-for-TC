@@ -14,7 +14,8 @@ import {
   LogOut,
   Presentation,
   UserPlus,
-  BookMarked
+  BookMarked,
+  Settings2
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { signOut } from 'firebase/auth';
@@ -28,7 +29,8 @@ const navItems = [
   { name: 'New Enrollment', href: '/enrollment', icon: UserPlus, feature: 'admissions' },
   { name: 'Faculty', href: '/faculty', icon: Users, feature: 'faculty' },
   { name: 'Teachers', href: '/teachers', icon: BookMarked, feature: 'faculty' },
-  { name: 'Academic System', href: '/courses', icon: BookOpen, feature: 'courses' },
+  { name: 'Academic Setup', href: '/academic-config', icon: Settings2, feature: 'courses' },
+  { name: 'Subject Portal', href: '/courses', icon: BookOpen, feature: 'courses' },
   { name: 'Pedagogical Portal', href: '/classroom', icon: Presentation, feature: 'classroom' },
   { name: 'Finance', href: '/finance', icon: BadgeDollarSign, feature: 'finance' },
   { name: 'Messaging', href: '/messages', icon: MessageSquare, feature: 'messaging' },

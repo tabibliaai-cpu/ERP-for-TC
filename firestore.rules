@@ -358,5 +358,57 @@ service cloud.firestore {
       // Audit logs are immutable — no update or delete
       allow update, delete: if false;
     }
+
+    // ===================================================================
+    // DYNAMIC ACADEMIC CONFIGURATION SYSTEM
+    // ===================================================================
+
+    match /programs/{progId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /academic_courses/{acId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /curriculum_maps/{cmId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /program_versions/{pvId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if false; // Versions are immutable once created
+    }
+
+    match /electives/{elId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
+
+    match /grading_configs/{gcId} {
+      allow list: if isVerified() && (resource == null || isMember(resource.data.tenantId));
+      allow get: if isVerified() && isMember(resource.data.tenantId);
+      allow create: if isVerified() && isTenantAdmin(incoming().tenantId);
+      allow update: if isVerified() && isTenantAdmin(existing().tenantId);
+      allow delete: if isVerified() && isTenantAdmin(existing().tenantId);
+    }
   }
 }
