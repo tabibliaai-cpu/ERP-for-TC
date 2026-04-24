@@ -29,3 +29,33 @@ Stage Summary:
 - Scripture references and keyword tagging system
 - Citation generator supporting 5 academic formats
 - Firestore rules need manual deployment via Firebase console (token auth failed via REST)
+---
+Task ID: 1
+Agent: main
+Task: Fix Vercel deployment root cause and deploy dramatic Library UI changes
+
+Work Log:
+- Investigated Vercel project (prj_5MJY6o75SBRcxzwxCm2ldWug7ceq) via REST API
+- Found `dist/` directory was committed to git in commit 408835c, causing Vercel to serve stale build artifacts
+- Discovered buildCommand, outputDirectory, installCommand were all null — causing unpredictable builds
+- Production was serving old asset hashes (index-BY_ERSdh.js) despite new commits
+- Set explicit build config: buildCommand="npm run build", outputDirectory="dist", installCommand="npm install"
+- Triggered fresh deployment via API → READY and PROMOTED
+- Analyzed why previous gradient changes were not visible: dark violet-900/indigo-900/blue-900 colors too subtle
+- Rewrote Library.tsx visual design with dramatic vibrant colors:
+  - Hero: bright fuchsia→violet→indigo gradient with pulsing orbs
+  - Tabs: each tab uses its own gradient color when active
+  - Stats: 90% opacity gradient backgrounds with gradient text
+  - Buttons: fuchsia→violet gradient throughout
+  - Archives card: emerald→teal→cyan color scheme
+  - Cards: hover scale transform effect
+- Built locally → NEW hashes (index-VUc_cNi9.js, index-jG7N9e3X.css)
+- Committed as 4377ce0 and pushed to GitHub
+- Triggered final deployment via Vercel API → READY and PROMOTED
+- Verified all new assets served at erp-for-tc.vercel.app
+
+Stage Summary:
+- ROOT CAUSE: dist/ committed to git + missing build config + Vercel build cache = stale deployments
+- FIX: Explicit build config + fresh API-triggered deployments
+- NEW UI: Vibrant fuchsia/violet hero, colorful gradient tabs, dramatic color palette throughout
+- Production URL: https://erp-for-tc.vercel.app (serving new assets index-VUc_cNi9.js)
