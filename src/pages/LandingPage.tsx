@@ -9,12 +9,12 @@ function FadeIn({ children, className = '', delay = 0, direction = 'up' }: {
   direction?: 'up' | 'down' | 'left' | 'right';
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
+  const inView = useInView(ref, { once: true, margin: '-60px' });
   const dirMap = {
-    up: { y: 32, x: 0 },
-    down: { y: -32, x: 0 },
-    left: { x: 32, y: 0 },
-    right: { x: -32, y: 0 },
+    up: { y: 36, x: 0 },
+    down: { y: -36, x: 0 },
+    left: { x: 36, y: 0 },
+    right: { x: -36, y: 0 },
   };
   const d = dirMap[direction];
   return (
@@ -23,14 +23,14 @@ function FadeIn({ children, className = '', delay = 0, direction = 'up' }: {
       className={className}
       initial={{ opacity: 0, ...d }}
       animate={inView ? { opacity: 1, y: 0, x: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
   );
 }
 
-/* ─── Animated counter (supports decimals) ─── */
+/* ─── Animated counter ─── */
 function CountUp({ end, suffix = '', prefix = '', decimals = 0 }: {
   end: number; suffix?: string; prefix?: string; decimals?: number;
 }) {
@@ -40,7 +40,7 @@ function CountUp({ end, suffix = '', prefix = '', decimals = 0 }: {
   useEffect(() => {
     if (!inView) return;
     let start = 0;
-    const totalFrames = 100;
+    const totalFrames = 90;
     const step = end / totalFrames;
     const tick = () => {
       start += step;
@@ -66,60 +66,71 @@ const SCREENS = [
   { src: pedagogicalImg, label: 'Classroom', desc: 'Teaching portal' },
 ];
 
+/* ─── 8 Feature modules matching the actual ERP ─── */
 const FEATURES_BENTO = [
   {
-    title: 'Student Lifecycle',
-    desc: 'From admission inquiry to alumni tracking. Manage every student touchpoint in a unified pipeline with automated notifications.',
+    title: 'Admissions & Students',
+    desc: 'From inquiry to alumni. Unified student lifecycle management with automated notifications, document tracking, and pipeline analytics.',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     ),
-    span: 'col',
     accent: 'indigo',
   },
   {
-    title: 'Financial Automation',
-    desc: 'Fee structures, invoicing, scholarship management, and financial reporting — all automated with real-time dashboards.',
+    title: 'Finance & Fees',
+    desc: 'Fee structures, invoicing, scholarship management, and financial reporting with real-time dashboards and automated reminders.',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
     ),
-    span: 'col',
     accent: 'emerald',
   },
   {
     title: 'Academic Management',
-    desc: 'Curriculum planning, timetables, exams, grading, transcripts — fully integrated with automated scheduling.',
+    desc: 'Curriculum planning, timetables, exams, grading, and transcripts — fully integrated with automated scheduling and GPA tracking.',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
     ),
-    span: 'wide',
     accent: 'amber',
   },
   {
     title: 'Theological Library',
-    desc: 'Manuscript cataloging, borrowing system, citation tools, and a 14-module research portal with scripture references.',
+    desc: 'Manuscript cataloging, borrowing system, citation tools, and a 14-module research portal with scripture cross-references.',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     ),
-    span: 'wide',
     accent: 'rose',
   },
   {
-    title: 'Multi-Institution',
-    desc: 'One platform, unlimited campuses. Centralized control with local autonomy for each location.',
+    title: 'Faculty Management',
+    desc: 'Faculty profiles, qualifications tracking, teaching assignments, performance reviews, and professional development planning.',
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     ),
-    span: 'col',
     accent: 'sky',
   },
   {
-    title: 'Role-Based Security',
-    desc: 'Fine-grained permissions, audit logging, and end-to-end encryption for every data point in the system.',
+    title: 'Church Management',
+    desc: 'Congregation records, ministry assignments, event scheduling, and pastoral care tracking integrated with institutional data.',
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M9 22V12h6v10"/><path d="M9 12V9a3 3 0 0 1 6 0"/></svg>
     ),
-    span: 'col',
     accent: 'violet',
+  },
+  {
+    title: 'Classroom & Pedagogy',
+    desc: 'Subject portals, lesson planning, assignment management, attendance tracking, and student-teacher communication tools.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    ),
+    accent: 'teal',
+  },
+  {
+    title: 'Multi-Institution',
+    desc: 'One platform, unlimited campuses. Centralized control with local autonomy, cross-campus reporting, and unified administration.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    ),
+    accent: 'orange',
   },
 ];
 
@@ -167,7 +178,7 @@ const FAQ_ITEMS = [
   { q: 'Do you offer training for our staff?', a: 'Yes. Every subscription includes onboarding training sessions, comprehensive documentation, and video tutorials. Premium plans include dedicated account management and quarterly training workshops. We also provide 24/7 in-app chat support for ongoing questions.' },
 ];
 
-const AVATAR_COLORS = ['#4338ca', '#7c3aed', '#2563eb', '#0891b2', '#059669'];
+const AVATAR_COLORS = ['#6366f1', '#8b5cf6', '#0ea5e9', '#0d9488', '#f59e0b'];
 
 /* ═══════════════════════════════════════════════════════════════════════ */
 /*  LANDING PAGE                                                        */
@@ -187,7 +198,6 @@ const LandingPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Close mobile menu on resize
   useEffect(() => {
     const onResize = () => { if (window.innerWidth > 768) setMobileMenuOpen(false); };
     window.addEventListener('resize', onResize);
@@ -202,13 +212,23 @@ const LandingPage = () => {
         className="lp-nav"
         ref={navRef}
         style={{
-          boxShadow: useTransform(navScrolled, v => v > 0 ? `0 1px 3px rgba(0,0,0,${0.06 * v})` : 'none'),
+          boxShadow: useTransform(navScrolled, v => v > 0 ? `0 1px 3px rgba(0,0,0,${0.05 * v})` : 'none'),
         }}
       >
         <div className="lp-nav-inner">
           <div className="lp-nav-brand">
             <div className="lp-nav-logo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#4338ca"/><path d="M2 17l10 5 10-5" stroke="#4338ca" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M2 12l10 5 10-5" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <defs>
+                  <linearGradient id="lp-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="url(#lp-logo-grad)" />
+                <path d="M2 17l10 5 10-5" stroke="url(#lp-logo-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2 12l10 5 10-5" stroke="#a5b4fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
             <span className="lp-nav-name">CovenantERP</span>
           </div>
@@ -222,7 +242,6 @@ const LandingPage = () => {
             <button className="lp-nav-login" onClick={() => navigate('/login')}>Sign In</button>
             <button className="lp-nav-cta" onClick={() => navigate('/login')}>Get Started</button>
           </div>
-          {/* Mobile hamburger */}
           <button
             className={`lp-nav-hamburger ${mobileMenuOpen ? 'open' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -231,7 +250,6 @@ const LandingPage = () => {
             <span /><span /><span />
           </button>
         </div>
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -256,8 +274,8 @@ const LandingPage = () => {
 
       {/* ════════ 1. HERO ════════ */}
       <section className="lp-hero">
-        <div className="lp-hero-pattern" />
         <div className="lp-hero-gradient" />
+        <div className="lp-hero-pattern" />
 
         <div className="lp-hero-inner">
           <div className="lp-hero-content">
@@ -275,7 +293,7 @@ const LandingPage = () => {
             </FadeIn>
             <FadeIn delay={0.16}>
               <p className="lp-hero-desc">
-                Manage admissions, academics, finance, library, and campus operations
+                Manage admissions, academics, finance, library, faculty, and campus operations
                 from one unified platform. Designed for seminaries, Bible colleges,
                 and theological institutions.
               </p>
@@ -330,8 +348,7 @@ const LandingPage = () => {
                 </div>
                 <img src={dashboardImg} alt="CovenantERP Dashboard" className="lp-mockup-img" />
               </div>
-              {/* Floating cards */}
-              <motion.div className="lp-float-card lp-float-1" animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}>
+              <motion.div className="lp-float-card lp-float-1" animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
                 <div className="lp-float-icon lp-float-green">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
@@ -340,7 +357,7 @@ const LandingPage = () => {
                   <div className="lp-float-value lp-float-value-green">+24%</div>
                 </div>
               </motion.div>
-              <motion.div className="lp-float-card lp-float-2" animate={{ y: [0, 6, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
+              <motion.div className="lp-float-card lp-float-2" animate={{ y: [0, 8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
                 <div className="lp-float-icon lp-float-indigo">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
@@ -368,7 +385,7 @@ const LandingPage = () => {
         </FadeIn>
       </section>
 
-      {/* ════════ 3. FEATURES BENTO ════════ */}
+      {/* ════════ 3. FEATURES — 8 ERP Modules with Dynamic Colors ════════ */}
       <section className="lp-features" id="features">
         <FadeIn>
           <p className="lp-section-label">Features</p>
@@ -377,13 +394,13 @@ const LandingPage = () => {
           <h2 className="lp-section-title">Everything your institution needs.</h2>
         </FadeIn>
         <FadeIn delay={0.16}>
-          <p className="lp-section-desc">Six core modules, one unified platform. No more juggling between disconnected tools.</p>
+          <p className="lp-section-desc">Eight core modules, one unified platform. Each feature is color-coded to match its identity across the app.</p>
         </FadeIn>
 
         <div className="lp-bento">
           {FEATURES_BENTO.map((f, i) => (
             <FadeIn key={i} delay={i * 0.06}>
-              <div className={`lp-bento-card lp-bento-${f.span} lp-accent-${f.accent}`}>
+              <div className={`lp-bento-card lp-accent-${f.accent}`}>
                 <div className={`lp-bento-icon lp-icon-${f.accent}`}>{f.icon}</div>
                 <h3 className="lp-bento-title">{f.title}</h3>
                 <p className="lp-bento-desc">{f.desc}</p>
@@ -449,14 +466,13 @@ const LandingPage = () => {
                     src={SCREENS[activeScreen].src}
                     alt={SCREENS[activeScreen].label}
                     className="lp-browser-img"
-                    initial={{ opacity: 0, scale: 0.98 }}
+                    initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.35 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   />
                 </AnimatePresence>
               </div>
-              {/* Shadow/reflection */}
               <div className="lp-preview-reflection" />
             </div>
           </FadeIn>
@@ -553,6 +569,7 @@ const LandingPage = () => {
       {/* ════════ 8. CTA ════════ */}
       <section className="lp-cta">
         <div className="lp-cta-glow" />
+        <div className="lp-cta-dots" />
         <FadeIn>
           <h2 className="lp-cta-title">Ready to modernize your institution?</h2>
         </FadeIn>
@@ -576,7 +593,17 @@ const LandingPage = () => {
           <div className="lp-footer-top">
             <div className="lp-footer-brand">
               <div className="lp-nav-logo">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#818cf8"/><path d="M2 17l10 5 10-5" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M2 12l10 5 10-5" stroke="#a5b4fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <defs>
+                    <linearGradient id="lp-logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#818cf8" />
+                      <stop offset="100%" stopColor="#a78bfa" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" fill="url(#lp-logo-grad-footer)" />
+                  <path d="M2 17l10 5 10-5" stroke="url(#lp-logo-grad-footer)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M2 12l10 5 10-5" stroke="#c4b5fd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
               <span className="lp-footer-name">CovenantERP</span>
               <p className="lp-footer-tagline">The complete ERP platform for theological institutions.</p>
