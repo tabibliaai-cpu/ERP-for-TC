@@ -83,3 +83,48 @@ Stage Summary:
 - Subscribed users without profile see onboarding wizard
 - Complete users see the full ERP dashboard
 - Super admins bypass all gates and go directly to /super-admin
+
+---
+Task ID: 4
+Agent: Super Z (Main)
+Task: Institutional SaaS Onboarding & Management System — Impersonation, Real-time Sync, Audit Logging
+
+Work Log:
+- Explored full codebase structure (21 files, 1655-line SuperAdmin, 235-line AuthProvider, monolithic dataService)
+- Created src/services/institutionService.ts (470 lines) — Shared Institution Schema service:
+  - InstitutionProfile with full lifecycle fields (isSubscribed, onboardingComplete, journeyPhase, subscriptionStatus)
+  - institutionService: CRUD + journey phase management + subscription activation + real-time sync (onSnapshot) + stats
+  - impersonationService: token generation (TTL), validation (auto-revokes expired), revocation, bulk revoke
+  - auditLogService: generic log + convenience helpers for auth/institution/impersonation/super admin actions + filtered queries + real-time subscription
+- Enhanced src/store/useStore.ts:
+  - ImpersonationContext interface (institutionId, institutionName, adminEmail, tokenId, startedAt, reason)
+  - startImpersonation/stopImpersonation actions
+  - isRealtimeSynced/lastSyncTime for real-time sync state
+- Enhanced src/pages/SuperAdmin.tsx (1654 → 1964 lines):
+  - Added imports: institutionService, impersonationService, auditLogService, useAppStore, useAuthStore
+  - Added impersonation state (7 new useState), real-time sync state
+  - Real-time sync useEffect with onSnapshot subscription (auto-updates institutions live)
+  - Impersonation handlers: open modal, generate token, validate, start/stop impersonation
+  - Live Sync indicator in header (Wifi/WifiOff icon + timestamp)
+  - Tokens button in header to view active impersonation tokens
+  - Amber Impersonation Banner below header when active (shows institution name, admin email, reason, exit button)
+  - Eye (Impersonate) button in institutions table actions column
+  - Impersonation Modal: reason input, TTL selector (1/2/4/8 hours), generate button
+  - Active Tokens Panel: list of tokens with Use/Revoke buttons, expiry display, usage count
+- Enhanced src/components/auth/AuthProvider.tsx:
+  - Auto audit logging at 4 key auth events: super_admin login, account creation, full access login, logout
+  - All audit calls use .catch(() => {}) to never break auth flow
+- Enhanced src/App.tsx:
+  - Import useAppStore for impersonation state
+  - New routing: super_admin + impersonating → shows regular admin dashboard (all routes without ProtectedRoute)
+  - Normal super_admin → shows only /super-admin
+- Build: 0 errors, 2140 modules, 4.82s build time
+- Pushed commit 5290716 to GitHub
+
+Stage Summary:
+- Full Institutional SaaS Onboarding & Management System implemented
+- Real-time Firestore sync via onSnapshot (live institution data in SuperAdmin)
+- Impersonation Token system with TTL, audit trail, reason tracking
+- Auto audit logging for all auth events
+- Journey phase tracking (discovery → identity → conversion → onboarding → active)
+- 889 lines added across 6 files (1 new, 5 modified)
