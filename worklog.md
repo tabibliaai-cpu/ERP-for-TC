@@ -42,3 +42,32 @@ Stage Summary:
 - Teacher Enrollment now has all 17 sections matching the full spec
 - Live at: https://erp-for-tc.vercel.app
 - All 17 sections: Basic, Contact, Spiritual, Qualifications, Employment, Ministry, Payroll, Accommodation, Medical, Documents, Performance, Teaching Assignment, Attendance/Leave, Permissions, Content Mgmt, Admin Controls, Security
+
+---
+Task ID: 3
+Agent: Main Agent + Fullstack Developer Subagent
+Task: Restore comprehensive Student Enrollment System (13 sections) — was replaced by basic modal
+
+Work Log:
+- Investigated user report: "all features were there but now they're all gone"
+- Found Student Enrollment was replaced by a basic 3-tab modal in Admissions.tsx during a "streamline" commit
+- Sidebar had /enrollment link but App.tsx had NO /enrollment route (404)
+- Created comprehensive StudentEnrollment.tsx (805 lines, 13 sections) matching TeacherEnrollment design language
+- Added /enrollment route to App.tsx with import for StudentEnrollment component
+- Build verified: 2134 modules, 0 errors, built in 4.14s
+- Committed and pushed to GitHub (commit 4538777)
+- Vercel auto-deployment confirmed (200 OK on all pages)
+
+Stage Summary:
+- Student Enrollment (13 sections) fully restored:
+  1. Basic Information 2. Contact Details 3. Family & Guardian 4. Spiritual Profile
+  5. Previous Education 6. Program Enrollment 7. Accommodation & Transport
+  8. Financial Information 9. Medical Information 10. Documents Upload
+  11. Ministry & Calling 12. Admin & Verification 13. Declaration & Consent
+- Teacher Management System verified complete (17-section enrollment + 12-tab management)
+- All routes live at: https://erp-for-tc.vercel.app
+  - /enrollment (Student Enrollment - 13 sections)
+  - /admissions (Student Registry/List)
+  - /admissions/:studentId (Student Profile)
+  - /teachers (Teacher Management - 12 tabs)
+  - /teacher-enrollment (Teacher Enrollment - 17 sections)
