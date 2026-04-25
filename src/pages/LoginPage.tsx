@@ -18,15 +18,13 @@ export default function LoginPage({ role }: LoginPageProps) {
   const isSuperAdmin = role === 'super_admin';
   const title = isSuperAdmin ? 'Super Admin Login' : 'Admin Login';
   const subtitle = isSuperAdmin
-    ? 'Full system access — manage organizations, users, and global settings'
-    : 'Manage your church — members, finances, events, and ministries';
-  const accentColor = isSuperAdmin ? 'amber' : 'blue';
+    ? 'Full platform access — manage all institutions, users, and system settings'
+    : 'Manage your institution — students, teachers, academics, and finances';
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
     try {
       const result = await login(username, password, role);
       if (result.success) {
@@ -42,44 +40,40 @@ export default function LoginPage({ role }: LoginPageProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4">
-      {/* Background decorations */}
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      {/* Subtle background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-100/30 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-100/30 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-50/40 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative w-full max-w-md animate-fade-in">
         {/* Back button */}
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-8 transition-colors group"
+          className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-600 mb-8 transition-colors group"
         >
           <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Back to Home
         </button>
 
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 sm:p-10">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${
-              isSuperAdmin ? 'from-amber-500 to-amber-400' : 'from-blue-600 to-blue-500'
-            } flex items-center justify-center mx-auto mb-4 shadow-lg ${
-              isSuperAdmin ? 'shadow-amber-200' : 'shadow-blue-200'
-            }`}>
+            <div className="w-14 h-14 rounded-2xl bg-amber-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-600/20">
               {isSuperAdmin ? (
-                <Shield className="h-8 w-8 text-white" />
+                <Shield className="h-7 w-7 text-white" />
               ) : (
-                <UserCog className="h-8 w-8 text-white" />
+                <UserCog className="h-7 w-7 text-white" />
               )}
             </div>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Church className="h-5 w-5 text-amber-600" />
-              <span className="text-sm font-bold text-gray-900">CovenantERP</span>
+              <Church className="h-4 w-4 text-amber-600" />
+              <span className="text-sm font-bold text-slate-900">CovenantERP</span>
             </div>
-            <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">{title}</h1>
-            <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">{title}</h1>
+            <p className="text-sm text-slate-500 mt-1">{subtitle}</p>
           </div>
 
           {/* Error */}
@@ -91,9 +85,9 @@ export default function LoginPage({ role }: LoginPageProps) {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-1.5">
+              <label htmlFor="username" className="block text-sm font-medium text-slate-700 mb-1.5">
                 Username
               </label>
               <input
@@ -102,14 +96,14 @@ export default function LoginPage({ role }: LoginPageProps) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder={isSuperAdmin ? 'Enter super admin username' : 'Enter admin username'}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
                 required
                 autoComplete="username"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-1.5">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -119,14 +113,14 @@ export default function LoginPage({ role }: LoginPageProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all pr-12"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all pr-12"
                   required
                   autoComplete="current-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1"
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -136,11 +130,7 @@ export default function LoginPage({ role }: LoginPageProps) {
             <button
               type="submit"
               disabled={isLoading || !username.trim() || !password.trim()}
-              className={`w-full py-3.5 rounded-xl text-white font-bold text-sm shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                isSuperAdmin
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-400 shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300'
-                  : 'bg-gradient-to-r from-blue-600 to-blue-500 shadow-blue-500/25 hover:from-blue-500 hover:to-blue-400'
-              }`}
+              className="w-full py-2.5 rounded-xl bg-amber-600 text-white font-semibold text-sm shadow-lg shadow-amber-600/20 hover:bg-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -157,12 +147,12 @@ export default function LoginPage({ role }: LoginPageProps) {
           </form>
 
           {/* Hint */}
-          <div className="mt-6 p-3 rounded-xl bg-gray-50 border border-gray-100">
-            <p className="text-xs text-gray-400 text-center">
+          <div className="mt-5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <p className="text-xs text-slate-400 text-center">
               {isSuperAdmin ? (
-                <>Demo: <span className="text-gray-600 font-medium">superadmin</span> / <span className="text-gray-600 font-medium">SuperAdmin@2024</span></>
+                <>Demo: <span className="text-slate-600 font-medium">superadmin</span> / <span className="text-slate-600 font-medium">SuperAdmin@2024</span></>
               ) : (
-                <>Demo: <span className="text-gray-600 font-medium">admin</span> / <span className="text-gray-600 font-medium">Admin@2024</span></>
+                <>Demo: <span className="text-slate-600 font-medium">admin</span> / <span className="text-slate-600 font-medium">Admin@2024</span></>
               )}
             </p>
           </div>

@@ -20,7 +20,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* ═══════════════════ HEADER / NAVBAR ═══════════════════ */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+      <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -35,8 +35,8 @@ export default function LandingPage() {
 
             {/* Desktop: Nav Links + Login Buttons */}
             <div className="hidden md:flex items-center gap-3">
-              <a href="#features" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-              <a href="#about" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+              <a href="#features" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Features</a>
+              <a href="#about" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">About</a>
 
               {/* Divider */}
               <div className="w-px h-6 bg-gray-200 mx-1" />

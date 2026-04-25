@@ -75,8 +75,8 @@ export default function PedagogyPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-gray-900">Pedagogical Portal</h2>
-          <p className="text-gray-500 mt-1">Teaching methods, resources, and formation tracking</p>
+          <h2 className="text-xl font-bold text-slate-900">Pedagogical Portal</h2>
+          <p className="text-slate-500 mt-1">Teaching methods, resources, and formation tracking</p>
         </div>
         <button
           onClick={() => { setActiveTab('lessons'); setShowModal(true); }}
@@ -95,28 +95,28 @@ export default function PedagogyPage() {
           { icon: TrendingUp, label: 'Avg Engagement', value: '88%', color: 'bg-amber-500' },
           { icon: Users, label: 'Active Mentorships', value: mentorships.length.toString(), color: 'bg-purple-500' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className={`w-10 h-10 rounded-xl ${stat.color} flex items-center justify-center`}>
                 <stat.icon className="h-5 w-5 text-white" />
               </div>
-              <p className="text-sm text-gray-500">{stat.label}</p>
+              <p className="text-sm text-slate-500">{stat.label}</p>
             </div>
-            <p className="text-2xl font-extrabold text-gray-900">{stat.value}</p>
+            <p className="text-xl font-bold text-slate-900">{stat.value}</p>
           </div>
         ))}
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 rounded-xl overflow-x-auto">
+      <div className="flex gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto">
         {tabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
               activeTab === tab.id
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
             }`}
           >
             <tab.icon className="h-4 w-4" />
@@ -130,47 +130,47 @@ export default function PedagogyPage() {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="text"
                 placeholder="Search lesson plans..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all"
               />
             </div>
-            <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">
               <Filter className="h-4 w-4" />
               Filter
             </button>
           </div>
 
           {/* Teaching Methods Overview */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <Brain className="h-5 w-5 text-amber-500" />
               Teaching Methods Distribution
             </h3>
             <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {teachingMethods.map((method, i) => (
-                <div key={i} className="p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-amber-200 transition-colors">
-                  <p className="text-sm font-semibold text-gray-900">{method.name}</p>
-                  <p className="text-xs text-gray-500 mt-1">{method.desc.substring(0, 40)}...</p>
-                  <div className="mt-2 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-200 transition-colors">
+                  <p className="text-sm font-semibold text-slate-900">{method.name}</p>
+                  <p className="text-xs text-slate-500 mt-1">{method.desc.substring(0, 40)}...</p>
+                  <div className="mt-2 h-1.5 bg-slate-200 rounded-full overflow-hidden">
                     <div className="h-full bg-amber-500 rounded-full" style={{ width: `${method.usage}%` }} />
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">{method.usage}% usage</p>
+                  <p className="text-xs text-slate-400 mt-1">{method.usage}% usage</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Lesson Plans Table */}
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-gray-400 border-b border-gray-100 bg-gray-50/50">
+                  <tr className="text-left text-slate-400 border-b border-slate-100 bg-slate-50/50">
                     <th className="px-6 py-3 font-medium">Course</th>
                     <th className="px-6 py-3 font-medium">Topic</th>
                     <th className="px-6 py-3 font-medium">Teacher</th>
@@ -180,33 +180,33 @@ export default function PedagogyPage() {
                     <th className="px-6 py-3 font-medium">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-slate-50">
                   {filteredLessons.map((plan) => (
-                    <tr key={plan.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 font-medium text-gray-900">{plan.course}</td>
-                      <td className="px-6 py-4 text-gray-600 max-w-xs truncate">{plan.topic}</td>
-                      <td className="px-6 py-4 text-gray-500">{plan.teacher}</td>
-                      <td className="px-6 py-4 text-gray-500">{plan.date}</td>
+                    <tr key={plan.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4 font-medium text-slate-900">{plan.course}</td>
+                      <td className="px-6 py-4 text-slate-600 max-w-xs truncate">{plan.topic}</td>
+                      <td className="px-6 py-4 text-slate-500">{plan.teacher}</td>
+                      <td className="px-6 py-4 text-slate-500">{plan.date}</td>
                       <td className="px-6 py-4">
                         <span className="px-2 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-medium">{plan.method}</span>
                       </td>
                       <td className="px-6 py-4">
                         {plan.engagement > 0 ? (
                           <div className="flex items-center gap-2">
-                            <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div className="w-16 h-1.5 bg-slate-200 rounded-full overflow-hidden">
                               <div className={`h-full rounded-full ${plan.engagement >= 90 ? 'bg-emerald-500' : plan.engagement >= 75 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${plan.engagement}%` }} />
                             </div>
-                            <span className="text-xs font-medium text-gray-600">{plan.engagement}%</span>
+                            <span className="text-xs font-medium text-slate-600">{plan.engagement}%</span>
                           </div>
                         ) : (
-                          <span className="text-xs text-gray-400">--</span>
+                          <span className="text-xs text-slate-400">--</span>
                         )}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded-lg text-xs font-semibold ${
                           plan.status === 'Completed' ? 'bg-emerald-50 text-emerald-600' :
                           plan.status === 'Upcoming' ? 'bg-blue-50 text-blue-600' :
-                          'bg-gray-100 text-gray-500'
+                          'bg-slate-100 text-slate-500'
                         }`}>{plan.status}</span>
                       </td>
                     </tr>
@@ -223,9 +223,9 @@ export default function PedagogyPage() {
         <div className="space-y-4">
           <div className="flex gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input type="text" placeholder="Search resources..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all" />
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all" />
             </div>
             <button onClick={() => setShowResourceModal(true)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors">
@@ -234,7 +234,7 @@ export default function PedagogyPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredResources.map((res) => (
-              <div key={res.id} className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg hover:border-amber-200 transition-all cursor-pointer group">
+              <div key={res.id} className="bg-white rounded-2xl border border-slate-100 p-5 hover:shadow-lg hover:border-amber-200 transition-all cursor-pointer group">
                 <div className="flex items-start justify-between mb-3">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                     res.type === 'PDF' ? 'bg-red-50 text-red-600' :
@@ -246,13 +246,13 @@ export default function PedagogyPage() {
                      res.type === 'Video' ? <Video className="h-5 w-5" /> :
                      <ExternalLink className="h-5 w-5" />}
                   </div>
-                  <span className="text-xs font-semibold px-2 py-1 rounded-lg bg-gray-100 text-gray-500">{res.type}</span>
+                  <span className="text-xs font-semibold px-2 py-1 rounded-lg bg-slate-100 text-slate-500">{res.type}</span>
                 </div>
-                <h4 className="font-semibold text-gray-900 text-sm group-hover:text-amber-600 transition-colors">{res.title}</h4>
-                <p className="text-xs text-gray-500 mt-1">{res.course}</p>
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-50">
-                  <p className="text-xs text-gray-400">By {res.uploadedBy}</p>
-                  <div className="flex items-center gap-1 text-xs text-gray-400">
+                <h4 className="font-semibold text-slate-900 text-sm group-hover:text-amber-600 transition-colors">{res.title}</h4>
+                <p className="text-xs text-slate-500 mt-1">{res.course}</p>
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-50">
+                  <p className="text-xs text-slate-400">By {res.uploadedBy}</p>
+                  <div className="flex items-center gap-1 text-xs text-slate-400">
                     <MessageSquare className="h-3 w-3" /> {res.downloads}
                   </div>
                 </div>
@@ -266,8 +266,8 @@ export default function PedagogyPage() {
       {activeTab === 'engagement' && (
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Engagement Overview */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Student Engagement Overview</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Student Engagement Overview</h3>
             <div className="space-y-4">
               {[
                 { metric: 'Class Participation', value: 87, color: 'bg-blue-500' },
@@ -278,10 +278,10 @@ export default function PedagogyPage() {
               ].map((item, i) => (
                 <div key={i}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium text-gray-700">{item.metric}</span>
-                    <span className="text-sm font-bold text-gray-900">{item.value}%</span>
+                    <span className="text-sm font-medium text-slate-700">{item.metric}</span>
+                    <span className="text-sm font-bold text-slate-900">{item.value}%</span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                     <div className={`h-full ${item.color} rounded-full transition-all`} style={{ width: `${item.value}%` }} />
                   </div>
                 </div>
@@ -290,17 +290,17 @@ export default function PedagogyPage() {
           </div>
 
           {/* Teaching Effectiveness */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Teaching Effectiveness Scores</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Teaching Effectiveness Scores</h3>
             <div className="space-y-4">
               {lessonPlans.filter(l => l.engagement > 0).map((plan) => (
-                <div key={plan.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <div key={plan.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">{plan.teacher}</p>
-                    <p className="text-xs text-gray-500">{plan.course}</p>
+                    <p className="text-sm font-semibold text-slate-900">{plan.teacher}</p>
+                    <p className="text-xs text-slate-500">{plan.course}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Star className={`h-4 w-4 ${plan.engagement >= 90 ? 'text-amber-500 fill-amber-500' : 'text-gray-300'}`} />
+                    <Star className={`h-4 w-4 ${plan.engagement >= 90 ? 'text-amber-500 fill-amber-500' : 'text-slate-300'}`} />
                     <span className={`text-sm font-bold ${plan.engagement >= 90 ? 'text-emerald-600' : plan.engagement >= 75 ? 'text-amber-600' : 'text-red-600'}`}>
                       {plan.engagement}%
                     </span>
@@ -314,9 +314,9 @@ export default function PedagogyPage() {
 
       {/* Mentorship Tab */}
       {activeTab === 'mentorship' && (
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-          <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-            <h3 className="text-lg font-bold text-gray-900">Active Mentorships</h3>
+        <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+          <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-slate-900">Active Mentorships</h3>
             <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 text-amber-700 text-sm font-medium hover:bg-amber-100 transition-colors">
               <Plus className="h-4 w-4" /> Assign Mentorship
             </button>
@@ -324,7 +324,7 @@ export default function PedagogyPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-400 border-b border-gray-100 bg-gray-50/50">
+                <tr className="text-left text-slate-400 border-b border-slate-100 bg-slate-50/50">
                   <th className="px-6 py-3 font-medium">Mentor</th>
                   <th className="px-6 py-3 font-medium">Student</th>
                   <th className="px-6 py-3 font-medium">Focus Area</th>
@@ -334,14 +334,14 @@ export default function PedagogyPage() {
                   <th className="px-6 py-3 font-medium">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-slate-50">
                 {mentorships.map((m) => (
-                  <tr key={m.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-gray-900">{m.mentor}</td>
-                    <td className="px-6 py-4 text-gray-600">{m.student}</td>
+                  <tr key={m.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 font-medium text-slate-900">{m.mentor}</td>
+                    <td className="px-6 py-4 text-slate-600">{m.student}</td>
                     <td className="px-6 py-4"><span className="px-2 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-medium">{m.focus}</span></td>
-                    <td className="px-6 py-4 text-gray-500">{m.meetings}</td>
-                    <td className="px-6 py-4 text-gray-500">{m.lastMeeting}</td>
+                    <td className="px-6 py-4 text-slate-500">{m.meetings}</td>
+                    <td className="px-6 py-4 text-slate-500">{m.lastMeeting}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 rounded-lg text-xs font-semibold ${
                         m.growth === 'Excellent' ? 'bg-emerald-50 text-emerald-600' :
@@ -367,7 +367,7 @@ export default function PedagogyPage() {
                 <Heart className="h-5 w-5 text-amber-400" />
               </div>
               <div>
-                <h3 className="text-lg font-bold">Spiritual Formation Index</h3>
+                <h3 className="text-sm font-semibold">Spiritual Formation Index</h3>
                 <p className="text-blue-200 text-sm">Overall campus spiritual health</p>
               </div>
             </div>
@@ -378,21 +378,21 @@ export default function PedagogyPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {spiritualActivities.map((act, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg transition-all">
+              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5 hover:shadow-lg transition-all">
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm font-semibold text-gray-900">{act.activity}</p>
+                  <p className="text-sm font-semibold text-slate-900">{act.activity}</p>
                   <span className={`text-xs font-medium px-2 py-0.5 rounded-lg ${
                     act.trend === 'up' ? 'bg-emerald-50 text-emerald-600' :
                     act.trend === 'down' ? 'bg-red-50 text-red-600' :
-                    'bg-gray-100 text-gray-500'
+                    'bg-slate-100 text-slate-500'
                   }`}>
                     {act.trend === 'up' ? '↑ Rising' : act.trend === 'down' ? '↓ Declining' : '→ Stable'}
                   </span>
                 </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style={{ width: `${act.participation}%` }} />
                 </div>
-                <p className="text-xs text-gray-500 mt-2">{act.participation}% participation rate</p>
+                <p className="text-xs text-slate-500 mt-2">{act.participation}% participation rate</p>
               </div>
             ))}
           </div>
@@ -403,15 +403,15 @@ export default function PedagogyPage() {
       {showModal && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setShowModal(false)}>
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <h3 className="text-lg font-bold text-gray-900">Create Lesson Plan</h3>
-              <button onClick={() => setShowModal(false)} className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center"><X className="h-5 w-5 text-gray-400" /></button>
+            <div className="flex items-center justify-between p-6 border-b border-slate-100">
+              <h3 className="text-sm font-semibold text-slate-900">Create Lesson Plan</h3>
+              <button onClick={() => setShowModal(false)} className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center"><X className="h-5 w-5 text-slate-400" /></button>
             </div>
             <div className="p-6 space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Course</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all">
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Course</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>Systematic Theology I</option>
                     <option>New Testament Survey</option>
                     <option>Pastoral Ministry</option>
@@ -421,43 +421,43 @@ export default function PedagogyPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date</label>
-                  <input type="date" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Date</label>
+                  <input type="date" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Topic</label>
-                <input type="text" placeholder="Lesson topic..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Topic</label>
+                <input type="text" placeholder="Lesson topic..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Teaching Method</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all">
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Teaching Method</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>Lecture</option><option>Discussion</option><option>Case Study</option><option>Sermon-based Teaching</option><option>Interactive Bible Study</option><option>Field-based Learning</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Duration</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all">
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Duration</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>60 min</option><option>75 min</option><option>90 min</option><option>120 min</option>
                   </select>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Scripture References</label>
-                <input type="text" placeholder="e.g., John 3:16, Romans 8:28-39" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Scripture References</label>
+                <input type="text" placeholder="e.g., John 3:16, Romans 8:28-39" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Objectives</label>
-                <textarea rows={3} placeholder="What students should learn..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all resize-none" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Objectives</label>
+                <textarea rows={3} placeholder="What students should learn..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Activities Planned</label>
-                <textarea rows={2} placeholder="Class activities, discussions, assignments..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 outline-none focus:border-amber-400 transition-all resize-none" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Activities Planned</label>
+                <textarea rows={2} placeholder="Class activities, discussions, assignments..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-100">
-              <button onClick={() => setShowModal(false)} className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-slate-100">
+              <button onClick={() => setShowModal(false)} className="px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
               <button onClick={() => setShowModal(false)} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all">Create Plan</button>
             </div>
           </div>
@@ -468,20 +468,20 @@ export default function PedagogyPage() {
       {showResourceModal && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setShowResourceModal(false)}>
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <h3 className="text-lg font-bold text-gray-900">Upload Teaching Resource</h3>
-              <button onClick={() => setShowResourceModal(false)} className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center"><X className="h-5 w-5 text-gray-400" /></button>
+            <div className="flex items-center justify-between p-6 border-b border-slate-100">
+              <h3 className="text-sm font-semibold text-slate-900">Upload Teaching Resource</h3>
+              <button onClick={() => setShowResourceModal(false)} className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center"><X className="h-5 w-5 text-slate-400" /></button>
             </div>
             <div className="p-6 space-y-4">
-              <div><label className="block text-sm font-semibold text-gray-700 mb-1.5">Resource Title</label><input type="text" placeholder="e.g., Lecture Notes: Doctrine of God" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all" /></div>
+              <div><label className="block text-sm font-semibold text-slate-700 mb-1.5">Resource Title</label><input type="text" placeholder="e.g., Lecture Notes: Doctrine of God" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all" /></div>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="block text-sm font-semibold text-gray-700 mb-1.5">Course</label><select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all"><option>Systematic Theology I</option><option>Hermeneutics</option><option>Pastoral Ministry</option><option>Church History I</option></select></div>
-                <div><label className="block text-sm font-semibold text-gray-700 mb-1.5">Type</label><select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all"><option>PDF</option><option>Video</option><option>Audio</option><option>External Link</option></select></div>
+                <div><label className="block text-sm font-semibold text-slate-700 mb-1.5">Course</label><select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all"><option>Systematic Theology I</option><option>Hermeneutics</option><option>Pastoral Ministry</option><option>Church History I</option></select></div>
+                <div><label className="block text-sm font-semibold text-slate-700 mb-1.5">Type</label><select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all"><option>PDF</option><option>Video</option><option>Audio</option><option>External Link</option></select></div>
               </div>
-              <div><label className="block text-sm font-semibold text-gray-700 mb-1.5">Upload File</label><div className="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center hover:border-amber-400 transition-colors cursor-pointer"><Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" /><p className="text-sm text-gray-500">Click or drag file to upload</p><p className="text-xs text-gray-400 mt-1">PDF, MP4, MP3, DOC up to 50MB</p></div></div>
+              <div><label className="block text-sm font-semibold text-slate-700 mb-1.5">Upload File</label><div className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center hover:border-amber-400 transition-colors cursor-pointer"><Upload className="h-8 w-8 text-slate-400 mx-auto mb-2" /><p className="text-sm text-slate-500">Click or drag file to upload</p><p className="text-xs text-slate-400 mt-1">PDF, MP4, MP3, DOC up to 50MB</p></div></div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-100">
-              <button onClick={() => setShowResourceModal(false)} className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">Cancel</button>
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-slate-100">
+              <button onClick={() => setShowResourceModal(false)} className="px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
               <button onClick={() => setShowResourceModal(false)} className="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-colors">Upload</button>
             </div>
           </div>

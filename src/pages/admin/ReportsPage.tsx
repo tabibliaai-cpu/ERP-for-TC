@@ -98,14 +98,14 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-gray-900">Reports & Analytics</h2>
-          <p className="text-gray-500 mt-1">Comprehensive institutional insights and data analysis</p>
+          <h2 className="text-xl font-bold text-slate-900">Reports & Analytics</h2>
+          <p className="text-slate-500 mt-1">Comprehensive institutional insights and data analysis</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 bg-white">
-            <Calendar className="h-4 w-4 text-gray-400" />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-white">
+            <Calendar className="h-4 w-4 text-slate-400" />
             <select value={dateRange} onChange={(e) => setDateRange(e.target.value)}
-              className="text-sm text-gray-700 bg-transparent outline-none cursor-pointer">
+              className="text-sm text-slate-700 bg-transparent outline-none cursor-pointer">
               <option value="this_week">This Week</option>
               <option value="this_month">This Month</option>
               <option value="this_quarter">This Quarter</option>
@@ -120,11 +120,11 @@ export default function ReportsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 rounded-xl overflow-x-auto">
+      <div className="flex gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto">
         {tabs.map(tab => (
           <button key={tab.id} onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-              activeTab === tab.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+              activeTab === tab.id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
             }`}>
             <tab.icon className="h-4 w-4" />{tab.label}
           </button>
@@ -141,48 +141,48 @@ export default function ReportsPage() {
               { icon: Activity, label: 'Pass Rate', value: `${academicStats.passRate}%`, change: '+1.2%', up: true, color: 'bg-amber-500' },
               { icon: BarChart3, label: 'Attendance', value: `${academicStats.attendanceRate}%`, change: '-0.5%', up: false, color: 'bg-purple-500' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5">
+              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5">
                 <div className="flex items-center justify-between mb-3">
                   <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center`}><s.icon className="h-5 w-5 text-white" /></div>
                   <span className={`flex items-center gap-0.5 text-xs font-semibold ${s.up ? 'text-emerald-600' : 'text-red-500'}`}>
                     {s.up ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}{s.change}
                   </span>
                 </div>
-                <p className="text-2xl font-extrabold text-gray-900">{s.value}</p>
-                <p className="text-sm text-gray-500">{s.label}</p>
+                <p className="text-xl font-bold text-slate-900">{s.value}</p>
+                <p className="text-sm text-slate-500">{s.label}</p>
               </div>
             ))}
           </div>
 
           {/* Grade Distribution */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Grade Distribution</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Grade Distribution</h3>
             <div className="flex flex-wrap gap-3 mb-4">
               {academicStats.gradeDistribution.map((g, i) => (
-                <div key={i} className="flex-1 min-w-[100px] p-3 rounded-xl bg-gray-50 border border-gray-100 text-center">
-                  <p className="text-lg font-extrabold text-gray-900">{g.grade}</p>
-                  <p className="text-xs text-gray-500">{g.count} students</p>
-                  <div className="mt-2 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                <div key={i} className="flex-1 min-w-[100px] p-3 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                  <p className="text-lg font-extrabold text-slate-900">{g.grade}</p>
+                  <p className="text-xs text-slate-500">{g.count} students</p>
+                  <div className="mt-2 h-1.5 bg-slate-200 rounded-full overflow-hidden">
                     <div className="h-full bg-amber-500 rounded-full" style={{ width: `${g.pct * 3}%` }} />
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">{g.pct}%</p>
+                  <p className="text-xs text-slate-400 mt-1">{g.pct}%</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Top Performers */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Top Performing Students</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Top Performing Students</h3>
             <table className="w-full text-sm">
-              <thead><tr className="text-left text-gray-400 border-b border-gray-100"><th className="pb-3 font-medium">Rank</th><th className="pb-3 font-medium">Name</th><th className="pb-3 font-medium">Program</th><th className="pb-3 font-medium">GPA</th></tr></thead>
-              <tbody className="divide-y divide-gray-50">
+              <thead><tr className="text-left text-slate-400 border-b border-slate-100"><th className="pb-3 font-medium">Rank</th><th className="pb-3 font-medium">Name</th><th className="pb-3 font-medium">Program</th><th className="pb-3 font-medium">GPA</th></tr></thead>
+              <tbody className="divide-y divide-slate-50">
                 {academicStats.topPerformers.map((s) => (
-                  <tr key={s.rank} className="hover:bg-gray-50">
-                    <td className="py-3"><span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white ${s.rank <= 3 ? 'bg-amber-500' : 'bg-gray-400'}`}>{s.rank}</span></td>
-                    <td className="py-3 font-medium text-gray-900">{s.name}</td>
-                    <td className="py-3 text-gray-500">{s.program}</td>
-                    <td className="py-3 font-bold text-gray-900">{s.gpa.toFixed(2)}</td>
+                  <tr key={s.rank} className="hover:bg-slate-50">
+                    <td className="py-3"><span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white ${s.rank <= 3 ? 'bg-amber-500' : 'bg-slate-400'}`}>{s.rank}</span></td>
+                    <td className="py-3 font-medium text-slate-900">{s.name}</td>
+                    <td className="py-3 text-slate-500">{s.program}</td>
+                    <td className="py-3 font-bold text-slate-900">{s.gpa.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -202,42 +202,42 @@ export default function ReportsPage() {
               { label: 'Scholarships Given', value: `₹${(financialStats.scholarshipGiven / 1000).toFixed(0)}K`, icon: GraduationCap, color: 'bg-amber-500' },
               { label: 'Sponsor Funds', value: `₹${(financialStats.sponsorFunds / 1000).toFixed(0)}K`, icon: Church, color: 'bg-purple-500' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5">
+              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center`}><s.icon className="h-5 w-5 text-white" /></div>
-                  <p className="text-sm text-gray-500">{s.label}</p>
+                  <p className="text-sm text-slate-500">{s.label}</p>
                 </div>
-                <p className="text-2xl font-extrabold text-gray-900">{s.value}</p>
+                <p className="text-xl font-bold text-slate-900">{s.value}</p>
               </div>
             ))}
           </div>
 
           {/* Monthly Trend */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Monthly Collection Trend</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Monthly Collection Trend</h3>
             <div className="flex items-end gap-6 h-48">
               {financialStats.monthlyTrend.map((m, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-2">
-                  <p className="text-xs font-semibold text-gray-700">₹{(m.amount / 1000).toFixed(0)}K</p>
+                  <p className="text-xs font-semibold text-slate-700">₹{(m.amount / 1000).toFixed(0)}K</p>
                   <div className="w-full bg-gradient-to-t from-amber-500 to-amber-300 rounded-t-lg transition-all" style={{ height: `${(m.amount / 500000) * 100}%` }} />
-                  <p className="text-xs text-gray-500">{m.month}</p>
+                  <p className="text-xs text-slate-500">{m.month}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Fee Breakdown */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Revenue by Fee Category</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Revenue by Fee Category</h3>
             <div className="space-y-3">
               {financialStats.feeBreakdown.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="w-24 text-sm font-medium text-gray-700">{f.category}</div>
-                  <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="w-24 text-sm font-medium text-slate-700">{f.category}</div>
+                  <div className="flex-1 h-3 bg-slate-100 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style={{ width: `${f.pct}%` }} />
                   </div>
-                  <div className="w-20 text-sm font-bold text-gray-900 text-right">₹{(f.amount / 100000).toFixed(1)}L</div>
-                  <div className="w-10 text-xs text-gray-400">{f.pct}%</div>
+                  <div className="w-20 text-sm font-bold text-slate-900 text-right">₹{(f.amount / 100000).toFixed(1)}L</div>
+                  <div className="w-10 text-xs text-slate-400">{f.pct}%</div>
                 </div>
               ))}
             </div>
@@ -255,23 +255,23 @@ export default function ReportsPage() {
               { label: 'Baptisms This Year', value: ministryStats.baptismsThisYear.toString(), color: 'bg-amber-500' },
               { label: 'New Ministries', value: ministryStats.newMinistries.toString(), color: 'bg-purple-500' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 text-center">
-                <p className="text-3xl font-extrabold text-gray-900">{s.value}</p>
-                <p className="text-sm text-gray-500 mt-1">{s.label}</p>
+              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5 text-center">
+                <p className="text-xl font-bold text-slate-900">{s.value}</p>
+                <p className="text-sm text-slate-500 mt-1">{s.label}</p>
               </div>
             ))}
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Ministry Participation</h3>
+          <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">Ministry Participation</h3>
             <table className="w-full text-sm">
-              <thead><tr className="text-left text-gray-400 border-b border-gray-100"><th className="pb-3 font-medium">Ministry</th><th className="pb-3 font-medium">Participants</th><th className="pb-3 font-medium">Events</th><th className="pb-3 font-medium">Engagement</th></tr></thead>
-              <tbody className="divide-y divide-gray-50">
+              <thead><tr className="text-left text-slate-400 border-b border-slate-100"><th className="pb-3 font-medium">Ministry</th><th className="pb-3 font-medium">Participants</th><th className="pb-3 font-medium">Events</th><th className="pb-3 font-medium">Engagement</th></tr></thead>
+              <tbody className="divide-y divide-slate-50">
                 {ministryStats.ministryParticipation.map((m, i) => (
-                  <tr key={i} className="hover:bg-gray-50">
-                    <td className="py-3 font-medium text-gray-900">{m.ministry}</td>
-                    <td className="py-3 text-gray-500">{m.participants}</td>
-                    <td className="py-3 text-gray-500">{m.events}</td>
-                    <td className="py-3"><div className="w-20 h-1.5 bg-gray-200 rounded-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(m.participants / 52) * 100}%` }} /></div></td>
+                  <tr key={i} className="hover:bg-slate-50">
+                    <td className="py-3 font-medium text-slate-900">{m.ministry}</td>
+                    <td className="py-3 text-slate-500">{m.participants}</td>
+                    <td className="py-3 text-slate-500">{m.events}</td>
+                    <td className="py-3"><div className="w-20 h-1.5 bg-slate-200 rounded-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(m.participants / 52) * 100}%` }} /></div></td>
                   </tr>
                 ))}
               </tbody>
@@ -289,37 +289,37 @@ export default function ReportsPage() {
               { label: 'Borrowed This Month', value: libraryStats.borrowedThisMonth.toString(), color: 'bg-emerald-500' },
               { label: 'Active Borrowers', value: libraryStats.activeBorrowers.toString(), color: 'bg-amber-500' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 text-center">
-                <p className="text-3xl font-extrabold text-gray-900">{s.value}</p>
-                <p className="text-sm text-gray-500 mt-1">{s.label}</p>
+              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5 text-center">
+                <p className="text-xl font-bold text-slate-900">{s.value}</p>
+                <p className="text-sm text-slate-500 mt-1">{s.label}</p>
               </div>
             ))}
           </div>
           <div className="grid lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Categories</h3>
+            <div className="bg-white rounded-2xl border border-slate-100 p-6">
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Popular Categories</h3>
               <div className="space-y-3">
                 {libraryStats.popularCategories.map((c, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className="w-36 text-sm font-medium text-gray-700">{c.category}</div>
-                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="w-36 text-sm font-medium text-slate-700">{c.category}</div>
+                    <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(c.count / 245) * 100}%` }} />
                     </div>
-                    <span className="text-sm text-gray-500 w-10 text-right">{c.count}</span>
+                    <span className="text-sm text-slate-500 w-10 text-right">{c.count}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Most Borrowed Books</h3>
+            <div className="bg-white rounded-2xl border border-slate-100 p-6">
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Most Borrowed Books</h3>
               <div className="space-y-3">
                 {libraryStats.mostBorrowed.map((b, i) => (
-                  <div key={i} className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50">
+                  <div key={i} className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50">
                     <span className="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center">{i + 1}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">{b.title}</p>
+                      <p className="text-sm font-medium text-slate-900 truncate">{b.title}</p>
                     </div>
-                    <span className="text-sm text-gray-500">{b.borrows}x</span>
+                    <span className="text-sm text-slate-500">{b.borrows}x</span>
                   </div>
                 ))}
               </div>
@@ -330,38 +330,38 @@ export default function ReportsPage() {
 
       {/* Custom Report Builder */}
       {activeTab === 'custom' && (
-        <div className="bg-white rounded-2xl border border-gray-100 p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-2">Custom Report Builder</h3>
-          <p className="text-sm text-gray-500 mb-6">Select data points, filters, and date range to generate custom reports</p>
+        <div className="bg-white rounded-2xl border border-slate-100 p-6">
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">Custom Report Builder</h3>
+          <p className="text-sm text-slate-500 mb-6">Select data points, filters, and date range to generate custom reports</p>
           <div className="space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Report Type</label>
-                <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all">
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Report Type</label>
+                <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all">
                   <option>Student Enrollment Report</option><option>Financial Summary</option><option>Attendance Report</option><option>Grade Report</option><option>Ministry Activity Report</option><option>Library Usage Report</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date Range</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Date Range</label>
                 <div className="flex gap-2">
-                  <input type="date" className="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all" />
-                  <input type="date" className="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-amber-400 transition-all" />
+                  <input type="date" className="flex-1 px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all" />
+                  <input type="date" className="flex-1 px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-amber-500 transition-all" />
                 </div>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Filters</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-1.5">Filters</label>
               <div className="flex flex-wrap gap-2">
                 {['Program', 'Department', 'Semester', 'Gender', 'Status', 'Church'].map(f => (
-                  <button key={f} className="px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-600 hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 transition-colors">{f}</button>
+                  <button key={f} className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 transition-colors">{f}</button>
                 ))}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Include Columns</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-1.5">Include Columns</label>
               <div className="flex flex-wrap gap-2">
                 {['Name', 'ID', 'Program', 'GPA', 'Attendance', 'Fee Status', 'Spiritual Status'].map(c => (
-                  <label key={c} className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-600 cursor-pointer hover:bg-gray-50">
+                  <label key={c} className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 cursor-pointer hover:bg-slate-50">
                     <input type="checkbox" defaultChecked className="rounded text-amber-500" /> {c}
                   </label>
                 ))}
@@ -371,7 +371,7 @@ export default function ReportsPage() {
               <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all">
                 <PieChart className="h-4 w-4" /> Generate Report
               </button>
-              <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">
                 <Printer className="h-4 w-4" /> Print Preview
               </button>
             </div>
