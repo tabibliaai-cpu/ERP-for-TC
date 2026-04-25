@@ -52,16 +52,16 @@ const statusBadge = (status: string) => {
   const map: Record<string, string> = {
     Active: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20',
     Suspended: 'bg-red-50 text-red-700 ring-1 ring-red-600/20',
-    Inactive: 'bg-slate-100 text-slate-600 ring-1 ring-slate-500/20',
+    Inactive: 'bg-[#F5F2EE] text-[#6B6B6B] ring-1 ring-[#E8E5E0]',
   };
   return map[status] || map.Inactive;
 };
 
 const planBadge = (plan: string) => {
   const map: Record<string, string> = {
-    Premium: 'bg-amber-50 text-amber-700 ring-1 ring-amber-600/20',
-    Basic: 'bg-blue-50 text-blue-700 ring-1 ring-blue-600/20',
-    Free: 'bg-slate-100 text-slate-600 ring-1 ring-slate-500/20',
+    Premium: 'bg-[#B8860B]/10 text-[#B8860B] ring-1 ring-[#B8860B]/20',
+    Basic: 'bg-sky-50 text-sky-700 ring-1 ring-sky-600/20',
+    Free: 'bg-[#F5F2EE] text-[#6B6B6B] ring-1 ring-[#E8E5E0]',
   };
   return map[plan] || map.Free;
 };
@@ -99,16 +99,16 @@ export default function SuperAdminDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Platform Administration</h2>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-100 text-amber-800 ring-1 ring-amber-600/20">
+            <h2 className="text-2xl font-bold tracking-tight text-[#1F1F1F] font-heading">Platform Administration</h2>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-[#B8860B]/10 text-[#B8860B] ring-1 ring-[#B8860B]/20">
               <Shield className="h-3 w-3" /> Super Admin
             </span>
           </div>
-          <p className="text-sm text-slate-500">Manage institutions, users, billing, and platform configuration for CovenantERP.</p>
+          <p className="text-sm text-[#6B6B6B]">Manage institutions, users, billing, and platform configuration for CovenantERP.</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white text-sm font-semibold shadow-lg shadow-amber-500/20 hover:from-amber-600 hover:to-amber-500 active:scale-[0.98] transition-all cursor-pointer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6B2D3E] to-[#8B3D52] text-white text-sm font-semibold shadow-lg shadow-[#6B2D3E]/20 hover:from-[#5A2535] hover:to-[#7A3448] active:scale-[0.98] transition-all cursor-pointer"
         >
           <Plus className="h-4 w-4" /> Add Institution
         </button>
@@ -117,12 +117,12 @@ export default function SuperAdminDashboard() {
       {/* ── Platform Stats ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { icon: Building2, label: 'Institutions', value: sampleInstitutions.length.toString(), change: '+2 this month', iconBg: 'bg-blue-500/10', iconColor: 'text-blue-600' },
+          { icon: Building2, label: 'Institutions', value: sampleInstitutions.length.toString(), change: '+2 this month', iconBg: 'bg-[#6B2D3E]/10', iconColor: 'text-[#6B2D3E]' },
           { icon: Users, label: 'Total Users', value: '1,847', change: '+128 this month', iconBg: 'bg-emerald-500/10', iconColor: 'text-emerald-600' },
-          { icon: CreditCard, label: 'Revenue', value: '₹74.8L', change: '+15% vs last', iconBg: 'bg-amber-500/10', iconColor: 'text-amber-600' },
-          { icon: Activity, label: 'Uptime', value: '99.9%', change: 'Last 30 days', iconBg: 'bg-purple-500/10', iconColor: 'text-purple-600' },
+          { icon: CreditCard, label: 'Revenue', value: '₹74.8L', change: '+15% vs last', iconBg: 'bg-[#B8860B]/10', iconColor: 'text-[#B8860B]' },
+          { icon: Activity, label: 'Uptime', value: '99.9%', change: 'Last 30 days', iconBg: 'bg-[#6B2D3E]/10', iconColor: 'text-[#8B3D52]' },
         ].map((s, i) => (
-          <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5 flex flex-col gap-3">
+          <div key={i} className="bg-white rounded-2xl border border-[#E8E5E0] p-5 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <div className={`w-10 h-10 rounded-xl ${s.iconBg} flex items-center justify-center`}>
                 <s.icon className={`h-5 w-5 ${s.iconColor}`} />
@@ -132,23 +132,23 @@ export default function SuperAdminDashboard() {
               </span>
             </div>
             <div>
-              <p className="text-2xl font-bold tracking-tight text-slate-900">{s.value}</p>
-              <p className="text-xs text-slate-500 mt-0.5">{s.label}</p>
+              <p className="text-2xl font-bold tracking-tight text-[#1F1F1F]">{s.value}</p>
+              <p className="text-xs text-[#6B6B6B] mt-0.5">{s.label}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* ── Tab Bar ── */}
-      <div className="flex gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto">
+      <div className="flex gap-1 p-1 bg-[#F5F2EE] rounded-xl overflow-x-auto">
         {tabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+                ? 'bg-white text-[#6B2D3E] shadow-sm'
+                : 'text-[#6B6B6B] hover:text-[#1F1F1F] hover:bg-white/50'
             }`}
           >
             <tab.icon className="h-4 w-4" />
@@ -164,51 +164,51 @@ export default function SuperAdminDashboard() {
         <div className="space-y-4">
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
             <input
               type="text"
               placeholder="Search institutions by name, location, or admin..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-white text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
             />
           </div>
 
           {/* Table Card */}
-          <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-[#E8E5E0] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-slate-50/50 border-b border-slate-100">
+                  <tr className="bg-[#FAFAF7] border-b border-[#E8E5E0]">
                     {['Institution', 'Code', 'Location', 'Admin', 'Students', 'Plan', 'Revenue', 'Status', 'Actions'].map(h => (
-                      <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">{h}</th>
+                      <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-[#6B6B6B]">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-[#E8E5E0]">
                   {filteredInstitutions.map((inst) => (
-                    <tr key={inst.id} className="hover:bg-slate-50/60 transition-colors">
+                    <tr key={inst.id} className="hover:bg-[#FAFAF7] transition-colors">
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xs shrink-0">
+                          <div className="w-9 h-9 rounded-lg bg-[#6B2D3E]/10 flex items-center justify-center text-[#6B2D3E] font-bold text-xs shrink-0">
                             {inst.code.split('-')[0]}
                           </div>
                           <div className="min-w-0">
-                            <p className="font-semibold text-slate-900 truncate">{inst.name}</p>
-                            <p className="text-xs text-slate-500">{inst.type}</p>
+                            <p className="font-semibold text-[#1F1F1F] truncate">{inst.name}</p>
+                            <p className="text-xs text-[#6B6B6B]">{inst.type}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-5 py-3.5 text-slate-500 font-mono text-xs">{inst.code}</td>
-                      <td className="px-5 py-3.5 text-slate-600">{inst.location}</td>
-                      <td className="px-5 py-3.5 text-slate-600">{inst.admin}</td>
-                      <td className="px-5 py-3.5 font-semibold text-slate-900">{inst.students}</td>
+                      <td className="px-5 py-3.5 text-[#6B6B6B] font-mono text-xs">{inst.code}</td>
+                      <td className="px-5 py-3.5 text-[#1F1F1F]">{inst.location}</td>
+                      <td className="px-5 py-3.5 text-[#1F1F1F]">{inst.admin}</td>
+                      <td className="px-5 py-3.5 font-semibold text-[#1F1F1F]">{inst.students}</td>
                       <td className="px-5 py-3.5">
                         <span className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-semibold ${planBadge(inst.plan)}`}>
                           {inst.plan}
                         </span>
                       </td>
-                      <td className="px-5 py-3.5 font-semibold text-slate-900">{inst.revenue}</td>
+                      <td className="px-5 py-3.5 font-semibold text-[#1F1F1F]">{inst.revenue}</td>
                       <td className="px-5 py-3.5">
                         <span className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-semibold ${statusBadge(inst.status)}`}>
                           {inst.status}
@@ -216,8 +216,8 @@ export default function SuperAdminDashboard() {
                       </td>
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-1">
-                          <button className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors cursor-pointer" title="View"><Eye className="h-4 w-4 text-slate-400" /></button>
-                          <button className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors cursor-pointer" title="Edit"><Edit className="h-4 w-4 text-slate-400" /></button>
+                          <button className="w-8 h-8 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors cursor-pointer" title="View"><Eye className="h-4 w-4 text-[#9CA3AF]" /></button>
+                          <button className="w-8 h-8 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors cursor-pointer" title="Edit"><Edit className="h-4 w-4 text-[#9CA3AF]" /></button>
                           <button className="w-8 h-8 rounded-lg hover:bg-red-50 flex items-center justify-center transition-colors cursor-pointer" title="Delete"><Trash2 className="h-4 w-4 text-red-400" /></button>
                         </div>
                       </td>
@@ -236,45 +236,45 @@ export default function SuperAdminDashboard() {
       {activeTab === 'users' && (
         <div className="space-y-4">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
             <input
               type="text"
               placeholder="Search users across institutions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-white text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
             />
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-[#E8E5E0] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-slate-50/50 border-b border-slate-100">
+                  <tr className="bg-[#FAFAF7] border-b border-[#E8E5E0]">
                     {['User', 'Email', 'Role', 'Institution', 'Last Login', 'Status', 'Actions'].map(h => (
-                      <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">{h}</th>
+                      <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-[#6B6B6B]">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-[#E8E5E0]">
                   {filteredUsers.map((u) => (
-                    <tr key={u.id} className="hover:bg-slate-50/60 transition-colors">
+                    <tr key={u.id} className="hover:bg-[#FAFAF7] transition-colors">
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-[#F5F2EE] flex items-center justify-center text-xs font-bold text-[#6B2D3E] shrink-0">
                             {u.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                           </div>
-                          <span className="font-semibold text-slate-900">{u.name}</span>
+                          <span className="font-semibold text-[#1F1F1F]">{u.name}</span>
                         </div>
                       </td>
-                      <td className="px-5 py-3.5 text-slate-500">{u.email}</td>
+                      <td className="px-5 py-3.5 text-[#6B6B6B]">{u.email}</td>
                       <td className="px-5 py-3.5">
                         <span className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-semibold ${
-                          u.role === 'Institution Admin' ? 'bg-amber-50 text-amber-700 ring-1 ring-amber-600/20' : 'bg-blue-50 text-blue-700 ring-1 ring-blue-600/20'
+                          u.role === 'Institution Admin' ? 'bg-[#B8860B]/10 text-[#B8860B] ring-1 ring-[#B8860B]/20' : 'bg-sky-50 text-sky-700 ring-1 ring-sky-600/20'
                         }`}>{u.role}</span>
                       </td>
-                      <td className="px-5 py-3.5 text-slate-600">{u.institution}</td>
-                      <td className="px-5 py-3.5 text-slate-500">{u.lastLogin}</td>
+                      <td className="px-5 py-3.5 text-[#1F1F1F]">{u.institution}</td>
+                      <td className="px-5 py-3.5 text-[#6B6B6B]">{u.lastLogin}</td>
                       <td className="px-5 py-3.5">
                         <span className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-semibold ${statusBadge(u.status)}`}>
                           {u.status}
@@ -282,8 +282,8 @@ export default function SuperAdminDashboard() {
                       </td>
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-1">
-                          <button className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors cursor-pointer"><Eye className="h-4 w-4 text-slate-400" /></button>
-                          <button className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors cursor-pointer"><Edit className="h-4 w-4 text-slate-400" /></button>
+                          <button className="w-8 h-8 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors cursor-pointer"><Eye className="h-4 w-4 text-[#9CA3AF]" /></button>
+                          <button className="w-8 h-8 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors cursor-pointer"><Edit className="h-4 w-4 text-[#9CA3AF]" /></button>
                           {u.status === 'Active' ? (
                             <button className="w-8 h-8 rounded-lg hover:bg-red-50 flex items-center justify-center transition-colors cursor-pointer" title="Suspend"><XCircle className="h-4 w-4 text-red-400" /></button>
                           ) : (
@@ -304,36 +304,36 @@ export default function SuperAdminDashboard() {
           TAB 3 — Feature Toggles
           ════════════════════════════════════════════════ */}
       {activeTab === 'features' && (
-        <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-100">
-            <h3 className="text-sm font-bold text-slate-900">Feature Toggle System</h3>
-            <p className="text-sm text-slate-500 mt-0.5">Control which features each institution has access to</p>
+        <div className="bg-white rounded-2xl border border-[#E8E5E0] overflow-hidden">
+          <div className="px-6 py-5 border-b border-[#E8E5E0]">
+            <h3 className="text-sm font-bold text-[#1F1F1F] font-heading">Feature Toggle System</h3>
+            <p className="text-sm text-[#6B6B6B] mt-0.5">Control which features each institution has access to</p>
           </div>
-          <div className="divide-y divide-slate-50">
+          <div className="divide-y divide-[#E8E5E0]">
             {featureFlags.map((f, i) => (
-              <div key={i} className="flex items-center justify-between px-6 py-4 hover:bg-slate-50/60 transition-colors">
+              <div key={i} className="flex items-center justify-between px-6 py-4 hover:bg-[#FAFAF7] transition-colors">
                 <div className="flex items-center gap-4">
                   {f.enabled === f.institutions ? (
                     <ToggleRight className="h-6 w-6 text-emerald-500 shrink-0" />
                   ) : (
-                    <ToggleLeft className="h-6 w-6 text-slate-300 shrink-0" />
+                    <ToggleLeft className="h-6 w-6 text-[#9CA3AF] shrink-0" />
                   )}
                   <div>
-                    <p className="text-sm font-semibold text-slate-900">{f.feature}</p>
-                    <p className="text-xs text-slate-500 mt-0.5">{f.description}</p>
+                    <p className="text-sm font-semibold text-[#1F1F1F]">{f.feature}</p>
+                    <p className="text-xs text-[#6B6B6B] mt-0.5">{f.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 shrink-0">
                   <div className="hidden sm:flex items-center gap-2">
-                    <div className="w-24 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="w-24 h-1.5 rounded-full bg-[#F5F2EE] overflow-hidden">
                       <div
-                        className={`h-full rounded-full ${f.enabled === f.institutions ? 'bg-emerald-500' : 'bg-amber-400'}`}
+                        className={`h-full rounded-full ${f.enabled === f.institutions ? 'bg-emerald-500' : 'bg-[#B8860B]'}`}
                         style={{ width: `${(f.enabled / f.institutions) * 100}%` }}
                       />
                     </div>
-                    <span className="text-xs text-slate-500 w-20 text-right">{f.enabled}/{f.institutions}</span>
+                    <span className="text-xs text-[#6B6B6B] w-20 text-right">{f.enabled}/{f.institutions}</span>
                   </div>
-                  <button className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer">
+                  <button className="px-3 py-1.5 rounded-lg border border-[#E8E5E0] text-xs font-medium text-[#6B6B6B] hover:bg-[#FAFAF7] transition-colors cursor-pointer">
                     Configure
                   </button>
                 </div>
@@ -349,39 +349,39 @@ export default function SuperAdminDashboard() {
       {activeTab === 'analytics' && (
         <div className="space-y-6">
           {/* Revenue Overview — dark gradient */}
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 text-white">
+          <div className="bg-gradient-to-br from-[#1A1F36] via-[#1A1F36] to-[#2A2F46] rounded-2xl p-6 text-white">
             <div className="flex items-center gap-2 mb-1">
-              <BarChart3 className="h-4 w-4 text-blue-300" />
-              <h3 className="text-sm font-semibold">Platform Revenue Overview</h3>
+              <BarChart3 className="h-4 w-4 text-[#B8860B]" />
+              <h3 className="text-sm font-semibold font-heading">Platform Revenue Overview</h3>
             </div>
-            <p className="text-sm text-slate-400 mb-6">Combined revenue from all institutions</p>
+            <p className="text-sm text-[#9CA3AF] mb-6">Combined revenue from all institutions</p>
             <div className="grid sm:grid-cols-3 gap-6">
               <div>
-                <p className="text-3xl font-extrabold text-amber-400">₹74.8L</p>
-                <p className="text-sm text-slate-400 mt-1">Total Annual Revenue</p>
+                <p className="text-3xl font-extrabold text-[#B8860B]">₹74.8L</p>
+                <p className="text-sm text-[#9CA3AF] mt-1">Total Annual Revenue</p>
               </div>
               <div>
                 <p className="text-3xl font-extrabold text-emerald-400">₹6.2L</p>
-                <p className="text-sm text-slate-400 mt-1">Monthly Average</p>
+                <p className="text-sm text-[#9CA3AF] mt-1">Monthly Average</p>
               </div>
               <div>
-                <p className="text-3xl font-extrabold text-blue-400">+18%</p>
-                <p className="text-sm text-slate-400 mt-1">Growth vs Last Year</p>
+                <p className="text-3xl font-extrabold text-[#8B3D52]">+18%</p>
+                <p className="text-sm text-[#9CA3AF] mt-1">Growth vs Last Year</p>
               </div>
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Institution Growth */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-6">
-              <h3 className="text-sm font-bold text-slate-900 mb-5">Student Enrollment</h3>
+            <div className="bg-white rounded-2xl border border-[#E8E5E0] p-6">
+              <h3 className="text-sm font-bold text-[#1F1F1F] mb-5 font-heading">Student Enrollment</h3>
               <div className="space-y-3">
                 {sampleInstitutions.slice(0, 5).map((inst) => (
                   <div key={inst.id} className="flex items-center gap-4">
-                    <div className="w-32 text-sm font-medium text-slate-600 truncate shrink-0">{inst.name.split(' ')[0]}</div>
-                    <div className="flex-1 h-7 bg-slate-100 rounded-lg overflow-hidden">
+                    <div className="w-32 text-sm font-medium text-[#6B6B6B] truncate shrink-0">{inst.name.split(' ')[0]}</div>
+                    <div className="flex-1 h-7 bg-[#F5F2EE] rounded-lg overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-lg flex items-center justify-end px-2 transition-all"
+                        className="h-full bg-gradient-to-r from-[#6B2D3E] to-[#8B3D52] rounded-lg flex items-center justify-end px-2 transition-all"
                         style={{ width: `${Math.max((inst.students / 420) * 100, 20)}%` }}
                       >
                         <span className="text-xs font-bold text-white">{inst.students}</span>
@@ -393,17 +393,17 @@ export default function SuperAdminDashboard() {
             </div>
 
             {/* Plan Distribution */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-6">
-              <h3 className="text-sm font-bold text-slate-900 mb-5">Plan Distribution</h3>
+            <div className="bg-white rounded-2xl border border-[#E8E5E0] p-6">
+              <h3 className="text-sm font-bold text-[#1F1F1F] mb-5 font-heading">Plan Distribution</h3>
               <div className="space-y-4">
                 {[
-                  { plan: 'Premium', count: 3, color: 'from-amber-500 to-amber-400', pct: 50 },
-                  { plan: 'Basic', count: 2, color: 'from-blue-500 to-blue-400', pct: 33 },
-                  { plan: 'Free', count: 1, color: 'from-slate-400 to-slate-300', pct: 17 },
+                  { plan: 'Premium', count: 3, color: 'from-[#B8860B] to-[#D4A017]', pct: 50 },
+                  { plan: 'Basic', count: 2, color: 'from-[#6B2D3E] to-[#8B3D52]', pct: 33 },
+                  { plan: 'Free', count: 1, color: 'from-[#9CA3AF] to-[#B0B8C4]', pct: 17 },
                 ].map((p, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-20 text-sm font-semibold text-slate-700">{p.plan}</div>
-                    <div className="flex-1 h-8 bg-slate-100 rounded-lg overflow-hidden">
+                    <div className="w-20 text-sm font-semibold text-[#1F1F1F]">{p.plan}</div>
+                    <div className="flex-1 h-8 bg-[#F5F2EE] rounded-lg overflow-hidden">
                       <div
                         className={`h-full bg-gradient-to-r ${p.color} rounded-lg flex items-center px-3 transition-all`}
                         style={{ width: `${Math.max(p.pct, 25)}%` }}
@@ -411,7 +411,7 @@ export default function SuperAdminDashboard() {
                         <span className="text-xs font-bold text-white">{p.count} institutions</span>
                       </div>
                     </div>
-                    <span className="text-sm font-medium text-slate-500 w-10 text-right">{p.pct}%</span>
+                    <span className="text-sm font-medium text-[#6B6B6B] w-10 text-right">{p.pct}%</span>
                   </div>
                 ))}
               </div>
@@ -428,30 +428,30 @@ export default function SuperAdminDashboard() {
           {[
             {
               plan: 'Free', price: '₹0', features: ['Up to 50 students', 'Basic Academic Module', 'Community Support'],
-              card: 'bg-white border border-slate-200', popular: false,
+              card: 'bg-white border border-[#E8E5E0]', popular: false,
             },
             {
               plan: 'Basic', price: '₹4,999/mo', features: ['Up to 500 students', 'All Core Modules', 'Email Support', 'Library Access'],
-              card: 'bg-white border border-blue-200 ring-2 ring-blue-500', popular: true,
+              card: 'bg-white border border-[#6B2D3E]/30 ring-2 ring-[#6B2D3E]', popular: true,
             },
             {
               plan: 'Premium', price: '₹14,999/mo', features: ['Unlimited Students', 'All Modules + AI', 'Priority Support', 'Custom Branding', 'Advanced Analytics'],
-              card: 'bg-white border border-amber-200', popular: false,
+              card: 'bg-white border border-[#B8860B]/30', popular: false,
             },
           ].map((p, i) => (
-            <div key={i} className={`rounded-2xl border p-6 ${p.card} flex flex-col ${p.popular ? 'shadow-lg shadow-blue-500/10' : ''}`}>
+            <div key={i} className={`rounded-2xl border p-6 ${p.card} flex flex-col ${p.popular ? 'shadow-lg shadow-[#6B2D3E]/10' : ''}`}>
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-slate-900">{p.plan}</h4>
+                <h4 className="text-sm font-bold text-[#1F1F1F] font-heading">{p.plan}</h4>
                 {p.popular && (
-                  <span className="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-md uppercase tracking-wider">
+                  <span className="text-[10px] font-bold text-[#6B2D3E] bg-[#6B2D3E]/10 px-2 py-0.5 rounded-md uppercase tracking-wider">
                     Popular
                   </span>
                 )}
               </div>
-              <p className="text-2xl font-extrabold text-slate-900 mb-4">{p.price}</p>
+              <p className="text-2xl font-extrabold text-[#1F1F1F] mb-4">{p.price}</p>
               <ul className="mt-auto space-y-2.5">
                 {p.features.map((f, j) => (
-                  <li key={j} className="flex items-center gap-2.5 text-sm text-slate-600">
+                  <li key={j} className="flex items-center gap-2.5 text-sm text-[#1F1F1F]">
                     <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
                     {f}
                   </li>
@@ -471,44 +471,44 @@ export default function SuperAdminDashboard() {
           <div className="grid sm:grid-cols-3 gap-4">
             {[
               { icon: Shield, label: 'Data Encryption', desc: 'End-to-end AES-256 encryption enabled for all institutions', iconBg: 'bg-emerald-500/10', iconColor: 'text-emerald-600' },
-              { icon: Database, label: 'Auto Backups', desc: 'Daily automated backups. Last backup: 2 hours ago', iconBg: 'bg-blue-500/10', iconColor: 'text-blue-600' },
-              { icon: AlertTriangle, label: 'Security Alerts', desc: '2 suspicious login attempts detected this week', iconBg: 'bg-amber-500/10', iconColor: 'text-amber-600' },
+              { icon: Database, label: 'Auto Backups', desc: 'Daily automated backups. Last backup: 2 hours ago', iconBg: 'bg-[#6B2D3E]/10', iconColor: 'text-[#6B2D3E]' },
+              { icon: AlertTriangle, label: 'Security Alerts', desc: '2 suspicious login attempts detected this week', iconBg: 'bg-[#B8860B]/10', iconColor: 'text-[#B8860B]' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5">
+              <div key={i} className="bg-white rounded-2xl border border-[#E8E5E0] p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <div className={`w-10 h-10 rounded-xl ${s.iconBg} flex items-center justify-center`}>
                     <s.icon className={`h-5 w-5 ${s.iconColor}`} />
                   </div>
-                  <span className="text-sm font-bold text-slate-900">{s.label}</span>
+                  <span className="text-sm font-bold text-[#1F1F1F]">{s.label}</span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
+                <p className="text-xs text-[#6B6B6B] leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
 
           {/* Audit Log Timeline */}
-          <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-            <div className="px-6 py-5 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-slate-900">Audit Log</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Recent activity across the platform</p>
+          <div className="bg-white rounded-2xl border border-[#E8E5E0] overflow-hidden">
+            <div className="px-6 py-5 border-b border-[#E8E5E0]">
+              <h3 className="text-sm font-bold text-[#1F1F1F] font-heading">Audit Log</h3>
+              <p className="text-xs text-[#6B6B6B] mt-0.5">Recent activity across the platform</p>
             </div>
-            <div className="divide-y divide-slate-50">
+            <div className="divide-y divide-[#E8E5E0]">
               {auditLogs.map((log, i) => {
                 const dotColor =
                   log.type === 'security' ? 'bg-red-500' :
                   log.type === 'create' ? 'bg-emerald-500' :
-                  log.type === 'update' ? 'bg-blue-500' : 'bg-slate-400';
+                  log.type === 'update' ? 'bg-[#6B2D3E]' : 'bg-[#9CA3AF]';
                 const ringColor =
                   log.type === 'security' ? 'ring-red-500/20' :
                   log.type === 'create' ? 'ring-emerald-500/20' :
-                  log.type === 'update' ? 'ring-blue-500/20' : 'ring-slate-400/20';
+                  log.type === 'update' ? 'ring-[#6B2D3E]/20' : 'ring-[#9CA3AF]/20';
                 return (
-                  <div key={i} className="flex items-center gap-4 px-6 py-3.5 hover:bg-slate-50/60 transition-colors">
+                  <div key={i} className="flex items-center gap-4 px-6 py-3.5 hover:bg-[#FAFAF7] transition-colors">
                     <div className={`w-2.5 h-2.5 rounded-full ${dotColor} ring-4 ${ringColor} shrink-0`} />
-                    <span className="text-xs text-slate-400 font-mono w-36 shrink-0">{log.time}</span>
-                    <span className="text-sm font-semibold text-slate-900 w-36 truncate shrink-0">{log.user}</span>
-                    <span className="text-sm text-slate-600 flex-1 min-w-0">{log.action}</span>
-                    <span className="text-xs text-slate-500 shrink-0">{log.target}</span>
+                    <span className="text-xs text-[#9CA3AF] font-mono w-36 shrink-0">{log.time}</span>
+                    <span className="text-sm font-semibold text-[#1F1F1F] w-36 truncate shrink-0">{log.user}</span>
+                    <span className="text-sm text-[#6B6B6B] flex-1 min-w-0">{log.action}</span>
+                    <span className="text-xs text-[#6B6B6B] shrink-0">{log.target}</span>
                   </div>
                 );
               })}
@@ -521,12 +521,12 @@ export default function SuperAdminDashboard() {
           TAB 7 — System Settings
           ════════════════════════════════════════════════ */}
       {activeTab === 'settings' && (
-        <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-100">
-            <h3 className="text-sm font-bold text-slate-900">Platform Settings</h3>
-            <p className="text-xs text-slate-500 mt-0.5">Configure global platform behavior</p>
+        <div className="bg-white rounded-2xl border border-[#E8E5E0] overflow-hidden">
+          <div className="px-6 py-5 border-b border-[#E8E5E0]">
+            <h3 className="text-sm font-bold text-[#1F1F1F] font-heading">Platform Settings</h3>
+            <p className="text-xs text-[#6B6B6B] mt-0.5">Configure global platform behavior</p>
           </div>
-          <div className="divide-y divide-slate-50">
+          <div className="divide-y divide-[#E8E5E0]">
             {[
               { label: 'Default Theme Mode', desc: 'Set default theme for new institutions', enabled: true, value: 'Light' },
               { label: 'Allow Self-Registration', desc: 'Let institutions sign up without approval', enabled: false, value: 'Disabled' },
@@ -535,13 +535,13 @@ export default function SuperAdminDashboard() {
               { label: 'Maintenance Mode', desc: 'Put platform in maintenance mode', enabled: false, value: 'Off' },
               { label: 'API Access', desc: 'Allow third-party API integrations', enabled: true, value: 'Enabled' },
             ].map((s, i) => (
-              <div key={i} className="flex items-center justify-between px-6 py-4 hover:bg-slate-50/60 transition-colors">
+              <div key={i} className="flex items-center justify-between px-6 py-4 hover:bg-[#FAFAF7] transition-colors">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">{s.label}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">{s.desc}</p>
+                  <p className="text-sm font-semibold text-[#1F1F1F]">{s.label}</p>
+                  <p className="text-xs text-[#6B6B6B] mt-0.5">{s.desc}</p>
                 </div>
                 <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 ml-4"
-                  style={{ backgroundColor: s.enabled ? '#10b981' : '#e2e8f0' }}>
+                  style={{ backgroundColor: s.enabled ? '#6B2D3E' : '#E8E5E0' }}>
                   <span
                     className="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform"
                     style={{ translate: s.enabled ? '24px' : '2px' }}
@@ -566,41 +566,41 @@ export default function SuperAdminDashboard() {
             onClick={e => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8E5E0]">
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Add New Institution</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Register a new institution on the platform</p>
+                <h3 className="text-sm font-bold text-[#1F1F1F] font-heading">Add New Institution</h3>
+                <p className="text-xs text-[#6B6B6B] mt-0.5">Register a new institution on the platform</p>
               </div>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors cursor-pointer"
               >
-                <XCircle className="h-5 w-5 text-slate-400" />
+                <XCircle className="h-5 w-5 text-[#9CA3AF]" />
               </button>
             </div>
 
             {/* Modal Body */}
             <div className="p-6 space-y-5">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Institution Name</label>
+                <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Institution Name</label>
                 <input
                   type="text"
                   placeholder="e.g., Grace Theological Seminary"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Type</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all cursor-pointer">
+                  <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Type</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all cursor-pointer text-[#1F1F1F]">
                     <option>Seminary</option>
                     <option>Bible College</option>
                     <option>Training Center</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Plan</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all cursor-pointer">
+                  <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Plan</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all cursor-pointer text-[#1F1F1F]">
                     <option>Free</option>
                     <option>Basic</option>
                     <option>Premium</option>
@@ -608,52 +608,52 @@ export default function SuperAdminDashboard() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Location</label>
+                <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Location</label>
                 <input
                   type="text"
                   placeholder="City, Country"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Admin Name</label>
+                  <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Admin Name</label>
                   <input
                     type="text"
                     placeholder="Full name"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Admin Email</label>
+                  <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Admin Email</label>
                   <input
                     type="email"
                     placeholder="admin@institution.edu"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Denomination</label>
+                <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Denomination</label>
                 <input
                   type="text"
                   placeholder="e.g., Baptist, Pentecostal"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all placeholder:text-slate-400"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E5E0] bg-[#FAFAF7] text-sm outline-none focus:border-[#6B2D3E] focus:ring-2 focus:ring-[#6B2D3E]/20 transition-all placeholder:text-[#9CA3AF] text-[#1F1F1F]"
                 />
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#E8E5E0] bg-[#FAFAF7] rounded-b-2xl">
               <button
                 onClick={() => setShowAddModal(false)}
-                className="px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-white transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-xl border border-[#E8E5E0] text-sm font-medium text-[#6B6B6B] hover:bg-white transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white text-sm font-semibold shadow-lg shadow-amber-500/20 hover:from-amber-600 hover:to-amber-500 active:scale-[0.98] transition-all cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6B2D3E] to-[#8B3D52] text-white text-sm font-semibold shadow-lg shadow-[#6B2D3E]/20 hover:from-[#5A2535] hover:to-[#7A3448] active:scale-[0.98] transition-all cursor-pointer"
               >
                 Create Institution
               </button>

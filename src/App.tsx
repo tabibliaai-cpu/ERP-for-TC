@@ -44,8 +44,8 @@ function AdminDashboardRouter() {
       case 'finances': return <BillingPage />;
       case 'academics': return <AcademicsPage />;
       case 'library': return <LibraryPage />;
-      case 'yeshua': return <div className="animate-fade-in p-8 text-center"><p className="text-slate-400">Yeshua AI chatbot — coming soon as in-dashboard widget</p></div>;
-      case 'comms': return <div className="animate-fade-in p-8 text-center"><p className="text-slate-400">Communications module — coming soon</p></div>;
+      case 'yeshua': return <div className="animate-fade-in p-8 text-center"><p className="text-[#9CA3AF]">Yeshua AI chatbot — coming soon as in-dashboard widget</p></div>;
+      case 'comms': return <div className="animate-fade-in p-8 text-center"><p className="text-[#9CA3AF]">Communications module — coming soon</p></div>;
       case 'reports': return <ReportsPage />;
       case 'pedagogy': return <PedagogyPage />;
       default: return null;
@@ -62,39 +62,39 @@ function AdminDashboardRouter() {
   const userInitial = user?.displayName?.charAt(0)?.toUpperCase() || 'A';
 
   return (
-    <div className="h-screen flex bg-slate-50 overflow-hidden">
+    <div className="h-screen flex bg-[#FAFAF7] overflow-hidden">
 
       {/* ── Mobile overlay ── */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 lg:hidden"
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* ── Sidebar ── */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 w-[17rem] bg-slate-950 flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-[17rem] bg-[#1A1F36] flex flex-col transition-transform duration-300 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Logo area */}
         <div className="flex items-center gap-3 px-5 pt-5 pb-4">
-          <div className="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <div className="w-9 h-9 rounded-xl bg-[#B8860B] flex items-center justify-center shadow-lg shadow-[#B8860B]/20">
             <Church className="h-5 w-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="text-[15px] font-bold tracking-tight text-white leading-tight">
-              Covenant<span className="text-amber-400">ERP</span>
+            <span className="text-[15px] font-bold tracking-tight text-white leading-tight font-heading">
+              Covenant<span className="text-[#D4A03C]">ERP</span>
             </span>
-            <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase mt-0.5">
+            <span className="text-[11px] font-medium text-[#9CA3AF] tracking-wide uppercase mt-0.5">
               Admin Panel
             </span>
           </div>
         </div>
 
         {/* Thin separator */}
-        <div className="mx-5 h-px bg-slate-800" />
+        <div className="mx-5 h-px bg-white/10" />
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
@@ -107,8 +107,8 @@ function AdminDashboardRouter() {
                 onClick={() => handleNav(item.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
                   active
-                    ? 'bg-white text-slate-950 shadow-sm'
-                    : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+                    ? 'bg-white/10 text-white shadow-sm'
+                    : 'text-[#9CA3AF] hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <Icon className="h-[18px] w-[18px] shrink-0" />
@@ -121,19 +121,19 @@ function AdminDashboardRouter() {
         {/* Bottom section */}
         <div className="px-3 pb-3">
           {/* Thin separator */}
-          <div className="mx-2 mb-3 h-px bg-slate-800" />
+          <div className="mx-2 mb-3 h-px bg-white/10" />
 
           {/* User info row */}
           {user && (
             <div className="flex items-center gap-3 px-3 py-2 mb-1">
-              <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#B8860B] flex items-center justify-center text-white text-xs font-bold shrink-0">
                 {userInitial}
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-medium text-slate-300 truncate">
+                <span className="text-sm font-medium text-white/80 truncate">
                   {user.displayName}
                 </span>
-                <span className="text-[11px] text-slate-600 truncate">
+                <span className="text-[11px] text-[#9CA3AF] truncate">
                   {user.username}
                 </span>
               </div>
@@ -143,7 +143,7 @@ function AdminDashboardRouter() {
           {/* Logout button */}
           <button
             onClick={logout}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-900 hover:text-red-400 transition-all duration-150"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-[#9CA3AF] hover:bg-white/5 hover:text-red-400 transition-all duration-150"
           >
             <LogOut className="h-4 w-4" />
             <span>Sign Out</span>
@@ -154,16 +154,16 @@ function AdminDashboardRouter() {
       {/* ── Main area ── */}
       <main className="flex-1 flex flex-col overflow-hidden">
         {/* Top header bar */}
-        <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 lg:px-6 shrink-0">
+        <header className="h-14 bg-white border-b border-[#E8E5E0] flex items-center justify-between px-4 lg:px-6 shrink-0">
           {/* Left: hamburger + page title */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors"
+              className="lg:hidden w-9 h-9 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center transition-colors"
             >
-              <Menu className="h-[18px] w-[18px] text-slate-600" />
+              <Menu className="h-[18px] w-[18px] text-[#6B6B6B]" />
             </button>
-            <h1 className="text-base font-semibold text-slate-900">
+            <h1 className="text-base font-semibold text-[#1F1F1F] font-heading">
               {currentPage?.label || 'Dashboard'}
             </h1>
           </div>
@@ -171,21 +171,21 @@ function AdminDashboardRouter() {
           {/* Right: notification + avatar */}
           <div className="flex items-center gap-1.5">
             {/* Notification bell */}
-            <button className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center relative transition-colors">
-              <Bell className="h-[18px] w-[18px] text-slate-500" />
+            <button className="w-9 h-9 rounded-lg hover:bg-[#F5F2EE] flex items-center justify-center relative transition-colors">
+              <Bell className="h-[18px] w-[18px] text-[#6B6B6B]" />
               <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white" />
             </button>
 
             {/* Divider */}
-            <div className="w-px h-6 bg-slate-200 mx-1.5 hidden sm:block" />
+            <div className="w-px h-6 bg-[#E8E5E0] mx-1.5 hidden sm:block" />
 
             {/* User avatar + name */}
             {user && (
-              <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-slate-50 transition-colors cursor-default">
-                <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white text-xs font-bold">
+              <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-[#F5F2EE] transition-colors cursor-default">
+                <div className="w-8 h-8 rounded-full bg-[#6B2D3E] flex items-center justify-center text-white text-xs font-bold">
                   {userInitial}
                 </div>
-                <span className="text-sm font-medium text-slate-700 hidden sm:block">
+                <span className="text-sm font-medium text-[#1F1F1F] hidden sm:block">
                   {user.displayName}
                 </span>
               </div>
@@ -194,7 +194,7 @@ function AdminDashboardRouter() {
         </header>
 
         {/* Content area */}
-        <div className="flex-1 overflow-y-auto p-4 lg:p-6">
+        <div className="flex-1 overflow-y-auto p-4 lg:p-6 bg-[#FAFAF7]">
           {activeModule === 'dashboard' ? <Dashboard /> : renderModule()}
         </div>
       </main>
@@ -208,20 +208,20 @@ function SuperAdminRouter() {
   const userInitial = user?.displayName?.charAt(0)?.toUpperCase() || 'S';
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-[#FAFAF7] flex flex-col">
       {/* Top header bar */}
-      <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 lg:px-6 shrink-0 sticky top-0 z-30">
+      <header className="h-14 bg-white border-b border-[#E8E5E0] flex items-center justify-between px-4 lg:px-6 shrink-0 sticky top-0 z-30">
         {/* Left: branding + badge */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-[#6B2D3E] flex items-center justify-center">
             <Church className="h-4 w-4 text-white" />
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-base font-bold tracking-tight text-slate-900">
-              Covenant<span className="text-amber-600">ERP</span>
+            <span className="text-base font-bold tracking-tight text-[#1F1F1F] font-heading">
+              Covenant<span className="text-[#B8860B]">ERP</span>
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 ring-1 ring-amber-200/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-[#6B2D3E]/8 text-[#6B2D3E] ring-1 ring-[#6B2D3E]/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#6B2D3E]" />
               Super Admin
             </span>
           </div>
@@ -229,18 +229,18 @@ function SuperAdminRouter() {
 
         {/* Right: avatar + logout */}
         <div className="flex items-center gap-2">
-          <h1 className="text-sm font-medium text-slate-600 hidden md:block">
+          <h1 className="text-sm font-medium text-[#6B6B6B] hidden md:block">
             Platform Administration
           </h1>
 
-          <div className="w-px h-6 bg-slate-200 mx-1 hidden md:block" />
+          <div className="w-px h-6 bg-[#E8E5E0] mx-1 hidden md:block" />
 
           {user && (
-            <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-slate-50 transition-colors cursor-default">
-              <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold">
+            <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-[#F5F2EE] transition-colors cursor-default">
+              <div className="w-8 h-8 rounded-full bg-[#B8860B] flex items-center justify-center text-white text-xs font-bold">
                 {userInitial}
               </div>
-              <span className="text-sm font-medium text-slate-700 hidden sm:block">
+              <span className="text-sm font-medium text-[#1F1F1F] hidden sm:block">
                 {user.displayName}
               </span>
             </div>
@@ -248,7 +248,7 @@ function SuperAdminRouter() {
 
           <button
             onClick={logout}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all duration-150 ml-1"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-[#6B6B6B] hover:text-red-600 hover:bg-red-50 transition-all duration-150 ml-1"
           >
             <LogOut className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Sign Out</span>

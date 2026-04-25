@@ -43,94 +43,126 @@ export default function LoginPage({ role }: LoginPageProps) {
     <div className="min-h-screen flex animate-fade-in">
 
       {/* ===================== LEFT PANEL — Decorative (hidden on mobile) ===================== */}
-      <div className="hidden lg:flex lg:w-1/2 xl:w-[55%] relative bg-slate-900 text-white flex-col justify-between overflow-hidden">
-        {/* Decorative background shapes */}
+      <div className="hidden lg:flex lg:w-1/2 xl:w-[55%] relative flex-col justify-between overflow-hidden"
+        style={{ backgroundColor: '#1A1F36' }}
+      >
+        {/* Background layers */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Large radial glow top-left */}
-          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[100px]" />
-          {/* Small accent glow bottom-right */}
-          <div className="absolute bottom-24 right-16 w-72 h-72 bg-amber-600/8 rounded-full blur-[80px]" />
-          {/* Grid pattern overlay */}
+          {/* Warm ambient glow — top-left */}
           <div
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full blur-[120px]"
+            style={{ backgroundColor: 'rgba(184, 134, 11, 0.07)' }}
+          />
+          {/* Secondary glow — bottom-right */}
+          <div
+            className="absolute bottom-16 right-12 w-80 h-80 rounded-full blur-[100px]"
+            style={{ backgroundColor: 'rgba(184, 134, 11, 0.05)' }}
+          />
+          {/* Subtle diamond / cross-hatch texture */}
+          <div
+            className="absolute inset-0 opacity-[0.025]"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-              backgroundSize: '60px 60px',
+                'linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)',
+              backgroundSize: '72px 72px',
             }}
           />
-          {/* Decorative cross watermark */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.04]">
-            <Church className="h-[300px] w-[300px] text-white" strokeWidth={0.5} />
+          {/* Large cross watermark — 5% opacity */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05]">
+            <Church className="h-[340px] w-[340px] text-white" strokeWidth={0.4} />
           </div>
         </div>
 
-        {/* Top section: Logo & back */}
+        {/* Top section — Back to Home */}
         <div className="relative z-10 p-10 xl:p-14">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-amber-400 transition-colors group"
+            className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors duration-300 group"
           >
-            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
             Back to Home
           </button>
         </div>
 
-        {/* Center section: Hero content */}
+        {/* Center section — Hero content */}
         <div className="relative z-10 flex-1 flex items-center px-10 xl:px-14">
           <div className="max-w-lg">
             {/* Logo mark */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center shadow-lg shadow-amber-600/30">
+            <div className="flex items-center gap-3.5 mb-10">
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                style={{
+                  backgroundColor: '#B8860B',
+                  boxShadow: '0 8px 24px rgba(184, 134, 11, 0.25)',
+                }}
+              >
                 <Church className="h-6 w-6 text-white" />
               </div>
-              <span className="text-2xl font-bold tracking-tight">CovenantERP</span>
+              <span className="text-2xl font-bold tracking-tight text-white">CovenantERP</span>
             </div>
 
-            <h2 className="text-3xl xl:text-4xl font-bold leading-tight mb-4">
+            {/* Heading */}
+            <h2 className="text-3xl xl:text-4xl font-heading font-bold leading-snug mb-5 text-white">
               Empowering Theological
               <br />
-              <span className="text-amber-400">Education Worldwide</span>
+              <span className="font-heading" style={{ color: '#D4A03C' }}>
+                Education Worldwide
+              </span>
             </h2>
-            <p className="text-slate-400 text-base leading-relaxed max-w-md">
+
+            {/* Description */}
+            <p className="text-white/40 text-[15px] leading-relaxed max-w-md">
               A comprehensive management platform designed for seminaries, Bible colleges,
               and theological institutions to streamline administration, academics, and ministry training.
             </p>
 
             {/* Feature pills */}
-            <div className="flex flex-wrap gap-3 mt-8">
-              {['Student Management', 'Academic Records', 'Finance & Billing', 'Ministry Tracking'].map((feature) => (
-                <span
-                  key={feature}
-                  className="px-4 py-1.5 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-slate-300"
-                >
-                  {feature}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-2.5 mt-8">
+              {['Student Management', 'Academic Records', 'Finance & Billing', 'Ministry Tracking'].map(
+                (feature) => (
+                  <span
+                    key={feature}
+                    className="px-4 py-1.5 rounded-full text-xs font-medium text-white/60 transition-colors"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                    }}
+                  >
+                    {feature}
+                  </span>
+                ),
+              )}
             </div>
           </div>
         </div>
 
-        {/* Bottom section: Quote */}
+        {/* Bottom section — Scripture quote */}
         <div className="relative z-10 p-10 xl:p-14">
-          <blockquote className="border-l-2 border-amber-600/50 pl-4">
-            <p className="text-slate-500 text-sm italic leading-relaxed">
-              "Commit to the Lord whatever you do, and he will establish your plans."
+          <blockquote
+            className="pl-4"
+            style={{ borderLeft: '2px solid rgba(184, 134, 11, 0.4)' }}
+          >
+            <p className="text-white/35 text-sm italic leading-relaxed font-light">
+              &ldquo;Commit to the Lord whatever you do, and he will establish your plans.&rdquo;
             </p>
-            <cite className="text-slate-600 text-xs mt-1 block not-italic">— Proverbs 16:3</cite>
+            <cite className="text-white/25 text-xs mt-1.5 block not-italic">
+              &mdash; Proverbs 16:3
+            </cite>
           </blockquote>
         </div>
       </div>
 
       {/* ===================== RIGHT PANEL — Login Form ===================== */}
-      <div className="flex-1 flex flex-col bg-white min-h-screen">
-        {/* Mobile back button */}
-        <div className="lg:hidden p-4 sm:p-6">
+      <div className="flex-1 flex flex-col min-h-screen" style={{ backgroundColor: '#FAFAF7' }}>
+
+        {/* Mobile-only back button */}
+        <div className="lg:hidden p-5 sm:p-6">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-600 transition-colors group"
+            className="flex items-center gap-2 text-sm hover:opacity-70 transition-opacity duration-300 group"
+            style={{ color: '#8B8680' }}
           >
-            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
             Back to Home
           </button>
         </div>
@@ -138,50 +170,73 @@ export default function LoginPage({ role }: LoginPageProps) {
         {/* Form area — vertically centered */}
         <div className="flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-12 py-8">
           <div className="w-full max-w-md">
-            {/* Mobile-only logo (visible on small screens) */}
-            <div className="lg:hidden flex items-center gap-2.5 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center">
+            {/* Mobile-only logo */}
+            <div className="lg:hidden flex items-center gap-3 mb-10">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: '#B8860B' }}
+              >
                 <Church className="h-5 w-5 text-white" />
               </div>
-              <span className="text-lg font-bold text-slate-900 tracking-tight">CovenantERP</span>
+              <span className="text-lg font-bold tracking-tight" style={{ color: '#2D2A26' }}>
+                CovenantERP
+              </span>
             </div>
 
-            {/* Header */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-3">
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                  isSuperAdmin
-                    ? 'bg-amber-100 text-amber-600'
-                    : 'bg-slate-100 text-slate-600'
-                }`}>
+            {/* Role icon + heading */}
+            <div className="mb-10">
+              <div className="flex items-center gap-3.5 mb-4">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{
+                    backgroundColor: isSuperAdmin
+                      ? 'linear-gradient(135deg, #6B2D3E 0%, #8B3D52 100%)'
+                      : 'linear-gradient(135deg, #6B2D3E 0%, #B8860B 100%)',
+                  }}
+                >
                   {isSuperAdmin ? (
-                    <Shield className="h-5 w-5" />
+                    <Shield className="h-5.5 w-5.5" style={{ color: '#D4A03C' }} />
                   ) : (
-                    <UserCog className="h-5 w-5" />
+                    <UserCog className="h-5.5 w-5.5" style={{ color: '#D4A03C' }} />
                   )}
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">{title}</h1>
+                  <h1
+                    className="text-xl font-heading font-bold tracking-tight"
+                    style={{ color: '#2D2A26' }}
+                  >
+                    {title}
+                  </h1>
                 </div>
               </div>
-              <p className="text-sm text-slate-500 leading-relaxed">{subtitle}</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#8B8680' }}>
+                {subtitle}
+              </p>
             </div>
 
             {/* Error Alert */}
             {error && (
-              <div className="flex items-start gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm mb-6 animate-fade-in">
-                <AlertCircle className="h-5 w-5 mt-0.5 shrink-0 text-red-500" />
+              <div
+                className="flex items-start gap-3 p-4 rounded-xl text-sm mb-7 animate-fade-in"
+                style={{
+                  backgroundColor: '#FEF2F2',
+                  border: '1px solid #FECACA',
+                  color: '#991B1B',
+                }}
+              >
+                <AlertCircle className="h-5 w-5 mt-0.5 shrink-0" style={{ color: '#DC2626' }} />
                 <span className="font-medium">{error}</span>
               </div>
             )}
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Username Field */}
+              {/* Username / Email field */}
               <div>
                 <label
                   htmlFor="username"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold mb-2"
+                  style={{ color: '#4A4540' }}
                 >
                   Username
                 </label>
@@ -191,17 +246,34 @@ export default function LoginPage({ role }: LoginPageProps) {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder={isSuperAdmin ? 'Enter super admin username' : 'Enter admin username'}
-                  className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 focus:bg-white transition-all"
+                  className="w-full px-4 py-3.5 rounded-xl text-base transition-all duration-200 focus:outline-none focus:ring-2"
+                  style={{
+                    border: '1px solid #E8E5E0',
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    color: '#2D2A26',
+                    caretColor: '#6B2D3E',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#6B2D3E';
+                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(107, 45, 62, 0.1)';
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = '#E8E5E0';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                  }}
                   required
                   autoComplete="username"
                 />
               </div>
 
-              {/* Password Field */}
+              {/* Password field */}
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold mb-2"
+                  style={{ color: '#4A4540' }}
                 >
                   Password
                 </label>
@@ -212,43 +284,104 @@ export default function LoginPage({ role }: LoginPageProps) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
-                    className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 focus:bg-white transition-all pr-14"
+                    className="w-full px-4 py-3.5 rounded-xl text-base transition-all duration-200 focus:outline-none focus:ring-2 pr-14"
+                    style={{
+                      border: '1px solid #E8E5E0',
+                      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                      color: '#2D2A26',
+                      caretColor: '#6B2D3E',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = '#6B2D3E';
+                      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(107, 45, 62, 0.1)';
+                      e.currentTarget.style.backgroundColor = '#FFFFFF';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = '#E8E5E0';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                    }}
                     required
                     autoComplete="current-password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1.5 rounded-lg hover:bg-slate-100"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg transition-colors duration-200 cursor-pointer"
+                    style={{ color: '#8B8680' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(232, 229, 224, 0.6)';
+                      e.currentTarget.style.color = '#4A4540';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = '#8B8680';
+                    }}
                   >
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading || !username.trim() || !password.trim()}
-                className="w-full py-3.5 rounded-xl bg-amber-600 text-white font-semibold text-base shadow-lg shadow-amber-600/25 hover:bg-amber-700 hover:shadow-amber-700/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2.5 cursor-pointer"
-              >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Signing in...
-                  </>
-                ) : (
-                  `Sign in as ${isSuperAdmin ? 'Super Admin' : 'Admin'}`
-                )}
-              </button>
+              {/* Submit button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isLoading || !username.trim() || !password.trim()}
+                  className="w-full py-3.5 rounded-xl text-white font-semibold text-base flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #6B2D3E 0%, #8B3D52 50%, #6B2D3E 100%)',
+                    boxShadow: '0 4px 16px rgba(107, 45, 62, 0.3), inset 0 1px 0 rgba(212, 160, 60, 0.15)',
+                    backgroundSize: '200% 200%',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.background =
+                        'linear-gradient(135deg, #8B3D52 0%, #A04D65 50%, #8B3D52 100%)';
+                      e.currentTarget.style.backgroundSize = '200% 200%';
+                      e.currentTarget.style.boxShadow =
+                        '0 6px 24px rgba(107, 45, 62, 0.4), inset 0 1px 0 rgba(212, 160, 60, 0.2)';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      'linear-gradient(135deg, #6B2D3E 0%, #8B3D52 50%, #6B2D3E 100%)';
+                    e.currentTarget.style.backgroundSize = '200% 200%';
+                    e.currentTarget.style.boxShadow =
+                      '0 4px 16px rgba(107, 45, 62, 0.3), inset 0 1px 0 rgba(212, 160, 60, 0.15)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  {isLoading ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                        />
+                      </svg>
+                      Signing in...
+                    </>
+                  ) : (
+                    `Sign in as ${isSuperAdmin ? 'Super Admin' : 'Admin'}`
+                  )}
+                </button>
+              </div>
             </form>
 
-            {/* Support hint - no credentials shown */}
-            <div className="mt-6 text-center">
-              <p className="text-xs text-slate-400">
+            {/* Credentials notice — no public credentials shown */}
+            <div className="mt-8 text-center">
+              <p className="text-xs" style={{ color: '#A8A29E' }}>
                 Contact your institution administrator for login credentials
               </p>
             </div>
@@ -256,8 +389,8 @@ export default function LoginPage({ role }: LoginPageProps) {
         </div>
 
         {/* Footer */}
-        <div className="px-6 sm:px-8 lg:px-12 py-5 border-t border-slate-100">
-          <p className="text-xs text-slate-400 text-center">
+        <div className="px-6 sm:px-8 lg:px-12 py-5" style={{ borderTop: '1px solid #E8E5E0' }}>
+          <p className="text-xs text-center" style={{ color: '#A8A29E' }}>
             &copy; {new Date().getFullYear()} CovenantERP &middot; Theological Institution Management System
           </p>
         </div>
