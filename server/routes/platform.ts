@@ -364,7 +364,15 @@ router.put('/users/:id/status', authMiddleware, superAdminOnly, (req: Request, r
 // ── FEATURE FLAGS ─────────────────────────────
 router.get('/features/:institutionId', authMiddleware, superAdminOnly, (req: Request, res: Response) => {
   const db = getPlatformSqlite();
-  const flags = db.prepare('SELECT * FROM feature_flags WHERE institution_id = ?').all(req.params.institutionId);
+  const instId = req.params.institutionId;
+  
+  // If 'all' is requested, return all feature flags across institutions
+  if (instId === 'all') {
+    const flags = db.prepare('SELECT ff.*, i.name as institution_name FROM feature_flags ff LEFT JOIN institutions i ON ff.institution_id = i.id ORDER BY i.name, ff.feature').all();
+    return res.json(flags);
+  }
+  
+  const flags = db.prepare('SELECT * FROM feature_flags WHERE institution_id = ?').all(instId);
   res.json(flags);
 });
 

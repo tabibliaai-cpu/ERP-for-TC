@@ -12,6 +12,26 @@ function getDb(req: Request) {
   return getTenantSqlite(user.tenantDbName);
 }
 
+// Helper: camelCase → snake_case
+function toSnake(obj: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {};
+  for (const [key, val] of Object.entries(obj)) {
+    const snake = key.replace(/[A-Z]/g, c => '_' + c.toLowerCase());
+    result[snake] = val;
+  }
+  return result;
+}
+
+// Helper: safely build INSERT with snake_case columns
+function safeInsert(db: any, table: string, data: Record<string, any>, overrides: Record<string, any> = {}) {
+  const merged = { ...data, ...overrides };
+  const columns = Object.keys(merged);
+  const placeholders = columns.map(() => '?');
+  const values = Object.values(merged);
+  const sql = `INSERT INTO ${table} (${columns.join(', ')}) VALUES (${placeholders.join(', ')})`;
+  return db.prepare(sql).run(...values);
+}
+
 // ── STUDENTS ─────────────────────────────────
 router.get('/students', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
   try {
@@ -51,12 +71,29 @@ router.post('/students', authMiddleware, institutionAdminOnly, (req: Request, re
     const id = `stu-${crypto.randomUUID().slice(0, 8)}`;
     const enrollmentNumber = `GTS-${Date.now().toString(36).toUpperCase()}`;
     
-    const { fullName, gender, mobile, email, programId, semester, academicYear, ...rest } = req.body;
+    // Convert camelCase to snake_case for DB columns
+    const data = toSnake(req.body);
     
-    db.prepare(`
-      INSERT INTO students (id, enrollment_number, full_name, gender, mobile, email, program_id, semester, academic_year, ${Object.keys(rest).length > 0 ? Object.keys(rest).join(', ') + ',' : ''} admission_status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ${Object.keys(rest).length > 0 ? Object.keys(rest).map(() => '?').join(', ') + ',' : ''} 'approved')
-    `).run(id, enrollmentNumber, fullName, gender, mobile, email, programId || null, semester || 1, academicYear || '2026', ...Object.values(rest));
+    // Remove fields we generate ourselves
+    delete data.id;
+    delete data.enrollment_no;
+    delete data.enrollment_number;
+    
+    // Handle special fields
+    if (typeof data.semester === 'string' && data.semester.startsWith('Semester')) {
+      data.semester = parseInt(data.semester.replace('Semester ', '')) || 1;
+    }
+    if (!data.semester || isNaN(Number(data.semester))) data.semester = 1;
+    
+    // program is a name string (e.g. "B.Th") — store as-is if no program_id
+    if (data.program && !data.program_id) {
+      delete data.program; // Don't store program name in program_id column
+    }
+    
+    data.admission_status = data.admission_status || 'approved';
+    data.status = data.status || 'active';
+    
+    safeInsert(db, 'students', data, { id, enrollment_number: enrollmentNumber });
     
     res.status(201).json({ id, enrollmentNumber, message: 'Student created successfully' });
   } catch (err: any) {
@@ -78,7 +115,8 @@ router.get('/students/:id', authMiddleware, institutionAdminOnly, (req: Request,
 router.put('/students/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
   try {
     const db = getDb(req);
-    const fields = Object.entries(req.body);
+    const data = toSnake(req.body);
+    const fields = Object.entries(data);
     if (fields.length === 0) return res.status(400).json({ error: 'No fields to update' });
     
     const setClause = fields.map(([k]) => `${k} = ?`).join(', ');
@@ -86,63 +124,6 @@ router.put('/students/:id', authMiddleware, institutionAdminOnly, (req: Request,
       .run(...fields.map(([, v]) => v), req.params.id);
     
     res.json({ success: true, message: 'Student updated' });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ── TEACHERS ─────────────────────────────────
-router.get('/teachers', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
-  try {
-    const db = getDb(req);
-    const teachers = db.prepare('SELECT * FROM teachers WHERE status = ? ORDER BY created_at DESC').all('active');
-    res.json(teachers);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.post('/teachers', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
-  try {
-    const db = getDb(req);
-    const id = `tch-${crypto.randomUUID().slice(0, 8)}`;
-    const employeeId = `EMP-${Date.now().toString(36).toUpperCase()}`;
-    
-    const { fullName, gender, mobile, email, department, role, ...rest } = req.body;
-    
-    db.prepare(`
-      INSERT INTO teachers (id, employee_id, full_name, gender, mobile, email, department, role, ${Object.keys(rest).length > 0 ? Object.keys(rest).join(', ') + ',' : ''} status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ${Object.keys(rest).length > 0 ? Object.keys(rest).map(() => '?').join(', ') + ',' : ''} 'active')
-    `).run(id, employeeId, fullName, gender, mobile, email, department || null, role || 'teacher', ...Object.values(rest));
-    
-    res.status(201).json({ id, employeeId, message: 'Teacher created successfully' });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.get('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
-  try {
-    const db = getDb(req);
-    const teacher = db.prepare('SELECT * FROM teachers WHERE id = ?').get(req.params.id);
-    if (!teacher) return res.status(404).json({ error: 'Teacher not found' });
-    res.json(teacher);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.put('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
-  try {
-    const db = getDb(req);
-    const fields = Object.entries(req.body);
-    if (fields.length === 0) return res.status(400).json({ error: 'No fields to update' });
-
-    const setClause = fields.map(([k]) => `${k} = ?`).join(', ');
-    db.prepare(`UPDATE teachers SET ${setClause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`)
-      .run(...fields.map(([, v]) => v), req.params.id);
-
-    res.json({ success: true, message: 'Teacher updated' });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -169,6 +150,65 @@ router.get('/students/recent', authMiddleware, institutionAdminOnly, (req: Reque
   }
 });
 
+// ── TEACHERS ─────────────────────────────────
+router.get('/teachers', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const teachers = db.prepare('SELECT * FROM teachers WHERE status = ? ORDER BY created_at DESC').all('active');
+    res.json(teachers);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/teachers', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const id = `tch-${crypto.randomUUID().slice(0, 8)}`;
+    const employeeId = `EMP-${Date.now().toString(36).toUpperCase()}`;
+    
+    const data = toSnake(req.body);
+    delete data.id;
+    delete data.employee_id;
+    delete data.employee_number;
+    data.status = data.status || 'active';
+    
+    safeInsert(db, 'teachers', data, { id, employee_id: employeeId });
+    
+    res.status(201).json({ id, employeeId, message: 'Teacher created successfully' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const teacher = db.prepare('SELECT * FROM teachers WHERE id = ?').get(req.params.id);
+    if (!teacher) return res.status(404).json({ error: 'Teacher not found' });
+    res.json(teacher);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.put('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const data = toSnake(req.body);
+    const fields = Object.entries(data);
+    if (fields.length === 0) return res.status(400).json({ error: 'No fields to update' });
+
+    const setClause = fields.map(([k]) => `${k} = ?`).join(', ');
+    db.prepare(`UPDATE teachers SET ${setClause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`)
+      .run(...fields.map(([, v]) => v), req.params.id);
+
+    res.json({ success: true, message: 'Teacher updated' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ── PROGRAMS ─────────────────────────────────
 router.get('/programs', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
   try {
@@ -184,12 +224,20 @@ router.post('/programs', authMiddleware, institutionAdminOnly, (req: Request, re
   try {
     const db = getDb(req);
     const id = `prog-${crypto.randomUUID().slice(0, 8)}`;
-    const { name, code, level, duration, totalSemesters, totalCredits, description } = req.body;
+    const data = toSnake(req.body);
+    delete data.id;
     
-    db.prepare(`
-      INSERT INTO programs (id, name, code, level, duration, total_semesters, total_credits, description)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(id, name, code, level, duration, totalSemesters || 8, totalCredits || 0, description || null);
+    // Map frontend fields properly
+    const record: Record<string, any> = { id };
+    record.name = data.name || req.body.name;
+    record.code = data.code || data.short_name || req.body.shortName || '';
+    record.level = data.level || 'Undergraduate';
+    record.duration = data.duration || '4 Years';
+    record.total_semesters = Number(data.total_semesters || req.body.totalSemesters) || 8;
+    record.total_credits = Number(data.credits || data.total_credits || req.body.credits) || 0;
+    record.description = data.description || null;
+    
+    safeInsert(db, 'programs', record);
     
     res.status(201).json({ id, message: 'Program created' });
   } catch (err: any) {
@@ -218,12 +266,35 @@ router.post('/courses', authMiddleware, institutionAdminOnly, (req: Request, res
   try {
     const db = getDb(req);
     const id = `crs-${crypto.randomUUID().slice(0, 8)}`;
-    const { code, name, department, credits, courseType, semester, programId, teacherId, description } = req.body;
+    const body = req.body;
     
-    db.prepare(`
-      INSERT INTO courses (id, code, name, department, credits, course_type, semester, program_id, teacher_id, description)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(id, code, name, department, credits || 3, courseType || 'core', semester || 1, programId || null, teacherId || null, description || null);
+    const record: Record<string, any> = { id };
+    record.code = body.code || '';
+    record.name = body.name || '';
+    record.department = body.department || 'Biblical Studies';
+    record.credits = Number(body.credits) || 3;
+    record.course_type = body.type || body.courseType || 'core';
+    record.semester = Number(body.semester) || 1;
+    record.description = body.description || null;
+    record.prerequisites = body.prerequisites || 'None';
+    
+    // Try to find program_id from program name
+    if (body.program) {
+      const prog = db.prepare('SELECT id FROM programs WHERE code = ? OR name LIKE ?').get(body.program, `%${body.program}%`) as any;
+      record.program_id = prog?.id || null;
+    } else if (body.programId) {
+      record.program_id = body.programId;
+    }
+    
+    // Try to find teacher_id from instructor name
+    if (body.instructor) {
+      const teacher = db.prepare('SELECT id FROM teachers WHERE full_name LIKE ?').get(`%${body.instructor}%`) as any;
+      record.teacher_id = teacher?.id || null;
+    } else if (body.teacherId) {
+      record.teacher_id = body.teacherId;
+    }
+    
+    safeInsert(db, 'courses', record);
     
     res.status(201).json({ id, message: 'Course created' });
   } catch (err: any) {
@@ -237,6 +308,35 @@ router.get('/fee-structures', authMiddleware, institutionAdminOnly, (req: Reques
     const db = getDb(req);
     const fees = db.prepare('SELECT fs.*, p.name as program_name FROM fee_structures fs LEFT JOIN programs p ON fs.program_id = p.id ORDER BY fs.created_at DESC').all();
     res.json(fees);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/fee-structures', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const id = `fee-${crypto.randomUUID().slice(0, 8)}`;
+    const body = req.body;
+    
+    const record: Record<string, any> = { id };
+    record.name = body.name || '';
+    record.amount = Number(body.amount) || 0;
+    record.frequency = body.frequency || 'Per Semester';
+    record.type = body.type || 'Tuition';
+    record.is_mandatory = body.mandatory ? 1 : 0;
+    record.description = body.description || '';
+    record.status = 'active';
+    
+    // Try to find program_id from program name
+    if (body.program && body.program !== 'All') {
+      const prog = db.prepare('SELECT id FROM programs WHERE code = ? OR name LIKE ?').get(body.program, `%${body.program}%`) as any;
+      record.program_id = prog?.id || null;
+    }
+    
+    safeInsert(db, 'fee_structures', record);
+    
+    res.status(201).json({ id, message: 'Fee structure created' });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -263,15 +363,28 @@ router.post('/payments', authMiddleware, institutionAdminOnly, (req: Request, re
     const db = getDb(req);
     const id = `pay-${crypto.randomUUID().slice(0, 8)}`;
     const paymentId = `PAY-${Date.now().toString(36).toUpperCase()}`;
-    const { studentId, amountPaid, paymentMode, transactionRef, feeStructureId } = req.body;
+    const body = req.body;
     
-    db.prepare(`
-      INSERT INTO payments (id, payment_id, student_id, fee_structure_id, amount_paid, payment_mode, transaction_ref, received_by_id, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'completed')
-    `).run(id, paymentId, studentId, feeStructureId || null, amountPaid, paymentMode, transactionRef || null, (req as any).user.userId);
+    // Accept both camelCase and snake_case
+    const studentId = body.studentId || body.student_id;
+    const amountPaid = Number(body.amountPaid || body.amount) || 0;
+    const paymentMode = body.paymentMode || body.mode || 'Cash';
+    const transactionRef = body.transactionRef || body.transaction_ref || null;
+    
+    const record: Record<string, any> = {
+      id, payment_id: paymentId, student_id: studentId,
+      amount_paid: amountPaid, payment_mode: paymentMode,
+      transaction_ref: transactionRef,
+      received_by_id: (req as any).user.userId,
+      status: 'completed',
+    };
+    
+    safeInsert(db, 'payments', record);
     
     // Update student fee status
-    db.prepare('UPDATE students SET fee_status = ? WHERE id = ?').run('paid', studentId);
+    if (studentId) {
+      db.prepare('UPDATE students SET fee_status = ? WHERE id = ?').run('paid', studentId);
+    }
     
     res.status(201).json({ id, paymentId, message: 'Payment recorded' });
   } catch (err: any) {
@@ -320,12 +433,37 @@ router.post('/manuscripts', authMiddleware, institutionAdminOnly, (req: Request,
   try {
     const db = getDb(req);
     const id = `man-${crypto.randomUUID().slice(0, 8)}`;
-    const { title, author, category, type, totalCopies } = req.body;
+    const body = req.body;
+    const totalCopies = Number(body.totalCopies || body.total_copies || body.copies) || 1;
     
-    db.prepare(`
-      INSERT INTO manuscripts (id, title, author, category, type, total_copies, available_copies, uploaded_by_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(id, title, author || null, category || null, type || 'book', totalCopies || 1, totalCopies || 1, (req as any).user.userId);
+    const record: Record<string, any> = {
+      id,
+      title: body.title || '',
+      author: body.author || null,
+      category: body.category || null,
+      type: body.type || 'book',
+      total_copies: totalCopies,
+      available_copies: totalCopies,
+      uploaded_by_id: (req as any).user.userId,
+    };
+    
+    // Try to insert extra metadata columns if they exist in the table
+    const optionalFields = ['language', 'isbn', 'scripture_refs', 'keywords', 'abstract', 'access_level', 'publisher', 'year', 'description'];
+    for (const field of optionalFields) {
+      if (body[field] !== undefined && body[field] !== '') {
+        record[field] = body[field];
+      }
+    }
+    
+    // Build INSERT dynamically — only include columns that exist in the table
+    const tableInfo = db.prepare("PRAGMA table_info(manuscripts)").all() as any[];
+    const validColumns = new Set(tableInfo.map((c: any) => c.name));
+    const filteredRecord: Record<string, any> = {};
+    for (const [key, val] of Object.entries(record)) {
+      if (validColumns.has(key)) filteredRecord[key] = val;
+    }
+    
+    safeInsert(db, 'manuscripts', filteredRecord);
     
     res.status(201).json({ id, message: 'Manuscript added' });
   } catch (err: any) {
@@ -345,6 +483,56 @@ router.get('/lesson-plans', authMiddleware, institutionAdminOnly, (req: Request,
       ORDER BY lp.date DESC
     `).all();
     res.json(plans);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/lesson-plans', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const id = `lp-${crypto.randomUUID().slice(0, 8)}`;
+    const body = req.body;
+    
+    const record: Record<string, any> = { id };
+    record.title = body.title || '';
+    record.date = body.date || new Date().toISOString().split('T')[0];
+    record.status = body.status || 'draft';
+    record.created_by_id = (req as any).user.userId;
+    
+    // Try to find course_id from course name
+    if (body.course || body.courseId) {
+      if (body.courseId) {
+        record.course_id = body.courseId;
+      } else {
+        const course = db.prepare('SELECT id FROM courses WHERE code = ? OR name LIKE ?').get(body.course, `%${body.course}%`) as any;
+        record.course_id = course?.id || null;
+      }
+    }
+    
+    // Try to find teacher_id
+    if (body.teacher || body.teacherId) {
+      if (body.teacherId) {
+        record.teacher_id = body.teacherId;
+      } else {
+        const teacher = db.prepare('SELECT id FROM teachers WHERE full_name LIKE ?').get(`%${body.teacher}%`) as any;
+        record.teacher_id = teacher?.id || null;
+      }
+    }
+    
+    // Extra fields
+    const optionalFields = ['topic', 'objectives', 'materials', 'methodology', 'assessment', 'reflection', 'duration', 'scripture_reading', 'prayer_points'];
+    const tableInfo = db.prepare("PRAGMA table_info(lesson_plans)").all() as any[];
+    const validColumns = new Set(tableInfo.map((c: any) => c.name));
+    for (const field of optionalFields) {
+      if (body[field] !== undefined && body[field] !== '' && validColumns.has(field)) {
+        record[field] = body[field];
+      }
+    }
+    
+    safeInsert(db, 'lesson_plans', record);
+    
+    res.status(201).json({ id, message: 'Lesson plan created' });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -385,14 +573,14 @@ router.get('/dashboard/stats', authMiddleware, institutionAdminOnly, (req: Reque
     const borrowedBooks = db.prepare('SELECT COUNT(*) as c FROM borrow_records WHERE status = ?').get('borrowed') as any;
     
     res.json({
-      totalStudents: totalStudents.c,
-      totalTeachers: totalTeachers.c,
-      totalPrograms: totalPrograms.c,
-      totalCourses: totalCourses.c,
-      pendingApproval: pendingApproval.c,
-      totalRevenue: totalPayments.total,
-      totalManuscripts: totalManuscripts.c,
-      borrowedBooks: borrowedBooks.c,
+      totalStudents: totalStudents?.c || 0,
+      totalTeachers: totalTeachers?.c || 0,
+      totalPrograms: totalPrograms?.c || 0,
+      totalCourses: totalCourses?.c || 0,
+      pendingApproval: pendingApproval?.c || 0,
+      totalRevenue: totalPayments?.total || 0,
+      totalManuscripts: totalManuscripts?.c || 0,
+      borrowedBooks: borrowedBooks?.c || 0,
     });
   } catch (err: any) {
     res.status(500).json({ error: err.message });

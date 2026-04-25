@@ -396,11 +396,11 @@ export default function TeachersPage() {
     setSaving(true);
     try {
       if (token) {
+        // Send camelCase directly — backend expects camelCase
         const apiData: any = {};
         for (const [key, val] of Object.entries(form)) {
           if (val === '' || val === undefined || val === null) continue;
-          const snake = key.replace(/[A-Z]/g, c => '_' + c.toLowerCase());
-          apiData[snake] = val;
+          apiData[key] = val;
         }
         await createTeacher(apiData);
         setToast({ message: 'Faculty member created successfully', type: 'success' });

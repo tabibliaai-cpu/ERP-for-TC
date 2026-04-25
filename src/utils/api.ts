@@ -170,6 +170,10 @@ export async function createPayment(data: any) {
   return apiFetch('/tenant/payments', { method: 'POST', body: JSON.stringify(data) });
 }
 
+export async function createFeeStructure(data: any) {
+  return apiFetch('/tenant/fee-structures', { method: 'POST', body: JSON.stringify(data) });
+}
+
 export async function getGrades() {
   return apiFetch('/tenant/grades');
 }
@@ -185,6 +189,10 @@ export async function createManuscript(data: any) {
 
 export async function getLessonPlans() {
   return apiFetch('/tenant/lesson-plans');
+}
+
+export async function createLessonPlan(data: any) {
+  return apiFetch('/tenant/lesson-plans', { method: 'POST', body: JSON.stringify(data) });
 }
 
 export async function getAttendance(params?: { date?: string; courseId?: string }) {

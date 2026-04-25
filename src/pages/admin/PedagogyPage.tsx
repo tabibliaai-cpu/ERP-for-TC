@@ -4,7 +4,7 @@ import {
   Search, Filter, Star, Clock, ChevronRight, FileText, Video, ExternalLink,
   X, CheckCircle, AlertCircle, TrendingUp, Heart, Brain
 } from 'lucide-react';
-import { getLessonPlans, getToken } from '../../utils/api';
+import { getLessonPlans, createLessonPlan, getToken } from '../../utils/api';
 
 // --- Sample Data ---
 const lessonPlans = [
@@ -67,7 +67,11 @@ export default function PedagogyPage() {
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showResourceModal, setShowResourceModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const { show: showToast, ToastUI } = useToast();
+
+  // Lesson plan form state
+  const [lpForm, setLpForm] = useState({ course: 'Systematic Theology I', date: new Date().toISOString().split('T')[0], topic: '', method: 'Lecture', duration: '60 min', scripture: '', objectives: '', activities: '' });
 
   // ─── API Data Layer ──────────────────────────────────────────────────
   const [apiLessonPlans, setApiLessonPlans] = useState(lessonPlans);
@@ -456,7 +460,7 @@ export default function PedagogyPage() {
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Course</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
+                  <select value={lpForm.course} onChange={e => setLpForm(p => ({ ...p, course: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>Systematic Theology I</option>
                     <option>New Testament Survey</option>
                     <option>Pastoral Ministry</option>
@@ -467,43 +471,55 @@ export default function PedagogyPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Date</label>
-                  <input type="date" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
+                  <input type="date" value={lpForm.date} onChange={e => setLpForm(p => ({ ...p, date: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Topic</label>
-                <input type="text" placeholder="Lesson topic..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
+                <input type="text" value={lpForm.topic} onChange={e => setLpForm(p => ({ ...p, topic: e.target.value }))} placeholder="Lesson topic..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Teaching Method</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
+                  <select value={lpForm.method} onChange={e => setLpForm(p => ({ ...p, method: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>Lecture</option><option>Discussion</option><option>Case Study</option><option>Sermon-based Teaching</option><option>Interactive Bible Study</option><option>Field-based Learning</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Duration</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
+                  <select value={lpForm.duration} onChange={e => setLpForm(p => ({ ...p, duration: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all">
                     <option>60 min</option><option>75 min</option><option>90 min</option><option>120 min</option>
                   </select>
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Scripture References</label>
-                <input type="text" placeholder="e.g., John 3:16, Romans 8:28-39" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
+                <input type="text" value={lpForm.scripture} onChange={e => setLpForm(p => ({ ...p, scripture: e.target.value }))} placeholder="e.g., John 3:16, Romans 8:28-39" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Objectives</label>
-                <textarea rows={3} placeholder="What students should learn..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
+                <textarea rows={3} value={lpForm.objectives} onChange={e => setLpForm(p => ({ ...p, objectives: e.target.value }))} placeholder="What students should learn..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Activities Planned</label>
-                <textarea rows={2} placeholder="Class activities, discussions, assignments..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
+                <textarea rows={2} value={lpForm.activities} onChange={e => setLpForm(p => ({ ...p, activities: e.target.value }))} placeholder="Class activities, discussions, assignments..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-amber-500 transition-all resize-none" />
               </div>
             </div>
             <div className="flex items-center justify-end gap-3 p-6 border-t border-slate-100">
               <button onClick={() => setShowModal(false)} className="px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
-              <button onClick={() => setShowModal(false)} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all">Create Plan</button>
+              <button onClick={async () => {
+                if (!lpForm.topic) { showToast('Topic is required', 'error'); return; }
+                setSubmitting(true);
+                try {
+                  await createLessonPlan({ title: lpForm.topic, course: lpForm.course, date: lpForm.date, topic: lpForm.topic, duration: lpForm.duration, method: lpForm.method, objectives: lpForm.objectives, methodology: lpForm.activities });
+                  showToast('Lesson plan created successfully');
+                  setShowModal(false);
+                  setLpForm({ course: 'Systematic Theology I', date: new Date().toISOString().split('T')[0], topic: '', method: 'Lecture', duration: '60 min', scripture: '', objectives: '', activities: '' });
+                  const res = await getLessonPlans();
+                  if (Array.isArray(res)) { setApiLessonPlans(res.map((l: any) => ({ id: l.id ?? 0, course: l.course_name ?? l.course ?? '', topic: l.topic ?? l.title ?? '', teacher: l.teacher_name ?? '', date: l.date ?? '', duration: l.duration ?? '60 min', method: l.method ?? 'Lecture', status: l.status ?? 'Upcoming', engagement: 0 }))); }
+                } catch (e: any) { showToast(e.message || 'Failed to create lesson plan', 'error'); }
+                setSubmitting(false);
+              }} disabled={submitting} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all disabled:opacity-50">{submitting ? 'Creating...' : 'Create Plan'}</button>
             </div>
           </div>
         </div>

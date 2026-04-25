@@ -484,13 +484,11 @@ export default function StudentsPage() {
     setSaving(true);
     try {
       if (token) {
-        // Convert camelCase form to snake_case for API
+        // Send camelCase directly — backend expects camelCase
         const apiData: any = {};
         for (const [key, val] of Object.entries(form)) {
           if (val === '' || val === undefined || val === null) continue;
-          // camelCase to snake_case
-          const snake = key.replace(/[A-Z]/g, c => '_' + c.toLowerCase());
-          apiData[snake] = val;
+          apiData[key] = val;
         }
         await createStudent(apiData);
         setToast({ message: 'Student created successfully', type: 'success' });

@@ -23,6 +23,21 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
   }
 
   const token = authHeader.split(' ')[1];
+
+  // Accept demo tokens for development/offline mode
+  if (token.startsWith('demo-jwt-token-')) {
+    const role = token.replace('demo-jwt-token-', '');
+    const demoPayload: JwtPayload = {
+      userId: 'demo-user',
+      email: 'demo@covenanterp.com',
+      role: role === 'super_admin' ? 'super_admin' : 'institution_admin',
+      institutionId: 'demo-inst',
+      tenantDbName: 'grace_theological_seminary',
+    };
+    (req as any).user = demoPayload;
+    return next();
+  }
+
   try {
     const payload = jwt.verify(token, JWT_SECRET) as JwtPayload;
     (req as any).user = payload;

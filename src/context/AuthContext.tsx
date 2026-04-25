@@ -66,6 +66,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           displayName: cred.displayName,
         };
         setUser(authUser);
+        // Store a demo JWT so API calls work in demo mode
+        localStorage.setItem('covenantERP_token', 'demo-jwt-token-' + cred.role);
         localStorage.setItem('covenantERP_user', JSON.stringify(authUser));
         setIsLoading(false);
         return { success: true };

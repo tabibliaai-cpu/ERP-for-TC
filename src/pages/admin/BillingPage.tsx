@@ -4,7 +4,7 @@ import {
   ChevronLeft, ChevronRight, Receipt, TrendingUp, AlertCircle, CheckCircle,
   Clock, IndianRupee, Calendar, User, Gift, Printer, Mail
 } from 'lucide-react';
-import { getFeeStructures, getPayments, createPayment, getToken } from '../../utils/api';
+import { getFeeStructures, getPayments, createPayment, createFeeStructure, getToken } from '../../utils/api';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface FeeStructure {
@@ -196,8 +196,8 @@ export default function BillingPage() {
     if (!payForm.student || !payForm.amount) { showToast('Student and amount are required', 'error'); return; }
     setSubmitting(true);
     try {
-      const student = studentFees.find(s => s.id === payForm.student);
-      await createPayment({ student_id: payForm.student, student_name: student?.studentName ?? '', enrollment_number: student?.enrollmentNo ?? '', amount: Number(payForm.amount), mode: payForm.mode, transaction_ref: payForm.ref, date: payForm.date, fee_type: 'General', });
+      // Backend expects camelCase: studentId, amountPaid, paymentMode, transactionRef
+      await createPayment({ studentId: payForm.student, amountPaid: Number(payForm.amount), paymentMode: payForm.mode, transactionRef: payForm.ref, date: payForm.date, feeType: 'General', });
       showToast('Payment recorded successfully');
       setShowPaymentModal(false);
       setPayForm({ student: '', amount: '', mode: 'Cash', ref: '', date: new Date().toISOString().split('T')[0] });
@@ -207,9 +207,23 @@ export default function BillingPage() {
     setSubmitting(false);
   };
 
-  const handleAddFee = () => {
-    setShowAddFeeModal(false);
-    setFeeForm({ name: '', program: 'B.Th', type: 'Tuition', amount: '', frequency: 'Per Semester', mandatory: true, description: '' });
+  const handleAddFee = async () => {
+    if (!feeForm.name || !feeForm.amount) { showToast('Fee name and amount are required', 'error'); return; }
+    setSubmitting(true);
+    try {
+      await createFeeStructure({ name: feeForm.name, program: feeForm.program, type: feeForm.type, amount: Number(feeForm.amount), frequency: feeForm.frequency, mandatory: feeForm.mandatory, description: feeForm.description });
+      showToast('Fee structure created successfully');
+      setShowAddFeeModal(false);
+      setFeeForm({ name: '', program: 'B.Th', type: 'Tuition', amount: '', frequency: 'Per Semester', mandatory: true, description: '' });
+      const fRes = await getFeeStructures();
+      if (Array.isArray(fRes)) {
+        const mapped = fRes.map((f: any) => ({
+          id: String(f.id ?? ''), name: f.name ?? '', program: f.program_name ?? f.program ?? '', type: f.type ?? '', amount: Number(f.amount ?? 0), frequency: f.frequency ?? '', isMandatory: f.is_mandatory ?? f.isMandatory ?? true, status: f.status ?? 'Active', description: f.description ?? '',
+        }));
+        setApiFeeStructures(mapped);
+      }
+    } catch (e: any) { showToast(e.message || 'Failed to create fee structure', 'error'); }
+    setSubmitting(false);
   };
 
   return (
