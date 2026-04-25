@@ -104,7 +104,8 @@ interface Toast {
    FALLBACK / SAMPLE DATA
    ═══════════════════════════════════════════════════════════ */
 
-const fallbackInstitutions: Institution[] = [
+// Type-reference sample data (not used as default state)
+const _sampleInstitutions: Institution[] = [
   { id: 1, name: 'Grace Theological Seminary', code: 'GTS-001', type: 'Seminary', location: 'Chennai, India', city: 'Chennai', state: 'Tamil Nadu', country: 'India', admin_name: 'Dr. Samuel Johnson', admin_email: 'samuel@gts.edu', students: 342, plan: 'Premium', status: 'Active', email: 'info@gts.edu', phone: '+91-44-2345-6789', website: 'www.gts.edu', denomination: 'Protestant' },
   { id: 2, name: 'Living Word Bible College', code: 'LWBC-002', type: 'Bible College', location: 'Bangalore, India', city: 'Bangalore', state: 'Karnataka', country: 'India', admin_name: 'Rev. David Williams', admin_email: 'david@lwbc.edu', students: 185, plan: 'Basic', status: 'Active', email: 'info@lwbc.edu', phone: '+91-80-2345-6789', website: 'www.lwbc.edu', denomination: 'Pentecostal' },
   { id: 3, name: 'Hope International Seminary', code: 'HIS-003', type: 'Seminary', location: 'Mumbai, India', city: 'Mumbai', state: 'Maharashtra', country: 'India', admin_name: 'Prof. Maria Garcia', admin_email: 'maria@his.edu', students: 420, plan: 'Premium', status: 'Active', email: 'info@his.edu', phone: '+91-22-2345-6789', website: 'www.his.edu', denomination: 'Non-denominational' },
@@ -113,7 +114,7 @@ const fallbackInstitutions: Institution[] = [
   { id: 6, name: 'Redeemed Seminary', code: 'RSM-006', type: 'Seminary', location: 'Hyderabad, India', city: 'Hyderabad', state: 'Telangana', country: 'India', admin_name: 'Dr. Abraham Thomas', admin_email: 'abraham@rsm.edu', students: 210, plan: 'Premium', status: 'Suspended', email: 'info@rsm.edu', phone: '+91-40-2345-6789', website: 'www.rsm.edu', denomination: 'Assemblies of God' },
 ];
 
-const fallbackUsers: GlobalUser[] = [
+const _sampleUsers: GlobalUser[] = [
   { id: 1, name: 'Dr. Samuel Johnson', email: 'samuel@gts.edu', role: 'Institution Admin', institution: 'Grace Theological Seminary', status: 'Active', last_login_at: '2026-04-26' },
   { id: 2, name: 'Rev. David Williams', email: 'david@lwbc.edu', role: 'Institution Admin', institution: 'Living Word Bible College', status: 'Active', last_login_at: '2026-04-25' },
   { id: 3, name: 'John Abraham', email: 'john@student.gts.edu', role: 'Student', institution: 'Grace Theological Seminary', status: 'Active', last_login_at: '2026-04-26' },
@@ -122,7 +123,7 @@ const fallbackUsers: GlobalUser[] = [
   { id: 6, name: 'Dr. Abraham Thomas', email: 'abraham@rsm.edu', role: 'Institution Admin', institution: 'Redeemed Seminary', status: 'Active', last_login_at: '2026-04-22' },
 ];
 
-const fallbackAuditLogs: AuditLog[] = [
+const _sampleAuditLogs: AuditLog[] = [
   { time: '2026-04-26 14:32', user: 'Super Admin', user_name: 'Super Admin', action: 'Created institution', target: 'Redeemed Seminary', entity: 'Institution', type: 'create', created_at: '2026-04-26 14:32' },
   { time: '2026-04-26 13:15', user_name: 'Dr. Samuel Johnson', action: 'Updated fee structure', target: 'B.Th Program', entity: 'FeeStructure', type: 'update', created_at: '2026-04-26 13:15' },
   { time: '2026-04-26 11:45', user_name: 'System', action: 'Auto backup completed', target: 'All institutions', entity: 'System', type: 'system', created_at: '2026-04-26 11:45' },
@@ -131,7 +132,7 @@ const fallbackAuditLogs: AuditLog[] = [
   { time: '2026-04-25 09:30', user_name: 'System', action: 'Payment reminder sent', target: '42 students', entity: 'Payment', type: 'system', created_at: '2026-04-25 09:30' },
 ];
 
-const fallbackFeatures: FeatureFlag[] = [
+const _sampleFeatures: FeatureFlag[] = [
   { feature: 'Academic Module', description: 'Program & course management', institutions: 6, enabled: 6 },
   { feature: 'Pedagogical Portal', description: 'Teaching methods & resources', institutions: 6, enabled: 4 },
   { feature: 'Library System', description: 'Manuscript & resource management', institutions: 6, enabled: 5 },
@@ -142,7 +143,7 @@ const fallbackFeatures: FeatureFlag[] = [
   { feature: 'Ministry Tracking', description: 'Ministry involvement & outreach', institutions: 6, enabled: 4 },
 ];
 
-const fallbackStats: PlatformStat = {
+const _sampleStats: PlatformStat = {
   totalInstitutions: 6,
   totalUsers: 1847,
   totalStudents: 1411,
@@ -150,7 +151,7 @@ const fallbackStats: PlatformStat = {
   uptime: '99.9%',
 };
 
-const fallbackSettings = [
+const _sampleSettings = [
   { key: 'default_theme_mode', label: 'Default Theme Mode', desc: 'Set default theme for new institutions', value: 'light', enabled: true },
   { key: 'allow_self_registration', label: 'Allow Self-Registration', desc: 'Let institutions sign up without approval', value: 'disabled', enabled: false },
   { key: 'email_notifications', label: 'Email Notifications', desc: 'System-wide email notifications', value: 'enabled', enabled: true },
@@ -698,8 +699,8 @@ export default function SuperAdminDashboard() {
   const [users, setUsers] = useState<GlobalUser[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [features, setFeatures] = useState<FeatureFlag[]>([]);
-  const [platformStats, setPlatformStats] = useState<PlatformStat>(fallbackStats);
-  const [platformSettings, setPlatformSettings] = useState(fallbackSettings);
+  const [platformStats, setPlatformStats] = useState<PlatformStat>({});
+  const [platformSettings, setPlatformSettings] = useState<any[]>([]);
 
   // Loading states
   const [loadingInstitutions, setLoadingInstitutions] = useState(true);
@@ -737,10 +738,10 @@ export default function SuperAdminDashboard() {
     try {
       const data = await getInstitutions();
       const list = Array.isArray(data) ? data : data.institutions || data.data || [];
-      setInstitutions(list.length > 0 ? list : fallbackInstitutions);
+      setInstitutions(list);
     } catch {
-      setInstitutions(fallbackInstitutions);
-      addToast('error', 'Failed to load institutions. Showing sample data.');
+      setInstitutions([]);
+      addToast('error', 'Failed to load institutions. Please check your connection.');
     } finally {
       setLoadingInstitutions(false);
     }
@@ -751,9 +752,9 @@ export default function SuperAdminDashboard() {
     try {
       const data = await getGlobalUsers();
       const list = Array.isArray(data) ? data : data.users || data.data || [];
-      setUsers(list.length > 0 ? list : fallbackUsers);
+      setUsers(list);
     } catch {
-      setUsers(fallbackUsers);
+      setUsers([]);
     } finally {
       setLoadingUsers(false);
     }
@@ -778,9 +779,9 @@ export default function SuperAdminDashboard() {
     try {
       const data = await getAuditLogs();
       const list = Array.isArray(data) ? data : data.logs || data.data || [];
-      setAuditLogs(list.length > 0 ? list : fallbackAuditLogs);
+      setAuditLogs(list);
     } catch {
-      setAuditLogs(fallbackAuditLogs);
+      setAuditLogs([]);
     } finally {
       setLoadingLogs(false);
     }
@@ -791,9 +792,9 @@ export default function SuperAdminDashboard() {
     try {
       const data = await getFeatureFlags('all');
       const list = Array.isArray(data) ? data : data.features || data.data || [];
-      setFeatures(list.length > 0 ? list : fallbackFeatures);
+      setFeatures(list);
     } catch {
-      setFeatures(fallbackFeatures);
+      setFeatures([]);
     } finally {
       setLoadingFeatures(false);
     }
@@ -911,7 +912,7 @@ export default function SuperAdminDashboard() {
     }
   };
 
-  const handleToggleSetting = async (setting: typeof fallbackSettings[0]) => {
+  const handleToggleSetting = async (setting: any) => {
     const newValue = setting.enabled ? 'disabled' : 'enabled';
     try {
       await updatePlatformSetting(setting.key, newValue, setting.desc);

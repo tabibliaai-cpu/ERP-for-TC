@@ -129,8 +129,8 @@ export default function AcademicsPage() {
   const [apiCourses, setApiCourses] = useState<Course[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const effectivePrograms = dataLoaded && apiPrograms.length > 0 ? apiPrograms : programs;
-  const effectiveCourses = dataLoaded && apiCourses.length > 0 ? apiCourses : courses;
+  const effectivePrograms = apiPrograms;
+  const effectiveCourses = apiCourses;
 
   useEffect(() => {
     const token = getToken();
@@ -152,7 +152,7 @@ export default function AcademicsPage() {
           }));
           setApiCourses(mapped);
         }
-      } catch { /* fallback remains */ }
+      } catch { /* api data stays empty */ }
       setDataLoaded(true);
     })();
     return () => { cancelled = true; };

@@ -3,3 +3,4 @@ skills/
 download/
 *.pdf
 .env
+db\n*.db\n*.db-shm\n*.db-wal\ndist/

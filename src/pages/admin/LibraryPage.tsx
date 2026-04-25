@@ -105,7 +105,7 @@ export default function LibraryPage() {
   const [apiManuscripts, setApiManuscripts] = useState<Manuscript[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const effectiveManuscripts = dataLoaded && apiManuscripts.length > 0 ? apiManuscripts : manuscripts;
+  const effectiveManuscripts = apiManuscripts;
 
   useEffect(() => {
     const token = getToken();
@@ -121,7 +121,7 @@ export default function LibraryPage() {
           }));
           setApiManuscripts(mapped);
         }
-      } catch { /* fallback remains */ }
+      } catch { /* api data stays empty */ }
       setDataLoaded(true);
     })();
     return () => { cancelled = true; };

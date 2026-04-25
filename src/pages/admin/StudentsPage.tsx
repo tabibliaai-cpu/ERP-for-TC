@@ -403,7 +403,7 @@ function mapStudentFromApi(raw: any): Student {
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function StudentsPage() {
-  const [students, setStudents] = useState<Student[]>(initialStudents);
+  const [students, setStudents] = useState<Student[]>([]);
   const [search, setSearch] = useState('');
   const [filterProgram, setFilterProgram] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
@@ -483,26 +483,19 @@ export default function StudentsPage() {
     const token = getToken();
     setSaving(true);
     try {
-      if (token) {
-        // Send camelCase directly — backend expects camelCase
-        const apiData: any = {};
-        for (const [key, val] of Object.entries(form)) {
-          if (val === '' || val === undefined || val === null) continue;
-          apiData[key] = val;
-        }
-        await createStudent(apiData);
-        setToast({ message: 'Student created successfully', type: 'success' });
-      } else {
-        // Fallback: local add
-        const { id: _id, enrollmentNo: _enrollmentNo, ...rest } = form as any;
-        const newStudent: Student = {
-          id: String(students.length + 1),
-          enrollmentNo: `COV${new Date().getFullYear()}-${String(students.length + 1).padStart(3, '0')}`,
-          ...rest,
-        } as Student;
-        setStudents(prev => [...prev, newStudent]);
-        setToast({ message: 'Student added locally (no API token)', type: 'success' });
+      if (!token) {
+        setToast({ message: 'Unable to create student: not authenticated', type: 'error' });
+        setSaving(false);
+        return;
       }
+      // Send camelCase directly — backend expects camelCase
+      const apiData: any = {};
+      for (const [key, val] of Object.entries(form)) {
+        if (val === '' || val === undefined || val === null) continue;
+        apiData[key] = val;
+      }
+      await createStudent(apiData);
+      setToast({ message: 'Student created successfully', type: 'success' });
       setShowAddModal(false);
       setForm({ fullName: '', gender: 'Male', dob: '', nationality: 'Indian', bloodGroup: '', mobile: '', email: '',
         permanentAddress: '', currentAddress: '', emergencyContact: '', emergencyPhone: '',

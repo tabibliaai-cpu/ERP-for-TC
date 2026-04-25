@@ -329,7 +329,7 @@ const PerformanceBadge = ({ score }: { score: number }) => {
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function TeachersPage() {
-  const [teachers, setTeachers] = useState<Teacher[]>(initialTeachers);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [search, setSearch] = useState('');
   const [filterDept, setFilterDept] = useState('All');
   const [showAddModal, setShowAddModal] = useState(false);
@@ -395,25 +395,19 @@ export default function TeachersPage() {
     const token = getToken();
     setSaving(true);
     try {
-      if (token) {
-        // Send camelCase directly — backend expects camelCase
-        const apiData: any = {};
-        for (const [key, val] of Object.entries(form)) {
-          if (val === '' || val === undefined || val === null) continue;
-          apiData[key] = val;
-        }
-        await createTeacher(apiData);
-        setToast({ message: 'Faculty member created successfully', type: 'success' });
-      } else {
-        const { id: _id, employeeId: _employeeId, ...rest } = form as any;
-        const newTeacher: Teacher = {
-          id: String(teachers.length + 1),
-          employeeId: `COV-T${String(teachers.length + 1).padStart(3, '0')}`,
-          ...rest,
-        } as Teacher;
-        setTeachers(prev => [...prev, newTeacher]);
-        setToast({ message: 'Faculty added locally (no API token)', type: 'success' });
+      if (!token) {
+        setToast({ message: 'Unable to create faculty: not authenticated', type: 'error' });
+        setSaving(false);
+        return;
       }
+      // Send camelCase directly — backend expects camelCase
+      const apiData: any = {};
+      for (const [key, val] of Object.entries(form)) {
+        if (val === '' || val === undefined || val === null) continue;
+        apiData[key] = val;
+      }
+      await createTeacher(apiData);
+      setToast({ message: 'Faculty member created successfully', type: 'success' });
       setShowAddModal(false);
       fetchTeachers();
     } catch (err: any) {

@@ -21,13 +21,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Default demo credentials for offline/fallback
-const DEMO_CREDENTIALS: Record<string, { password: string; displayName: string; role: UserRole }> = {
-  'dasucosmos@gmail.com': { password: 'ERP@123', displayName: 'Super Administrator', role: 'super_admin' },
-  'admin': { password: 'Admin@2024', displayName: 'Church Administrator', role: 'admin' },
-  'admin@gracetheological.edu': { password: 'Admin@2024', displayName: 'Dr. Samuel Johnson', role: 'admin' },
-};
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
     try {
@@ -57,22 +50,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
       return { success: true };
     } catch (apiError: any) {
-      // Fallback to demo credentials (offline mode)
-      const cred = DEMO_CREDENTIALS[username.toLowerCase()];
-      if (cred && cred.password === password) {
-        const authUser: AuthUser = {
-          username: username.toLowerCase(),
-          role: cred.role,
-          displayName: cred.displayName,
-        };
-        setUser(authUser);
-        // Store a demo JWT so API calls work in demo mode
-        localStorage.setItem('covenantERP_token', 'demo-jwt-token-' + cred.role);
-        localStorage.setItem('covenantERP_user', JSON.stringify(authUser));
-        setIsLoading(false);
-        return { success: true };
-      }
-      
       setIsLoading(false);
       return { success: false, error: apiError.message || 'Invalid username or password' };
     }

@@ -74,10 +74,10 @@ export default function PedagogyPage() {
   const [lpForm, setLpForm] = useState({ course: 'Systematic Theology I', date: new Date().toISOString().split('T')[0], topic: '', method: 'Lecture', duration: '60 min', scripture: '', objectives: '', activities: '' });
 
   // ─── API Data Layer ──────────────────────────────────────────────────
-  const [apiLessonPlans, setApiLessonPlans] = useState(lessonPlans);
+  const [apiLessonPlans, setApiLessonPlans] = useState<any[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const effectiveLessonPlans = dataLoaded && apiLessonPlans.length > 0 ? apiLessonPlans : lessonPlans;
+  const effectiveLessonPlans = dataLoaded ? apiLessonPlans : [];
 
   useEffect(() => {
     const token = getToken();
@@ -93,7 +93,7 @@ export default function PedagogyPage() {
           }));
           setApiLessonPlans(mapped);
         }
-      } catch { /* fallback remains */ }
+      } catch { /* api data stays empty */ }
       setDataLoaded(true);
     })();
     return () => { cancelled = true; };

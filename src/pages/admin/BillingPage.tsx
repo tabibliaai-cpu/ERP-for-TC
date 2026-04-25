@@ -150,10 +150,13 @@ export default function BillingPage() {
   // ─── API Data Layer ──────────────────────────────────────────────────
   const [apiFeeStructures, setApiFeeStructures] = useState<FeeStructure[]>([]);
   const [apiPayments, setApiPayments] = useState<Payment[]>([]);
+  const [apiStudentFees, setApiStudentFees] = useState<StudentFee[]>([]);
+  const [apiInvoices, setApiInvoices] = useState<Invoice[]>([]);
+  const [apiScholarships, setApiScholarships] = useState<Scholarship[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const effectiveFeeStructures = dataLoaded && apiFeeStructures.length > 0 ? apiFeeStructures : feeStructures;
-  const effectivePayments = dataLoaded && apiPayments.length > 0 ? apiPayments : payments;
+  const effectiveFeeStructures = apiFeeStructures;
+  const effectivePayments = apiPayments;
 
   useEffect(() => {
     const token = getToken();
@@ -175,7 +178,7 @@ export default function BillingPage() {
             }));
             setApiPayments(mapped);
         }
-      } catch { /* fallback remains */ }
+      } catch { /* api data stays empty */ }
       setDataLoaded(true);
     })();
     return () => { cancelled = true; };
@@ -183,13 +186,13 @@ export default function BillingPage() {
 
   const stats = useMemo(() => ({
     totalRevenue: effectivePayments.reduce((a, p) => a + p.amount, 0),
-    pendingDues: studentFees.reduce((a, s) => a + s.due, 0),
+    pendingDues: apiStudentFees.reduce((a, s) => a + s.due, 0),
     monthlyCollection: effectivePayments.filter(p => p.date.startsWith('2025-03')).reduce((a, p) => a + p.amount, 0),
-    scholarshipsGiven: scholarships.reduce((a, s) => a + s.amount, 0),
-  }), [effectivePayments]);
+    scholarshipsGiven: apiScholarships.reduce((a, s) => a + s.amount, 0),
+  }), [effectivePayments, apiStudentFees, apiScholarships]);
 
   const filteredFees = useMemo(() => effectiveFeeStructures.filter(f => search === '' || f.name.toLowerCase().includes(search.toLowerCase())), [search, effectiveFeeStructures]);
-  const filteredStudentFees = useMemo(() => studentFees.filter(s => search === '' || s.studentName.toLowerCase().includes(search.toLowerCase()) || s.enrollmentNo.toLowerCase().includes(search.toLowerCase())), [search]);
+  const filteredStudentFees = useMemo(() => apiStudentFees.filter(s => search === '' || s.studentName.toLowerCase().includes(search.toLowerCase()) || s.enrollmentNo.toLowerCase().includes(search.toLowerCase())), [search, apiStudentFees]);
   const filteredPayments = useMemo(() => effectivePayments.filter(p => search === '' || p.studentName.toLowerCase().includes(search.toLowerCase())), [search, effectivePayments]);
 
   const handleRecordPayment = async () => {
@@ -253,7 +256,7 @@ export default function BillingPage() {
           { label: 'Total Revenue', value: fmt(stats.totalRevenue), icon: TrendingUp, color: 'bg-emerald-600', sub: 'All time collection' },
           { label: 'Pending Dues', value: fmt(stats.pendingDues), icon: AlertCircle, color: 'bg-red-600', sub: 'Outstanding fees' },
           { label: 'Monthly Collection', value: fmt(stats.monthlyCollection), icon: Wallet, color: 'bg-blue-600', sub: 'March 2025' },
-          { label: 'Scholarships Given', value: fmt(stats.scholarshipsGiven), icon: Gift, color: 'bg-amber-600', sub: `${scholarships.length} active` },
+          { label: 'Scholarships Given', value: fmt(stats.scholarshipsGiven), icon: Gift, color: 'bg-amber-600', sub: `${apiScholarships.length} active` },
         ].map((card, i) => (
           <div key={i} className="bg-white rounded-2xl border border-slate-100 p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-all">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${card.color}`}><card.icon className="h-5 w-5 text-white" /></div>
@@ -296,7 +299,7 @@ export default function BillingPage() {
                 <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-5 text-white">
                   <p className="text-sm text-amber-100">Scholarships Awarded</p>
                   <p className="text-2xl font-extrabold mt-1">{fmt(stats.scholarshipsGiven)}</p>
-                  <p className="text-xs text-amber-200 mt-2">{scholarships.length} scholarship programs</p>
+                  <p className="text-xs text-amber-200 mt-2">{apiScholarships.length} scholarship programs</p>
                 </div>
               </div>
 
@@ -478,7 +481,7 @@ export default function BillingPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
-                    {invoices.map(inv => (
+                    {apiInvoices.map(inv => (
                       <tr key={inv.id} className="hover:bg-slate-50/50 transition-colors">
                         <td className="px-4 py-3 font-mono text-xs text-slate-600 font-semibold">{inv.invoiceNo}</td>
                         <td className="px-4 py-3"><p className="font-medium text-slate-900">{inv.studentName}</p><p className="text-xs text-slate-400">{inv.enrollmentNo}</p></td>
@@ -503,7 +506,7 @@ export default function BillingPage() {
           {activeTab === 5 && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {scholarships.map(s => (
+                {apiScholarships.map(s => (
                   <div key={s.id} className="border border-slate-100 rounded-2xl p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-all">
                     <div className="flex items-start justify-between mb-3">
                       <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center"><Gift className="h-5 w-5 text-amber-600" /></div>
