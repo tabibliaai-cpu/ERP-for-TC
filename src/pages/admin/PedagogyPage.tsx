@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   BookOpen, Upload, Users, MessageSquare, Calendar, BarChart3, Plus,
   Search, Filter, Star, Clock, ChevronRight, FileText, Video, ExternalLink,
   X, CheckCircle, AlertCircle, TrendingUp, Heart, Brain
 } from 'lucide-react';
+import { getLessonPlans, getToken } from '../../utils/api';
 
 // --- Sample Data ---
 const lessonPlans = [
@@ -45,11 +46,54 @@ const spiritualActivities = [
   { activity: 'Outreach Programs', participation: 38, trend: 'up' },
 ];
 
+// ─── Toast helper ─────────────────────────────────────────────────────────
+function useToast() {
+  const [toast, setToast] = useState<{msg: string; type: 'success' | 'error'} | null>(null);
+  const show = useCallback((msg: string, type: 'success' | 'error' = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  }, []);
+  const ToastUI = toast ? (
+    <div className={`fixed top-6 right-6 z-[100] flex items-center gap-2 px-5 py-3 rounded-xl shadow-lg text-sm font-semibold text-white animate-fade-in ${toast.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
+      {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+      {toast.msg}
+    </div>
+  ) : null;
+  return { show, ToastUI };
+}
+
 export default function PedagogyPage() {
   const [activeTab, setActiveTab] = useState('lessons');
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showResourceModal, setShowResourceModal] = useState(false);
+  const { show: showToast, ToastUI } = useToast();
+
+  // ─── API Data Layer ──────────────────────────────────────────────────
+  const [apiLessonPlans, setApiLessonPlans] = useState(lessonPlans);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const effectiveLessonPlans = dataLoaded && apiLessonPlans.length > 0 ? apiLessonPlans : lessonPlans;
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) { setDataLoaded(true); return; }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await getLessonPlans();
+        if (cancelled) return;
+        if (Array.isArray(res)) {
+          const mapped = res.map((l: any) => ({
+            id: l.id ?? l.lesson_plan_id ?? 0, course: l.course_name ?? l.course ?? '', topic: l.topic ?? '', teacher: l.teacher_name ?? l.teacher ?? '', date: l.date ?? '', duration: l.duration ?? '60 min', method: l.method ?? 'Lecture', status: l.status ?? 'Upcoming', engagement: Number(l.engagement ?? 0),
+          }));
+          setApiLessonPlans(mapped);
+        }
+      } catch { /* fallback remains */ }
+      setDataLoaded(true);
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const tabs = [
     { id: 'lessons', label: 'Lesson Plans', icon: BookOpen },
@@ -59,7 +103,7 @@ export default function PedagogyPage() {
     { id: 'spiritual', label: 'Spiritual Formation', icon: Heart },
   ];
 
-  const filteredLessons = lessonPlans.filter(l =>
+  const filteredLessons = effectiveLessonPlans.filter(l =>
     l.course.toLowerCase().includes(searchTerm.toLowerCase()) ||
     l.topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
     l.teacher.toLowerCase().includes(searchTerm.toLowerCase())
@@ -72,6 +116,7 @@ export default function PedagogyPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {ToastUI}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -90,7 +135,7 @@ export default function PedagogyPage() {
       {/* Summary Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { icon: BookOpen, label: 'Active Lesson Plans', value: lessonPlans.filter(l => l.status !== 'Archived').length.toString(), color: 'bg-blue-500' },
+          { icon: BookOpen, label: 'Active Lesson Plans', value: effectiveLessonPlans.filter(l => l.status !== 'Archived').length.toString(), color: 'bg-blue-500' },
           { icon: FileText, label: 'Teaching Resources', value: resources.length.toString(), color: 'bg-emerald-500' },
           { icon: TrendingUp, label: 'Avg Engagement', value: '88%', color: 'bg-amber-500' },
           { icon: Users, label: 'Active Mentorships', value: mentorships.length.toString(), color: 'bg-purple-500' },
@@ -293,7 +338,7 @@ export default function PedagogyPage() {
           <div className="bg-white rounded-2xl border border-slate-100 p-6">
             <h3 className="text-sm font-semibold text-slate-900 mb-4">Teaching Effectiveness Scores</h3>
             <div className="space-y-4">
-              {lessonPlans.filter(l => l.engagement > 0).map((plan) => (
+              {effectiveLessonPlans.filter(l => l.engagement > 0).map((plan) => (
                 <div key={plan.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors">
                   <div>
                     <p className="text-sm font-semibold text-slate-900">{plan.teacher}</p>

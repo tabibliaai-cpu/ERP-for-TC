@@ -12,10 +12,11 @@ import AcademicsPage from './pages/admin/AcademicsPage';
 import LibraryPage from './pages/admin/LibraryPage';
 import PedagogyPage from './pages/admin/PedagogyPage';
 import ReportsPage from './pages/admin/ReportsPage';
+import ProfilePage from './pages/admin/ProfilePage';
 import SuperAdminDashboard from './pages/SuperAdminDashboard';
 import {
   LogOut, Church, LayoutDashboard, GraduationCap, UserCog, Wallet,
-  BookOpen, Brain, Library, Sparkles, Send, BarChart3, Menu, X, Bell
+  BookOpen, Brain, Library, Sparkles, Send, BarChart3, Menu, X, Bell, UserCircle
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 
@@ -30,6 +31,7 @@ const adminNav = [
   { id: 'yeshua', label: 'Yeshua AI', icon: Sparkles },
   { id: 'comms', label: 'Communications', icon: Send },
   { id: 'reports', label: 'Reports', icon: BarChart3 },
+  { id: 'profile', label: 'My Profile', icon: UserCircle },
 ];
 
 function AdminDashboardRouter() {
@@ -48,6 +50,7 @@ function AdminDashboardRouter() {
       case 'comms': return <div className="animate-fade-in p-8 text-center"><p className="text-[#9CA3AF]">Communications module — coming soon</p></div>;
       case 'reports': return <ReportsPage />;
       case 'pedagogy': return <PedagogyPage />;
+      case 'profile': return <ProfilePage />;
       default: return null;
     }
   };

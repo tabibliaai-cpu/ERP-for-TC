@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   BookOpen, GraduationCap, Plus, Search, X, Eye, Edit3, ChevronLeft, ChevronRight,
-  Settings, Layers, Award, Sparkles, Target, LayoutGrid, BookMarked, Clock, CheckCircle
+  Settings, Layers, Award, Sparkles, Target, LayoutGrid, BookMarked, Clock, CheckCircle, AlertCircle
 } from 'lucide-react';
+import { getPrograms, getCourses, createProgram, createCourse, getToken } from '../../utils/api';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Program {
@@ -92,6 +93,22 @@ const Select = ({ label, value, onChange, options }: { label: string; value: str
   </div>
 );
 
+// ─── Toast helper ─────────────────────────────────────────────────────────
+function useToast() {
+  const [toast, setToast] = useState<{msg: string; type: 'success' | 'error'} | null>(null);
+  const show = useCallback((msg: string, type: 'success' | 'error' = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  }, []);
+  const ToastUI = toast ? (
+    <div className={`fixed top-6 right-6 z-[100] flex items-center gap-2 px-5 py-3 rounded-xl shadow-lg text-sm font-semibold text-white animate-fade-in ${toast.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
+      {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+      {toast.msg}
+    </div>
+  ) : null;
+  return { show, ToastUI };
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function AcademicsPage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -101,21 +118,57 @@ export default function AcademicsPage() {
   const [selectedProgram, setSelectedProgram] = useState('B.Th');
   const [showAddProgram, setShowAddProgram] = useState(false);
   const [showAddCourse, setShowAddCourse] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { show: showToast, ToastUI } = useToast();
 
   const [progForm, setProgForm] = useState({ name: '', shortName: '', duration: '', credits: '', level: 'Undergraduate', gradingSystem: 'GPA (4.0 Scale)', totalSemesters: '', department: '', description: '' });
   const [courseForm, setCourseForm] = useState({ code: '', name: '', department: 'Biblical Studies', credits: '', type: 'Core', semester: '', prerequisites: '', description: '', program: 'B.Th', instructor: '', hours: '' });
 
-  const depts = useMemo(() => ['All', ...new Set(courses.map(c => c.department))], []);
+  // ─── API Data Layer ──────────────────────────────────────────────────
+  const [apiPrograms, setApiPrograms] = useState<Program[]>([]);
+  const [apiCourses, setApiCourses] = useState<Course[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  const filteredCourses = useMemo(() => courses.filter(c => {
+  const effectivePrograms = dataLoaded && apiPrograms.length > 0 ? apiPrograms : programs;
+  const effectiveCourses = dataLoaded && apiCourses.length > 0 ? apiCourses : courses;
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) { setDataLoaded(true); return; }
+    let cancelled = false;
+    (async () => {
+      try {
+        const [pRes, cRes] = await Promise.allSettled([getPrograms(), getCourses()]);
+        if (cancelled) return;
+        if (pRes.status === 'fulfilled' && Array.isArray(pRes.value)) {
+          const mapped = pRes.value.map((p: any) => ({
+            id: String(p.id ?? p.program_id ?? ''), name: p.name ?? p.program_name ?? '', shortName: p.short_name ?? p.shortName ?? '', duration: p.duration ?? 'N/A', credits: Number(p.credits ?? 0), level: p.level ?? 'Undergraduate', gradingSystem: p.grading_system ?? p.gradingSystem ?? 'GPA (4.0 Scale)', totalSemesters: Number(p.total_semesters ?? p.totalSemesters ?? 0), status: p.status ?? 'Active', department: p.department ?? '', description: p.description ?? '', version: p.version ?? 'v1.0', effectiveDate: p.effective_date ?? p.effectiveDate ?? new Date().toISOString().split('T')[0],
+          }));
+          setApiPrograms(mapped);
+        }
+        if (cRes.status === 'fulfilled' && Array.isArray(cRes.value)) {
+          const mapped = cRes.value.map((c: any) => ({
+            id: String(c.id ?? c.course_id ?? ''), code: c.code ?? '', name: c.name ?? c.course_name ?? '', department: c.department ?? '', credits: Number(c.credits ?? 0), type: c.type ?? 'Core', semester: Number(c.semester ?? 0), prerequisites: c.prerequisites ?? 'None', description: c.description ?? '', program: c.program_name ?? c.program ?? '', syllabus: c.syllabus ?? 'Uploaded', status: c.status ?? 'Active', instructor: c.teacher_name ?? c.instructor ?? '', hours: Number(c.hours ?? 0),
+          }));
+          setApiCourses(mapped);
+        }
+      } catch { /* fallback remains */ }
+      setDataLoaded(true);
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  const depts = useMemo(() => ['All', ...new Set(effectiveCourses.map(c => c.department))], [effectiveCourses]);
+
+  const filteredCourses = useMemo(() => effectiveCourses.filter(c => {
     const m1 = search === '' || c.name.toLowerCase().includes(search.toLowerCase()) || c.code.toLowerCase().includes(search.toLowerCase());
     const m2 = filterProgram === 'All' || c.program === filterProgram;
     const m3 = filterDept === 'All' || c.department === filterDept;
     return m1 && m2 && m3;
-  }), [search, filterProgram, filterDept]);
+  }), [search, filterProgram, filterDept, effectiveCourses]);
 
   const curriculumView = useMemo(() => {
-    return courses
+    return effectiveCourses
       .filter(c => c.program === selectedProgram && c.status === 'Active')
       .reduce((acc, c) => {
         const sem = c.semester;
@@ -123,17 +176,47 @@ export default function AcademicsPage() {
         acc[sem].push({ semester: sem, courseCode: c.code, courseName: c.name, credits: c.credits, type: c.type, status: c.status });
         return acc;
       }, {} as Record<number, CurriculumEntry[]>);
-  }, [selectedProgram]);
+  }, [selectedProgram, effectiveCourses]);
 
   const stats = useMemo(() => ({
-    programs: programs.length,
-    courses: courses.filter(c => c.status === 'Active').length,
-    totalCredits: programs.reduce((a, p) => a + p.credits, 0),
-    departments: new Set(courses.map(c => c.department)).size,
-  }), []);
+    programs: effectivePrograms.length,
+    courses: effectiveCourses.filter(c => c.status === 'Active').length,
+    totalCredits: effectivePrograms.reduce((a, p) => a + p.credits, 0),
+    departments: new Set(effectiveCourses.map(c => c.department)).size,
+  }), [effectivePrograms, effectiveCourses]);
+
+  // ─── Create Handlers ────────────────────────────────────────────────
+  const handleCreateProgram = async () => {
+    if (!progForm.name || !progForm.shortName) { showToast('Name and short name are required', 'error'); return; }
+    setSubmitting(true);
+    try {
+      await createProgram({ name: progForm.name, short_name: progForm.shortName, duration: progForm.duration, credits: Number(progForm.credits) || 0, level: progForm.level, grading_system: progForm.gradingSystem, total_semesters: Number(progForm.totalSemesters) || 0, department: progForm.department, description: progForm.description });
+      showToast('Program created successfully');
+      setShowAddProgram(false);
+      setProgForm({ name: '', shortName: '', duration: '', credits: '', level: 'Undergraduate', gradingSystem: 'GPA (4.0 Scale)', totalSemesters: '', department: '', description: '' });
+      const pRes = await getPrograms();
+      if (Array.isArray(pRes)) { setApiPrograms(pRes.map((p: any) => ({ id: String(p.id ?? ''), name: p.name ?? '', shortName: p.short_name ?? '', duration: p.duration ?? 'N/A', credits: Number(p.credits ?? 0), level: p.level ?? 'Undergraduate', gradingSystem: p.grading_system ?? 'GPA (4.0 Scale)', totalSemesters: Number(p.total_semesters ?? 0), status: p.status ?? 'Active', department: p.department ?? '', description: p.description ?? '', version: p.version ?? 'v1.0', effectiveDate: p.effective_date ?? new Date().toISOString().split('T')[0] }))); }
+    } catch (e: any) { showToast(e.message || 'Failed to create program', 'error'); }
+    setSubmitting(false);
+  };
+
+  const handleCreateCourse = async () => {
+    if (!courseForm.code || !courseForm.name) { showToast('Code and name are required', 'error'); return; }
+    setSubmitting(true);
+    try {
+      await createCourse({ code: courseForm.code, name: courseForm.name, department: courseForm.department, credits: Number(courseForm.credits) || 0, type: courseForm.type, semester: Number(courseForm.semester) || 0, prerequisites: courseForm.prerequisites, description: courseForm.description, program: courseForm.program, instructor: courseForm.instructor, hours: Number(courseForm.hours) || 0 });
+      showToast('Course created successfully');
+      setShowAddCourse(false);
+      setCourseForm({ code: '', name: '', department: 'Biblical Studies', credits: '', type: 'Core', semester: '', prerequisites: '', description: '', program: 'B.Th', instructor: '', hours: '' });
+      const cRes = await getCourses();
+      if (Array.isArray(cRes)) { setApiCourses(cRes.map((c: any) => ({ id: String(c.id ?? ''), code: c.code ?? '', name: c.name ?? c.course_name ?? '', department: c.department ?? '', credits: Number(c.credits ?? 0), type: c.type ?? 'Core', semester: Number(c.semester ?? 0), prerequisites: c.prerequisites ?? 'None', description: c.description ?? '', program: c.program_name ?? c.program ?? '', syllabus: c.syllabus ?? 'Uploaded', status: c.status ?? 'Active', instructor: c.teacher_name ?? c.instructor ?? '', hours: Number(c.hours ?? 0) }))); }
+    } catch (e: any) { showToast(e.message || 'Failed to create course', 'error'); }
+    setSubmitting(false);
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {ToastUI}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2">
@@ -181,8 +264,8 @@ export default function AcademicsPage() {
           {/* ─── Programs Tab ─────────────────────────────────────────── */}
           {activeTab === 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {programs.map(p => {
-                const courseCount = courses.filter(c => c.program === p.shortName).length;
+              {effectivePrograms.map(p => {
+                const courseCount = effectiveCourses.filter(c => c.program === p.shortName).length;
                 return (
                   <div key={p.id} className="border border-slate-100 rounded-2xl p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-all group">
                     <div className="flex items-start justify-between mb-3">
@@ -219,7 +302,7 @@ export default function AcademicsPage() {
                 </div>
                 <select value={filterProgram} onChange={e => setFilterProgram(e.target.value)} className="px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 bg-white">
                   <option value="All">All Programs</option>
-                  {programs.map(p => <option key={p.id} value={p.shortName}>{p.shortName}</option>)}
+                  {effectivePrograms.map(p => <option key={p.id} value={p.shortName}>{p.shortName}</option>)}
                 </select>
                 <select value={filterDept} onChange={e => setFilterDept(e.target.value)} className="px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 bg-white">
                   {depts.map(d => <option key={d} value={d}>{d === 'All' ? 'All Departments' : d}</option>)}
@@ -264,7 +347,7 @@ export default function AcademicsPage() {
           {activeTab === 2 && (
             <div className="space-y-4">
               <div className="flex gap-2">
-                {programs.map(p => (
+                {effectivePrograms.map(p => (
                   <button key={p.id} onClick={() => setSelectedProgram(p.shortName)}
                     className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${selectedProgram === p.shortName ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}>
                     {p.shortName}
@@ -283,7 +366,7 @@ export default function AcademicsPage() {
                         <span className="font-mono text-xs text-amber-700 font-semibold w-16 shrink-0">{c.courseCode}</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-slate-900">{c.courseName}</p>
-                          <p className="text-xs text-slate-400">{courses.find(cr => cr.code === c.courseCode)?.department}</p>
+                          <p className="text-xs text-slate-400">{effectiveCourses.find(cr => cr.code === c.courseCode)?.department}</p>
                         </div>
                         <span className={`px-2 py-1 rounded-lg text-xs font-semibold shrink-0 ${c.type === 'Core' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>{c.type}</span>
                         <span className="text-sm font-semibold text-slate-700 w-8 text-center shrink-0">{c.credits}</span>
@@ -336,7 +419,7 @@ export default function AcademicsPage() {
                 </div>
                 <div className="border border-slate-100 rounded-2xl p-5">
                   <h4 className="font-bold text-slate-900 text-sm mb-3">Credit Requirements</h4>
-                  {programs.map(p => (
+                  {effectivePrograms.map(p => (
                     <div key={p.id} className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
                       <span className="text-sm text-slate-700">{p.shortName}</span>
                       <span className="text-sm font-semibold text-slate-900">{p.credits} credits ({p.totalSemesters} sem)</span>
@@ -353,8 +436,8 @@ export default function AcademicsPage() {
               <div className="p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <h4 className="font-bold text-amber-800 text-sm flex items-center gap-2"><Sparkles className="h-4 w-4" />Elective Selection Rules</h4>
                 <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {programs.map(p => {
-                    const electives = courses.filter(c => c.program === p.shortName && c.type === 'Elective');
+                  {effectivePrograms.map(p => {
+                    const electives = effectiveCourses.filter(c => c.program === p.shortName && c.type === 'Elective');
                     return (
                       <div key={p.id} className="bg-white rounded-xl p-3 border border-amber-100">
                         <p className="text-sm font-semibold text-slate-900">{p.shortName}</p>
@@ -378,7 +461,7 @@ export default function AcademicsPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
-                    {courses.filter(c => c.type === 'Elective').map(c => (
+                    {effectiveCourses.filter(c => c.type === 'Elective').map(c => (
                       <tr key={c.id} className="hover:bg-slate-50/50 transition-colors">
                         <td className="px-4 py-3 font-mono text-xs text-amber-700 font-semibold">{c.code}</td>
                         <td className="px-4 py-3 font-medium text-slate-900">{c.name}</td>
@@ -420,7 +503,7 @@ export default function AcademicsPage() {
             </div>
             <div className="flex items-center justify-end gap-2 p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
               <button onClick={() => setShowAddProgram(false)} className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-white transition-all">Cancel</button>
-              <button onClick={() => setShowAddProgram(false)} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all"><Plus className="h-4 w-4" />Create Program</button>
+              <button onClick={handleCreateProgram} disabled={submitting} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all disabled:opacity-50"><Plus className="h-4 w-4" />{submitting ? 'Creating...' : 'Create Program'}</button>
             </div>
           </div>
         </div>
@@ -437,7 +520,7 @@ export default function AcademicsPage() {
             <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
               <div className="grid grid-cols-2 gap-4">
                 <Input label="Course Code" value={courseForm.code} onChange={v => setCourseForm(p => ({ ...p, code: v }))} placeholder="e.g., BT301" />
-                <Select label="Program" value={courseForm.program} onChange={v => setCourseForm(p => ({ ...p, program: v }))} options={programs.map(p => ({ label: p.shortName, value: p.shortName }))} />
+                <Select label="Program" value={courseForm.program} onChange={v => setCourseForm(p => ({ ...p, program: v }))} options={effectivePrograms.map(p => ({ label: p.shortName, value: p.shortName }))} />
               </div>
               <Input label="Course Name" value={courseForm.name} onChange={v => setCourseForm(p => ({ ...p, name: v }))} />
               <div className="grid grid-cols-2 gap-4">
@@ -455,7 +538,7 @@ export default function AcademicsPage() {
             </div>
             <div className="flex items-center justify-end gap-2 p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
               <button onClick={() => setShowAddCourse(false)} className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-white transition-all">Cancel</button>
-              <button onClick={() => setShowAddCourse(false)} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-amber-600 text-white text-sm font-semibold hover:bg-amber-700 transition-all shadow-lg shadow-amber-600/20"><Plus className="h-4 w-4" />Add Course</button>
+              <button onClick={handleCreateCourse} disabled={submitting} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-amber-600 text-white text-sm font-semibold hover:bg-amber-700 transition-all shadow-lg shadow-amber-600/20 disabled:opacity-50"><Plus className="h-4 w-4" />{submitting ? 'Creating...' : 'Add Course'}</button>
             </div>
           </div>
         </div>

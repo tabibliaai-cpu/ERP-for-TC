@@ -195,3 +195,63 @@ export async function getAttendance(params?: { date?: string; courseId?: string 
 export async function getDashboardStats() {
   return apiFetch('/tenant/dashboard/stats');
 }
+
+// ── PROFILE (Admin) ───────────────────────────
+export async function updateProfile(data: {
+  fullName?: string;
+  displayName?: string;
+  phone?: string;
+  gender?: string;
+  dateOfBirth?: string;
+  churchName?: string;
+  pastorName?: string;
+  yearsInMinistry?: string;
+  statementOfFaith?: string;
+}) {
+  return apiFetch('/platform/auth/profile', { method: 'PUT', body: JSON.stringify(data) });
+}
+
+export async function changePassword(currentPassword: string, newPassword: string) {
+  return apiFetch('/platform/auth/password', {
+    method: 'PUT',
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+}
+
+// ── PLATFORM (Super Admin) — Additional ─────────
+export async function getInstitution(id: string) {
+  return apiFetch(`/platform/institutions/${id}`);
+}
+
+export async function updateInstitution(id: string, data: any) {
+  return apiFetch(`/platform/institutions/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+}
+
+export async function deleteInstitution(id: string) {
+  return apiFetch(`/platform/institutions/${id}`, { method: 'DELETE' });
+}
+
+export async function updateUserStatus(userId: string, status: string) {
+  return apiFetch(`/platform/users/${userId}/status`, { method: 'PUT', body: JSON.stringify({ status }) });
+}
+
+export async function getPlatformSettings() {
+  return apiFetch('/platform/settings');
+}
+
+export async function updatePlatformSetting(key: string, value: string, description?: string) {
+  return apiFetch('/platform/settings', { method: 'PUT', body: JSON.stringify({ key, value, description }) });
+}
+
+// ── TENANT (Admin) — Additional ───────────────
+export async function updateTeacher(id: string, data: any) {
+  return apiFetch(`/tenant/teachers/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+}
+
+export async function deleteStudent(id: string) {
+  return apiFetch(`/tenant/students/${id}`, { method: 'DELETE' });
+}
+
+export async function getRecentStudents() {
+  return apiFetch('/tenant/students/recent');
+}

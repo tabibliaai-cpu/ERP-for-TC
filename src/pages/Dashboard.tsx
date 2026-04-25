@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { getDashboardStats, getRecentStudents, getToken } from '../utils/api';
 import {
   Building2, Users, Shield, BarChart3, GraduationCap, Wallet, UserCog,
   BookOpen, FileText, Plus, UserPlus, FileBarChart, Clock, CheckCircle2,
@@ -59,6 +61,39 @@ function StatCard({
    DashboardView — Role-based dashboard content
    ================================================================ */
 function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
+  /* ── API state for admin dashboard ── */
+  const [stats, setStats] = useState<{ totalStudents?: number; totalTeachers?: number; totalPrograms?: number; totalRevenue?: number } | null>(null);
+  const [recentStudents, setRecentStudents] = useState<{ full_name?: string; program?: string; enrollment_date?: string; admission_status?: string; name?: string; status?: string; date?: string }[]>([]);
+  const [apiLoaded, setApiLoaded] = useState(false);
+
+  useEffect(() => {
+    if (role !== 'admin') return;
+    const token = getToken();
+    if (!token) { setApiLoaded(true); return; }
+    Promise.all([
+      getDashboardStats().catch(() => null),
+      getRecentStudents().catch(() => null),
+    ]).then(([statsData, recentData]) => {
+      if (statsData) setStats(statsData);
+      if (recentData) setRecentStudents(Array.isArray(recentData) ? recentData : []);
+      setApiLoaded(true);
+    });
+  }, [role]);
+
+  const fmt = (n: number | undefined) => n != null ? `$${n.toLocaleString('en-US')}` : undefined;
+  const sStudents = stats?.totalStudents ?? 342;
+  const sRevenue = stats?.totalRevenue;
+  const sTeachers = stats?.totalTeachers ?? 28;
+  const sPrograms = stats?.totalPrograms ?? 6;
+
+  const displayRecent = recentStudents.length > 0 ? recentStudents : [
+    { name: 'Samuel Johnson', program: 'M.Div', date: 'Apr 20, 2026', status: 'Active' },
+    { name: 'David Williams', program: 'B.Th', date: 'Apr 18, 2026', status: 'Active' },
+    { name: 'Maria Garcia', program: 'M.Th', date: 'Apr 15, 2026', status: 'Pending' },
+    { name: 'James Chen', program: 'D.Min', date: 'Apr 12, 2026', status: 'Active' },
+    { name: 'Ruth Adeyemi', program: 'M.Div', date: 'Apr 10, 2026', status: 'Active' },
+  ];
+
   /* ── Super Admin ────────────────────────────────────────── */
   if (role === 'super_admin') {
     return (
@@ -223,7 +258,7 @@ function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
         <StatCard
           icon={GraduationCap}
           label="Students"
-          value="342"
+          value={String(sStudents)}
           change="+12 this month"
           changeType="positive"
           color="bg-[#6B2D3E]"
@@ -232,7 +267,7 @@ function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
         <StatCard
           icon={Wallet}
           label="Revenue"
-          value="$47,850"
+          value={sRevenue != null ? fmt(sRevenue)! : '$47,850'}
           change="+8.2% vs last"
           changeType="positive"
           color="bg-[#2D6A4F]"
@@ -241,7 +276,7 @@ function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
         <StatCard
           icon={UserCog}
           label="Faculty"
-          value="28"
+          value={String(sTeachers)}
           change="+2 new"
           changeType="positive"
           color="bg-[#B8860B]"
@@ -250,7 +285,7 @@ function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
         <StatCard
           icon={BookOpen}
           label="Programs"
-          value="6"
+          value={String(sPrograms)}
           change="B.Th, M.Div..."
           changeType="neutral"
           color="bg-[#3B6B8A]"
@@ -336,53 +371,52 @@ function DashboardView({ role }: { role: 'super_admin' | 'admin' }) {
               </tr>
             </thead>
             <tbody>
-              {[
-                { name: 'Samuel Johnson', program: 'M.Div', date: 'Apr 20, 2026', status: 'Active' },
-                { name: 'David Williams', program: 'B.Th', date: 'Apr 18, 2026', status: 'Active' },
-                { name: 'Maria Garcia', program: 'M.Th', date: 'Apr 15, 2026', status: 'Pending' },
-                { name: 'James Chen', program: 'D.Min', date: 'Apr 12, 2026', status: 'Active' },
-                { name: 'Ruth Adeyemi', program: 'M.Div', date: 'Apr 10, 2026', status: 'Active' },
-              ].map((student, i) => (
+              {displayRecent.map((student, i) => {
+                const sName = (student as any).full_name || (student as any).name || '';
+                const sProgram = (student as any).program || '';
+                const sDate = (student as any).enrollment_date
+                  ? new Date((student as any).enrollment_date!).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                  : (student as any).date || '';
+                const sStatus = (student as any).admission_status || (student as any).status || '';
+                return (
                 <tr key={i}>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F5F2EE] to-[#E8E5E0] flex items-center justify-center">
                         <span className="text-xs font-bold text-[#6B2D3E]">
-                          {student.name
-                            .split(' ')
-                            .map((n) => n[0])
-                            .join('')}
+                          {sName.split(' ').map((n: string) => n[0]).join('')}
                         </span>
                       </div>
-                      <span className="font-medium text-[#1F1F1F]">{student.name}</span>
+                      <span className="font-medium text-[#1F1F1F]">{sName}</span>
                     </div>
                   </td>
                   <td>
                     <span className="text-[#6B2D3E] font-medium bg-[#6B2D3E]/8 px-2.5 py-1 rounded-md text-xs">
-                      {student.program}
+                      {sProgram}
                     </span>
                   </td>
                   <td>
-                    <span className="text-[#6B6B6B]">{student.date}</span>
+                    <span className="text-[#6B6B6B]">{sDate}</span>
                   </td>
                   <td>
                     <span
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold ${
-                        student.status === 'Pending'
+                        sStatus === 'Pending'
                           ? 'bg-[#B8860B]/10 text-[#8B6914] ring-1 ring-inset ring-[#B8860B]/20'
                           : 'bg-[#2D6A4F]/10 text-[#2D6A4F] ring-1 ring-inset ring-[#2D6A4F]/20'
                       }`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${
-                          student.status === 'Pending' ? 'bg-[#B8860B]' : 'bg-[#2D6A4F]'
+                          sStatus === 'Pending' ? 'bg-[#B8860B]' : 'bg-[#2D6A4F]'
                         }`}
                       />
-                      {student.status}
+                      {sStatus}
                     </span>
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>

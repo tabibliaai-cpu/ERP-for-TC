@@ -94,8 +94,7 @@ export function getPlatformDb() {
         last_login_ip TEXT,
         status TEXT DEFAULT 'active',
         created_at TEXT DEFAULT (CURRENT_TIMESTAMP),
-        updated_at TEXT DEFAULT (CURRENT_TIMESTAMP),
-        FOREIGN KEY (institution_id) REFERENCES institutions(id)
+        updated_at TEXT DEFAULT (CURRENT_TIMESTAMP)
       );
       CREATE TABLE IF NOT EXISTS subscriptions (
         id TEXT PRIMARY KEY,

@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import {
   GraduationCap, Users, UserPlus, Search, Filter, Eye, Edit3, X, ChevronLeft, ChevronRight,
   Phone, Mail, MapPin, Heart, BookOpen, Church, Calendar, FileText, DollarSign,
   AlertCircle, CheckCircle, Clock, Download, MoreVertical, UserCheck, UserX, Star
 } from 'lucide-react';
+import { getStudents, createStudent, getStudent, updateStudent, getToken } from '../../utils/api';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Student {
@@ -313,6 +314,93 @@ function Select({ label, value, onChange, options }: {
   );
 }
 
+// ─── Toast helper ──────────────────────────────────────────────────────────────
+function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) {
+  useEffect(() => { const t = setTimeout(onClose, 3500); return () => clearTimeout(t); }, [onClose]);
+  return (
+    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-sm font-medium animate-fade-in ${
+      type === 'success' ? 'bg-[#2D6A4F] text-white' : 'bg-red-600 text-white'
+    }`}>
+      {type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+      {message}
+      <button onClick={onClose} className="ml-2 hover:opacity-70"><X className="h-3.5 w-3.5" /></button>
+    </div>
+  );
+}
+
+// ─── snake_case to camelCase mapper ──────────────────────────────────────────
+function mapStudentFromApi(raw: any): Student {
+  return {
+    id: raw.id || String(raw.id),
+    enrollmentNo: raw.enrollment_no || raw.enrollmentNo || '',
+    fullName: raw.full_name || raw.fullName || '',
+    gender: raw.gender || '',
+    dob: raw.dob || raw.date_of_birth || '',
+    nationality: raw.nationality || '',
+    bloodGroup: raw.blood_group || raw.bloodGroup || '',
+    mobile: raw.mobile || raw.phone || '',
+    email: raw.email || '',
+    permanentAddress: raw.permanent_address || raw.permanentAddress || '',
+    currentAddress: raw.current_address || raw.currentAddress || '',
+    emergencyContact: raw.emergency_contact || raw.emergencyContact || '',
+    emergencyPhone: raw.emergency_phone || raw.emergencyPhone || '',
+    fatherName: raw.father_name || raw.fatherName || '',
+    motherName: raw.mother_name || raw.motherName || '',
+    guardian: raw.guardian || '',
+    occupation: raw.occupation || '',
+    familyBackground: raw.family_background || raw.familyBackground || '',
+    conversionDate: raw.conversion_date || raw.conversionDate || '',
+    baptismStatus: raw.baptism_status || raw.baptismStatus || '',
+    baptismDate: raw.baptism_date || raw.baptismDate || '',
+    baptismChurch: raw.baptism_church || raw.baptismChurch || '',
+    currentChurch: raw.current_church || raw.currentChurch || '',
+    pastorName: raw.pastor_name || raw.pastorName || '',
+    ministryInvolvement: raw.ministry_involvement || raw.ministryInvolvement || '',
+    spiritualGifts: raw.spiritual_gifts || raw.spiritualGifts || '',
+    testimony: raw.testimony || '',
+    prevQualification: raw.prev_qualification || raw.prevQualification || '',
+    schoolCollege: raw.school_college || raw.schoolCollege || '',
+    boardUniversity: raw.board_university || raw.boardUniversity || '',
+    year: raw.year || '',
+    marks: raw.marks || '',
+    medium: raw.medium || '',
+    program: raw.program || '',
+    department: raw.department || '',
+    admissionDate: raw.admission_date || raw.admissionDate || '',
+    academicYear: raw.academic_year || raw.academicYear || '',
+    semester: raw.semester || '',
+    mode: raw.mode || '',
+    campus: raw.campus || '',
+    hostelRequired: raw.hostel_required ?? raw.hostelRequired ?? false,
+    roomAllocation: raw.room_allocation || raw.roomAllocation || '',
+    transportRequired: raw.transport_required ?? raw.transportRequired ?? false,
+    feeStructure: raw.fee_structure || raw.feeStructure || '',
+    scholarship: raw.scholarship || '',
+    sponsorship: raw.sponsorship || '',
+    paymentPlan: raw.payment_plan || raw.paymentPlan || '',
+    feeStatus: raw.fee_status || raw.feeStatus || '',
+    healthConditions: raw.health_conditions || raw.healthConditions || '',
+    allergies: raw.allergies || '',
+    disability: raw.disability || '',
+    medicalCertificate: raw.medical_certificate ?? raw.medicalCertificate ?? false,
+    idProof: raw.id_proof || raw.idProof || '',
+    academicCerts: raw.academic_certs || raw.academicCerts || '',
+    baptismCert: raw.baptism_cert || raw.baptismCert || '',
+    pastorRec: raw.pastor_rec || raw.pastorRec || '',
+    passportPhotos: raw.passport_photos ?? raw.passportPhotos ?? false,
+    callingType: raw.calling_type || raw.callingType || '',
+    ministryExperience: raw.ministry_experience || raw.ministryExperience || '',
+    yearsOfService: raw.years_of_service || raw.yearsOfService || '',
+    preferredField: raw.preferred_field || raw.preferredField || '',
+    internshipInterest: raw.internship_interest || raw.internshipInterest || '',
+    admissionStatus: raw.admission_status || raw.admissionStatus || '',
+    verifiedBy: raw.verified_by || raw.verifiedBy || '',
+    remarks: raw.remarks || '',
+    approvalDate: raw.approval_date || raw.approvalDate || '',
+    profilePhoto: raw.profile_photo || raw.profilePhoto || '',
+  };
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function StudentsPage() {
   const [students, setStudents] = useState<Student[]>(initialStudents);
@@ -323,6 +411,9 @@ export default function StudentsPage() {
   const [viewStudent, setViewStudent] = useState<Student | null>(null);
   const [formTab, setFormTab] = useState(0);
   const [viewTab, setViewTab] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   // New student form state
   const [form, setForm] = useState<Partial<Student>>({
@@ -345,6 +436,31 @@ export default function StudentsPage() {
 
   const uf = (field: string, val: string | boolean) => setForm(prev => ({ ...prev, [field]: val }));
 
+  // ─── API fetch students ────────────────────────────────────────────────
+  const fetchStudents = useCallback(async (searchTerm?: string, statusFilter?: string) => {
+    const token = getToken();
+    if (!token) return;
+    setLoading(true);
+    try {
+      const params: any = {};
+      if (searchTerm) params.search = searchTerm;
+      if (statusFilter && statusFilter !== 'All') params.status = statusFilter;
+      const data = await getStudents(params);
+      if (data && Array.isArray(data.students)) {
+        setStudents(data.students.map(mapStudentFromApi));
+      } else if (Array.isArray(data)) {
+        setStudents(data.map(mapStudentFromApi));
+      }
+    } catch (err) {
+      console.warn('Failed to fetch students, using fallback data', err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchStudents(); }, [fetchStudents]);
+  useEffect(() => { fetchStudents(search, filterStatus); }, [search, filterStatus, fetchStudents]);
+
   // Summary stats
   const stats = useMemo(() => ({
     total: students.length,
@@ -363,30 +479,54 @@ export default function StudentsPage() {
     });
   }, [students, search, filterProgram, filterStatus]);
 
-  const handleAdd = () => {
-    const { id: _id, enrollmentNo: _enrollmentNo, ...rest } = form as any;
-    const newStudent: Student = {
-      id: String(students.length + 1),
-      enrollmentNo: `COV${new Date().getFullYear()}-${String(students.length + 1).padStart(3, '0')}`,
-      ...rest,
-    } as Student;
-    setStudents(prev => [...prev, newStudent]);
-    setShowAddModal(false);
-    setForm({ fullName: '', gender: 'Male', dob: '', nationality: 'Indian', bloodGroup: '', mobile: '', email: '',
-      permanentAddress: '', currentAddress: '', emergencyContact: '', emergencyPhone: '',
-      fatherName: '', motherName: '', guardian: 'Father', occupation: '', familyBackground: '',
-      conversionDate: '', baptismStatus: 'Unbaptized', baptismDate: '', baptismChurch: '',
-      currentChurch: '', pastorName: '', ministryInvolvement: '', spiritualGifts: '', testimony: '',
-      prevQualification: '', schoolCollege: '', boardUniversity: '', year: '', marks: '', medium: 'English',
-      program: 'B.Th', department: '', admissionDate: '2025-06-01', academicYear: '2025-2026',
-      semester: 'Semester 1', mode: 'Regular',
-      campus: 'Main Campus', hostelRequired: false, roomAllocation: '', transportRequired: false,
-      feeStructure: '', scholarship: 'None', sponsorship: '', paymentPlan: 'Quarterly', feeStatus: 'Due',
-      healthConditions: '', allergies: '', disability: '', medicalCertificate: false,
-      idProof: '', academicCerts: '', baptismCert: '', pastorRec: '', passportPhotos: false,
-      callingType: 'Pastor', ministryExperience: '', yearsOfService: '', preferredField: '', internshipInterest: '',
-      admissionStatus: 'Pending', verifiedBy: '', remarks: '', approvalDate: '', profilePhoto: '',
-    });
+  const handleAdd = async () => {
+    const token = getToken();
+    setSaving(true);
+    try {
+      if (token) {
+        // Convert camelCase form to snake_case for API
+        const apiData: any = {};
+        for (const [key, val] of Object.entries(form)) {
+          if (val === '' || val === undefined || val === null) continue;
+          // camelCase to snake_case
+          const snake = key.replace(/[A-Z]/g, c => '_' + c.toLowerCase());
+          apiData[snake] = val;
+        }
+        await createStudent(apiData);
+        setToast({ message: 'Student created successfully', type: 'success' });
+      } else {
+        // Fallback: local add
+        const { id: _id, enrollmentNo: _enrollmentNo, ...rest } = form as any;
+        const newStudent: Student = {
+          id: String(students.length + 1),
+          enrollmentNo: `COV${new Date().getFullYear()}-${String(students.length + 1).padStart(3, '0')}`,
+          ...rest,
+        } as Student;
+        setStudents(prev => [...prev, newStudent]);
+        setToast({ message: 'Student added locally (no API token)', type: 'success' });
+      }
+      setShowAddModal(false);
+      setForm({ fullName: '', gender: 'Male', dob: '', nationality: 'Indian', bloodGroup: '', mobile: '', email: '',
+        permanentAddress: '', currentAddress: '', emergencyContact: '', emergencyPhone: '',
+        fatherName: '', motherName: '', guardian: 'Father', occupation: '', familyBackground: '',
+        conversionDate: '', baptismStatus: 'Unbaptized', baptismDate: '', baptismChurch: '',
+        currentChurch: '', pastorName: '', ministryInvolvement: '', spiritualGifts: '', testimony: '',
+        prevQualification: '', schoolCollege: '', boardUniversity: '', year: '', marks: '', medium: 'English',
+        program: 'B.Th', department: '', admissionDate: '2025-06-01', academicYear: '2025-2026',
+        semester: 'Semester 1', mode: 'Regular',
+        campus: 'Main Campus', hostelRequired: false, roomAllocation: '', transportRequired: false,
+        feeStructure: '', scholarship: 'None', sponsorship: '', paymentPlan: 'Quarterly', feeStatus: 'Due',
+        healthConditions: '', allergies: '', disability: '', medicalCertificate: false,
+        idProof: '', academicCerts: '', baptismCert: '', pastorRec: '', passportPhotos: false,
+        callingType: 'Pastor', ministryExperience: '', yearsOfService: '', preferredField: '', internshipInterest: '',
+        admissionStatus: 'Pending', verifiedBy: '', remarks: '', approvalDate: '', profilePhoto: '',
+      });
+      fetchStudents();
+    } catch (err: any) {
+      setToast({ message: err?.message || 'Failed to create student', type: 'error' });
+    } finally {
+      setSaving(false);
+    }
   };
 
   // ─── Form Tab Renderer ─────────────────────────────────────────────────
@@ -571,6 +711,13 @@ export default function StudentsPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+      {loading && (
+        <div className="flex items-center gap-2 text-sm text-[#6B6B6B] animate-pulse">
+          <div className="w-4 h-4 border-2 border-[#6B2D3E] border-t-transparent rounded-full animate-spin" />
+          Loading from server…
+        </div>
+      )}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -677,7 +824,12 @@ export default function StudentsPage() {
                     </td>
                     <td className="px-5 py-4 text-right">
                       <div className="flex items-center justify-end gap-1">
-                        <button onClick={() => { setViewStudent(s); setViewTab(0); }} className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors" title="View"><Eye className="h-4 w-4" /></button>
+                        <button onClick={() => {
+                          const token = getToken();
+                          if (token) {
+                            getStudent(s.id).then((data) => { setViewStudent(mapStudentFromApi(data)); setViewTab(0); }).catch(() => { setViewStudent(s); setViewTab(0); });
+                          } else { setViewStudent(s); setViewTab(0); }
+                        }} className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors" title="View"><Eye className="h-4 w-4" /></button>
                         <button className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors" title="Edit"><Edit3 className="h-4 w-4" /></button>
                       </div>
                     </td>
@@ -728,7 +880,7 @@ export default function StudentsPage() {
                 {formTab < formTabs.length - 1 ? (
                   <button onClick={() => setFormTab(formTab + 1)} className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all">Next<ChevronRight className="h-4 w-4" /></button>
                 ) : (
-                  <button onClick={handleAdd} className="inline-flex items-center gap-1 px-5 py-2 rounded-xl bg-amber-600 text-white text-sm font-semibold hover:bg-amber-700 transition-all shadow-lg shadow-amber-600/20"><UserPlus className="h-4 w-4" />Enroll Student</button>
+                  <button onClick={handleAdd} disabled={saving} className="inline-flex items-center gap-1 px-5 py-2 rounded-xl bg-amber-600 text-white text-sm font-semibold hover:bg-amber-700 transition-all shadow-lg shadow-amber-600/20 disabled:opacity-60 disabled:cursor-not-allowed">{saving ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <UserPlus className="h-4 w-4" />}{saving ? 'Enrolling…' : 'Enroll Student'}</button>
                 )}
               </div>
             </div>

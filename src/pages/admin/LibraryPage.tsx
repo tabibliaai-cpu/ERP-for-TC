@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   BookOpen, Search, Plus, X, Eye, Download, Upload, BookMarked, Star,
   Library, Filter, Grid3X3, List, Users, FileText, Quote, Globe,
-  Lock, ChevronDown, BookCopy, Calendar, Clock, UserCheck, AlertCircle,
+  Lock, ChevronDown, BookCopy, Calendar, Clock, UserCheck, AlertCircle, CheckCircle,
   Bookmark, BookmarkCheck, Sparkles
 } from 'lucide-react';
+import { getManuscripts, createManuscript, getToken } from '../../utils/api';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Manuscript {
@@ -69,6 +70,22 @@ const accessBadge = (level: string) => {
   return <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold ${config.bg}`}><config.icon className="h-3 w-3" />{level}</span>;
 };
 
+// ─── Toast helper ─────────────────────────────────────────────────────────
+function useToast() {
+  const [toast, setToast] = useState<{msg: string; type: 'success' | 'error'} | null>(null);
+  const show = useCallback((msg: string, type: 'success' | 'error' = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  }, []);
+  const ToastUI = toast ? (
+    <div className={`fixed top-6 right-6 z-[100] flex items-center gap-2 px-5 py-3 rounded-xl shadow-lg text-sm font-semibold text-white animate-fade-in ${toast.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
+      {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+      {toast.msg}
+    </div>
+  ) : null;
+  return { show, ToastUI };
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function LibraryPage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -79,22 +96,51 @@ export default function LibraryPage() {
   const [showBorrowModal, setShowBorrowModal] = useState(false);
   const [selectedManuscript, setSelectedManuscript] = useState<Manuscript | null>(null);
   const [bookmarks, setBookmarks] = useState<string[]>(['1', '3', '16', '17']);
+  const [submitting, setSubmitting] = useState(false);
+  const { show: showToast, ToastUI } = useToast();
 
   const [form, setForm] = useState({ title: '', author: '', category: 'Systematic Theology', type: 'Book', language: 'English', year: '', isbn: '', scriptureRefs: '', keywords: '', abstract: '', accessLevel: 'Students', copies: '1' });
 
-  const filtered = useMemo(() => manuscripts.filter(m => {
+  // ─── API Data Layer ──────────────────────────────────────────────────
+  const [apiManuscripts, setApiManuscripts] = useState<Manuscript[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const effectiveManuscripts = dataLoaded && apiManuscripts.length > 0 ? apiManuscripts : manuscripts;
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) { setDataLoaded(true); return; }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await getManuscripts({ search: search || undefined, category: selectedCategory !== 'All' ? selectedCategory : undefined });
+        if (cancelled) return;
+        if (Array.isArray(res)) {
+          const mapped = res.map((m: any) => ({
+            id: String(m.id ?? ''), title: m.title ?? '', author: m.author ?? '', category: m.category ?? '', type: m.type ?? 'Book', language: m.language ?? 'English', year: Number(m.year ?? 0), isbn: m.isbn ?? '', scriptureRefs: m.scripture_refs ?? m.scriptureRefs ?? '', keywords: m.keywords ?? '', abstract: m.abstract ?? '', accessLevel: m.access_level ?? m.accessLevel ?? 'Students', status: m.status ?? 'Available', copies: Number(m.copies ?? 1), available: Number(m.available ?? m.copies ?? 1), coverColor: m.cover_color ?? 'from-slate-500 to-slate-700',
+          }));
+          setApiManuscripts(mapped);
+        }
+      } catch { /* fallback remains */ }
+      setDataLoaded(true);
+    })();
+    return () => { cancelled = true; };
+  }, [search, selectedCategory]);
+
+  const filtered = useMemo(() => effectiveManuscripts.filter(m => {
     const m1 = search === '' || m.title.toLowerCase().includes(search.toLowerCase()) || m.author.toLowerCase().includes(search.toLowerCase()) || m.keywords.toLowerCase().includes(search.toLowerCase()) || m.scriptureRefs.toLowerCase().includes(search.toLowerCase());
     const m2 = selectedCategory === 'All' || m.category === selectedCategory;
     return m1 && m2;
-  }), [search, selectedCategory]);
+  }), [search, selectedCategory, effectiveManuscripts]);
 
-  const totalBooks = manuscripts.reduce((a, m) => a + m.copies, 0);
-  const totalAvailable = manuscripts.reduce((a, m) => a + m.available, 0);
+  const totalBooks = effectiveManuscripts.reduce((a, m) => a + m.copies, 0);
+  const totalAvailable = effectiveManuscripts.reduce((a, m) => a + m.available, 0);
   const borrowed = borrowRecords.filter(b => b.status === 'Borrowed').length;
   const overdue = borrowRecords.filter(b => b.status === 'Overdue').length;
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {ToastUI}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -113,7 +159,7 @@ export default function LibraryPage() {
       {/* Summary */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Collection', value: totalBooks, icon: BookOpen, color: 'bg-slate-900', sub: `${manuscripts.length} titles` },
+          { label: 'Total Collection', value: totalBooks, icon: BookOpen, color: 'bg-slate-900', sub: `${effectiveManuscripts.length} titles` },
           { label: 'Available', value: totalAvailable, icon: BookCopy, color: 'bg-emerald-600', sub: 'Ready to borrow' },
           { label: 'Currently Borrowed', value: borrowed, icon: BookMarked, color: 'bg-blue-600', sub: 'Active loans' },
           { label: 'Overdue', value: overdue, icon: AlertCircle, color: 'bg-red-600', sub: 'Action needed' },
@@ -140,7 +186,7 @@ export default function LibraryPage() {
                     selectedCategory === cat ? 'bg-amber-50 text-amber-700 font-semibold' : 'text-slate-600 hover:bg-slate-50'
                   }`}>
                   {cat}
-                  <span className="float-right text-xs text-slate-400">{cat === 'All' ? manuscripts.length : manuscripts.filter(m => m.category === cat).length}</span>
+                  <span className="float-right text-xs text-slate-400">{cat === 'All' ? effectiveManuscripts.length : effectiveManuscripts.filter(m => m.category === cat).length}</span>
                 </button>
               ))}
             </div>
@@ -282,7 +328,7 @@ export default function LibraryPage() {
               {/* ─── Bookmarks Tab ─────────────────────────────────────── */}
               {activeTab === 2 && (
                 <div className="space-y-3">
-                  {manuscripts.filter(m => bookmarks.includes(m.id)).map(m => (
+                  {effectiveManuscripts.filter(m => bookmarks.includes(m.id)).map(m => (
                     <div key={m.id} className="flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:shadow-md hover:shadow-slate-200/50 transition-all">
                       <div className={`w-12 h-16 rounded-lg bg-gradient-to-br ${m.coverColor} flex items-center justify-center shrink-0`}><BookOpen className="h-6 w-6 text-white/40" /></div>
                       <div className="flex-1 min-w-0">
@@ -397,7 +443,19 @@ export default function LibraryPage() {
             </div>
             <div className="flex items-center justify-end gap-2 p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
               <button onClick={() => setShowAddModal(false)} className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-white transition-all">Cancel</button>
-              <button onClick={() => setShowAddModal(false)} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all"><Plus className="h-4 w-4" />Add Manuscript</button>
+              <button onClick={async () => {
+                if (!form.title || !form.author) { showToast('Title and author are required', 'error'); return; }
+                setSubmitting(true);
+                try {
+                  await createManuscript({ title: form.title, author: form.author, category: form.category, type: form.type, language: form.language, year: Number(form.year) || 0, isbn: form.isbn, scripture_refs: form.scriptureRefs, keywords: form.keywords, abstract: form.abstract, access_level: form.accessLevel, copies: Number(form.copies) || 1 });
+                  showToast('Manuscript added successfully');
+                  setShowAddModal(false);
+                  setForm({ title: '', author: '', category: 'Systematic Theology', type: 'Book', language: 'English', year: '', isbn: '', scriptureRefs: '', keywords: '', abstract: '', accessLevel: 'Students', copies: '1' });
+                  const res = await getManuscripts({ search: '', category: undefined });
+                  if (Array.isArray(res)) { setApiManuscripts(res.map((m: any) => ({ id: String(m.id ?? ''), title: m.title ?? '', author: m.author ?? '', category: m.category ?? '', type: m.type ?? 'Book', language: m.language ?? 'English', year: Number(m.year ?? 0), isbn: m.isbn ?? '', scriptureRefs: m.scripture_refs ?? '', keywords: m.keywords ?? '', abstract: m.abstract ?? '', accessLevel: m.access_level ?? 'Students', status: m.status ?? 'Available', copies: Number(m.copies ?? 1), available: Number(m.available ?? m.copies ?? 1), coverColor: m.cover_color ?? 'from-slate-500 to-slate-700' }))); }
+                } catch (e: any) { showToast(e.message || 'Failed to add manuscript', 'error'); }
+                setSubmitting(false);
+              }} disabled={submitting} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all disabled:opacity-50"><Plus className="h-4 w-4" />{submitting ? 'Adding...' : 'Add Manuscript'}</button>
             </div>
           </div>
         </div>

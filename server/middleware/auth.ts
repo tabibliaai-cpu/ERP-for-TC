@@ -52,7 +52,7 @@ export function institutionAdminOnly(req: Request, res: Response, next: NextFunc
 export function auditLog(userId: string, action: string, entity: string, entityId?: string, institutionId?: string, details?: string) {
   try {
     const db = getPlatformSqlite();
-    db.run('INSERT INTO audit_logs (id, user_id, action, entity, entity_id, institution_id, details) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    db.prepare('INSERT INTO audit_logs (id, user_id, action, entity, entity_id, institution_id, details) VALUES (?, ?, ?, ?, ?, ?, ?)').run(
       `audit-${Date.now()}`, userId, action, entity, entityId || null, institutionId || null, details || null
     );
   } catch (err) {

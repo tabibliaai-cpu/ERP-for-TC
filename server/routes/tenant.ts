@@ -132,6 +132,43 @@ router.get('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request,
   }
 });
 
+router.put('/teachers/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const fields = Object.entries(req.body);
+    if (fields.length === 0) return res.status(400).json({ error: 'No fields to update' });
+
+    const setClause = fields.map(([k]) => `${k} = ?`).join(', ');
+    db.prepare(`UPDATE teachers SET ${setClause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`)
+      .run(...fields.map(([, v]) => v), req.params.id);
+
+    res.json({ success: true, message: 'Teacher updated' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete('/students/:id', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    db.prepare("UPDATE students SET status = 'archived', updated_at = CURRENT_TIMESTAMP WHERE id = ?").run(req.params.id);
+    res.json({ success: true, message: 'Student archived' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── RECENT STUDENTS ───────────────────────────
+router.get('/students/recent', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
+  try {
+    const db = getDb(req);
+    const students = db.prepare('SELECT * FROM students ORDER BY created_at DESC LIMIT 5').all();
+    res.json(students);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ── PROGRAMS ─────────────────────────────────
 router.get('/programs', authMiddleware, institutionAdminOnly, (req: Request, res: Response) => {
   try {

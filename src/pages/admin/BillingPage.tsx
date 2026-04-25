@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   DollarSign, Wallet, CreditCard, FileText, Search, X, Plus, Eye, Download,
   ChevronLeft, ChevronRight, Receipt, TrendingUp, AlertCircle, CheckCircle,
   Clock, IndianRupee, Calendar, User, Gift, Printer, Mail
 } from 'lucide-react';
+import { getFeeStructures, getPayments, createPayment, getToken } from '../../utils/api';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface FeeStructure {
@@ -116,6 +117,22 @@ const feeStatusBadge = (s: string) => {
 
 const fmt = (n: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
 
+// ─── Toast helper ─────────────────────────────────────────────────────────
+function useToast() {
+  const [toast, setToast] = useState<{msg: string; type: 'success' | 'error'} | null>(null);
+  const show = useCallback((msg: string, type: 'success' | 'error' = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  }, []);
+  const ToastUI = toast ? (
+    <div className={`fixed top-6 right-6 z-[100] flex items-center gap-2 px-5 py-3 rounded-xl shadow-lg text-sm font-semibold text-white animate-fade-in ${toast.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
+      {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+      {toast.msg}
+    </div>
+  ) : null;
+  return { show, ToastUI };
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function BillingPage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -124,24 +141,70 @@ export default function BillingPage() {
   const [showInvoiceModal, setShowInvoiceModal] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [showAddFeeModal, setShowAddFeeModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { show: showToast, ToastUI } = useToast();
 
   const [payForm, setPayForm] = useState({ student: '', amount: '', mode: 'Cash', ref: '', date: new Date().toISOString().split('T')[0] });
   const [feeForm, setFeeForm] = useState({ name: '', program: 'B.Th', type: 'Tuition', amount: '', frequency: 'Per Semester', mandatory: true, description: '' });
 
+  // ─── API Data Layer ──────────────────────────────────────────────────
+  const [apiFeeStructures, setApiFeeStructures] = useState<FeeStructure[]>([]);
+  const [apiPayments, setApiPayments] = useState<Payment[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const effectiveFeeStructures = dataLoaded && apiFeeStructures.length > 0 ? apiFeeStructures : feeStructures;
+  const effectivePayments = dataLoaded && apiPayments.length > 0 ? apiPayments : payments;
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) { setDataLoaded(true); return; }
+    let cancelled = false;
+    (async () => {
+      try {
+        const [fRes, pRes] = await Promise.allSettled([getFeeStructures(), getPayments()]);
+        if (cancelled) return;
+        if (fRes.status === 'fulfilled' && Array.isArray(fRes.value)) {
+          const mapped = fRes.value.map((f: any) => ({
+            id: String(f.id ?? ''), name: f.name ?? '', program: f.program_name ?? f.program ?? '', type: f.type ?? '', amount: Number(f.amount ?? 0), frequency: f.frequency ?? '', isMandatory: f.is_mandatory ?? f.isMandatory ?? true, status: f.status ?? 'Active', description: f.description ?? '',
+          }));
+          setApiFeeStructures(mapped);
+        }
+        if (pRes.status === 'fulfilled' && Array.isArray(pRes.value)) {
+            const mapped = pRes.value.map((p: any) => ({
+              id: String(p.id ?? ''), studentName: p.student_name ?? p.studentName ?? '', enrollmentNo: p.enrollment_number ?? p.enrollmentNo ?? '', amount: Number(p.amount ?? 0), date: p.date ?? '', mode: p.mode ?? '', transactionRef: p.transaction_ref ?? p.transactionRef ?? '', receivedBy: p.received_by ?? '', feeType: p.fee_type ?? p.feeType ?? '', status: p.status ?? 'Completed',
+            }));
+            setApiPayments(mapped);
+        }
+      } catch { /* fallback remains */ }
+      setDataLoaded(true);
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   const stats = useMemo(() => ({
-    totalRevenue: payments.reduce((a, p) => a + p.amount, 0),
+    totalRevenue: effectivePayments.reduce((a, p) => a + p.amount, 0),
     pendingDues: studentFees.reduce((a, s) => a + s.due, 0),
-    monthlyCollection: payments.filter(p => p.date.startsWith('2025-03')).reduce((a, p) => a + p.amount, 0),
+    monthlyCollection: effectivePayments.filter(p => p.date.startsWith('2025-03')).reduce((a, p) => a + p.amount, 0),
     scholarshipsGiven: scholarships.reduce((a, s) => a + s.amount, 0),
-  }), []);
+  }), [effectivePayments]);
 
-  const filteredFees = useMemo(() => feeStructures.filter(f => search === '' || f.name.toLowerCase().includes(search.toLowerCase())), [search]);
+  const filteredFees = useMemo(() => effectiveFeeStructures.filter(f => search === '' || f.name.toLowerCase().includes(search.toLowerCase())), [search, effectiveFeeStructures]);
   const filteredStudentFees = useMemo(() => studentFees.filter(s => search === '' || s.studentName.toLowerCase().includes(search.toLowerCase()) || s.enrollmentNo.toLowerCase().includes(search.toLowerCase())), [search]);
-  const filteredPayments = useMemo(() => payments.filter(p => search === '' || p.studentName.toLowerCase().includes(search.toLowerCase())), [search]);
+  const filteredPayments = useMemo(() => effectivePayments.filter(p => search === '' || p.studentName.toLowerCase().includes(search.toLowerCase())), [search, effectivePayments]);
 
-  const handleRecordPayment = () => {
-    setShowPaymentModal(false);
-    setPayForm({ student: '', amount: '', mode: 'Cash', ref: '', date: new Date().toISOString().split('T')[0] });
+  const handleRecordPayment = async () => {
+    if (!payForm.student || !payForm.amount) { showToast('Student and amount are required', 'error'); return; }
+    setSubmitting(true);
+    try {
+      const student = studentFees.find(s => s.id === payForm.student);
+      await createPayment({ student_id: payForm.student, student_name: student?.studentName ?? '', enrollment_number: student?.enrollmentNo ?? '', amount: Number(payForm.amount), mode: payForm.mode, transaction_ref: payForm.ref, date: payForm.date, fee_type: 'General', });
+      showToast('Payment recorded successfully');
+      setShowPaymentModal(false);
+      setPayForm({ student: '', amount: '', mode: 'Cash', ref: '', date: new Date().toISOString().split('T')[0] });
+      const pRes = await getPayments();
+      if (Array.isArray(pRes)) { setApiPayments(pRes.map((p: any) => ({ id: String(p.id ?? ''), studentName: p.student_name ?? '', enrollmentNo: p.enrollment_number ?? '', amount: Number(p.amount ?? 0), date: p.date ?? '', mode: p.mode ?? '', transactionRef: p.transaction_ref ?? '', receivedBy: p.received_by ?? '', feeType: p.fee_type ?? '', status: p.status ?? 'Completed' }))); }
+    } catch (e: any) { showToast(e.message || 'Failed to record payment', 'error'); }
+    setSubmitting(false);
   };
 
   const handleAddFee = () => {
@@ -151,6 +214,7 @@ export default function BillingPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {ToastUI}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -226,7 +290,7 @@ export default function BillingPage() {
               <div>
                 <h3 className="text-base font-bold text-slate-900 mb-3">Recent Payments</h3>
                 <div className="space-y-2">
-                  {payments.slice(0, 5).map(p => (
+                  {effectivePayments.slice(0, 5).map(p => (
                     <div key={p.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
                       <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center"><CheckCircle className="h-4 w-4 text-emerald-600" /></div>
                       <div className="flex-1 min-w-0">
@@ -366,7 +430,7 @@ export default function BillingPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
-                    {filteredPayments.map(p => (
+                    {effectivePayments.map(p => (
                       <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
                         <td className="px-4 py-3 font-mono text-xs text-slate-600">{p.id}</td>
                         <td className="px-4 py-3"><p className="font-medium text-slate-900 truncate max-w-[160px]">{p.studentName}</p><p className="text-xs text-slate-400">{p.feeType}</p></td>
@@ -465,7 +529,7 @@ export default function BillingPage() {
             </div>
             <div className="flex items-center justify-end gap-2 p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
               <button onClick={() => setShowPaymentModal(false)} className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-white transition-all">Cancel</button>
-              <button onClick={handleRecordPayment} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20"><CheckCircle className="h-4 w-4" />Record Payment</button>
+              <button onClick={handleRecordPayment} disabled={submitting} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 disabled:opacity-50"><CheckCircle className="h-4 w-4" />{submitting ? 'Recording...' : 'Record Payment'}</button>
             </div>
           </div>
         </div>

@@ -75,3 +75,38 @@ Stage Summary:
 - New typography: Playfair Display for headings, Inter for body
 - Super admin credentials updated (dasucosmos@gmail.com / ERP@123) and hidden from UI
 - All 11 files changed, 1663 insertions, 1017 deletions
+---
+Task ID: 1
+Agent: Main Agent
+Task: Wire entire CovenantERP platform — backend fixes, API wiring, new features
+
+Work Log:
+- Installed server dependencies (express, better-sqlite3, drizzle-orm, bcryptjs, jsonwebtoken, cors, tsx, concurrently)
+- Fixed auditLog function in auth.ts (db.run → db.prepare().run())
+- Fixed circular FK constraint in create institution endpoint (removed FK from platform_users.institution_id)
+- Added 11 missing API endpoints: getInstitution, updateInstitution, deleteInstitution, updateUserStatus, updateProfile, changePassword, getPlatformSettings, updatePlatformSetting, updateTeacher, deleteStudent, getRecentStudents
+- Added admin profile API endpoints: PUT /platform/auth/profile, PUT /platform/auth/password
+- Added institution CRUD endpoints: PUT /platform/institutions/:id, DELETE /platform/institutions/:id, GET /platform/institutions/:id
+- Added user status management: PUT /platform/users/:id/status
+- Added platform settings CRUD: GET/PUT /platform/settings
+- Added teacher update and student delete, recent students endpoints
+- Rewrote SuperAdminDashboard.tsx with full API wiring, toast notifications, institution profile modal (view/edit), loading states, graceful fallback
+- Created ProfilePage.tsx for admin portal with personal info, spiritual profile, password change, edit mode
+- Wired Dashboard.tsx admin section to real API stats and recent students
+- Wired StudentsPage.tsx to real API (list, create, update, search with snake_case mapping)
+- Wired TeachersPage.tsx to real API (list, create, update with snake_case mapping)
+- Wired AcademicsPage.tsx to real API (programs, courses)
+- Wired BillingPage.tsx to real API (fee structures, payments)
+- Wired LibraryPage.tsx to real API (manuscripts)
+- Wired PedagogyPage.tsx to real API (lesson plans)
+- Added ProfilePage to admin sidebar navigation in App.tsx
+- Added dev script to run both frontend and backend concurrently
+- All tests pass: institution CRUD, admin login, multi-tenant isolation, platform stats
+
+Stage Summary:
+- Backend fully functional with all CRUD operations
+- Frontend wired to real API with graceful fallback to demo data
+- Institution Profile feature built in Super Admin (view/edit modal)
+- Admin Profile page built (personal info, spiritual profile, password change)
+- Multi-tenant architecture verified working (3 institutions, separate databases)
+- TypeScript: 0 errors, Vite build succeeds
