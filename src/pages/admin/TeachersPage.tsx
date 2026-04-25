@@ -286,11 +286,12 @@ export default function TeachersPage() {
   }), [teachers, search, filterDept]);
 
   const handleAdd = () => {
+    const { id: _id, employeeId: _employeeId, ...rest } = form as any;
     const newTeacher: Teacher = {
       id: String(teachers.length + 1),
       employeeId: `COV-T${String(teachers.length + 1).padStart(3, '0')}`,
-      ...form as unknown as Teacher,
-    };
+      ...rest,
+    } as Teacher;
     setTeachers(prev => [...prev, newTeacher]);
     setShowAddModal(false);
   };

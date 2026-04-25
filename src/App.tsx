@@ -13,11 +13,12 @@ import LibraryPage from './pages/admin/LibraryPage';
 import PedagogyPage from './pages/admin/PedagogyPage';
 import ReportsPage from './pages/admin/ReportsPage';
 import SuperAdminDashboard from './pages/SuperAdminDashboard';
+import { LogOut } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 function AdminDashboardRouter() {
   const [activeModule, setActiveModule] = useState('dashboard');
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const renderModule = () => {
     switch (activeModule) {
@@ -101,11 +102,20 @@ function AdminDashboardRouter() {
           </div>
           <div className="flex items-center gap-3">
             {user && (
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
-                  {user.displayName.charAt(0)}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
+                    {user.displayName.charAt(0)}
+                  </div>
+                  <span className="text-sm font-medium text-gray-700 hidden sm:block">{user.displayName}</span>
                 </div>
-                <span className="text-sm font-medium text-gray-700 hidden sm:block">{user.displayName}</span>
+                <button
+                  onClick={logout}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
@@ -121,14 +131,24 @@ function AdminDashboardRouter() {
 }
 
 function SuperAdminRouter() {
+  const { logout } = useAuth();
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="h-16 bg-white border-b border-gray-100 flex items-center px-6 shrink-0">
-        <div className="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center text-white font-bold text-xs mr-2">CE</div>
-        <span className="text-lg font-bold tracking-tight text-gray-900 mr-6">Covenant<span className="text-amber-600">ERP</span></span>
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-          Super Admin
-        </span>
+      <header className="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6 shrink-0">
+        <div className="flex items-center">
+          <div className="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center text-white font-bold text-xs mr-2">CE</div>
+          <span className="text-lg font-bold tracking-tight text-gray-900 mr-6">Covenant<span className="text-amber-600">ERP</span></span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            Super Admin
+          </span>
+        </div>
+        <button
+          onClick={logout}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+          Sign Out
+        </button>
       </header>
       <div className="p-4 lg:p-6 max-w-7xl mx-auto">
         <SuperAdminDashboard />

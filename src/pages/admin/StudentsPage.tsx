@@ -258,7 +258,7 @@ function calcCompletion(s: Student): number {
     'prevQualification','schoolCollege','program','department','admissionDate','academicYear','semester','mode',
     'callingType','ministryExperience'];
   total = fields.length;
-  for (const f of fields) { if (s[f] && s[f].trim() !== '') filled++; }
+  for (const f of fields) { if (s[f] && String(s[f]).trim() !== '') filled++; }
   return Math.round((filled / total) * 100);
 }
 
@@ -364,11 +364,12 @@ export default function StudentsPage() {
   }, [students, search, filterProgram, filterStatus]);
 
   const handleAdd = () => {
+    const { id: _id, enrollmentNo: _enrollmentNo, ...rest } = form as any;
     const newStudent: Student = {
       id: String(students.length + 1),
       enrollmentNo: `COV${new Date().getFullYear()}-${String(students.length + 1).padStart(3, '0')}`,
-      ...form as unknown as Student,
-    };
+      ...rest,
+    } as Student;
     setStudents(prev => [...prev, newStudent]);
     setShowAddModal(false);
     setForm({ fullName: '', gender: 'Male', dob: '', nationality: 'Indian', bloodGroup: '', mobile: '', email: '',

@@ -79,7 +79,7 @@ export default function PedagogyPage() {
           <p className="text-gray-500 mt-1">Teaching methods, resources, and formation tracking</p>
         </div>
         <button
-          onClick={() => setActiveTab('lessons') || setShowModal(true)}
+          onClick={() => { setActiveTab('lessons'); setShowModal(true); }}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all"
         >
           <Plus className="h-4 w-4" />

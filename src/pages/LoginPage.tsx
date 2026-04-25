@@ -22,20 +22,23 @@ export default function LoginPage({ role }: LoginPageProps) {
     : 'Manage your church — members, finances, events, and ministries';
   const accentColor = isSuperAdmin ? 'amber' : 'blue';
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
-    setTimeout(() => {
-      const result = login(username, password, role);
+    try {
+      const result = await login(username, password, role);
       if (result.success) {
-        navigate('/dashboard');
+        navigate(isSuperAdmin ? '/super-admin' : '/dashboard');
       } else {
         setError(result.error || 'Login failed');
       }
+    } catch (err: any) {
+      setError(err.message || 'Login failed');
+    } finally {
       setIsLoading(false);
-    }, 600);
+    }
   };
 
   return (

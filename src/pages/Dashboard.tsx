@@ -4,7 +4,7 @@ import { navigate } from '../utils/router';
 import {
   Church, Users, Wallet, CalendarDays, BookOpen, MessageSquare, Sparkles,
   Settings, LogOut, LayoutDashboard, BarChart3, Bell, ChevronDown, Menu, X,
-  Shield, Building2, FileText, Heart
+  Shield, Building2, FileText, Heart, UserCog
 } from 'lucide-react';
 
 // --- Sidebar ---
@@ -347,7 +347,7 @@ export default function Dashboard() {
         {/* Page Content */}
         <div className="flex-1 overflow-y-auto p-4 lg:p-6">
           {activeTab === 'dashboard' ? (
-            <DashboardView role={user.role} />
+            <DashboardView role={user.role as 'super_admin' | 'admin'} />
           ) : (
             <ModuleView
               title={navItems.find(n => n.id === activeTab)?.label || activeTab}
