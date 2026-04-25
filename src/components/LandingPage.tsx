@@ -1,7 +1,8 @@
 import {
   Users, Wallet, CalendarDays, BookOpen, MessageSquare, Sparkles,
-  Church, Shield, ArrowRight, Heart, UserCog, Lock
+  Church, Shield, ArrowRight, Heart, UserCog, Lock, Menu, X
 } from 'lucide-react';
+import { useState } from 'react';
 import { navigate } from '../utils/router';
 
 const features = [
@@ -14,171 +15,163 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Church className="h-7 w-7 text-amber-600" />
-            <span className="text-xl font-bold tracking-tight text-gray-900">
-              Covenant<span className="text-amber-600">ERP</span>
-            </span>
+      {/* ═══════════════════ HEADER / NAVBAR ═══════════════════ */}
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-sm">
+                <Church className="h-4.5 w-4.5 text-white" />
+              </div>
+              <span className="text-lg font-bold tracking-tight text-gray-900">
+                Covenant<span className="text-amber-600">ERP</span>
+              </span>
+            </div>
+
+            {/* Desktop: Nav Links + Login Buttons */}
+            <div className="hidden md:flex items-center gap-3">
+              <a href="#features" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+              <a href="#about" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+
+              {/* Divider */}
+              <div className="w-px h-6 bg-gray-200 mx-1" />
+
+              {/* Super Admin Login — Gold */}
+              <button
+                onClick={() => navigate('/login/super-admin')}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 text-white text-sm font-semibold hover:bg-amber-600 transition-colors shadow-sm"
+              >
+                <Shield className="h-4 w-4" />
+                Super Admin
+              </button>
+
+              {/* Admin Login — Slate */}
+              <button
+                onClick={() => navigate('/login/admin')}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+              >
+                <UserCog className="h-4 w-4" />
+                Admin Login
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
-          <div className="hidden sm:flex items-center gap-3">
-            <a href="#features" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-            <a href="#about" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
-          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-100 py-3 space-y-1 animate-fade-in">
+              <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">Features</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">About</a>
+              <div className="pt-2 space-y-2">
+                <button
+                  onClick={() => { setMobileMenuOpen(false); navigate('/login/super-admin'); }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-amber-500 text-white text-sm font-semibold"
+                >
+                  <Shield className="h-4 w-4" />
+                  Super Admin Login
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); navigate('/login/admin'); }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 text-white text-sm font-semibold"
+                >
+                  <UserCog className="h-4 w-4" />
+                  Admin Login
+                </button>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-500 rounded-full blur-[120px]" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-blue-500 rounded-full blur-[150px]" />
+      {/* ═══════════════════ HERO SECTION ═══════════════════ */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Subtle glow effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px]" />
+          <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm font-medium mb-6">
-              <Shield className="h-4 w-4" />
-              Theological Institution Management
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
-              Transforming Theological Education{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">
-                with Divine Purpose
-              </span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              The Complete ERP for{' '}
+              <span className="text-amber-400">Theological Institutions</span>
             </h1>
-            <p className="mt-6 text-lg sm:text-xl text-blue-100/80 leading-relaxed max-w-2xl">
-              The complete ERP platform for seminaries, Bible colleges, and theological training centers. Manage students, faculty, academics, finances, and spiritual formation — all in one place.
+            <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+              Manage students, faculty, academics, finances, library, and spiritual formation across multiple seminaries and Bible colleges — all from one powerful platform.
             </p>
 
-            {/* LOGIN BUTTONS - PROMINENT */}
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => navigate('/login/super-admin')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-slate-900 font-bold text-sm shadow-lg shadow-amber-500/25 hover:from-amber-400 hover:to-amber-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Lock className="h-5 w-5" />
-                Super Admin Login
-                <ArrowRight className="h-4 w-4" />
-              </button>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => navigate('/login/admin')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl border-2 border-white/30 text-white font-bold text-sm hover:bg-white/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-amber-500 text-white font-semibold text-sm hover:bg-amber-600 transition-colors"
               >
-                <UserCog className="h-5 w-5" />
-                Admin Login
+                Get Started
                 <ArrowRight className="h-4 w-4" />
               </button>
+              <a
+                href="#features"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-slate-600 text-slate-300 font-semibold text-sm hover:bg-slate-800 transition-colors"
+              >
+                Explore Features
+              </a>
             </div>
-
-            {/* Quick Info */}
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-blue-200/60">
-              <span>Demo: superadmin / SuperAdmin@2024</span>
-              <span className="hidden sm:inline">|</span>
-              <span>Demo: admin / Admin@2024</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 60L48 55C96 50 192 40 288 35C384 30 480 30 576 33.3C672 36.7 768 43.3 864 45C960 46.7 1056 43.3 1152 38.3C1248 33.3 1344 26.7 1392 23.3L1440 20V60H1392C1344 60 1248 60 1152 60C1056 60 960 60 864 60C768 60 672 60 576 60C480 60 384 60 288 60C192 60 96 60 48 60H0Z" fill="white" />
-          </svg>
-        </div>
-      </section>
-
-      {/* Login Cards Section */}
-      <section className="py-12 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 gap-6">
-            {/* Super Admin Card */}
-            <button
-              onClick={() => navigate('/login/super-admin')}
-              className="group p-6 rounded-2xl border-2 border-gray-100 bg-white hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300 text-left"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-400 flex items-center justify-center mb-4 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform">
-                <Shield className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Super Admin</h3>
-              <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                Full platform control. Manage all institutions, global users, feature toggles, revenue analytics, and system security. Multi-tenant SaaS administration.
-              </p>
-              <div className="flex items-center gap-2 text-amber-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                Sign in as Super Admin <ArrowRight className="h-4 w-4" />
-              </div>
-            </button>
-
-            {/* Admin Card */}
-            <button
-              onClick={() => navigate('/login/admin')}
-              className="group p-6 rounded-2xl border-2 border-gray-100 bg-white hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 text-left"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center mb-4 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
-                <UserCog className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Institution Admin</h3>
-              <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                Manage your seminary or Bible college. Students, teachers, academics, billing, library, pedagogy, reports, and spiritual formation tracking.
-              </p>
-              <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                Sign in as Admin <ArrowRight className="h-4 w-4" />
-              </div>
-            </button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 sm:py-28 bg-gray-50">
+      {/* ═══════════════════ FEATURES SECTION ═══════════════════ */}
+      <section id="features" className="py-16 sm:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-sm font-semibold text-amber-600 uppercase tracking-wider">Complete ERP Platform</p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-              Everything a Theological Institution Needs
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Everything Your Institution Needs
             </h2>
-            <p className="mt-4 text-gray-500 text-lg">
-              From enrollment to graduation, academics to spiritual formation — a purpose-built platform for theological education.
+            <p className="mt-3 text-gray-500">
+              Purpose-built modules for seminaries, Bible colleges, and theological training centers.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((feature) => (
-              <div key={feature.title} className="group relative p-6 lg:p-8 rounded-2xl border border-gray-100 bg-white hover:border-amber-200 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/20 mb-5">
-                  <feature.icon className="h-6 w-6 text-white" />
+              <div key={feature.title} className="p-6 rounded-xl border border-gray-200 bg-white hover:border-amber-300 hover:shadow-md transition-all">
+                <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center mb-4">
+                  <feature.icon className="h-5 w-5 text-amber-600" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="text-base font-bold text-gray-900 mb-1.5">{feature.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 sm:py-28 bg-white">
+      {/* ═══════════════════ ABOUT SECTION ═══════════════════ */}
+      <section id="about" className="py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-amber-600 uppercase tracking-wider">About CovenantERP</p>
-              <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-                Purpose-Built for Theological Education
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Built for Theological Education
               </h2>
-              <p className="mt-6 text-gray-600 leading-relaxed">
-                CovenantERP is not a generic school management system adapted for theology. It is built from the ground up for seminaries, Bible colleges, and theological training centers — with spiritual formation at its core.
+              <p className="mt-5 text-gray-600 leading-relaxed">
+                CovenantERP is not a generic school management system. It is built from the ground up for seminaries, Bible colleges, and theological training centers — with spiritual formation at its core.
               </p>
-              <p className="mt-4 text-gray-600 leading-relaxed">
-                Our platform treats every teacher as a spiritual leader and educator, every student as a minister in training. From baptism records to ministry calling tracking, from sermon archives to devotional engagement — every feature reflects the unique mission of theological education.
+              <p className="mt-3 text-gray-600 leading-relaxed">
+                Every teacher is a spiritual leader. Every student is a minister in training. From baptism records to ministry calling tracking, every feature reflects the unique mission of theological education.
               </p>
-              <p className="mt-4 text-gray-600 leading-relaxed">
-                Whether you lead a small Bible training center or a thriving seminary with multiple programs, CovenantERP scales with your needs through its multi-tenant SaaS architecture.
-              </p>
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-2 gap-3">
                 {[
                   { icon: Shield, text: 'End-to-End Encryption' },
                   { icon: Users, text: 'Multi-Tenant SaaS' },
@@ -192,50 +185,30 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-amber-100 to-blue-50 rounded-3xl blur-2xl opacity-60" />
-              <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-gradient-to-br from-slate-900 to-blue-950 p-8 sm:p-10">
-                <h3 className="text-lg font-bold text-white mb-6">ERP Modules</h3>
-                <div className="space-y-3">
-                  {['Student Enrollment & Spiritual Profiles', 'Teacher Management & Performance', 'Dynamic Academic Configuration', 'Billing, Scholarships & Sponsorships', 'Pedagogical Portal & Mentorship', 'Theological Library System', 'Reports & Custom Analytics', 'Multi-Tenant Institution Control', 'Yeshua AI Biblical Assistant', 'White-Label Branding System'].map((mod, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-amber-400" />
-                      <span className="text-sm text-blue-100">{mod}</span>
-                    </div>
-                  ))}
-                </div>
+            <div className="rounded-xl border border-gray-200 bg-slate-900 p-8">
+              <h3 className="text-base font-bold text-white mb-5">All Modules</h3>
+              <div className="space-y-2.5">
+                {['Student Enrollment & Spiritual Profiles', 'Teacher Management & Performance', 'Dynamic Academic Configuration', 'Billing, Scholarships & Sponsorships', 'Pedagogical Portal & Mentorship', 'Theological Library System', 'Reports & Custom Analytics', 'Multi-Tenant Institution Control', 'Yeshua AI Biblical Assistant', 'White-Label Branding System'].map((mod, i) => (
+                  <div key={i} className="flex items-center gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                    <span className="text-sm text-slate-300">{mod}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 sm:py-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-            Ready to Equip Your Institution?
-          </h2>
-          <p className="mt-4 text-gray-500 text-lg max-w-2xl mx-auto">
-            Join theological institutions that are transforming their administration with CovenantERP.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => navigate('/login/admin')} className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold text-sm shadow-lg hover:from-slate-800 hover:to-slate-700 transition-all">
-              Get Started <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-100 bg-white mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* ═══════════════════ FOOTER ═══════════════════ */}
+      <footer className="border-t border-gray-200 bg-white mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <Church className="h-5 w-5 text-amber-600" />
+              <Church className="h-4 w-4 text-amber-600" />
               <span className="text-sm font-semibold text-gray-700">CovenantERP</span>
             </div>
-            <p className="text-sm text-gray-400">
+            <p className="text-xs text-gray-400">
               &copy; {new Date().getFullYear()} CovenantERP. All rights reserved.
             </p>
           </div>
