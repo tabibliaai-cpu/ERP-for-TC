@@ -23,10 +23,9 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 // Default demo credentials for offline/fallback
 const DEMO_CREDENTIALS: Record<string, { password: string; displayName: string; role: UserRole }> = {
-  'superadmin': { password: 'SuperAdmin@2024', displayName: 'Super Administrator', role: 'super_admin' },
+  'dasucosmos@gmail.com': { password: 'ERP@123', displayName: 'Super Administrator', role: 'super_admin' },
   'admin': { password: 'Admin@2024', displayName: 'Church Administrator', role: 'admin' },
   'admin@gracetheological.edu': { password: 'Admin@2024', displayName: 'Dr. Samuel Johnson', role: 'admin' },
-  'superadmin@covenanterp.com': { password: 'SuperAdmin@2024', displayName: 'Super Administrator', role: 'super_admin' },
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {

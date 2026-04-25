@@ -246,19 +246,10 @@ export default function LoginPage({ role }: LoginPageProps) {
               </button>
             </form>
 
-            {/* Demo Credentials Hint */}
-            <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-100">
-              <p className="text-xs text-slate-400 mb-1 font-medium uppercase tracking-wider">Demo Credentials</p>
-              <p className="text-sm text-slate-500">
-                Username:{' '}
-                <span className="text-slate-700 font-semibold">
-                  {isSuperAdmin ? 'superadmin' : 'admin'}
-                </span>
-                {' '}&middot;{' '}
-                Password:{' '}
-                <span className="text-slate-700 font-semibold">
-                  {isSuperAdmin ? 'SuperAdmin@2024' : 'Admin@2024'}
-                </span>
+            {/* Support hint - no credentials shown */}
+            <div className="mt-6 text-center">
+              <p className="text-xs text-slate-400">
+                Contact your institution administrator for login credentials
               </p>
             </div>
           </div>
