@@ -59,36 +59,45 @@ function AdminDashboardRouter() {
 
   const currentPage = adminNav.find(n => n.id === activeModule);
 
+  const userInitial = user?.displayName?.charAt(0)?.toUpperCase() || 'A';
+
   return (
     <div className="h-screen flex bg-slate-50 overflow-hidden">
-      {/* Mobile overlay */}
+
+      {/* ── Mobile overlay ── */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/30 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
-      {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-slate-100 flex flex-col transition-transform duration-200 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-      }`}>
-        {/* Logo */}
-        <div className="h-14 flex items-center gap-2.5 px-4 border-b border-slate-100 shrink-0">
-          <div className="w-7 h-7 rounded-lg bg-amber-600 flex items-center justify-center">
-            <Church className="h-4 w-4 text-white" />
+      {/* ── Sidebar ── */}
+      <aside
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-[17rem] bg-slate-950 flex flex-col transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
+        {/* Logo area */}
+        <div className="flex items-center gap-3 px-5 pt-5 pb-4">
+          <div className="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+            <Church className="h-5 w-5 text-white" />
           </div>
-          <span className="text-base font-bold tracking-tight text-slate-900">
-            Covenant<span className="text-amber-600">ERP</span>
-          </span>
+          <div className="flex flex-col">
+            <span className="text-[15px] font-bold tracking-tight text-white leading-tight">
+              Covenant<span className="text-amber-400">ERP</span>
+            </span>
+            <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase mt-0.5">
+              Admin Panel
+            </span>
+          </div>
         </div>
 
-        {/* Role badge */}
-        <div className="px-4 py-2.5 border-b border-slate-100">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
-            Admin Panel
-          </span>
-        </div>
+        {/* Thin separator */}
+        <div className="mx-5 h-px bg-slate-800" />
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-2 px-2 space-y-0.5">
+        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
           {adminNav.map((item) => {
             const Icon = item.icon;
             const active = activeModule === item.id;
@@ -96,61 +105,95 @@ function AdminDashboardRouter() {
               <button
                 key={item.id}
                 onClick={() => handleNav(item.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
                   active
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                    ? 'bg-white text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
                 }`}
               >
-                <Icon className="h-4.5 w-4.5 shrink-0" />
+                <Icon className="h-[18px] w-[18px] shrink-0" />
                 <span>{item.label}</span>
               </button>
             );
           })}
         </nav>
 
-        {/* Logout */}
-        <div className="p-2 border-t border-slate-100">
+        {/* Bottom section */}
+        <div className="px-3 pb-3">
+          {/* Thin separator */}
+          <div className="mx-2 mb-3 h-px bg-slate-800" />
+
+          {/* User info row */}
+          {user && (
+            <div className="flex items-center gap-3 px-3 py-2 mb-1">
+              <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                {userInitial}
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm font-medium text-slate-300 truncate">
+                  {user.displayName}
+                </span>
+                <span className="text-[11px] text-slate-600 truncate">
+                  {user.username}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Logout button */}
           <button
             onClick={logout}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-900 hover:text-red-400 transition-all duration-150"
           >
             <LogOut className="h-4 w-4" />
-            Sign Out
+            <span>Sign Out</span>
           </button>
         </div>
       </aside>
 
-      {/* Main */}
+      {/* ── Main area ── */}
       <main className="flex-1 flex flex-col overflow-hidden">
-        {/* Top bar */}
+        {/* Top header bar */}
         <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 lg:px-6 shrink-0">
+          {/* Left: hamburger + page title */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden w-8 h-8 rounded-lg hover:bg-slate-50 flex items-center justify-center"
+              className="lg:hidden w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors"
             >
-              <Menu className="h-4.5 w-4.5 text-slate-500" />
+              <Menu className="h-[18px] w-[18px] text-slate-600" />
             </button>
-            <h1 className="text-sm font-semibold text-slate-900">{currentPage?.label || 'Dashboard'}</h1>
+            <h1 className="text-base font-semibold text-slate-900">
+              {currentPage?.label || 'Dashboard'}
+            </h1>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="w-8 h-8 rounded-lg hover:bg-slate-50 flex items-center justify-center relative">
-              <Bell className="h-4 w-4 text-slate-400" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+
+          {/* Right: notification + avatar */}
+          <div className="flex items-center gap-1.5">
+            {/* Notification bell */}
+            <button className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center relative transition-colors">
+              <Bell className="h-[18px] w-[18px] text-slate-500" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white" />
             </button>
+
+            {/* Divider */}
+            <div className="w-px h-6 bg-slate-200 mx-1.5 hidden sm:block" />
+
+            {/* User avatar + name */}
             {user && (
-              <div className="flex items-center gap-2 ml-1">
-                <div className="w-7 h-7 rounded-lg bg-amber-600 flex items-center justify-center text-white text-xs font-bold">
-                  {user.displayName.charAt(0)}
+              <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-slate-50 transition-colors cursor-default">
+                <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white text-xs font-bold">
+                  {userInitial}
                 </div>
-                <span className="text-sm font-medium text-slate-700 hidden sm:block">{user.displayName}</span>
+                <span className="text-sm font-medium text-slate-700 hidden sm:block">
+                  {user.displayName}
+                </span>
               </div>
             )}
           </div>
         </header>
 
-        {/* Content */}
+        {/* Content area */}
         <div className="flex-1 overflow-y-auto p-4 lg:p-6">
           {activeModule === 'dashboard' ? <Dashboard /> : renderModule()}
         </div>
@@ -160,28 +203,61 @@ function AdminDashboardRouter() {
 }
 
 function SuperAdminRouter() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+
+  const userInitial = user?.displayName?.charAt(0)?.toUpperCase() || 'S';
+
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-6 shrink-0 sticky top-0 z-30">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-amber-600 flex items-center justify-center">
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      {/* Top header bar */}
+      <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 lg:px-6 shrink-0 sticky top-0 z-30">
+        {/* Left: branding + badge */}
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
             <Church className="h-4 w-4 text-white" />
           </div>
-          <span className="text-base font-bold tracking-tight text-slate-900">Covenant<span className="text-amber-600">ERP</span></span>
-          <span className="ml-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100">
-            Super Admin
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-base font-bold tracking-tight text-slate-900">
+              Covenant<span className="text-amber-600">ERP</span>
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 ring-1 ring-amber-200/60">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              Super Admin
+            </span>
+          </div>
         </div>
-        <button
-          onClick={logout}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors"
-        >
-          <LogOut className="h-3.5 w-3.5" />
-          Sign Out
-        </button>
+
+        {/* Right: avatar + logout */}
+        <div className="flex items-center gap-2">
+          <h1 className="text-sm font-medium text-slate-600 hidden md:block">
+            Platform Administration
+          </h1>
+
+          <div className="w-px h-6 bg-slate-200 mx-1 hidden md:block" />
+
+          {user && (
+            <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg hover:bg-slate-50 transition-colors cursor-default">
+              <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold">
+                {userInitial}
+              </div>
+              <span className="text-sm font-medium text-slate-700 hidden sm:block">
+                {user.displayName}
+              </span>
+            </div>
+          )}
+
+          <button
+            onClick={logout}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all duration-150 ml-1"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Sign Out</span>
+          </button>
+        </div>
       </header>
-      <div className="p-4 lg:p-6">
+
+      {/* Content */}
+      <div className="flex-1 p-4 lg:p-6">
         <SuperAdminDashboard />
       </div>
     </div>
