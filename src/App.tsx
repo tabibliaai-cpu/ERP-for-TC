@@ -8,6 +8,10 @@ import { Admissions } from './pages/Admissions';
 import { Finance } from './pages/Finance';
 import AcademicSystem from './pages/AcademicSystem';
 import { StudentProfile } from './pages/StudentProfile';
+import { StudentEnrollment } from './pages/StudentEnrollment';
+import { TeacherManagement } from './pages/TeacherManagement';
+import { TeacherEnrollment } from './pages/TeacherEnrollment';
+import AcademicConfig from './pages/AcademicConfig';
 import SubjectPortal from './pages/SubjectPortal';
 import { Library } from './pages/Library';
 import { ChurchManagement } from './pages/ChurchManagement';
@@ -35,7 +39,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 // ─── Onboarding Layout (no sidebar, centered) ───
 function OnboardingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50">
+    <div className="min-h-screen bg-slate-50">
       {children}
     </div>
   );
@@ -50,7 +54,7 @@ export default function App() {
     return (
       <div className="h-screen flex items-center justify-center bg-slate-950">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-14 h-14 border-4 border-fuchsia-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-14 h-14 border-4 border-slate-300 border-t-blue-600 rounded-full animate-spin"></div>
           <p className="text-slate-400 text-sm font-medium tracking-wide">Authenticating...</p>
         </div>
       </div>
@@ -136,18 +140,22 @@ export default function App() {
               <Route path="/messages" element={<Messaging />} />
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/admissions/:studentId" element={<StudentProfile />} />
-              <Route path="/faculty" element={<FacultyManagement />} />
-              <Route path="/courses" element={<AcademicSystem />} />
-              <Route path="/finance" element={<Finance />} />
-              <Route path="/library" element={<Library />} />
-              <Route path="/church" element={<ChurchManagement />} />
-              <Route path="/classroom" element={<SubjectPortal />} />
+              <Route path="/enrollment" element={<ProtectedRoute feature="admissions"><StudentEnrollment /></ProtectedRoute>} />
+              <Route path="/faculty" element={<ProtectedRoute feature="faculty"><FacultyManagement /></ProtectedRoute>} />
+              <Route path="/teachers" element={<ProtectedRoute feature="faculty"><TeacherManagement /></ProtectedRoute>} />
+              <Route path="/teacher-enrollment" element={<ProtectedRoute feature="faculty"><TeacherEnrollment /></ProtectedRoute>} />
+              <Route path="/academic-config" element={<ProtectedRoute feature="courses"><AcademicConfig /></ProtectedRoute>} />
+              <Route path="/courses" element={<ProtectedRoute feature="courses"><AcademicSystem /></ProtectedRoute>} />
+              <Route path="/finance" element={<ProtectedRoute feature="finance"><Finance /></ProtectedRoute>} />
+              <Route path="/library" element={<ProtectedRoute feature="library"><Library /></ProtectedRoute>} />
+              <Route path="/church" element={<ProtectedRoute feature="church"><ChurchManagement /></ProtectedRoute>} />
+              <Route path="/classroom" element={<ProtectedRoute feature="classroom"><SubjectPortal /></ProtectedRoute>} />
               <Route path="/super-admin" element={
                 <ProtectedRoute feature="super-admin">
                   <SuperAdmin />
                 </ProtectedRoute>
               } />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings" element={<ProtectedRoute feature="settings"><Settings /></ProtectedRoute>} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </DashboardLayout>
@@ -155,20 +163,30 @@ export default function App() {
       );
     }
 
-    // Super Admin: Normal Mode → Go to Super Admin panel
+    // Super Admin: Normal Mode → Full access to all pages + Super Admin panel
     if (user.role === 'super_admin') {
       return (
         <Router>
           <DashboardLayout>
             <Routes>
-              <Route path="/" element={<Navigate to="/super-admin" replace />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/landing" element={<PublicLayout><MarketingLanding onNavigate={() => window.location.reload()} /></PublicLayout>} />
-              <Route path="/super-admin" element={
-                <ProtectedRoute feature="super-admin">
-                  <SuperAdmin />
-                </ProtectedRoute>
-              } />
-              <Route path="*" element={<Navigate to="/super-admin" replace />} />
+              <Route path="/messages" element={<Messaging />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/admissions/:studentId" element={<StudentProfile />} />
+              <Route path="/enrollment" element={<StudentEnrollment />} />
+              <Route path="/faculty" element={<FacultyManagement />} />
+              <Route path="/teachers" element={<TeacherManagement />} />
+              <Route path="/teacher-enrollment" element={<TeacherEnrollment />} />
+              <Route path="/academic-config" element={<AcademicConfig />} />
+              <Route path="/courses" element={<AcademicSystem />} />
+              <Route path="/finance" element={<Finance />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/church" element={<ChurchManagement />} />
+              <Route path="/classroom" element={<SubjectPortal />} />
+              <Route path="/super-admin" element={<SuperAdmin />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </DashboardLayout>
         </Router>
@@ -196,9 +214,29 @@ export default function App() {
                 <StudentProfile />
               </ProtectedRoute>
             } />
+            <Route path="/enrollment" element={
+              <ProtectedRoute feature="admissions">
+                <StudentEnrollment />
+              </ProtectedRoute>
+            } />
             <Route path="/faculty" element={
               <ProtectedRoute feature="faculty">
                 <FacultyManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/teachers" element={
+              <ProtectedRoute feature="faculty">
+                <TeacherManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/teacher-enrollment" element={
+              <ProtectedRoute feature="faculty">
+                <TeacherEnrollment />
+              </ProtectedRoute>
+            } />
+            <Route path="/academic-config" element={
+              <ProtectedRoute feature="courses">
+                <AcademicConfig />
               </ProtectedRoute>
             } />
             <Route path="/courses" element={

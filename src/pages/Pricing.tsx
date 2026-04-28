@@ -257,8 +257,8 @@ const PlanCard: React.FC<{
       className={cn(
         "relative flex flex-col rounded-2xl p-[1px] transition-shadow duration-300",
         plan.popular
-          ? "scale-[1.03] shadow-2xl shadow-fuchsia-500/20 md:scale-105"
-          : "shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-fuchsia-500/10"
+          ? "scale-[1.03] shadow-2xl shadow-blue-500/20 md:scale-105"
+          : "shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-blue-500/10"
       )}
     >
       {/* Gradient border for popular */}
@@ -266,7 +266,7 @@ const PlanCard: React.FC<{
         className={cn(
           "absolute inset-0 rounded-2xl",
           plan.popular
-            ? "bg-gradient-to-br from-fuchsia-500 via-violet-500 to-purple-600"
+            ? "bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600"
             : "bg-gradient-to-br from-slate-700/60 via-slate-600/40 to-slate-700/60"
         )}
       />
@@ -281,7 +281,7 @@ const PlanCard: React.FC<{
         {/* Popular badge */}
         {plan.popular && (
           <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-500 px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-fuchsia-500/30">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-blue-500/30">
               <Sparkles className="h-3.5 w-3.5" />
               Most Popular
             </span>
@@ -294,7 +294,7 @@ const PlanCard: React.FC<{
             className={cn(
               "mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl",
               plan.popular
-                ? "bg-gradient-to-br from-fuchsia-500/20 to-violet-500/20 text-fuchsia-400"
+                ? "bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-400"
                 : "bg-slate-800/80 text-slate-400"
             )}
           >
@@ -335,8 +335,8 @@ const PlanCard: React.FC<{
           className={cn(
             "w-full rounded-xl py-3 text-sm font-semibold transition-all duration-200 cursor-pointer",
             plan.popular
-              ? "bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white shadow-lg shadow-fuchsia-500/25 hover:shadow-fuchsia-500/40 hover:scale-[1.02] active:scale-[0.98]"
-              : "border border-slate-700 bg-slate-800/50 text-slate-200 hover:border-fuchsia-500/50 hover:bg-slate-800/80 hover:text-white"
+              ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98]"
+              : "border border-slate-700 bg-slate-800/50 text-slate-200 hover:border-blue-500/50 hover:bg-slate-800/80 hover:text-white"
           )}
         >
           {plan.cta}
@@ -358,7 +358,7 @@ const PlanCard: React.FC<{
               <Check
                 className={cn(
                   "mt-0.5 h-4 w-4 shrink-0",
-                  plan.popular ? "text-fuchsia-400" : "text-emerald-400"
+                  plan.popular ? "text-blue-400" : "text-emerald-400"
                 )}
               />
               {feature.text}
@@ -444,8 +444,8 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
     <main className="min-h-screen bg-slate-950 text-white">
       {/* ===== Decorative background glows ===== */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-fuchsia-500/[0.07] blur-[120px]" />
-        <div className="absolute top-1/3 -left-32 h-[400px] w-[400px] rounded-full bg-violet-500/[0.05] blur-[100px]" />
+        <div className="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-blue-500/[0.07] blur-[120px]" />
+        <div className="absolute top-1/3 -left-32 h-[400px] w-[400px] rounded-full bg-indigo-500/[0.05] blur-[100px]" />
         <div className="absolute bottom-1/4 -right-32 h-[350px] w-[350px] rounded-full bg-purple-600/[0.05] blur-[100px]" />
       </div>
 
@@ -459,7 +459,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
         >
           <h1 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
             Simple,{" "}
-            <span className="bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Transparent
             </span>{" "}
             Pricing
@@ -476,7 +476,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
               className={cn(
                 "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-all duration-200",
                 !isAnnual
-                  ? "bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white shadow-lg shadow-fuchsia-500/20"
+                  ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/20"
                   : "text-slate-400 hover:text-white"
               )}
             >
@@ -487,7 +487,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
               className={cn(
                 "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-all duration-200",
                 isAnnual
-                  ? "bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white shadow-lg shadow-fuchsia-500/20"
+                  ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/20"
                   : "text-slate-400 hover:text-white"
               )}
             >
@@ -534,7 +534,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
           <div className="mb-10 text-center">
             <h2 className="text-2xl font-bold sm:text-3xl">
               Compare{" "}
-              <span className="bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
                 All Features
               </span>
             </h2>
@@ -553,7 +553,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
                     Basic
                   </th>
                   <th className="px-5 py-4 text-center">
-                    <span className="text-sm font-semibold bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-transparent">
+                    <span className="text-sm font-semibold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
                       Premium
                     </span>
                   </th>
@@ -569,7 +569,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
                     <tr key={`cat-${gi}`}>
                       <td
                         colSpan={4}
-                        className="px-5 py-3 text-xs font-bold uppercase tracking-widest text-fuchsia-400/80 bg-slate-800/20"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-widest text-blue-400/80 bg-slate-800/20"
                       >
                         <span className="inline-flex items-center gap-2">
                           {CATEGORY_ICONS[group.category]}
@@ -618,7 +618,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
             <div className="mb-10 text-center">
               <h2 className="text-2xl font-bold sm:text-3xl">
                 Frequently Asked{" "}
-                <span className="bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
                   Questions
                 </span>
               </h2>
@@ -651,12 +651,12 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
           <div className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/50 backdrop-blur-xl p-8 text-center sm:p-12">
             {/* Glow inside */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
-              <div className="h-[200px] w-[300px] rounded-full bg-fuchsia-500/[0.08] blur-[80px]" />
+              <div className="h-[200px] w-[300px] rounded-full bg-blue-500/[0.08] blur-[80px]" />
             </div>
 
             <div className="relative z-10">
-              <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-violet-500/20">
-                <Mail className="h-7 w-7 text-fuchsia-400" />
+              <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
+                <Mail className="h-7 w-7 text-blue-400" />
               </div>
               <h2 className="text-2xl font-bold sm:text-3xl">Still have questions?</h2>
               <p className="mx-auto mt-2 max-w-md text-sm text-slate-400">
@@ -665,14 +665,14 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
               <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
                 <button
                   onClick={() => onSelectPlan?.("contact")}
-                  className="cursor-pointer inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition-all hover:shadow-fuchsia-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                  className="cursor-pointer inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <HeadphonesIcon className="h-4 w-4" />
                   Contact Our Team
                 </button>
                 <a
                   href="mailto:support@covenanterp.com"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/50 px-6 py-3 text-sm font-semibold text-slate-300 transition-all hover:border-fuchsia-500/50 hover:bg-slate-800/80 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/50 px-6 py-3 text-sm font-semibold text-slate-300 transition-all hover:border-blue-500/50 hover:bg-slate-800/80 hover:text-white"
                 >
                   <Mail className="h-4 w-4" />
                   support@covenanterp.com

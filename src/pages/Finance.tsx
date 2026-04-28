@@ -130,7 +130,7 @@ function statusBadge(status: string) {
     pending: { bg: 'bg-slate-50', text: 'text-slate-500', border: 'border-slate-200' },
     overdue: { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-100' },
     failed: { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-100' },
-    refunded: { bg: 'bg-fuchsia-50', text: 'text-fuchsia-600', border: 'border-fuchsia-200' },
+    refunded: { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-200' },
     draft: { bg: 'bg-slate-50', text: 'text-slate-500', border: 'border-slate-200' },
     sent: { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-100' },
     cancelled: { bg: 'bg-zinc-100', text: 'text-zinc-500', border: 'border-zinc-200' },
@@ -684,7 +684,7 @@ export function Finance() {
 
   const Spinner = () => (
     <div className="flex flex-col items-center justify-center h-80 gap-4">
-      <div className="w-12 h-12 border-4 border-fuchsia-500/10 border-t-fuchsia-600 rounded-full animate-spin" />
+      <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin" />
       <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Syncing Ledger...</p>
     </div>
   );
@@ -694,7 +694,7 @@ export function Finance() {
       <Icon className="w-16 h-16 text-slate-200 mb-4" />
       <p className="font-bold">{message}</p>
       {actionLabel && onAction && (
-        <button onClick={onAction} className="mt-6 px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all">
+        <button onClick={onAction} className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all">
           {actionLabel}
         </button>
       )}
@@ -738,14 +738,14 @@ export function Finance() {
   const FormInput = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
     <input
       {...props}
-      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-sm font-medium"
+      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
     />
   );
 
   const FormSelect = (props: React.SelectHTMLAttributes<HTMLSelectElement>) => (
     <select
       {...props}
-      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-sm font-bold"
+      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-bold"
     />
   );
 
@@ -760,7 +760,7 @@ export function Finance() {
           value={value || studentSearchTerm}
           onFocus={() => setStudentDropdownOpen(true)}
           onChange={(e) => setStudentSearchTerm(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-sm font-medium"
+          className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
         />
       </div>
       <AnimatePresence>
@@ -810,7 +810,7 @@ export function Finance() {
         type="submit"
         className={cn(
           'flex-1 py-3 text-white rounded-xl font-bold text-sm shadow-lg transition-all',
-          submitColor === 'dark' ? 'bg-slate-900 hover:bg-slate-800 shadow-slate-200' : 'bg-gradient-to-r from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 shadow-fuchsia-100',
+          submitColor === 'dark' ? 'bg-slate-900 hover:bg-slate-800 shadow-slate-200' : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-blue-100',
         )}
       >
         {submitLabel}
@@ -829,12 +829,12 @@ export function Finance() {
         {[
           { label: 'Total Revenue', value: totalRevenue, icon: BadgeDollarSign, color: 'text-emerald-600', bg: 'bg-emerald-50', isCurrency: true },
           { label: 'Pending Dues', value: pendingDues, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50', isCurrency: true },
-          { label: 'This Month Collection', value: monthlyCollection, icon: TrendingUp, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50', isCurrency: true },
+          { label: 'This Month Collection', value: monthlyCollection, icon: TrendingUp, color: 'text-blue-600', bg: 'bg-blue-50', isCurrency: true },
           { label: 'Active Sponsors', value: activeSponsors, icon: HeartHandshake, color: 'text-rose-600', bg: 'bg-rose-50', isCurrency: false },
           { label: 'Scholarships', value: scholarshipCount, icon: Sparkles, color: 'text-purple-600', bg: 'bg-purple-50', isCurrency: false },
           { label: 'Overdue Accounts', value: overdueCount, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50', isCurrency: false },
         ].map((stat) => (
-          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm group hover:border-fuchsia-200 transition-all">
+          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm group hover:border-blue-200 transition-all">
             <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-4 shadow-sm', stat.bg, stat.color)}>
               <stat.icon className="w-5 h-5" />
             </div>
@@ -850,7 +850,7 @@ export function Finance() {
         <button onClick={() => { setActiveTab('payments'); setTimeout(() => openPaymentModal(), 100); }} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
           <Plus className="w-4 h-4" />Record Payment
         </button>
-        <button onClick={() => { setActiveTab('fee-structures'); setTimeout(() => openCreateFeeStructure(), 100); }} className="px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-xs font-bold hover:from-fuchsia-700 hover:to-violet-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-fuchsia-100">
+        <button onClick={() => { setActiveTab('fee-structures'); setTimeout(() => openCreateFeeStructure(), 100); }} className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-blue-100">
           <FileText className="w-4 h-4" />Create Fee Structure
         </button>
       </div>
@@ -908,7 +908,7 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search fee structures..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search fee structures..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
         <button onClick={openCreateFeeStructure} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
           <Plus className="w-4 h-4" />Create Fee Structure
@@ -945,7 +945,7 @@ export function Finance() {
                     <td className="px-6 py-6 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(fs.totalAmount)}</td>
                     <td className="px-6 py-6 text-center">{statusBadge(fs.isActive ? 'active' : 'inactive')}</td>
                     <td className="px-8 py-6 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => openEditFeeStructure(fs)} className="p-2 rounded-xl hover:bg-fuchsia-50 transition-all"><Edit3 className="w-4 h-4 text-fuchsia-500" /></button>
+                      <button onClick={() => openEditFeeStructure(fs)} className="p-2 rounded-xl hover:bg-blue-50 transition-all"><Edit3 className="w-4 h-4 text-blue-500" /></button>
                       <button onClick={() => handleDeleteFeeStructure(fs.id!)} className="p-2 rounded-xl hover:bg-rose-50 transition-all"><Trash2 className="w-4 h-4 text-rose-500" /></button>
                     </td>
                   </tr>
@@ -964,7 +964,7 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search student fees..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search student fees..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
         <button onClick={openAssignFee} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
           <UserPlus className="w-4 h-4" />Assign Fee
@@ -1016,7 +1016,7 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search payments..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search payments..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
         <button onClick={openPaymentModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
           <Plus className="w-4 h-4" />Record Payment
@@ -1056,7 +1056,7 @@ export function Finance() {
                     <td className="px-6 py-5 text-center text-xs text-slate-400">{p.createdAt ? toDate(p.createdAt).toLocaleDateString() : '—'}</td>
                     <td className="px-6 py-5 text-center">{statusBadge(p.status)}</td>
                     <td className="px-6 py-5 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => printReceipt(p)} className="p-2 rounded-xl hover:bg-fuchsia-50 transition-all"><Printer className="w-4 h-4 text-fuchsia-500" /></button>
+                      <button onClick={() => printReceipt(p)} className="p-2 rounded-xl hover:bg-blue-50 transition-all"><Printer className="w-4 h-4 text-blue-500" /></button>
                     </td>
                   </tr>
                 ))}
@@ -1074,7 +1074,7 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search invoices..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search invoices..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
       </div>
 
@@ -1129,7 +1129,7 @@ export function Finance() {
         {[
           { label: 'Total Collected', value: totalRevenue, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
           { label: 'Total Pending', value: pendingDues, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
-          { label: 'Fee Assignments', value: studentFees.length, icon: FileText, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50' },
+          { label: 'Fee Assignments', value: studentFees.length, icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
           { label: 'Overdue Accounts', value: overdueCount, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
         ].map((stat) => (
           <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm">
@@ -1169,7 +1169,7 @@ export function Finance() {
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Pending Fees</p>
-          <button onClick={exportReportsCSV} className="px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 transition-all flex items-center gap-2">
+          <button onClick={exportReportsCSV} className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2">
             <Download className="w-3.5 h-3.5" />Export CSV
           </button>
         </div>
@@ -1305,7 +1305,7 @@ export function Finance() {
                             {sc.description && <p className="text-[10px] text-slate-400 mt-0.5">{sc.description}</p>}
                           </td>
                           <td className="px-6 py-6 text-center text-[10px] font-black uppercase tracking-widest text-slate-500">{sc.type}</td>
-                          <td className="px-6 py-6 text-center font-mono font-bold text-fuchsia-600 tabular-nums">
+                          <td className="px-6 py-6 text-center font-mono font-bold text-blue-600 tabular-nums">
                             {sc.type === 'percentage' ? `${sc.value}%` : formatCurrency(sc.value)}
                           </td>
                           <td className="px-6 py-6 text-center text-[10px] font-black uppercase tracking-widest text-slate-400">{sc.criteria || 'general'}</td>
@@ -1362,7 +1362,7 @@ export function Finance() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Fee Components</p>
-            <button type="button" onClick={addFeeComponent} className="px-4 py-2 bg-fuchsia-50 text-fuchsia-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-fuchsia-100 transition-all flex items-center gap-1.5">
+            <button type="button" onClick={addFeeComponent} className="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 transition-all flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" />Add Component
             </button>
           </div>
@@ -1390,7 +1390,7 @@ export function Finance() {
                 </div>
                 <div className="flex items-center gap-4">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={comp.isMandatory} onChange={(e) => updateFeeComponent(index, 'isMandatory', e.target.checked)} className="w-4 h-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500" />
+                    <input type="checkbox" checked={comp.isMandatory} onChange={(e) => updateFeeComponent(index, 'isMandatory', e.target.checked)} className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
                     <span className="text-xs font-bold text-slate-500">Mandatory</span>
                   </label>
                   {comp.type === 'recurring' && (
@@ -1408,9 +1408,9 @@ export function Finance() {
           </AnimatePresence>
 
           {fsForm.components.length > 0 && (
-            <div className="flex items-center justify-between p-4 bg-fuchsia-50 rounded-2xl border border-fuchsia-200">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-400">Auto-calculated Total</span>
-              <span className="text-xl font-mono font-bold text-fuchsia-600 tabular-nums">{formatCurrency(fsTotal)}</span>
+            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-200">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Auto-calculated Total</span>
+              <span className="text-xl font-mono font-bold text-blue-600 tabular-nums">{formatCurrency(fsTotal)}</span>
             </div>
           )}
         </div>
@@ -1439,7 +1439,7 @@ export function Finance() {
             <FormField label="Discount">
               <FormInput type="number" min="0" step="0.01" value={sfForm.discount || ''} onChange={(e) => setSfForm({ ...sfForm, discount: Number(e.target.value) })} />
             </FormField>
-            <div className="flex justify-between text-xs pt-2 border-t border-slate-200"><span className="text-slate-400 font-bold">Adjusted Fee:</span><span className="font-mono font-bold text-fuchsia-600">{formatCurrency(sfAdjustedFee)}</span></div>
+            <div className="flex justify-between text-xs pt-2 border-t border-slate-200"><span className="text-slate-400 font-bold">Adjusted Fee:</span><span className="font-mono font-bold text-blue-600">{formatCurrency(sfAdjustedFee)}</span></div>
           </div>
         )}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -1499,11 +1499,11 @@ export function Finance() {
           </FormField>
         </div>
         {pmForm.studentFeeId && pmForm.amount > 0 && (
-          <div className="p-4 bg-fuchsia-50 rounded-2xl border border-fuchsia-200 flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-400">Generated IDs</span>
+          <div className="p-4 bg-blue-50 rounded-2xl border border-blue-200 flex items-center justify-between">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Generated IDs</span>
             <div className="flex gap-3">
-              <span className="text-[10px] font-mono text-fuchsia-600 bg-white px-2 py-1 rounded-md">PAY-{new Date().getFullYear()}-XXXXX</span>
-              <span className="text-[10px] font-mono text-fuchsia-600 bg-white px-2 py-1 rounded-md">RCPT-{new Date().getFullYear()}-XXXXX</span>
+              <span className="text-[10px] font-mono text-blue-600 bg-white px-2 py-1 rounded-md">PAY-{new Date().getFullYear()}-XXXXX</span>
+              <span className="text-[10px] font-mono text-blue-600 bg-white px-2 py-1 rounded-md">RCPT-{new Date().getFullYear()}-XXXXX</span>
             </div>
           </div>
         )}
@@ -1531,7 +1531,7 @@ export function Finance() {
           </FormField>
         </div>
         <FormField label="Notes">
-          <textarea placeholder="Optional notes about the sponsor..." value={spForm.notes} onChange={(e) => setSpForm({ ...spForm, notes: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-sm font-medium resize-none" />
+          <textarea placeholder="Optional notes about the sponsor..." value={spForm.notes} onChange={(e) => setSpForm({ ...spForm, notes: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
         </FormField>
         <ModalActions onCancel={() => setIsSponsorModalOpen(false)} onSubmit={() => {}} submitLabel="Add Sponsor" />
       </form>
@@ -1565,7 +1565,7 @@ export function Finance() {
           </FormField>
         </div>
         <FormField label="Description">
-          <textarea placeholder="Describe the scholarship..." value={scForm.description} onChange={(e) => setScForm({ ...scForm, description: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all outline-none text-sm font-medium resize-none" />
+          <textarea placeholder="Describe the scholarship..." value={scForm.description} onChange={(e) => setScForm({ ...scForm, description: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
         </FormField>
         <ModalActions onCancel={() => setIsScholarshipModalOpen(false)} onSubmit={() => {}} submitLabel="Add Scholarship" />
       </form>
@@ -1602,8 +1602,8 @@ export function Finance() {
       {/* Header */}
       <div className="px-6 pt-8 pb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-fuchsia-50 flex items-center justify-center">
-            <BadgeDollarSign className="w-5 h-5 text-fuchsia-600" />
+          <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+            <BadgeDollarSign className="w-5 h-5 text-blue-600" />
           </div>
           <div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">Billing System</h1>
@@ -1622,7 +1622,7 @@ export function Finance() {
               className={cn(
                 'flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all border-b-2 -mb-px',
                 activeTab === tab.id
-                  ? 'text-fuchsia-600 border-fuchsia-500'
+                  ? 'text-blue-600 border-blue-500'
                   : 'text-slate-400 border-transparent hover:text-slate-600 hover:border-slate-200',
               )}
             >

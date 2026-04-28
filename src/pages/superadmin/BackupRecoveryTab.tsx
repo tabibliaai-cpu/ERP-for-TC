@@ -182,8 +182,8 @@ function ToggleSwitch({
       onClick={() => !disabled && onChange(!checked)}
       disabled={disabled}
       className={cn(
-        'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2',
-        checked ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600' : 'bg-gray-200',
+        'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2',
+        checked ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-gray-200',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
       role="switch"
@@ -223,10 +223,10 @@ function ProgressBar({
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600"
+          className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-600"
         />
       ) : (
-        <div className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600" style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-600" style={{ width: `${pct}%` }} />
       )}
     </div>
   );
@@ -687,7 +687,7 @@ export function BackupRecoveryTab() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-24">
-        <div className="animate-spin w-12 h-12 border-4 border-fuchsia-500 border-t-transparent rounded-full mb-4" />
+        <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mb-4" />
         <p className="text-gray-500 font-medium">Loading backup & recovery data...</p>
       </div>
     );
@@ -710,7 +710,7 @@ export function BackupRecoveryTab() {
               'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-xl flex items-center gap-2 text-sm font-semibold',
               toast.type === 'success' && 'bg-gradient-to-r from-emerald-500 to-green-600 text-white',
               toast.type === 'error' && 'bg-gradient-to-r from-rose-500 to-red-600 text-white',
-              toast.type === 'info' && 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white'
+              toast.type === 'info' && 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
             )}
           >
             {toast.type === 'success' && <CheckCircle className="w-4 h-4" />}
@@ -774,7 +774,7 @@ export function BackupRecoveryTab() {
       >
         <div>
           <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <div className="bg-gradient-to-br from-fuchsia-500 to-violet-600 rounded-lg p-1.5">
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg p-1.5">
               <Database className="w-5 h-5 text-white" />
             </div>
             Backup & Recovery
@@ -820,7 +820,7 @@ export function BackupRecoveryTab() {
               className={cn(
                 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all',
                 isActive
-                  ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-lg shadow-fuchsia-500/25'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
                   : 'bg-white/60 text-gray-600 hover:bg-white hover:text-gray-900 border border-gray-200'
               )}
             >
@@ -844,14 +844,14 @@ export function BackupRecoveryTab() {
                 value: metrics.lastBackupTime ? timeAgo(metrics.lastBackupTime) : 'Never',
                 sub: metrics.lastBackupTime ? formatTimestamp(metrics.lastBackupTime) : 'No backups yet',
                 icon: Clock,
-                gradient: 'from-fuchsia-600 to-violet-600',
+                gradient: 'from-blue-600 to-indigo-600',
               },
               {
                 label: 'Next Scheduled',
                 value: metrics.nextBackupTime.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
                 sub: `Every ${schedule.frequency}`,
                 icon: Calendar,
-                gradient: 'from-violet-500 to-purple-600',
+                gradient: 'from-indigo-500 to-purple-600',
               },
               {
                 label: 'Success Rate (7d)',
@@ -892,7 +892,7 @@ export function BackupRecoveryTab() {
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
             <GlassCard className="p-6">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <ShieldCheck className="w-5 h-5 text-fuchsia-600" />
+                <ShieldCheck className="w-5 h-5 text-blue-600" />
                 Backup Health Summary
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -929,7 +929,7 @@ export function BackupRecoveryTab() {
                 {/* Recent Activity */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                    <Timer className="w-4 h-4 text-violet-500" />
+                    <Timer className="w-4 h-4 text-indigo-500" />
                     Recent Activity
                   </h4>
                   {backupRecords.length === 0 ? (
@@ -943,7 +943,7 @@ export function BackupRecoveryTab() {
                           ) : record.status === 'failed' ? (
                             <XCircle className="w-4 h-4 text-red-500 shrink-0" />
                           ) : (
-                            <Loader2 className="w-4 h-4 text-fuchsia-500 shrink-0 animate-spin" />
+                            <Loader2 className="w-4 h-4 text-blue-500 shrink-0 animate-spin" />
                           )}
                           <span className="text-gray-600 truncate flex-1">
                             {record.type === 'auto' ? 'Auto' : 'Manual'} — {record.scope}
@@ -960,13 +960,13 @@ export function BackupRecoveryTab() {
                 {/* Quick Actions */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-fuchsia-500" />
+                    <Zap className="w-4 h-4 text-blue-500" />
                     Quick Actions
                   </h4>
                   <div className="space-y-2">
                     <button
                       onClick={() => setActiveSection('create')}
-                      className="w-full flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-fuchsia-50 to-violet-50 text-fuchsia-700 hover:from-fuchsia-100 hover:to-violet-100 transition-all text-sm font-medium"
+                      className="w-full flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 hover:from-blue-100 hover:to-indigo-100 transition-all text-sm font-medium"
                     >
                       <Download className="w-4 h-4" />
                       Create Manual Backup
@@ -1003,9 +1003,9 @@ export function BackupRecoveryTab() {
             <div className="p-6 border-b border-gray-100">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-fuchsia-600" />
+                  <Clock className="w-5 h-5 text-blue-600" />
                   Backup History
-                  <span className="text-xs font-medium bg-fuchsia-100 text-fuchsia-700 px-2 py-0.5 rounded-full">
+                  <span className="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                     {filteredRecords.length}
                   </span>
                 </h3>
@@ -1013,7 +1013,7 @@ export function BackupRecoveryTab() {
                   <select
                     value={statusFilter}
                     onChange={e => { setStatusFilter(e.target.value as any); setHistoryPage(1); }}
-                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   >
                     <option value="">All Statuses</option>
                     <option value="success">Success</option>
@@ -1024,14 +1024,14 @@ export function BackupRecoveryTab() {
                     type="date"
                     value={dateFrom}
                     onChange={e => { setDateFrom(e.target.value); setHistoryPage(1); }}
-                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="From"
                   />
                   <input
                     type="date"
                     value={dateTo}
                     onChange={e => { setDateTo(e.target.value); setHistoryPage(1); }}
-                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                    className="px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="To"
                   />
                   {(statusFilter || dateFrom || dateTo) && (
@@ -1061,7 +1061,7 @@ export function BackupRecoveryTab() {
                   {backupRecords.length === 0 && (
                     <button
                       onClick={() => setActiveSection('create')}
-                      className="mt-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-sm font-semibold shadow-lg shadow-fuchsia-500/25"
+                      className="mt-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-semibold shadow-lg shadow-blue-500/25"
                     >
                       <Download className="w-4 h-4" />
                       Create Backup
@@ -1089,7 +1089,7 @@ export function BackupRecoveryTab() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: idx * 0.03 }}
-                        className="hover:bg-fuchsia-50/30 transition-colors"
+                        className="hover:bg-blue-50/30 transition-colors"
                       >
                         <td className="px-4 py-3.5">
                           <div>
@@ -1105,8 +1105,8 @@ export function BackupRecoveryTab() {
                           <span className={cn(
                             'text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full',
                             record.type === 'auto'
-                              ? 'bg-violet-100 text-violet-700'
-                              : 'bg-fuchsia-100 text-fuchsia-700'
+                              ? 'bg-indigo-100 text-indigo-700'
+                              : 'bg-blue-100 text-blue-700'
                           )}>
                             {record.type}
                           </span>
@@ -1155,7 +1155,7 @@ export function BackupRecoveryTab() {
                         <td className="px-4 py-3.5 text-center">
                           <button
                             onClick={() => setSelectedBackupId(selectedBackupId === record.id ? null : record.id!)}
-                            className="p-2 rounded-lg text-gray-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 transition-all"
+                            className="p-2 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all"
                           >
                             {selectedBackupId === record.id ? <ChevronUp className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
@@ -1220,7 +1220,7 @@ export function BackupRecoveryTab() {
                               <div className="flex justify-between text-sm">
                                 <dt className="text-gray-500">Encrypted</dt>
                                 <dd className="text-gray-900 font-medium flex items-center gap-1">
-                                  {rec.encrypted ? <Lock className="w-3 h-3 text-fuchsia-600" /> : <Unlock className="w-3 h-3 text-gray-400" />}
+                                  {rec.encrypted ? <Lock className="w-3 h-3 text-blue-600" /> : <Unlock className="w-3 h-3 text-gray-400" />}
                                   {rec.encrypted ? 'Yes' : 'No'}
                                 </dd>
                               </div>
@@ -1248,7 +1248,7 @@ export function BackupRecoveryTab() {
                                   setActiveSection('restore');
                                   setRestoreBackupId(rec.id || null);
                                 }}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-sm font-semibold shadow-lg shadow-fuchsia-500/25 hover:from-fuchsia-700 hover:to-violet-700 transition-all"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-semibold shadow-lg shadow-blue-500/25 hover:from-blue-700 hover:to-indigo-700 transition-all"
                               >
                                 <RotateCcw className="w-4 h-4" />
                                 Restore This Backup
@@ -1299,7 +1299,7 @@ export function BackupRecoveryTab() {
                           className={cn(
                             'w-8 h-8 rounded-lg text-sm font-semibold transition-all',
                             historyPage === p
-                              ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-md'
+                              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
                               : 'text-gray-600 hover:bg-gray-100'
                           )}
                         >
@@ -1330,7 +1330,7 @@ export function BackupRecoveryTab() {
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="lg:col-span-2">
             <GlassCard className="p-6">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-6">
-                <Download className="w-5 h-5 text-fuchsia-600" />
+                <Download className="w-5 h-5 text-blue-600" />
                 Create Manual Backup
               </h3>
 
@@ -1349,12 +1349,12 @@ export function BackupRecoveryTab() {
                       className={cn(
                         'p-4 rounded-xl border-2 text-left transition-all',
                         backupScope === opt.value
-                          ? 'border-fuchsia-500 bg-fuchsia-50 shadow-md shadow-fuchsia-500/10'
-                          : 'border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/30'
+                          ? 'border-blue-500 bg-blue-50 shadow-md shadow-blue-500/10'
+                          : 'border-gray-200 bg-white hover:border-blue-200 hover:bg-blue-50/30'
                       )}
                     >
-                      <opt.icon className={cn('w-5 h-5 mb-2', backupScope === opt.value ? 'text-fuchsia-600' : 'text-gray-400')} />
-                      <p className={cn('text-sm font-semibold', backupScope === opt.value ? 'text-fuchsia-700' : 'text-gray-700')}>
+                      <opt.icon className={cn('w-5 h-5 mb-2', backupScope === opt.value ? 'text-blue-600' : 'text-gray-400')} />
+                      <p className={cn('text-sm font-semibold', backupScope === opt.value ? 'text-blue-700' : 'text-gray-700')}>
                         {opt.label}
                       </p>
                       <p className="text-xs text-gray-400 mt-0.5">{opt.desc}</p>
@@ -1376,7 +1376,7 @@ export function BackupRecoveryTab() {
                     value={scopeTarget}
                     onChange={e => setScopeTarget(e.target.value)}
                     placeholder="Enter institution ID..."
-                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </motion.div>
               )}
@@ -1391,7 +1391,7 @@ export function BackupRecoveryTab() {
                     <div className="flex gap-2">
                       <button
                         onClick={selectAllCollections}
-                        className="text-xs font-medium text-fuchsia-600 hover:text-fuchsia-700 transition-colors"
+                        className="text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors"
                       >
                         Select All
                       </button>
@@ -1414,14 +1414,14 @@ export function BackupRecoveryTab() {
                           className={cn(
                             'flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm transition-all',
                             isSelected
-                              ? 'border-fuchsia-300 bg-fuchsia-50 text-fuchsia-700'
+                              ? 'border-blue-300 bg-blue-50 text-blue-700'
                               : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300',
                             backupScope === 'full' && 'cursor-default'
                           )}
                         >
                           <span className="text-base">{col.icon}</span>
                           <span className="font-medium">{col.label}</span>
-                          {isSelected && <Check className="w-3.5 h-3.5 ml-auto text-fuchsia-600" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 ml-auto text-blue-600" />}
                         </button>
                       );
                     })}
@@ -1433,8 +1433,8 @@ export function BackupRecoveryTab() {
               <div className="space-y-4 mb-6">
                 <div className="flex items-center justify-between p-4 rounded-xl border border-gray-200 bg-gray-50/50">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center">
-                      <FileText className="w-4 h-4 text-violet-600" />
+                    <div className="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-indigo-600" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-700">Include Media Files</p>
@@ -1445,8 +1445,8 @@ export function BackupRecoveryTab() {
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-xl border border-gray-200 bg-gray-50/50">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-fuchsia-100 flex items-center justify-center">
-                      <Lock className="w-4 h-4 text-fuchsia-600" />
+                    <div className="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center">
+                      <Lock className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-700">Encrypt Backup</p>
@@ -1465,7 +1465,7 @@ export function BackupRecoveryTab() {
                   onChange={e => setBackupNotes(e.target.value)}
                   placeholder="Add a description or notes for this backup..."
                   rows={3}
-                  className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                 />
               </div>
             </GlassCard>
@@ -1481,7 +1481,7 @@ export function BackupRecoveryTab() {
             {/* Backup Summary */}
             <GlassCard className="p-6">
               <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <BarChart3 className="w-4 h-4 text-fuchsia-600" />
+                <BarChart3 className="w-4 h-4 text-blue-600" />
                 Backup Summary
               </h4>
               <div className="space-y-3">
@@ -1515,20 +1515,20 @@ export function BackupRecoveryTab() {
               {isStartingBackup ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-2">
-                    <Loader2 className="w-5 h-5 text-fuchsia-600 animate-spin" />
+                    <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
                     <span className="text-sm font-bold text-gray-900">Backup in Progress</span>
                   </div>
                   <ProgressBar value={backupProgress} max={100} />
                   <div className="flex items-center justify-between">
                     <p className="text-xs text-gray-500">{backupStage}</p>
-                    <p className="text-xs font-bold text-fuchsia-600">{Math.round(backupProgress)}%</p>
+                    <p className="text-xs font-bold text-blue-600">{Math.round(backupProgress)}%</p>
                   </div>
                 </div>
               ) : (
                 <button
                   onClick={handleStartBackup}
                   disabled={backupScope !== 'full' && selectedCollections.length === 0}
-                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-bold text-base hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-xl shadow-fuchsia-500/30 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-base hover:from-blue-700 hover:to-indigo-700 transition-all shadow-xl shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
                 >
                   <Play className="w-5 h-5" />
                   Start Backup
@@ -1550,7 +1550,7 @@ export function BackupRecoveryTab() {
           <GlassCard className="p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-fuchsia-600" />
+                <Calendar className="w-5 h-5 text-blue-600" />
                 Backup Schedule Configuration
               </h3>
               <div className="flex items-center gap-3">
@@ -1576,8 +1576,8 @@ export function BackupRecoveryTab() {
                         className={cn(
                           'px-4 py-3 rounded-xl border-2 text-sm font-semibold capitalize transition-all',
                           schedule.frequency === freq
-                            ? 'border-fuchsia-500 bg-fuchsia-50 text-fuchsia-700 shadow-sm'
-                            : 'border-gray-200 bg-white text-gray-600 hover:border-fuchsia-200'
+                            ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm'
+                            : 'border-gray-200 bg-white text-gray-600 hover:border-blue-200'
                         )}
                       >
                         {freq}
@@ -1596,7 +1596,7 @@ export function BackupRecoveryTab() {
                         type="time"
                         value={schedule.time}
                         onChange={e => setSchedule(s => ({ ...s, time: e.target.value }))}
-                        className="pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                        className="pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       />
                     </div>
                     <p className="text-xs text-gray-400">Server timezone</p>
@@ -1614,7 +1614,7 @@ export function BackupRecoveryTab() {
                       max={365}
                       value={schedule.retentionCount}
                       onChange={e => setSchedule(s => ({ ...s, retentionCount: Math.max(1, parseInt(e.target.value) || 1) }))}
-                      className="w-20 px-3 py-2.5 text-sm border border-gray-200 rounded-xl bg-white text-center focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all"
+                      className="w-20 px-3 py-2.5 text-sm border border-gray-200 rounded-xl bg-white text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                     <span className="text-sm text-gray-500">backup(s)</span>
                   </div>
@@ -1636,7 +1636,7 @@ export function BackupRecoveryTab() {
                   <div className="flex items-center justify-between p-3 rounded-xl border border-gray-200 bg-gray-50/50">
                     <div className="flex items-center gap-2">
                       {schedule.notifyOnFailure ? (
-                        <Bell className="w-4 h-4 text-fuchsia-500" />
+                        <Bell className="w-4 h-4 text-blue-500" />
                       ) : (
                         <BellOff className="w-4 h-4 text-gray-400" />
                       )}
@@ -1659,7 +1659,7 @@ export function BackupRecoveryTab() {
                 <button
                   onClick={handleSaveSchedule}
                   disabled={isSavingSchedule || !schedule.isActive}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSavingSchedule ? <Loader2 className="w-4 h-4 animate-spin" /> : <Settings className="w-4 h-4" />}
                   Save Schedule
@@ -1680,7 +1680,7 @@ export function BackupRecoveryTab() {
             <GlassCard className="overflow-hidden">
               <div className="p-6 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <RotateCcw className="w-5 h-5 text-fuchsia-600" />
+                  <RotateCcw className="w-5 h-5 text-blue-600" />
                   Available Restore Points
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">
@@ -1711,14 +1711,14 @@ export function BackupRecoveryTab() {
                             onClick={() => setRestoreBackupId(isSelected ? null : record.id!)}
                             className={cn(
                               'w-full px-6 py-4 flex items-center gap-4 text-left transition-all',
-                              isSelected ? 'bg-fuchsia-50/60 border-l-4 border-l-fuchsia-500' : 'hover:bg-gray-50/60'
+                              isSelected ? 'bg-blue-50/60 border-l-4 border-l-blue-500' : 'hover:bg-gray-50/60'
                             )}
                           >
                             <div className={cn(
                               'w-10 h-10 rounded-xl flex items-center justify-center shrink-0',
-                              isSelected ? 'bg-fuchsia-100' : 'bg-gray-100'
+                              isSelected ? 'bg-blue-100' : 'bg-gray-100'
                             )}>
-                              <Archive className={cn('w-5 h-5', isSelected ? 'text-fuchsia-600' : 'text-gray-400')} />
+                              <Archive className={cn('w-5 h-5', isSelected ? 'text-blue-600' : 'text-gray-400')} />
                             </div>
 
                             <div className="flex-1 min-w-0">
@@ -1728,12 +1728,12 @@ export function BackupRecoveryTab() {
                                 </span>
                                 <span className={cn(
                                   'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full',
-                                  record.type === 'auto' ? 'bg-violet-100 text-violet-700' : 'bg-fuchsia-100 text-fuchsia-700'
+                                  record.type === 'auto' ? 'bg-indigo-100 text-indigo-700' : 'bg-blue-100 text-blue-700'
                                 )}>
                                   {record.type}
                                 </span>
                                 {record.encrypted && (
-                                  <Lock className="w-3 h-3 text-fuchsia-500" />
+                                  <Lock className="w-3 h-3 text-blue-500" />
                                 )}
                               </div>
                               <p className="text-xs text-gray-400 mt-0.5">
@@ -1743,7 +1743,7 @@ export function BackupRecoveryTab() {
 
                             <div className="shrink-0">
                               {isSelected ? (
-                                <CheckCircle className="w-5 h-5 text-fuchsia-600" />
+                                <CheckCircle className="w-5 h-5 text-blue-600" />
                               ) : (
                                 <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
                               )}
@@ -1766,7 +1766,7 @@ export function BackupRecoveryTab() {
           >
             <GlassCard className="p-6">
               <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <Settings className="w-4 h-4 text-fuchsia-600" />
+                <Settings className="w-4 h-4 text-blue-600" />
                 Restore Options
               </h4>
 
@@ -1787,12 +1787,12 @@ export function BackupRecoveryTab() {
                         className={cn(
                           'p-3 rounded-xl border-2 text-center transition-all',
                           restoreScope === 'full'
-                            ? 'border-fuchsia-500 bg-fuchsia-50'
-                            : 'border-gray-200 hover:border-fuchsia-200'
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-blue-200'
                         )}
                       >
-                        <Database className={cn('w-5 h-5 mx-auto mb-1', restoreScope === 'full' ? 'text-fuchsia-600' : 'text-gray-400')} />
-                        <span className={cn('text-xs font-semibold', restoreScope === 'full' ? 'text-fuchsia-700' : 'text-gray-600')}>
+                        <Database className={cn('w-5 h-5 mx-auto mb-1', restoreScope === 'full' ? 'text-blue-600' : 'text-gray-400')} />
+                        <span className={cn('text-xs font-semibold', restoreScope === 'full' ? 'text-blue-700' : 'text-gray-600')}>
                           Full Restore
                         </span>
                       </button>
@@ -1801,12 +1801,12 @@ export function BackupRecoveryTab() {
                         className={cn(
                           'p-3 rounded-xl border-2 text-center transition-all',
                           restoreScope === 'partial'
-                            ? 'border-fuchsia-500 bg-fuchsia-50'
-                            : 'border-gray-200 hover:border-fuchsia-200'
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-blue-200'
                         )}
                       >
-                        <FolderOpen className={cn('w-5 h-5 mx-auto mb-1', restoreScope === 'partial' ? 'text-fuchsia-600' : 'text-gray-400')} />
-                        <span className={cn('text-xs font-semibold', restoreScope === 'partial' ? 'text-fuchsia-700' : 'text-gray-600')}>
+                        <FolderOpen className={cn('w-5 h-5 mx-auto mb-1', restoreScope === 'partial' ? 'text-blue-600' : 'text-gray-400')} />
+                        <span className={cn('text-xs font-semibold', restoreScope === 'partial' ? 'text-blue-700' : 'text-gray-600')}>
                           Partial Restore
                         </span>
                       </button>
@@ -1835,7 +1835,7 @@ export function BackupRecoveryTab() {
                                   prev.includes(col) ? prev.filter(c => c !== col) : [...prev, col]
                                 );
                               }}
-                              className="w-4 h-4 rounded border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500"
+                              className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                             />
                             <span className="text-sm text-gray-700">{col}</span>
                           </label>
@@ -1859,11 +1859,11 @@ export function BackupRecoveryTab() {
                   {isRestoring ? (
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <Loader2 className="w-4 h-4 text-fuchsia-600 animate-spin" />
+                        <Loader2 className="w-4 h-4 text-blue-600 animate-spin" />
                         <span className="text-sm font-bold text-gray-900">Restoring data...</span>
                       </div>
                       <ProgressBar value={restoreProgress} max={100} />
-                      <p className="text-xs text-right font-bold text-fuchsia-600">{Math.round(restoreProgress)}%</p>
+                      <p className="text-xs text-right font-bold text-blue-600">{Math.round(restoreProgress)}%</p>
                     </div>
                   ) : (
                     <button
@@ -1892,7 +1892,7 @@ export function BackupRecoveryTab() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <ScanSearch className="w-5 h-5 text-fuchsia-600" />
+                  <ScanSearch className="w-5 h-5 text-blue-600" />
                   Data Integrity Check
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">
@@ -1902,7 +1902,7 @@ export function BackupRecoveryTab() {
               {!isRunningCheck && (
                 <button
                   onClick={handleIntegrityCheck}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25"
                 >
                   <Play className="w-4 h-4" />
                   Run Integrity Check
@@ -1914,13 +1914,13 @@ export function BackupRecoveryTab() {
             {isRunningCheck && (
               <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3">
-                  <Loader2 className="w-5 h-5 text-fuchsia-600 animate-spin" />
+                  <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
                   <span className="text-sm font-bold text-gray-900">Scanning database...</span>
                 </div>
                 <ProgressBar value={checkProgress} max={100} />
                 <div className="flex justify-between">
                   <p className="text-xs text-gray-400">Analyzing collections and references</p>
-                  <p className="text-xs font-bold text-fuchsia-600">{Math.round(checkProgress)}%</p>
+                  <p className="text-xs font-bold text-blue-600">{Math.round(checkProgress)}%</p>
                 </div>
               </div>
             )}
@@ -2008,11 +2008,11 @@ export function BackupRecoveryTab() {
                             >
                               <div className={cn(
                                 'w-8 h-8 rounded-lg flex items-center justify-center shrink-0',
-                                issue.type === 'orphaned' && 'bg-violet-100',
+                                issue.type === 'orphaned' && 'bg-indigo-100',
                                 issue.type === 'missing_reference' && 'bg-rose-100',
                                 issue.type === 'inconsistency' && 'bg-amber-100'
                               )}>
-                                {issue.type === 'orphaned' && <FileText className="w-4 h-4 text-violet-600" />}
+                                {issue.type === 'orphaned' && <FileText className="w-4 h-4 text-indigo-600" />}
                                 {issue.type === 'missing_reference' && <AlertCircle className="w-4 h-4 text-rose-600" />}
                                 {issue.type === 'inconsistency' && <AlertTriangle className="w-4 h-4 text-amber-600" />}
                               </div>
@@ -2023,7 +2023,7 @@ export function BackupRecoveryTab() {
                                   </span>
                                   <span className={cn(
                                     'text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded',
-                                    issue.type === 'orphaned' && 'bg-violet-100 text-violet-700',
+                                    issue.type === 'orphaned' && 'bg-indigo-100 text-indigo-700',
                                     issue.type === 'missing_reference' && 'bg-rose-100 text-rose-700',
                                     issue.type === 'inconsistency' && 'bg-amber-100 text-amber-700'
                                   )}>
@@ -2068,11 +2068,11 @@ export function BackupRecoveryTab() {
                                         <span className="font-semibold text-gray-500">Description: </span>
                                         <span className="text-gray-700">{issue.description}</span>
                                       </div>
-                                      <div className="flex items-start gap-2 p-2 rounded-lg bg-fuchsia-50 border border-fuchsia-100">
-                                        <Wrench className="w-3.5 h-3.5 text-fuchsia-600 shrink-0 mt-0.5" />
+                                      <div className="flex items-start gap-2 p-2 rounded-lg bg-blue-50 border border-blue-100">
+                                        <Wrench className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
                                         <div>
-                                          <p className="text-xs font-semibold text-fuchsia-700">Fix Suggestion</p>
-                                          <p className="text-xs text-fuchsia-600 mt-0.5">{issue.fixSuggestion}</p>
+                                          <p className="text-xs font-semibold text-blue-700">Fix Suggestion</p>
+                                          <p className="text-xs text-blue-600 mt-0.5">{issue.fixSuggestion}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -2119,8 +2119,8 @@ export function BackupRecoveryTab() {
             {/* No results yet */}
             {!integrityResult && !isRunningCheck && (
               <div className="flex flex-col items-center justify-center py-16 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-fuchsia-50 flex items-center justify-center mb-4">
-                  <ScanSearch className="w-8 h-8 text-fuchsia-300" />
+                <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
+                  <ScanSearch className="w-8 h-8 text-blue-300" />
                 </div>
                 <p className="text-gray-500 font-semibold">No integrity check run yet</p>
                 <p className="text-sm text-gray-400 mt-1">

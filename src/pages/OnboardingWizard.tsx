@@ -188,9 +188,9 @@ function GradientButton({
   return (
     <button
       className={cn(
-        'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white px-6 py-3 rounded-xl font-semibold',
-        'hover:from-fuchsia-700 hover:to-violet-700 transition-all duration-200',
-        'shadow-lg shadow-fuchsia-500/25 hover:shadow-fuchsia-500/40',
+        'bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold',
+        'hover:from-blue-700 hover:to-indigo-700 transition-all duration-200',
+        'shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none',
         'flex items-center justify-center gap-2',
         className,
@@ -210,8 +210,8 @@ function OutlineButton({
   return (
     <button
       className={cn(
-        'border border-fuchsia-200 text-fuchsia-600 px-6 py-3 rounded-xl font-semibold',
-        'hover:bg-fuchsia-50 transition-all duration-200',
+        'border border-blue-200 text-blue-600 px-6 py-3 rounded-xl font-semibold',
+        'hover:bg-blue-50 transition-all duration-200',
         'disabled:opacity-40 disabled:cursor-not-allowed',
         'flex items-center justify-center gap-2',
         className,
@@ -239,9 +239,9 @@ function InputField({
   return (
     <div className="space-y-1.5">
       <label className="flex items-center gap-1.5 text-sm font-semibold text-slate-700">
-        {Icon && <Icon className="w-4 h-4 text-fuchsia-500" />}
+        {Icon && <Icon className="w-4 h-4 text-blue-500" />}
         {label}
-        {required && <span className="text-fuchsia-500">*</span>}
+        {required && <span className="text-blue-500">*</span>}
       </label>
       {children}
       {error && <p className="text-xs text-rose-500 mt-1">{error}</p>}
@@ -252,7 +252,7 @@ function InputField({
 function inputClasses(error?: string) {
   return cn(
     'w-full px-4 py-3 bg-white/60 border rounded-xl text-sm text-slate-800 placeholder:text-slate-400',
-    'focus:outline-none focus:ring-2 focus:ring-fuchsia-500/30 focus:border-fuchsia-400',
+    'focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400',
     'transition-all duration-200',
     error ? 'border-rose-300 bg-rose-50/40' : 'border-slate-200 hover:border-slate-300',
   );
@@ -306,34 +306,34 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
         transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
         className="relative mb-8"
       >
-        <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center shadow-2xl shadow-fuchsia-500/30">
+        <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-blue-500/30">
           <Church className="w-14 h-14 text-white" />
         </div>
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.4 }}
-          className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full shadow-lg border-2 border-fuchsia-100 flex items-center justify-center"
+          className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full shadow-lg border-2 border-blue-100 flex items-center justify-center"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.6 }}
           >
-            <Check className="w-5 h-5 text-fuchsia-600" strokeWidth={3} />
+            <Check className="w-5 h-5 text-blue-600" strokeWidth={3} />
           </motion.div>
         </motion.div>
       </motion.div>
 
       {/* Background decorative blobs */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-fuchsia-200/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-violet-200/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none" />
 
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-fuchsia-600 to-violet-600 bg-clip-text text-transparent mb-3"
+        className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3"
       >
         Welcome to CovenantERP
       </motion.h1>
@@ -345,7 +345,7 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
         className="text-slate-500 max-w-md mb-2 text-base leading-relaxed"
       >
         Let&apos;s set up your institution profile. This will take about{' '}
-        <span className="text-fuchsia-600 font-semibold">5 minutes</span>.
+        <span className="text-blue-600 font-semibold">5 minutes</span>.
       </motion.p>
 
       <motion.p
@@ -369,7 +369,7 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
           (feature) => (
             <span
               key={feature}
-              className="px-3 py-1.5 bg-fuchsia-50 border border-fuchsia-100 rounded-full text-xs font-medium text-fuchsia-600"
+              className="px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-xs font-medium text-blue-600"
             >
               {feature}
             </span>
@@ -509,9 +509,9 @@ function BasicInfoStep({ data, onChange }: { data: FormData; onChange: (d: FormD
 
       {/* Logo upload placeholder */}
       <InputField label="Institution Logo" icon={Upload}>
-        <div className="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-fuchsia-300 hover:bg-fuchsia-50/30 transition-all cursor-pointer group">
-          <Upload className="w-8 h-8 text-slate-300 mx-auto mb-2 group-hover:text-fuchsia-400 transition-colors" />
-          <p className="text-sm text-slate-400 group-hover:text-fuchsia-500 transition-colors">
+        <div className="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-blue-300 hover:bg-blue-50/30 transition-all cursor-pointer group">
+          <Upload className="w-8 h-8 text-slate-300 mx-auto mb-2 group-hover:text-blue-400 transition-colors" />
+          <p className="text-sm text-slate-400 group-hover:text-blue-500 transition-colors">
             Click to upload logo
           </p>
           <p className="text-xs text-slate-300 mt-1">PNG, JPG up to 2MB</p>
@@ -606,13 +606,13 @@ function MissionIdentityStep({ data, onChange }: { data: FormData; onChange: (d:
             {currentTags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-fuchsia-50 border border-fuchsia-200 rounded-lg text-xs font-medium text-fuchsia-700"
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 border border-blue-200 rounded-lg text-xs font-medium text-blue-700"
               >
                 {tag}
                 <button
                   type="button"
                   onClick={() => removeTag(tag)}
-                  className="ml-0.5 text-fuchsia-400 hover:text-fuchsia-700 transition-colors"
+                  className="ml-0.5 text-blue-400 hover:text-blue-700 transition-colors"
                 >
                   &times;
                 </button>
@@ -696,7 +696,7 @@ function AcademicProgramsStep({ data, onChange }: { data: FormData; onChange: (d
               className={cn(
                 'px-3 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 text-left',
                 data.programs.includes(prog)
-                  ? 'bg-fuchsia-50 border-fuchsia-300 text-fuchsia-700 shadow-sm'
+                  ? 'bg-blue-50 border-blue-300 text-blue-700 shadow-sm'
                   : 'bg-white/60 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-white/80',
               )}
             >
@@ -705,7 +705,7 @@ function AcademicProgramsStep({ data, onChange }: { data: FormData; onChange: (d
                   className={cn(
                     'w-4 h-4 rounded border flex items-center justify-center transition-all',
                     data.programs.includes(prog)
-                      ? 'bg-fuchsia-600 border-fuchsia-600'
+                      ? 'bg-blue-600 border-blue-600'
                       : 'border-slate-300',
                   )}
                 >
@@ -787,8 +787,8 @@ function AdminContactStep({ data, onChange }: { data: FormData; onChange: (d: Fo
       </div>
 
       {/* Primary admin */}
-      <div className="space-y-4 p-4 bg-fuchsia-50/40 border border-fuchsia-100 rounded-xl">
-        <p className="text-xs font-bold uppercase tracking-wider text-fuchsia-600">
+      <div className="space-y-4 p-4 bg-blue-50/40 border border-blue-100 rounded-xl">
+        <p className="text-xs font-bold uppercase tracking-wider text-blue-600">
           Primary Administrator
         </p>
 
@@ -878,7 +878,7 @@ function ReviewStep({ data }: { data: FormData }) {
     children: React.ReactNode;
   }) => (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 text-sm font-bold text-fuchsia-600 uppercase tracking-wider">
+      <div className="flex items-center gap-2 text-sm font-bold text-blue-600 uppercase tracking-wider">
         <Icon className="w-4 h-4" />
         {title}
       </div>
@@ -959,7 +959,7 @@ function ProgressBar({
         <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200 mx-8" />
         {/* Active track */}
         <motion.div
-          className="absolute top-5 h-0.5 bg-gradient-to-r from-fuchsia-500 to-violet-500 mx-8"
+          className="absolute top-5 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-8"
           initial={false}
           animate={{
             left: `${(currentStep / (STEPS.length - 1)) * 100}%`,
@@ -991,9 +991,9 @@ function ProgressBar({
                 className={cn(
                   'w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300',
                   isCurrent
-                    ? 'bg-gradient-to-br from-fuchsia-500 to-violet-600 border-transparent shadow-lg shadow-fuchsia-500/30'
+                    ? 'bg-gradient-to-br from-blue-500 to-indigo-600 border-transparent shadow-lg shadow-blue-500/30'
                     : isActive
-                      ? 'bg-fuchsia-100 border-fuchsia-400 text-fuchsia-600'
+                      ? 'bg-blue-100 border-blue-400 text-blue-600'
                       : 'bg-white border-slate-200 text-slate-300',
                 )}
                 whileHover={step.id <= currentStep ? { scale: 1.1 } : undefined}
@@ -1009,7 +1009,7 @@ function ProgressBar({
                 className={cn(
                   'text-[10px] font-semibold tracking-wide transition-colors whitespace-nowrap',
                   isCurrent
-                    ? 'text-fuchsia-600'
+                    ? 'text-blue-600'
                     : isActive
                       ? 'text-slate-500'
                       : 'text-slate-300',
@@ -1124,11 +1124,11 @@ export function OnboardingWizard({ userEmail, userId, onComplete }: OnboardingWi
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-fuchsia-50/30 to-violet-50/40 p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 p-4 md:p-8 relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-fuchsia-200/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-200/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-fuchsia-100/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-blue-100/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-2xl relative z-10">
         <motion.div

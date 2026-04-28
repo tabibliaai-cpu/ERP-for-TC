@@ -110,7 +110,7 @@ type TabId = typeof TABS[number]['id'];
 function LoadingSpinner({ text = 'Loading...' }: { text?: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16">
-      <div className="animate-spin w-10 h-10 border-4 border-fuchsia-500 border-t-transparent rounded-full mb-4"></div>
+      <div className="animate-spin w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full mb-4"></div>
       <p className="text-gray-500 font-medium">{text}</p>
     </div>
   );
@@ -173,7 +173,7 @@ const SuccessModal: React.FC<{
             <div>
               <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Email Address</label>
               <div className="flex items-center gap-2 mt-1">
-                <Mail className="w-4 h-4 text-fuchsia-500" />
+                <Mail className="w-4 h-4 text-blue-500" />
                 <span className="font-mono text-gray-800 text-sm break-all">{result.email}</span>
               </div>
             </div>
@@ -181,7 +181,7 @@ const SuccessModal: React.FC<{
               <div className="border-t border-gray-200 pt-3">
                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Temporary Password</label>
                 <div className="flex items-center gap-2 mt-1">
-                  <Key className="w-4 h-4 text-fuchsia-500" />
+                  <Key className="w-4 h-4 text-blue-500" />
                   <span className="font-mono text-gray-800 text-sm flex-1">
                     {showPassword ? result.tempPassword : '••••••••••'}
                   </span>
@@ -193,7 +193,7 @@ const SuccessModal: React.FC<{
             )}
           </div>
           <div className="flex gap-3">
-            <button onClick={copyPassword} className={cn('flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all', copied ? 'bg-green-500 text-white' : 'bg-fuchsia-100 text-fuchsia-700 hover:bg-fuchsia-200')}>
+            <button onClick={copyPassword} className={cn('flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all', copied ? 'bg-green-500 text-white' : 'bg-blue-50 text-blue-700 hover:bg-blue-100')}>
               {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copied ? 'Copied!' : 'Copy Password'}
             </button>
@@ -201,7 +201,7 @@ const SuccessModal: React.FC<{
               <Mail className="w-4 h-4" />Open Mail
             </button>
           </div>
-          <button onClick={onClose} className="w-full py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl text-sm font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-colors">Done</button>
+          <button onClick={onClose} className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition-colors">Done</button>
           <p className="text-xs text-center text-amber-600 bg-amber-50 rounded-lg p-2">⚠ This password will not be shown again. Please save it now.</p>
         </div>
       </div>
@@ -684,11 +684,11 @@ export function SuperAdmin() {
       <div className="bg-white/80 backdrop-blur-xl border-b border-gray-200/60 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-fuchsia-600 via-violet-600 to-indigo-600 rounded-xl p-2.5 shadow-lg shadow-fuchsia-500/25">
+            <div className="bg-blue-700 rounded-xl p-2.5 shadow-lg shadow-blue-500/20">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold text-blue-700">
                 Super Admin
               </h1>
               <p className="text-xs text-gray-500">Platform Operating System</p>
@@ -704,7 +704,7 @@ export function SuperAdmin() {
             </button>
             <button
               onClick={() => { setIsAddModalOpen(true); setActiveTab('institutions'); }}
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-blue-500/20 text-sm"
             >
               <Plus className="w-4 h-4" />
               Add Institution
@@ -757,8 +757,8 @@ export function SuperAdmin() {
                 className={cn(
                   'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
                   isActive
-                    ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-lg shadow-fuchsia-500/25'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-fuchsia-200 hover:text-fuchsia-600'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-blue-200 hover:text-blue-600'
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -781,11 +781,11 @@ export function SuperAdmin() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-900 via-indigo-900 to-blue-900 p-8 text-white shadow-2xl"
-              style={{ background: 'linear-gradient(135deg, #581c87, #312e81, #1e3a5f)' }}
+              className="relative overflow-hidden rounded-3xl bg-slate-800 p-8 text-white shadow-2xl"
+              style={{ background: '#1e293b' }}
             >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(168,85,247,0.3),transparent_60%)]"></div>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.2),transparent_60%)]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.1),transparent_60%)]"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <Sparkles className="w-8 h-8 text-amber-400" />
@@ -798,19 +798,19 @@ export function SuperAdmin() {
             {/* KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { label: 'Total Institutions', value: platformStats?.totalInstitutions ?? institutions.length, icon: Building2, gradient: 'from-fuchsia-600 to-violet-600', shadow: 'shadow-fuchsia-500/20' },
-                { label: 'Active Users', value: platformStats?.totalUsers ?? '-', icon: Users, gradient: 'from-blue-500 to-cyan-500', shadow: 'shadow-blue-500/20' },
-                { label: 'Monthly Revenue', value: `$${(platformStats?.totalRevenue ?? 0).toLocaleString()}`, icon: DollarSign, gradient: 'from-emerald-500 to-teal-500', shadow: 'shadow-emerald-500/20' },
-                { label: 'Total Students', value: platformStats?.totalStudents ?? '-', icon: BookOpen, gradient: 'from-amber-500 to-orange-500', shadow: 'shadow-amber-500/20' },
-                { label: 'Faculty Count', value: platformStats?.totalFaculty ?? '-', icon: Presentation, gradient: 'from-pink-500 to-rose-500', shadow: 'shadow-pink-500/20' },
-                { label: 'System Health', value: '99.9%', icon: Activity, gradient: 'from-green-500 to-emerald-500', shadow: 'shadow-green-500/20' },
+                { label: 'Total Institutions', value: platformStats?.totalInstitutions ?? institutions.length, icon: Building2, color: 'bg-blue-600', shadow: 'shadow-blue-500/20' },
+                { label: 'Active Users', value: platformStats?.totalUsers ?? '-', icon: Users, color: 'bg-emerald-500', shadow: 'shadow-emerald-500/20' },
+                { label: 'Monthly Revenue', value: `$${(platformStats?.totalRevenue ?? 0).toLocaleString()}`, icon: DollarSign, color: 'bg-amber-500', shadow: 'shadow-amber-500/20' },
+                { label: 'Total Students', value: platformStats?.totalStudents ?? '-', icon: BookOpen, color: 'bg-sky-500', shadow: 'shadow-sky-500/20' },
+                { label: 'Faculty Count', value: platformStats?.totalFaculty ?? '-', icon: Presentation, color: 'bg-rose-500', shadow: 'shadow-rose-500/20' },
+                { label: 'System Health', value: '99.9%', icon: Activity, color: 'bg-slate-600', shadow: 'shadow-slate-500/20' },
               ].map((kpi, i) => (
                 <motion.div
                   key={kpi.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={cn('relative overflow-hidden rounded-2xl bg-gradient-to-br p-5 text-white shadow-lg', kpi.gradient, kpi.shadow)}
+                  className={cn('relative overflow-hidden rounded-2xl p-5 text-white shadow-lg', kpi.color, kpi.shadow)}
                 >
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
                   <div className="relative z-10 flex items-center justify-between">
@@ -828,14 +828,14 @@ export function SuperAdmin() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <GlassCard className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-fuchsia-600" /> Platform Summary
+                  <TrendingUp className="w-5 h-5 text-blue-600" /> Platform Summary
                 </h3>
                 <div className="space-y-3">
                   {[
                     { label: 'Active Institutions', value: platformStats?.activeInstitutions ?? '-', color: 'text-emerald-600' },
                     { label: 'Monthly Active Users', value: platformStats?.monthlyActiveUsers ?? '-', color: 'text-blue-600' },
                     { label: 'Total Announcements', value: platformStats?.totalAnnouncements ?? '-', color: 'text-amber-600' },
-                    { label: 'Audit Log Entries', value: platformStats?.totalAuditLogs ?? '-', color: 'text-violet-600' },
+                    { label: 'Audit Log Entries', value: platformStats?.totalAuditLogs ?? '-', color: 'text-indigo-600' },
                   ].map(item => (
                     <div key={item.label} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                       <span className="text-gray-600 text-sm">{item.label}</span>
@@ -860,7 +860,7 @@ export function SuperAdmin() {
                           <span className="text-gray-500">{count} institutions</span>
                         </div>
                         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                          <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ delay: 0.3, duration: 0.8 }} className="h-full bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-full"></motion.div>
+                          <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ delay: 0.3, duration: 0.8 }} className="h-full bg-blue-600 rounded-full"></motion.div>
                         </div>
                       </div>
                     );
@@ -879,12 +879,12 @@ export function SuperAdmin() {
             {/* Gradient Stat Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: 'Total', value: institutions.length, icon: Building2, gradient: 'from-fuchsia-600 to-violet-600' },
-                { label: 'Active', value: institutions.filter(i => i.status === 'active').length, icon: Activity, gradient: 'from-emerald-500 to-teal-500' },
-                { label: 'Students', value: institutions.reduce((s, i) => s + (i.studentCount || 0), 0).toLocaleString(), icon: Users, gradient: 'from-blue-500 to-cyan-500' },
-                { label: 'Faculty', value: institutions.reduce((s, i) => s + (i.facultyCount || 0), 0).toLocaleString(), icon: Presentation, gradient: 'from-pink-500 to-rose-500' },
+                { label: 'Total', value: institutions.length, icon: Building2, color: 'bg-blue-600' },
+                { label: 'Active', value: institutions.filter(i => i.status === 'active').length, icon: Activity, color: 'bg-emerald-500' },
+                { label: 'Students', value: institutions.reduce((s, i) => s + (i.studentCount || 0), 0).toLocaleString(), icon: Users, color: 'bg-sky-500' },
+                { label: 'Faculty', value: institutions.reduce((s, i) => s + (i.facultyCount || 0), 0).toLocaleString(), icon: Presentation, color: 'bg-rose-500' },
               ].map((s, i) => (
-                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-2xl bg-gradient-to-br p-4 text-white shadow-lg', s.gradient)}>
+                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-2xl p-4 text-white shadow-lg', s.color)}>
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-white/80 text-xs font-medium">{s.label}</p>
@@ -899,7 +899,7 @@ export function SuperAdmin() {
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search institutions by name or admin email..." className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all" />
+              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search institutions by name or admin email..." className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
             </div>
 
             {/* Institutions Table */}
@@ -923,11 +923,11 @@ export function SuperAdmin() {
                     </thead>
                     <tbody>
                       {filteredInstitutions.map((inst) => (
-                        <tr key={inst.id} className="border-b border-gray-100 hover:bg-fuchsia-50/50 transition-colors">
+                        <tr key={inst.id} className="border-b border-gray-100 hover:bg-slate-50 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="bg-gradient-to-br from-fuchsia-100 to-violet-100 rounded-lg p-2">
-                                <Building2 className="w-4 h-4 text-fuchsia-600" />
+                              <div className="bg-blue-50 rounded-lg p-2">
+                                <Building2 className="w-4 h-4 text-blue-600" />
                               </div>
                               <div>
                                 <div className="font-semibold text-gray-900">{inst.name}</div>
@@ -941,7 +941,7 @@ export function SuperAdmin() {
                             <span className={cn(
                               'px-2.5 py-1 rounded-lg text-xs font-semibold',
                               (inst.subscriptionPlan || 'free') === 'enterprise' && 'bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700',
-                              (inst.subscriptionPlan || 'free') === 'premium' && 'bg-gradient-to-r from-purple-100 to-fuchsia-100 text-purple-700',
+                              (inst.subscriptionPlan || 'free') === 'premium' && 'bg-blue-50 text-blue-700',
                               (inst.subscriptionPlan || 'free') === 'basic' && 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700',
                               (inst.subscriptionPlan || 'free') === 'free' && 'bg-gray-100 text-gray-600',
                             )}>
@@ -956,7 +956,7 @@ export function SuperAdmin() {
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-1">
-                              <button onClick={() => handleSelectInstitution(inst)} className="p-2 text-fuchsia-600 hover:bg-fuchsia-100 rounded-lg transition-colors" title="Manage"><ChevronRight className="w-5 h-5" /></button>
+                              <button onClick={() => handleSelectInstitution(inst)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Manage"><ChevronRight className="w-5 h-5" /></button>
                               <button onClick={() => handleOpenImpersonate(inst)} className="p-2 text-amber-600 hover:bg-amber-100 rounded-lg transition-colors" title="Impersonate"><Eye className="w-4 h-4" /></button>
                               <button onClick={() => handleDeleteInstitution(inst.id)} className="p-2 text-rose-600 hover:bg-rose-100 rounded-lg transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
                             </div>
@@ -976,7 +976,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'users' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #2563eb, #4338ca, #6d28d9)' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-blue-700 p-6 text-white shadow-xl" style={{ background: '#1d4ed8' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Users className="w-8 h-8 text-blue-200" />
@@ -1033,7 +1033,7 @@ export function SuperAdmin() {
                           <tr key={user.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
                             <td className="px-6 py-4">
                               <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-400 to-violet-500 flex items-center justify-center text-white text-xs font-bold">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">
                                   {(user.displayName || user.email || '?')[0].toUpperCase()}
                                 </div>
                                 <span className="font-medium text-gray-900 text-sm">{user.displayName || user.email?.split('@')[0] || '-'}</span>
@@ -1044,7 +1044,7 @@ export function SuperAdmin() {
                               <span className={cn(
                                 'px-2.5 py-1 rounded-lg text-xs font-semibold',
                                 user.role === 'super-admin' && 'bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700',
-                                user.role === 'admin' && 'bg-gradient-to-r from-violet-100 to-fuchsia-100 text-violet-700',
+                                user.role === 'admin' && 'bg-blue-50 text-blue-700',
                                 (user.role === 'faculty' || user.role === 'teacher') && 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700',
                                 user.role === 'student' && 'bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700',
                                 !['super-admin', 'admin', 'faculty', 'teacher', 'student'].includes(user.role) && 'bg-gray-100 text-gray-600',
@@ -1213,7 +1213,7 @@ export function SuperAdmin() {
                     className={cn(
                       'relative overflow-hidden rounded-2xl p-6 text-white shadow-xl',
                       plan.id === 'basic' && 'bg-gradient-to-br from-blue-600 to-indigo-700',
-                      plan.id === 'premium' && 'bg-gradient-to-br from-fuchsia-600 via-violet-600 to-purple-700',
+                      plan.id === 'premium' && 'bg-blue-700',
                       plan.id === 'enterprise' && 'bg-gradient-to-br from-amber-500 via-orange-500 to-rose-600',
                     )}
                   >
@@ -1271,7 +1271,7 @@ export function SuperAdmin() {
                         <tr key={sub.id} className="border-b border-gray-100 hover:bg-amber-50/30 transition-colors">
                           <td className="px-6 py-4 font-medium text-gray-900 text-sm">{sub.institutionName || sub.institutionId}</td>
                           <td className="px-6 py-4">
-                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.plan === 'enterprise' && 'bg-amber-100 text-amber-700', sub.plan === 'premium' && 'bg-fuchsia-100 text-fuchsia-700', sub.plan === 'basic' && 'bg-blue-100 text-blue-700', sub.plan === 'free' && 'bg-gray-100 text-gray-600')}>
+                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.plan === 'enterprise' && 'bg-amber-100 text-amber-700', sub.plan === 'premium' && 'bg-blue-50 text-blue-700', sub.plan === 'basic' && 'bg-blue-100 text-blue-700', sub.plan === 'free' && 'bg-gray-100 text-gray-600')}>
                               {sub.plan}
                             </span>
                           </td>
@@ -1298,28 +1298,28 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'security' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-700 via-purple-700 to-fuchsia-800 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #6d28d9, #7e22ce, #a21caf)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(168,85,247,0.3),transparent_60%)]"></div>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-slate-700 p-6 text-white shadow-xl" style={{ background: '#334155' }}>
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
-                <Shield className="w-8 h-8 text-violet-200" />
+                <Shield className="w-8 h-8 text-blue-200" />
                 <div>
                   <h2 className="text-2xl font-bold">Security & Audit Logs</h2>
-                  <p className="text-violet-200 text-sm">Track every action across the platform. {auditLogs.length} total entries.</p>
+                  <p className="text-blue-200 text-sm">Track every action across the platform. {auditLogs.length} total entries.</p>
                 </div>
               </div>
             </motion.div>
 
             {/* Filters */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <select value={logInstitutionFilter} onChange={(e) => { setLogInstitutionFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-violet-500 min-w-[180px]">
+              <select value={logInstitutionFilter} onChange={(e) => { setLogInstitutionFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 min-w-[180px]">
                 <option value="">All Institutions</option>
                 {institutions.map(inst => <option key={inst.id} value={inst.id}>{inst.name}</option>)}
               </select>
-              <select value={logModuleFilter} onChange={(e) => { setLogModuleFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-violet-500 min-w-[180px]">
+              <select value={logModuleFilter} onChange={(e) => { setLogModuleFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 min-w-[180px]">
                 <option value="">All Modules</option>
                 {availableModules.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
               </select>
-              <button onClick={async () => { setLogsLoading(true); const fresh = await superAdminService.getAuditLogs(500); setAuditLogs(fresh); setLogsLoading(false); }} className="flex items-center gap-2 px-4 py-3 bg-violet-100 text-violet-700 rounded-xl text-sm font-semibold hover:bg-violet-200 transition-colors">
+              <button onClick={async () => { setLogsLoading(true); const fresh = await superAdminService.getAuditLogs(500); setAuditLogs(fresh); setLogsLoading(false); }} className="flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-100 transition-colors">
                 <RefreshCw className="w-4 h-4" /> Refresh
               </button>
             </div>
@@ -1341,7 +1341,7 @@ export function SuperAdmin() {
                       </thead>
                       <tbody>
                         {paginatedLogs.map((log: any) => (
-                          <tr key={log.id} className="border-b border-gray-100 hover:bg-violet-50/30 transition-colors">
+                          <tr key={log.id} className="border-b border-gray-100 hover:bg-slate-50 transition-colors">
                             <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">
                               <div className="flex items-center gap-1"><Clock className="w-3 h-3" />{log.timestamp?.seconds ? new Date(log.timestamp.seconds * 1000).toLocaleString() : '-'}</div>
                             </td>
@@ -1363,7 +1363,7 @@ export function SuperAdmin() {
                       <span className="text-sm text-gray-500">Showing {(logPage - 1) * logsPerPage + 1}–{Math.min(logPage * logsPerPage, filteredLogs.length)} of {filteredLogs.length}</span>
                       <div className="flex gap-2">
                         <button onClick={() => setLogPage(p => Math.max(1, p - 1))} disabled={logPage === 1} className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm disabled:opacity-50">Previous</button>
-                        <button onClick={() => setLogPage(p => Math.min(totalLogPages, p + 1))} disabled={logPage === totalLogPages} className="px-3 py-1.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg text-sm disabled:opacity-50">Next</button>
+                        <button onClick={() => setLogPage(p => Math.min(totalLogPages, p + 1))} disabled={logPage === totalLogPages} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm disabled:opacity-50">Next</button>
                       </div>
                     </div>
                   )}
@@ -1547,12 +1547,12 @@ export function SuperAdmin() {
               {/* Platform Configuration */}
               <GlassCard className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-fuchsia-600" /> Platform Configuration
+                  <Globe className="w-5 h-5 text-blue-600" /> Platform Configuration
                 </h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Platform Name</label>
-                    <input type="text" defaultValue="CovenantERP" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500" />
+                    <input type="text" defaultValue="CovenantERP" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
@@ -1598,7 +1598,7 @@ export function SuperAdmin() {
               {/* Security Policies */}
               <GlassCard className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Lock className="w-5 h-5 text-violet-600" /> Security Policies
+                  <Lock className="w-5 h-5 text-indigo-600" /> Security Policies
                 </h3>
                 <div className="space-y-3">
                   {[
@@ -1664,7 +1664,7 @@ export function SuperAdmin() {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-xl p-2">
+                <div className="bg-blue-600 rounded-xl p-2">
                   <Plus className="w-5 h-5 text-white" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Add New Institution</h2>
@@ -1674,12 +1674,12 @@ export function SuperAdmin() {
             <div className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Institution Name *</label>
-                <input type="text" value={newInstitution.name} onChange={(e) => setNewInstitution({ ...newInstitution, name: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent" placeholder="e.g., Westminster Theological Seminary" />
+                <input type="text" value={newInstitution.name} onChange={(e) => setNewInstitution({ ...newInstitution, name: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., Westminster Theological Seminary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Institution Type</label>
-                  <select value={newInstitution.institutionType} onChange={(e) => setNewInstitution({ ...newInstitution, institutionType: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500">
+                  <select value={newInstitution.institutionType} onChange={(e) => setNewInstitution({ ...newInstitution, institutionType: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500">
                     <option value="seminary">Seminary</option>
                     <option value="bible-college">Bible College</option>
                     <option value="christian-university">Christian University</option>
@@ -1688,12 +1688,12 @@ export function SuperAdmin() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Location</label>
-                  <input type="text" value={newInstitution.location} onChange={(e) => setNewInstitution({ ...newInstitution, location: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500" placeholder="City, Country" />
+                  <input type="text" value={newInstitution.location} onChange={(e) => setNewInstitution({ ...newInstitution, location: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="City, Country" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Email *</label>
-                <input type="email" value={newInstitution.adminEmail} onChange={(e) => setNewInstitution({ ...newInstitution, adminEmail: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500" placeholder="admin@institution.com" />
+                <input type="email" value={newInstitution.adminEmail} onChange={(e) => setNewInstitution({ ...newInstitution, adminEmail: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="admin@institution.com" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Password (auto-generated if empty)</label>
@@ -1704,15 +1704,15 @@ export function SuperAdmin() {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Subdomain (optional)</label>
-                <input type="text" value={newInstitution.subdomain} onChange={(e) => setNewInstitution({ ...newInstitution, subdomain: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500" placeholder="e.g., westminster" />
+                <input type="text" value={newInstitution.subdomain} onChange={(e) => setNewInstitution({ ...newInstitution, subdomain: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g., westminster" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Tradition / Denomination</label>
-                <input type="text" value={newInstitution.tradition} onChange={(e) => setNewInstitution({ ...newInstitution, tradition: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500" placeholder="e.g., Reformed, Baptist, Pentecostal" />
+                <input type="text" value={newInstitution.tradition} onChange={(e) => setNewInstitution({ ...newInstitution, tradition: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g., Reformed, Baptist, Pentecostal" />
               </div>
               <div className="flex gap-3 pt-2">
                 <button onClick={() => setIsAddModalOpen(false)} className="flex-1 px-4 py-2.5 border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors">Cancel</button>
-                <button onClick={handleAddInstitution} disabled={isSavingTenant} className="flex-1 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 disabled:opacity-50 shadow-lg shadow-fuchsia-500/25 transition-all">
+                <button onClick={handleAddInstitution} disabled={isSavingTenant} className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold disabled:opacity-50 shadow-lg shadow-blue-500/20 transition-all">
                   {isSavingTenant ? 'Creating...' : 'Create Institution'}
                 </button>
               </div>
@@ -1727,7 +1727,7 @@ export function SuperAdmin() {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-r from-fuchsia-600 to-violet-600 rounded-xl p-2">
+                <div className="bg-blue-600 rounded-xl p-2">
                   <Building2 className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -1752,15 +1752,15 @@ export function SuperAdmin() {
 
               {/* Admins List */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><Users className="w-5 h-5 text-fuchsia-600" /> Institution Administrators</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><Users className="w-5 h-5 text-blue-600" /> Institution Administrators</h3>
                 <div className="space-y-2 mb-4">
                   {tenantAdmins.length === 0 ? (
                     <p className="text-gray-500 text-sm">No administrators provisioned yet.</p>
                   ) : (
                     tenantAdmins.map((admin) => (
-                      <div key={admin.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:bg-fuchsia-50/50 transition-colors">
+                      <div key={admin.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:bg-slate-50 transition-colors">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-400 to-violet-500 flex items-center justify-center text-white text-xs font-bold">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">
                             {(admin.displayName || admin.email)[0].toUpperCase()}
                           </div>
                           <div>
@@ -1781,13 +1781,13 @@ export function SuperAdmin() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Email</label>
-                    <input type="email" value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent" placeholder="admin@example.com" />
+                    <input type="email" value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="admin@example.com" />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Temporary Password</label>
                     <div className="flex gap-2">
                       <div className="flex-1 relative">
-                        <input type={showNewAdminPassword ? 'text' : 'password'} value={newAdminPassword} onChange={(e) => setNewAdminPassword(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent pr-10" />
+                        <input type={showNewAdminPassword ? 'text' : 'password'} value={newAdminPassword} onChange={(e) => setNewAdminPassword(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" />
                         <button onClick={() => setShowNewAdminPassword(!showNewAdminPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600">
                           {showNewAdminPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
@@ -1802,7 +1802,7 @@ export function SuperAdmin() {
                       <p className="text-sm text-rose-700">{provisionError}</p>
                     </div>
                   )}
-                  <button onClick={handleProvisionAdmin} disabled={isProvisioning} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-fuchsia-500/25 transition-all">
+                  <button onClick={handleProvisionAdmin} disabled={isProvisioning} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20 transition-all">
                     {isProvisioning ? (<><div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div> Provisioning...</>) : (<><CheckCircle className="w-5 h-5" /> Provision Admin Account</>)}
                   </button>
                 </div>
@@ -1887,7 +1887,7 @@ export function SuperAdmin() {
       {showActiveTokens && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-6 text-white flex items-center justify-between">
+            <div className="bg-blue-700 p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <KeyRound className="w-6 h-6" />
                 <h2 className="text-lg font-bold">Active Impersonation Tokens</h2>

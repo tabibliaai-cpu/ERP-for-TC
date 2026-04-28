@@ -51,9 +51,9 @@ const PERMISSION_CATEGORIES = [
     id: 'academic',
     label: 'Academic',
     icon: GraduationCap,
-    color: 'from-violet-500 to-purple-600',
-    bgLight: 'bg-violet-50',
-    textLight: 'text-violet-700',
+    color: 'from-indigo-500 to-purple-600',
+    bgLight: 'bg-indigo-50',
+    textLight: 'text-indigo-700',
     permissions: [
       'courses.create', 'courses.edit', 'courses.delete',
       'grades.manage', 'attendance.manage'
@@ -63,9 +63,9 @@ const PERMISSION_CATEGORIES = [
     id: 'students',
     label: 'Students',
     icon: UserCheck,
-    color: 'from-fuchsia-500 to-pink-600',
-    bgLight: 'bg-fuchsia-50',
-    textLight: 'text-fuchsia-700',
+    color: 'from-blue-500 to-pink-600',
+    bgLight: 'bg-blue-50',
+    textLight: 'text-blue-700',
     permissions: [
       'students.create', 'students.view', 'students.edit', 'students.delete'
     ]
@@ -201,8 +201,8 @@ const SYSTEM_ROLES: Omit<RolePermission, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
 const ROLE_META: Record<string, { label: string; color: string; gradient: string; icon: React.ElementType; badgeBg: string; badgeText: string }> = {
   super_admin:       { label: 'Super Admin',       color: 'amber',    gradient: 'from-amber-400 to-amber-600',       icon: Crown,          badgeBg: 'bg-amber-100',    badgeText: 'text-amber-700' },
-  institution_admin: { label: 'Institution Admin', color: 'fuchsia',  gradient: 'from-fuchsia-500 to-violet-600',    icon: Shield,         badgeBg: 'bg-fuchsia-100',  badgeText: 'text-fuchsia-700' },
-  faculty:           { label: 'Faculty',            color: 'violet',   gradient: 'from-violet-500 to-purple-600',     icon: GraduationCap,  badgeBg: 'bg-violet-100',   badgeText: 'text-violet-700' },
+  institution_admin: { label: 'Institution Admin', color: 'fuchsia',  gradient: 'from-blue-500 to-indigo-600',    icon: Shield,         badgeBg: 'bg-blue-100',  badgeText: 'text-blue-700' },
+  faculty:           { label: 'Faculty',            color: 'violet',   gradient: 'from-indigo-500 to-purple-600',     icon: GraduationCap,  badgeBg: 'bg-indigo-100',   badgeText: 'text-indigo-700' },
   teacher:           { label: 'Teacher',            color: 'blue',     gradient: 'from-blue-400 to-blue-600',          icon: UserCheck,      badgeBg: 'bg-blue-100',     badgeText: 'text-blue-700' },
   student:           { label: 'Student',            color: 'cyan',     gradient: 'from-cyan-400 to-cyan-600',          icon: BookOpen,       badgeBg: 'bg-cyan-100',     badgeText: 'text-cyan-700' },
   librarian:         { label: 'Librarian',          color: 'emerald',  gradient: 'from-emerald-400 to-emerald-600',    icon: Library,        badgeBg: 'bg-emerald-100',  badgeText: 'text-emerald-700' },
@@ -473,10 +473,10 @@ export function RolesPermissionsTab() {
       ROLE_META[roleSlug] = {
         label: newRoleName.trim(),
         color: 'fuchsia',
-        gradient: 'from-fuchsia-500 to-violet-600',
+        gradient: 'from-blue-500 to-indigo-600',
         icon: Layers as React.ElementType,
-        badgeBg: 'bg-fuchsia-100',
-        badgeText: 'text-fuchsia-700',
+        badgeBg: 'bg-blue-100',
+        badgeText: 'text-blue-700',
       };
 
       setShowCreateModal(false);
@@ -585,7 +585,7 @@ export function RolesPermissionsTab() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className={cn(
               'h-full rounded-full',
-              pct === 100 ? 'bg-gradient-to-r from-fuchsia-500 to-violet-500' : 'bg-gradient-to-r from-fuchsia-400 to-violet-400'
+              pct === 100 ? 'bg-gradient-to-r from-blue-500 to-indigo-500' : 'bg-gradient-to-r from-blue-400 to-indigo-400'
             )}
           />
         </div>
@@ -610,7 +610,7 @@ export function RolesPermissionsTab() {
         className={cn(
           'w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200',
           checked
-            ? 'bg-gradient-to-br from-fuchsia-500 to-violet-600 text-white shadow-md shadow-fuchsia-500/20 hover:shadow-lg hover:shadow-fuchsia-500/30 scale-105'
+            ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 scale-105'
             : 'bg-gray-100 text-gray-400 hover:bg-gray-200',
           disabled && 'opacity-50 cursor-not-allowed'
         )}
@@ -627,7 +627,7 @@ export function RolesPermissionsTab() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-24">
-        <div className="animate-spin w-12 h-12 border-4 border-fuchsia-500 border-t-transparent rounded-full mb-4" />
+        <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mb-4" />
         <p className="text-gray-500 font-medium">Loading roles & permissions...</p>
       </div>
     );
@@ -667,7 +667,7 @@ export function RolesPermissionsTab() {
       >
         <div>
           <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <div className="bg-gradient-to-br from-fuchsia-500 to-violet-600 rounded-lg p-1.5">
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg p-1.5">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             Roles & Permissions
@@ -688,7 +688,7 @@ export function RolesPermissionsTab() {
               <button
                 onClick={handleBatchSave}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 disabled:opacity-60"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
               >
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 Save Changes
@@ -697,7 +697,7 @@ export function RolesPermissionsTab() {
           )}
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 text-sm"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
           >
             <Plus className="w-4 h-4" />
             Create Role
@@ -708,7 +708,7 @@ export function RolesPermissionsTab() {
       {/* ─── Stats Row ─── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total Roles', value: roles.length, icon: Shield, gradient: 'from-fuchsia-600 to-violet-600' },
+          { label: 'Total Roles', value: roles.length, icon: Shield, gradient: 'from-blue-600 to-indigo-600' },
           { label: 'System Roles', value: roles.filter(r => r.isSystemRole).length, icon: Lock, gradient: 'from-amber-500 to-orange-500' },
           { label: 'Custom Roles', value: roles.filter(r => !r.isSystemRole).length, icon: Layers, gradient: 'from-cyan-500 to-teal-500' },
           { label: 'Total Permissions', value: ALL_PERMISSIONS.length, icon: Key, gradient: 'from-emerald-500 to-green-500' },
@@ -739,9 +739,9 @@ export function RolesPermissionsTab() {
           <div className="p-6 border-b border-gray-100">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <Crown className="w-5 h-5 text-fuchsia-600" />
+                <Crown className="w-5 h-5 text-blue-600" />
                 Role Definitions
-                <span className="text-xs font-medium bg-fuchsia-100 text-fuchsia-700 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                   {roles.length}
                 </span>
               </h3>
@@ -752,7 +752,7 @@ export function RolesPermissionsTab() {
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search roles..."
-                  className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all w-full sm:w-64"
+                  className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-full sm:w-64"
                 />
               </div>
             </div>
@@ -782,7 +782,7 @@ export function RolesPermissionsTab() {
                   >
                     <button
                       onClick={() => setExpandedRole(isExpanded ? null : role.id!)}
-                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-fuchsia-50/40 transition-colors text-left"
+                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-blue-50/40 transition-colors text-left"
                     >
                       <div className={cn('rounded-xl p-2.5 bg-gradient-to-br shadow-sm', meta.gradient)}>
                         <Icon className="w-5 h-5 text-white" />
@@ -800,7 +800,7 @@ export function RolesPermissionsTab() {
                             </span>
                           )}
                           {!role.isSystemRole && (
-                            <span className="text-[10px] font-medium bg-fuchsia-50 text-fuchsia-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span className="text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full flex items-center gap-1">
                               <Sparkles className="w-2.5 h-2.5" /> Custom
                             </span>
                           )}
@@ -868,7 +868,7 @@ export function RolesPermissionsTab() {
                                           className={cn(
                                             'text-[9px] px-1.5 py-0.5 rounded font-medium',
                                             editedPermissions[role.id!]?.[p]
-                                              ? 'bg-fuchsia-500 text-white'
+                                              ? 'bg-blue-500 text-white'
                                               : 'bg-gray-200 text-gray-400'
                                           )}
                                         >
@@ -900,7 +900,7 @@ export function RolesPermissionsTab() {
         <GlassCard className="overflow-hidden">
           <div className="p-6 border-b border-gray-100">
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-              <Target className="w-5 h-5 text-fuchsia-600" />
+              <Target className="w-5 h-5 text-blue-600" />
               Permission Matrix
               {hasChanges && (
                 <span className="flex items-center gap-1 text-xs font-medium bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full animate-pulse">
@@ -961,7 +961,7 @@ export function RolesPermissionsTab() {
                     {cat.permissions.map((perm, permIdx) => (
                       <tr
                         key={perm}
-                        className="border-b border-gray-50 hover:bg-fuchsia-50/30 transition-colors"
+                        className="border-b border-gray-50 hover:bg-blue-50/30 transition-colors"
                       >
                         {permIdx === 0 ? (
                           <td
@@ -1010,9 +1010,9 @@ export function RolesPermissionsTab() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <UserCog className="w-5 h-5 text-fuchsia-600" />
+                  <UserCog className="w-5 h-5 text-blue-600" />
                   Role Assignment
-                  <span className="text-xs font-medium bg-fuchsia-100 text-fuchsia-700 px-2 py-0.5 rounded-full">
+                  <span className="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                     {users.length} users
                   </span>
                 </h3>
@@ -1027,7 +1027,7 @@ export function RolesPermissionsTab() {
                   value={userSearchQuery}
                   onChange={e => setUserSearchQuery(e.target.value)}
                   placeholder="Search by name, email, or role..."
-                  className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all w-full sm:w-72"
+                  className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-full sm:w-72"
                 />
               </div>
             </div>
@@ -1051,10 +1051,10 @@ export function RolesPermissionsTab() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: idx * 0.02 }}
-                      className="px-6 py-3 flex items-center gap-4 hover:bg-fuchsia-50/30 transition-colors"
+                      className="px-6 py-3 flex items-center gap-4 hover:bg-blue-50/30 transition-colors"
                     >
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-fuchsia-100 to-violet-100 flex items-center justify-center shrink-0">
-                        <span className="text-xs font-bold text-fuchsia-600">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center shrink-0">
+                        <span className="text-xs font-bold text-blue-600">
                           {user.displayName.charAt(0).toUpperCase()}
                         </span>
                       </div>
@@ -1078,7 +1078,7 @@ export function RolesPermissionsTab() {
                           handleAssignRole(user.id, newRole);
                         }}
                         disabled={isAssigning}
-                        className="text-xs font-medium border border-gray-200 rounded-lg px-3 py-1.5 bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all cursor-pointer min-w-[140px]"
+                        className="text-xs font-medium border border-gray-200 rounded-lg px-3 py-1.5 bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer min-w-[140px]"
                       >
                         {allAvailableRoles.map(roleKey => (
                           <option key={roleKey} value={roleKey}>
@@ -1116,7 +1116,7 @@ export function RolesPermissionsTab() {
               onClick={e => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-fuchsia-600 to-violet-600 p-6 text-white">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="bg-white/20 rounded-xl p-2">
@@ -1124,7 +1124,7 @@ export function RolesPermissionsTab() {
                     </div>
                     <div>
                       <h2 className="text-xl font-bold">Create Custom Role</h2>
-                      <p className="text-fuchsia-200 text-sm">Define a new institution-specific role with custom permissions.</p>
+                      <p className="text-blue-200 text-sm">Define a new institution-specific role with custom permissions.</p>
                     </div>
                   </div>
                   <button
@@ -1149,7 +1149,7 @@ export function RolesPermissionsTab() {
                       value={newRoleName}
                       onChange={e => { setNewRoleName(e.target.value); setCreateError(''); }}
                       placeholder="e.g. Lab Assistant, Dean, Program Coordinator"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all text-sm"
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
                     />
                   </div>
                   <div>
@@ -1161,7 +1161,7 @@ export function RolesPermissionsTab() {
                       onChange={e => setNewRoleDescription(e.target.value)}
                       placeholder="Describe the purpose and scope of this role..."
                       rows={2}
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all text-sm resize-none"
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm resize-none"
                     />
                   </div>
                 </div>
@@ -1213,7 +1213,7 @@ export function RolesPermissionsTab() {
                                 'text-[10px] font-semibold px-2.5 py-1 rounded-lg transition-all',
                                 allCatEnabled
                                   ? 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                                  : 'bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:from-fuchsia-600 hover:to-violet-600'
+                                  : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600'
                               )}
                             >
                               {allCatEnabled ? 'Deselect All' : 'Select All'}
@@ -1234,8 +1234,8 @@ export function RolesPermissionsTab() {
                                   className={cn(
                                     'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all',
                                     isEnabled
-                                      ? 'bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white shadow-md shadow-fuchsia-500/20'
-                                      : 'bg-white text-gray-600 border border-gray-200 hover:border-fuchsia-300 hover:text-fuchsia-600'
+                                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md shadow-blue-500/20'
+                                      : 'bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:text-blue-600'
                                   )}
                                 >
                                   {isEnabled ? <CheckSquare className="w-3 h-3" /> : <Square className="w-3 h-3" />}
@@ -1268,7 +1268,7 @@ export function RolesPermissionsTab() {
                 <button
                   onClick={handleCreateRole}
                   disabled={isCreating || !newRoleName.trim()}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 disabled:cursor-not-allowed text-sm"
                 >
                   {isCreating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                   Create Role

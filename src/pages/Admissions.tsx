@@ -182,7 +182,7 @@ export function Admissions() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600">Academic Affairs</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Academic Affairs</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Student Management</span>
           </div>
@@ -209,7 +209,7 @@ export function Admissions() {
           <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm flex items-center gap-4">
             <div className={cn(
               "w-12 h-12 rounded-2xl flex items-center justify-center",
-              stat.color === 'indigo' ? "bg-fuchsia-50 text-fuchsia-600" :
+              stat.color === 'indigo' ? "bg-blue-50 text-blue-600" :
               stat.color === 'emerald' ? "bg-emerald-50 text-emerald-600" :
               stat.color === 'amber' ? "bg-amber-50 text-amber-600" : "bg-rose-50 text-rose-600"
             )}>
@@ -232,7 +232,7 @@ export function Admissions() {
               placeholder="Search registry..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-fuchsia-100 outline-none transition-all placeholder:text-slate-300 font-medium"
+              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder:text-slate-300 font-medium"
             />
           </div>
           <div className="flex gap-2">
@@ -245,7 +245,7 @@ export function Admissions() {
 
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-80 gap-4">
-             <div className="w-12 h-12 border-4 border-fuchsia-500/10 border-t-fuchsia-600 rounded-full animate-spin"></div>
+             <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin"></div>
              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Decrypting Records...</p>
           </div>
         ) : filteredStudents.length === 0 ? (
@@ -277,7 +277,7 @@ export function Admissions() {
                   >
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 overflow-hidden rounded-2xl bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm uppercase shadow-sm group-hover:from-fuchsia-700 hover:to-violet-700 group-hover:text-white transition-all duration-500">
+                        <div className="w-12 h-12 overflow-hidden rounded-2xl bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm uppercase shadow-sm group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500">
                           {student.photoUrl ? (
                             <img src={student.photoUrl} alt={student.name} className="w-full h-full object-cover" />
                           ) : (
@@ -318,11 +318,11 @@ export function Admissions() {
                             e.stopPropagation();
                             setStudentToEdit(student);
                           }}
-                          className="text-[10px] font-black text-fuchsia-600 uppercase tracking-widest hover:underline"
+                          className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline"
                         >
                           Modify
                         </button>
-                        <ShieldCheck className="w-4 h-4 text-slate-200 group-hover:text-fuchsia-600 transition-colors" />
+                        <ShieldCheck className="w-4 h-4 text-slate-200 group-hover:text-blue-600 transition-colors" />
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
@@ -373,7 +373,7 @@ export function Admissions() {
                       onClick={() => setFormTab(tab)}
                       className={cn(
                         "px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                        formTab === tab ? "bg-white text-fuchsia-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
+                        formTab === tab ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                       )}
                     >
                       {tab}
@@ -393,7 +393,7 @@ export function Admissions() {
                            value={newStudent.studentId || ''}
                            onChange={(e) => setNewStudent({...newStudent, studentId: e.target.value})}
                            placeholder="Auto-generated if empty"
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                          />
                        </div>
                        <div className="space-y-2">
@@ -403,7 +403,7 @@ export function Admissions() {
                            value={newStudent.photoUrl || ''}
                            onChange={(e) => setNewStudent({...newStudent, photoUrl: e.target.value})}
                            placeholder="https://..."
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                          />
                        </div>
                     </div>
@@ -416,7 +416,7 @@ export function Admissions() {
                           value={newStudent.name}
                           onChange={(e) => setNewStudent({...newStudent, name: e.target.value})}
                           placeholder="Legal name"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
@@ -427,7 +427,7 @@ export function Admissions() {
                           value={newStudent.email}
                           onChange={(e) => setNewStudent({...newStudent, email: e.target.value})}
                           placeholder="email@institution.edu"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -437,7 +437,7 @@ export function Admissions() {
                         <select 
                           value={newStudent.program}
                           onChange={(e) => setNewStudent({...newStudent, program: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
                         >
                           <option>M.Div</option>
                           <option>B.Th</option>
@@ -453,7 +453,7 @@ export function Admissions() {
                           max="6"
                           value={newStudent.year}
                           onChange={(e) => setNewStudent({...newStudent, year: parseInt(e.target.value)})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -470,7 +470,7 @@ export function Admissions() {
                           value={newStudent.phone || ''}
                           onChange={(e) => setNewStudent({...newStudent, phone: e.target.value})}
                           placeholder="+1 (555) 000-0000"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
@@ -479,7 +479,7 @@ export function Admissions() {
                           type="date" 
                           value={newStudent.dob || ''}
                           onChange={(e) => setNewStudent({...newStudent, dob: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -489,7 +489,7 @@ export function Admissions() {
                         <select 
                           value={newStudent.gender || 'Other'}
                           onChange={(e) => setNewStudent({...newStudent, gender: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
                         >
                           <option>Male</option>
                           <option>Female</option>
@@ -504,7 +504,7 @@ export function Admissions() {
                           value={newStudent.bloodGroup || ''}
                           onChange={(e) => setNewStudent({...newStudent, bloodGroup: e.target.value})}
                           placeholder="A+"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold uppercase"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
                         />
                       </div>
                     </div>
@@ -515,7 +515,7 @@ export function Admissions() {
                         onChange={(e) => setNewStudent({...newStudent, address: e.target.value})}
                         placeholder="Street, City, Postal Code"
                         rows={2}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -538,7 +538,7 @@ export function Admissions() {
                               ...newStudent, 
                               emergencyContact: { ...newStudent.emergencyContact!, name: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                         <div className="space-y-2">
@@ -550,7 +550,7 @@ export function Admissions() {
                               ...newStudent, 
                               emergencyContact: { ...newStudent.emergencyContact!, relationship: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                       </div>
@@ -563,7 +563,7 @@ export function Admissions() {
                             ...newStudent, 
                             emergencyContact: { ...newStudent.emergencyContact!, phone: e.target.value } 
                           })}
-                          className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -574,7 +574,7 @@ export function Admissions() {
                         onChange={(e) => setNewStudent({...newStudent, medicalNotes: e.target.value})}
                         placeholder="Allergies, chronic conditions, or medications..."
                         rows={3}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -590,7 +590,7 @@ export function Admissions() {
                   </button>
                   <button 
                     type="submit"
-                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 shadow-2xl shadow-fuchsia-100 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 shadow-2xl shadow-blue-100 transition-all flex items-center justify-center gap-2"
                   >
                     <UserPlus className="w-4 h-4" />
                     Authorize Enrollment
@@ -633,7 +633,7 @@ export function Admissions() {
                       onClick={() => setFormTab(tab)}
                       className={cn(
                         "flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all",
-                        formTab === tab ? "bg-white text-fuchsia-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
+                        formTab === tab ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                       )}
                     >
                       {tab}
@@ -650,7 +650,7 @@ export function Admissions() {
                            type="text" 
                            value={studentToEdit.studentId || ''}
                            onChange={(e) => setStudentToEdit({...studentToEdit, studentId: e.target.value})}
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold text-sm"
+                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
                          />
                        </div>
                        <div className="space-y-2">
@@ -659,7 +659,7 @@ export function Admissions() {
                            type="url" 
                            value={studentToEdit.photoUrl || ''}
                            onChange={(e) => setStudentToEdit({...studentToEdit, photoUrl: e.target.value})}
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold text-sm"
+                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
                          />
                        </div>
                     </div>
@@ -670,7 +670,7 @@ export function Admissions() {
                         type="text" 
                         value={studentToEdit.name}
                         onChange={(e) => setStudentToEdit({...studentToEdit, name: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -680,7 +680,7 @@ export function Admissions() {
                         type="email" 
                         value={studentToEdit.email}
                         onChange={(e) => setStudentToEdit({...studentToEdit, email: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                       />
                     </div>
 
@@ -690,7 +690,7 @@ export function Admissions() {
                         <select 
                           value={studentToEdit.program}
                           onChange={(e) => setStudentToEdit({...studentToEdit, program: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
                         >
                           <option>M.Div</option>
                           <option>B.Th</option>
@@ -703,7 +703,7 @@ export function Admissions() {
                         <select 
                           value={studentToEdit.status}
                           onChange={(e) => setStudentToEdit({...studentToEdit, status: e.target.value as any})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
                         >
                           <option value="active">Active Enrollment</option>
                           <option value="graduated">Alumni (Graduated)</option>
@@ -723,7 +723,7 @@ export function Admissions() {
                           type="tel" 
                           value={studentToEdit.phone || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, phone: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
@@ -732,7 +732,7 @@ export function Admissions() {
                           type="date" 
                           value={studentToEdit.dob || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, dob: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -742,7 +742,7 @@ export function Admissions() {
                         <select 
                           value={studentToEdit.gender || 'Other'}
                           onChange={(e) => setStudentToEdit({...studentToEdit, gender: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
                         >
                           <option>Male</option>
                           <option>Female</option>
@@ -756,7 +756,7 @@ export function Admissions() {
                           type="text" 
                           value={studentToEdit.bloodGroup || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, bloodGroup: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold uppercase"
+                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
                         />
                       </div>
                     </div>
@@ -766,7 +766,7 @@ export function Admissions() {
                         value={studentToEdit.address || ''}
                         onChange={(e) => setStudentToEdit({...studentToEdit, address: e.target.value})}
                         rows={2}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -784,7 +784,7 @@ export function Admissions() {
                             ...studentToEdit, 
                             emergencyContact: { ...(studentToEdit.emergencyContact || {relationship:'', phone:''}), name: e.target.value } 
                           })}
-                          className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
@@ -797,7 +797,7 @@ export function Admissions() {
                               ...studentToEdit, 
                               emergencyContact: { ...(studentToEdit.emergencyContact || {name:'', phone:''}), relationship: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                         <div className="space-y-2">
@@ -809,7 +809,7 @@ export function Admissions() {
                               ...studentToEdit, 
                               emergencyContact: { ...(studentToEdit.emergencyContact || {name:'', relationship:''}), phone: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                       </div>
@@ -820,7 +820,7 @@ export function Admissions() {
                         value={studentToEdit.medicalNotes || ''}
                         onChange={(e) => setStudentToEdit({...studentToEdit, medicalNotes: e.target.value})}
                         rows={3}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -836,7 +836,7 @@ export function Admissions() {
                   </button>
                   <button 
                     type="submit"
-                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 shadow-2xl shadow-fuchsia-100 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 shadow-2xl shadow-blue-100 transition-all flex items-center justify-center gap-2"
                   >
                     <Save className="w-4 h-4" />
                     Commit Update

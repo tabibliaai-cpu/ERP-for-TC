@@ -643,7 +643,7 @@ export default function AcademicConfig() {
       archived: 'bg-slate-100 text-slate-500',
       draft: 'bg-amber-50 text-amber-600',
       superseded: 'bg-rose-50 text-rose-500',
-      completed: 'bg-fuchsia-50 text-fuchsia-500',
+      completed: 'bg-blue-50 text-blue-500',
       cancelled: 'bg-red-50 text-red-500',
       pending: 'bg-yellow-50 text-yellow-600',
     };
@@ -659,7 +659,7 @@ export default function AcademicConfig() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#F8FAFC]">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-slate-200 border-t-fuchsia-600 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin" />
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Loading Configuration System...</p>
         </div>
       </div>
@@ -693,7 +693,7 @@ export default function AcademicConfig() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: 'Total Programs', value: programs.length, icon: GraduationCap, color: 'text-fuchsia-600', bg: 'bg-fuchsia-50' },
+            { label: 'Total Programs', value: programs.length, icon: GraduationCap, color: 'text-blue-600', bg: 'bg-blue-50' },
             { label: 'Active Courses', value: courses.filter((c) => c.status === 'active').length, icon: BookOpen, color: 'text-emerald-600', bg: 'bg-emerald-50' },
             { label: 'Total Credits', value: totalCredits, icon: CreditCard, color: 'text-amber-600', bg: 'bg-amber-50' },
             { label: 'Curriculum Maps', value: curriculums.length, icon: LayoutGrid, color: 'text-rose-600', bg: 'bg-rose-50' },
@@ -753,7 +753,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search programs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
@@ -772,10 +772,10 @@ export default function AcademicConfig() {
                   !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((p) => (
-                  <div key={p.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-fuchsia-200 transition-all duration-300 group">
+                  <div key={p.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <span className="px-2.5 py-1 bg-fuchsia-50 text-fuchsia-600 rounded-lg text-[8px] font-black tracking-widest uppercase">
+                        <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black tracking-widest uppercase">
                           {p.level}
                         </span>
                         <StatusBadge status={p.status} />
@@ -783,7 +783,7 @@ export default function AcademicConfig() {
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           onClick={() => { fillProgramForm(p); openDrawer('program', p); }}
-                          className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                         </button>
@@ -825,13 +825,13 @@ export default function AcademicConfig() {
                     <div className="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {p.isMasterProgram && (
-                          <span className="px-2 py-0.5 bg-fuchsia-50 text-fuchsia-600 rounded-lg text-[7px] font-black uppercase tracking-widest flex items-center gap-1">
+                          <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-widest flex items-center gap-1">
                             <Globe className="w-2.5 h-2.5" /> Shared
                           </span>
                         )}
                         <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{p.creditSystem} credits &middot; {p.gradingSystem}</span>
                       </div>
-                      <span className="text-[9px] font-black text-fuchsia-500">v{p.version}</span>
+                      <span className="text-[9px] font-black text-blue-500">v{p.version}</span>
                     </div>
                   </div>
                 ))}
@@ -869,7 +869,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search courses..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
@@ -887,18 +887,18 @@ export default function AcademicConfig() {
                   !searchQuery || c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((c) => (
-                  <div key={c.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-fuchsia-200 transition-all duration-300 group">
+                  <div key={c.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <span className={cn(
                         'px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase',
-                        c.courseType === 'core' ? 'bg-fuchsia-50 text-fuchsia-600' :
+                        c.courseType === 'core' ? 'bg-blue-50 text-blue-600' :
                         c.courseType === 'elective' ? 'bg-amber-50 text-amber-600' :
                         'bg-slate-100 text-slate-500'
                       )}>
                         {c.courseType}
                       </span>
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillCourseForm(c); openDrawer('course', c); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillCourseForm(c); openDrawer('course', c); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
                         <button onClick={() => handleDeleteCourse(c.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
@@ -926,7 +926,7 @@ export default function AcademicConfig() {
                             <AlertTriangle className="w-2.5 h-2.5" /> Dep Issue
                           </span>
                         )}
-                        <span className="text-[9px] font-black text-fuchsia-500">v{c.version}</span>
+                        <span className="text-[9px] font-black text-blue-500">v{c.version}</span>
                       </div>
                     </div>
                   </div>
@@ -975,7 +975,7 @@ export default function AcademicConfig() {
                       });
                     }
                   }}
-                  className="px-5 py-3 bg-white border border-slate-100 rounded-2xl text-sm outline-none focus:ring-8 focus:ring-fuchsia-100 transition-all appearance-none cursor-pointer font-medium"
+                  className="px-5 py-3 bg-white border border-slate-100 rounded-2xl text-sm outline-none focus:ring-8 focus:ring-blue-100 transition-all appearance-none cursor-pointer font-medium"
                 >
                   <option value="">Select Program</option>
                   {programs.map((p) => (
@@ -986,7 +986,7 @@ export default function AcademicConfig() {
                   <button
                     onClick={handleAIGenerateCurriculum}
                     disabled={!selectedProgramId || isGeneratingAI}
-                    className="px-5 py-3 bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:from-fuchsia-700 hover:to-purple-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-fuchsia-100"
+                    className="px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-purple-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-100"
                   >
                     {isGeneratingAI ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -1000,7 +1000,7 @@ export default function AcademicConfig() {
                   <button
                     onClick={handleAISuggestCourses}
                     disabled={!selectedProgramId || isGeneratingAI}
-                    className="px-5 py-3 bg-white border border-fuchsia-200 text-fuchsia-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-fuchsia-50 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="px-5 py-3 bg-white border border-blue-200 text-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <Zap className="w-4 h-4" /> AI Suggest
                   </button>
@@ -1025,9 +1025,9 @@ export default function AcademicConfig() {
               {(aiStatusMessage || depWarnings.length > 0) && (
                 <div className={cn(
                   "p-4 rounded-2xl flex items-center gap-3 border",
-                  depWarnings.length > 0 ? "bg-amber-50 border-amber-100" : "bg-fuchsia-50 border-fuchsia-200"
+                  depWarnings.length > 0 ? "bg-amber-50 border-amber-100" : "bg-blue-50 border-blue-200"
                 )}>
-                  {depWarnings.length > 0 ? <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" /> : <Sparkles className="w-5 h-5 text-fuchsia-500 shrink-0" />}
+                  {depWarnings.length > 0 ? <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" /> : <Sparkles className="w-5 h-5 text-blue-500 shrink-0" />}
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-bold text-slate-900">{aiStatusMessage || `${depWarnings.length} dependency warnings detected`}</p>
                     {depWarnings.slice(0, 3).map((dw, i) => (
@@ -1044,13 +1044,13 @@ export default function AcademicConfig() {
 
               {/* AI Suggestions Panel */}
               {showAiSuggestions && aiSuggestions.length > 0 && (
-                <div className="bg-gradient-to-br from-fuchsia-50 to-purple-50 rounded-[2rem] border border-fuchsia-200 p-6">
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] border border-blue-200 p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-fuchsia-600" />
+                      <Sparkles className="w-5 h-5 text-blue-600" />
                       <h3 className="text-sm font-bold text-slate-900">AI-Recommended Courses</h3>
                     </div>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">{aiSuggestions.length} suggestions</span>
+                    <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">{aiSuggestions.length} suggestions</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {aiSuggestions.map((s, idx) => (
@@ -1063,7 +1063,7 @@ export default function AcademicConfig() {
                         <button
                           onClick={() => handleImportAISuggestion(s)}
                           disabled={!canEdit}
-                          className="ml-3 p-2 bg-fuchsia-50 text-fuchsia-600 rounded-xl hover:from-fuchsia-700 hover:to-violet-700 hover:text-white transition-all disabled:opacity-40"
+                          className="ml-3 p-2 bg-blue-50 text-blue-600 rounded-xl hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all disabled:opacity-40"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
@@ -1083,7 +1083,7 @@ export default function AcademicConfig() {
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <StatusBadge status={cur.status} />
-                        <span className="text-[9px] font-black text-fuchsia-500 ml-2">v{cur.version}</span>
+                        <span className="text-[9px] font-black text-blue-500 ml-2">v{cur.version}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <button
@@ -1096,7 +1096,7 @@ export default function AcademicConfig() {
                             });
                             openDrawer('curriculum', cur);
                           }}
-                          className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                         </button>
@@ -1116,7 +1116,7 @@ export default function AcademicConfig() {
                       {cur.semesters.map((sem, idx) => (
                         <div key={idx} className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl">
                           <span className="text-[10px] font-bold text-slate-600">{sem.semesterName}</span>
-                          <span className="text-[10px] font-bold text-fuchsia-600">{sem.courseIds.length} courses &middot; {sem.totalCredits} cr</span>
+                          <span className="text-[10px] font-bold text-blue-600">{sem.courseIds.length} courses &middot; {sem.totalCredits} cr</span>
                         </div>
                       ))}
                     </div>
@@ -1159,7 +1159,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search electives..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
@@ -1177,11 +1177,11 @@ export default function AcademicConfig() {
                   !searchQuery || e.name.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((e) => (
-                  <div key={e.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-fuchsia-200 transition-all duration-300 group">
+                  <div key={e.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <StatusBadge status={e.status} />
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillElectiveForm(e); openDrawer('elective', e); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillElectiveForm(e); openDrawer('elective', e); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
                         <button onClick={() => handleDeleteElective(e.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
@@ -1202,12 +1202,12 @@ export default function AcademicConfig() {
                     <div className="space-y-1.5 max-h-32 overflow-y-auto">
                       {e.courseIds.slice(0, 4).map((cid, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-[10px] text-slate-600">
-                          <div className="w-1.5 h-1.5 bg-fuchsia-400 rounded-full" />
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
                           {getCourseName(cid)}
                         </div>
                       ))}
                       {e.courseIds.length > 4 && (
-                        <p className="text-[9px] font-black text-fuchsia-500 pl-3.5">+{e.courseIds.length - 4} more courses</p>
+                        <p className="text-[9px] font-black text-blue-500 pl-3.5">+{e.courseIds.length - 4} more courses</p>
                       )}
                     </div>
                     <div className="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between">
@@ -1256,8 +1256,8 @@ export default function AcademicConfig() {
                 <div key={gc.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group">
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-fuchsia-50 rounded-2xl flex items-center justify-center">
-                        <Award className="w-5 h-5 text-fuchsia-600" />
+                      <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
+                        <Award className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-slate-900">{gc.name}</h3>
@@ -1268,10 +1268,10 @@ export default function AcademicConfig() {
                     </div>
                     <div className="flex items-center gap-2">
                       {gc.isDefault && (
-                        <span className="px-2.5 py-1 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">Default</span>
+                        <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">Default</span>
                       )}
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillGradingForm(gc); openDrawer('grading', gc); }} className="p-2 text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillGradingForm(gc); openDrawer('grading', gc); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
                         <button onClick={() => handleDeleteGrading(gc.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
@@ -1305,7 +1305,7 @@ export default function AcademicConfig() {
                         <span className="text-sm font-bold text-slate-900">{gm.grade}</span>
                         <span className="text-sm text-slate-600 text-center">{gm.minMarks}</span>
                         <span className="text-sm text-slate-600 text-center">{gm.maxMarks}</span>
-                        <span className="text-sm font-bold text-fuchsia-600 text-right">{gm.gradePoints.toFixed(1)}</span>
+                        <span className="text-sm font-bold text-blue-600 text-right">{gm.gradePoints.toFixed(1)}</span>
                       </div>
                     ))}
                   </div>
@@ -1343,7 +1343,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search assignments..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
@@ -1411,7 +1411,7 @@ export default function AcademicConfig() {
                     .map((a) => (
                       <div key={a.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 flex items-center justify-between hover:shadow-md transition-all">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-fuchsia-50 rounded-xl flex items-center justify-center text-fuchsia-600 font-bold text-sm">
+                          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 font-bold text-sm">
                             {a.subjectCode?.[0] || '?'}
                           </div>
                           <div>
@@ -1479,7 +1479,7 @@ export default function AcademicConfig() {
                       <div className="relative z-10 shrink-0">
                         <div className={cn(
                           'w-16 h-16 rounded-2xl flex items-center justify-center text-sm font-bold shadow-sm',
-                          v.status === 'active' ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white' :
+                          v.status === 'active' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white' :
                           v.status === 'superseded' ? 'bg-slate-200 text-slate-500' :
                           'bg-amber-100 text-amber-700'
                         )}>
@@ -1501,7 +1501,7 @@ export default function AcademicConfig() {
 
                         <div className="grid grid-cols-2 gap-4 mb-4">
                           <div className="p-3 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <CalendarDays className="w-4 h-4 text-fuchsia-500" />
+                            <CalendarDays className="w-4 h-4 text-blue-500" />
                             <div>
                               <p className="text-[8px] font-black uppercase text-slate-400">Effective From</p>
                               <p className="text-xs font-bold text-slate-900">{v.effectiveFrom || 'Not set'}</p>
@@ -1552,7 +1552,7 @@ export default function AcademicConfig() {
                 </p>
               </div>
               {isSuperAdmin && (
-                <span className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest">
+                <span className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest">
                   <ShieldCheck className="w-4 h-4" /> Super Admin Access
                 </span>
               )}
@@ -1572,7 +1572,7 @@ export default function AcademicConfig() {
             <div className="space-y-5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-fuchsia-600" />
+                  <Globe className="w-5 h-5 text-blue-600" />
                   <h3 className="text-sm font-bold text-slate-900">Shared Courses</h3>
                 </div>
                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
@@ -1584,30 +1584,30 @@ export default function AcademicConfig() {
                 {courses
                   .filter((c) => c.isMasterCourse || (c.sharedWithTenants && c.sharedWithTenants.length > 0))
                   .map((c) => (
-                    <div key={c.id} className="bg-white rounded-[2.5rem] border border-fuchsia-200 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-fuchsia-50 -translate-y-8 translate-x-8 rounded-full" />
+                    <div key={c.id} className="bg-white rounded-[2.5rem] border border-blue-200 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 -translate-y-8 translate-x-8 rounded-full" />
                       <div className="relative">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-2">
-                            <span className="px-2.5 py-1 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">
+                            <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">
                               Shared
                             </span>
                             <StatusBadge status={c.status} />
                           </div>
                           {isSuperAdmin && (
-                            <Share2 className="w-4 h-4 text-fuchsia-400" />
+                            <Share2 className="w-4 h-4 text-blue-400" />
                           )}
                         </div>
                         <h3 className="text-lg font-bold text-slate-900 mb-1">{c.name}</h3>
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">{c.code} &middot; {c.department || 'General'}</p>
                         <div className="grid grid-cols-2 gap-3 mb-4">
-                          <div className="text-center p-2.5 bg-fuchsia-50/50 rounded-2xl">
-                            <p className="text-sm font-bold text-fuchsia-700">{c.credits}</p>
-                            <p className="text-[8px] font-black uppercase text-fuchsia-400">Credits</p>
+                          <div className="text-center p-2.5 bg-blue-50/50 rounded-2xl">
+                            <p className="text-sm font-bold text-blue-700">{c.credits}</p>
+                            <p className="text-[8px] font-black uppercase text-blue-400">Credits</p>
                           </div>
-                          <div className="text-center p-2.5 bg-fuchsia-50/50 rounded-2xl">
-                            <p className="text-sm font-bold text-fuchsia-700">{c.sharedWithTenants?.length || 0}</p>
-                            <p className="text-[8px] font-black uppercase text-fuchsia-400">Shared</p>
+                          <div className="text-center p-2.5 bg-blue-50/50 rounded-2xl">
+                            <p className="text-sm font-bold text-blue-700">{c.sharedWithTenants?.length || 0}</p>
+                            <p className="text-[8px] font-black uppercase text-blue-400">Shared</p>
                           </div>
                         </div>
                         {c.description && (
@@ -1616,7 +1616,7 @@ export default function AcademicConfig() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => { fillCourseForm(c); openDrawer('course', c); }}
-                            className="flex-1 py-2.5 bg-fuchsia-50 text-fuchsia-600 rounded-xl text-[9px] font-black uppercase tracking-widest hover:from-fuchsia-700 hover:to-violet-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
                           >
                             <Eye className="w-3.5 h-3.5" /> View Details
                           </button>
@@ -1631,11 +1631,11 @@ export default function AcademicConfig() {
                   ))}
 
                 {courses.filter((c) => c.isMasterCourse || (c.sharedWithTenants && c.sharedWithTenants.length > 0)).length === 0 && (
-                  <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-fuchsia-200 rounded-[2.5rem] bg-fuchsia-50/10">
+                  <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-blue-200 rounded-[2.5rem] bg-blue-50/10">
                     <div className="text-center">
                       <Globe className="w-12 h-12 text-indigo-200 mx-auto mb-3" />
                       <p className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-300">No shared courses available yet</p>
-                      <p className="text-[9px] text-fuchsia-400 mt-2">Super admins can share programs and courses across institutions</p>
+                      <p className="text-[9px] text-blue-400 mt-2">Super admins can share programs and courses across institutions</p>
                     </div>
                   </div>
                 )}
@@ -1763,8 +1763,8 @@ export default function AcademicConfig() {
 
                     {/* Multi-Institution Control */}
                     {isSuperAdmin && (
-                      <div className="space-y-3 p-4 bg-fuchsia-50/50 rounded-2xl border border-fuchsia-200">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600 mb-3 flex items-center gap-2">
+                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-200">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-3 flex items-center gap-2">
                           <Globe className="w-3.5 h-3.5" /> Multi-Institution Control
                         </p>
                         <ToggleRow label="Master Program (share across institutions)" checked={!!(programForm as any).isMasterProgram} onChange={handleToggleMasterProgram} />
@@ -1794,8 +1794,8 @@ export default function AcademicConfig() {
 
                     {/* Multi-Institution Control for Courses */}
                     {isSuperAdmin && (
-                      <div className="space-y-3 p-4 bg-fuchsia-50/50 rounded-2xl border border-fuchsia-200">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600 mb-3 flex items-center gap-2">
+                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-200">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-3 flex items-center gap-2">
                           <Globe className="w-3.5 h-3.5" /> Multi-Institution Control
                         </p>
                         <ToggleRow label="Master Course (share across institutions)" checked={!!(courseForm as any).isMasterCourse} onChange={handleToggleMasterCourse} />
@@ -1865,7 +1865,7 @@ export default function AcademicConfig() {
                               const prog = programs.find((p) => p.id === curriculumForm.programId);
                               if (prog) handleInitCurriculumSemesters(prog.durationSemesters);
                             }}
-                            className="text-[9px] font-black text-fuchsia-600 hover:text-fuchsia-800 transition-colors"
+                            className="text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors"
                           >
                             Auto-generate from program
                           </button>
@@ -1876,7 +1876,7 @@ export default function AcademicConfig() {
                         <div key={idx} className="bg-slate-50 rounded-2xl p-4 space-y-3">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 bg-fuchsia-100 text-fuchsia-600 rounded-lg flex items-center justify-center text-xs font-bold">
+                              <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xs font-bold">
                                 {sem.semesterNumber}
                               </div>
                               <div>
@@ -1913,7 +1913,7 @@ export default function AcademicConfig() {
                                       <button
                                         key={c.id} type="button"
                                         onClick={() => handleAddCourseToSemester(idx, c.id!)}
-                                        className="flex items-center justify-between p-2 rounded-lg text-[10px] font-medium text-slate-600 hover:bg-fuchsia-50 hover:text-fuchsia-600 transition-all"
+                                        className="flex items-center justify-between p-2 rounded-lg text-[10px] font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all"
                                       >
                                         <span>{c.name} ({c.code})</span>
                                         <span className="text-[8px] font-bold text-slate-400">{c.credits}cr</span>
@@ -1929,7 +1929,7 @@ export default function AcademicConfig() {
                               <button
                                 type="button"
                                 onClick={() => setAddCourseSemesterIdx(idx)}
-                                className="flex items-center gap-1.5 text-[9px] font-black text-fuchsia-600 hover:text-fuchsia-800 transition-colors"
+                                className="flex items-center gap-1.5 text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors"
                               >
                                 <Plus className="w-3 h-3" /> Add Course
                               </button>
@@ -2019,7 +2019,7 @@ export default function AcademicConfig() {
                         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Grade Mappings</p>
                         <button
                           type="button" onClick={addGradeMappingRow}
-                          className="text-[9px] font-black text-fuchsia-600 hover:text-fuchsia-800 transition-colors flex items-center gap-1"
+                          className="text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1"
                         >
                           <Plus className="w-3 h-3" /> Add Row
                         </button>
@@ -2036,23 +2036,23 @@ export default function AcademicConfig() {
                             <input
                               type="text" value={gm.grade}
                               onChange={(e) => updateGradeMapping(idx, 'grade', e.target.value)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all font-bold"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all font-bold"
                             />
                             <input
                               type="number" value={gm.minMarks}
                               onChange={(e) => updateGradeMapping(idx, 'minMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-center"
                             />
                             <input
                               type="number" value={gm.maxMarks}
                               onChange={(e) => updateGradeMapping(idx, 'maxMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-center"
                             />
                             <div className="flex items-center gap-1 justify-end">
                               <input
                                 type="number" step="0.1" value={gm.gradePoints}
                                 onChange={(e) => updateGradeMapping(idx, 'gradePoints', parseFloat(e.target.value) || 0)}
-                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-fuchsia-100 transition-all text-right font-bold text-fuchsia-600"
+                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-right font-bold text-blue-600"
                               />
                               <button
                                 type="button" onClick={() => removeGradeMappingRow(idx)}
@@ -2152,7 +2152,7 @@ function InputField({ label, value, onChange, placeholder, type = 'text', requir
         type={type} required={required} disabled={disabled}
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
         className={cn(
-          'w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-sm',
+          'w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm',
           disabled && 'opacity-50 cursor-not-allowed bg-slate-100'
         )}
       />
@@ -2170,7 +2170,7 @@ function SelectField({ label, value, onChange, options, required = false }: {
       <select
         value={value} required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-sm appearance-none cursor-pointer"
+        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm appearance-none cursor-pointer"
       >
         {typeof options[0] === 'string'
           ? (options as string[]).map((o) => <option key={o} value={o}>{o}</option>)
@@ -2189,7 +2189,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3 }: {
       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">{label}</label>
       <textarea
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-fuchsia-100 transition-all outline-none text-sm resize-none"
+        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm resize-none"
       />
     </div>
   );
@@ -2201,7 +2201,7 @@ function ToggleRow({ label, checked, onChange }: { label: string; checked: boole
       <span className="text-sm font-medium text-slate-700">{label}</span>
       <button type="button" onClick={() => onChange(!checked)} className="focus:outline-none">
         {checked ? (
-          <ToggleRight className="w-8 h-8 text-fuchsia-600" />
+          <ToggleRight className="w-8 h-8 text-blue-600" />
         ) : (
           <ToggleLeft className="w-8 h-8 text-slate-300" />
         )}
@@ -2229,7 +2229,7 @@ function DrawerFooter({ onCancel, onDelete, submitting }: { onCancel: () => void
       )}
       <button
         type="submit" disabled={submitting}
-        className="flex-2 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:from-fuchsia-700 hover:to-violet-700 shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+        className="flex-2 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {submitting ? (
           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

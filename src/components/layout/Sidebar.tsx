@@ -10,13 +10,12 @@ import {
   MessageSquare, 
   Settings,
   ShieldCheck,
-  ChevronRight,
   LogOut,
   Presentation,
   UserPlus,
   BookMarked,
   Settings2,
-  Sparkles
+  Building2
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { signOut } from 'firebase/auth';
@@ -25,20 +24,21 @@ import { useAuthStore } from '../../store/useStore';
 import { hasPermission } from '../../lib/permissions';
 
 const navItems = [
-  { name: 'Dashboard', href: '/', icon: LayoutDashboard, feature: 'dashboard', gradient: 'from-fuchsia-500 to-pink-500' },
-  { name: 'Students', href: '/admissions', icon: GraduationCap, feature: 'admissions', gradient: 'from-blue-500 to-cyan-500' },
-  { name: 'New Enrollment', href: '/enrollment', icon: UserPlus, feature: 'admissions', gradient: 'from-violet-500 to-purple-500' },
-  { name: 'Faculty', href: '/faculty', icon: Users, feature: 'faculty', gradient: 'from-emerald-500 to-teal-500' },
-  { name: 'Teachers', href: '/teachers', icon: BookMarked, feature: 'faculty', gradient: 'from-amber-500 to-orange-500' },
-  { name: 'Academic Setup', href: '/academic-config', icon: Settings2, feature: 'courses', gradient: 'from-rose-500 to-red-500' },
-  { name: 'Subject Portal', href: '/courses', icon: BookOpen, feature: 'courses', gradient: 'from-indigo-500 to-blue-500' },
-  { name: 'Pedagogical Portal', href: '/classroom', icon: Presentation, feature: 'classroom', gradient: 'from-cyan-500 to-sky-500' },
-  { name: 'Finance', href: '/finance', icon: BadgeDollarSign, feature: 'finance', gradient: 'from-yellow-500 to-amber-500' },
-  { name: 'Messaging', href: '/messages', icon: MessageSquare, feature: 'messaging', gradient: 'from-pink-500 to-rose-500' },
-  { name: 'Library', href: '/library', icon: BookOpen, feature: 'library', gradient: 'from-fuchsia-500 to-violet-500' },
-  { name: 'Church Operations', href: '/church', icon: Heart, feature: 'church', gradient: 'from-red-500 to-orange-500' },
-  { name: 'Super Admin', href: '/super-admin', icon: ShieldCheck, feature: 'super-admin', gradient: 'from-fuchsia-500 to-violet-600' },
-  { name: 'Settings', href: '/settings', icon: Settings, feature: 'settings', gradient: 'from-gray-400 to-gray-600' },
+  { name: 'Dashboard', href: '/', icon: LayoutDashboard, feature: 'dashboard' },
+  { name: 'Students', href: '/admissions', icon: GraduationCap, feature: 'admissions' },
+  { name: 'New Enrollment', href: '/enrollment', icon: UserPlus, feature: 'admissions' },
+  { name: 'Faculty', href: '/faculty', icon: Users, feature: 'faculty' },
+  { name: 'Teachers', href: '/teachers', icon: BookMarked, feature: 'faculty' },
+  { name: 'Teacher Enrollment', href: '/teacher-enrollment', icon: Presentation, feature: 'faculty' },
+  { name: 'Academic Setup', href: '/academic-config', icon: Settings2, feature: 'courses' },
+  { name: 'Subject Portal', href: '/courses', icon: BookOpen, feature: 'courses' },
+  { name: 'Classroom', href: '/classroom', icon: Presentation, feature: 'classroom' },
+  { name: 'Finance', href: '/finance', icon: BadgeDollarSign, feature: 'finance' },
+  { name: 'Messaging', href: '/messages', icon: MessageSquare, feature: 'messaging' },
+  { name: 'Library', href: '/library', icon: BookOpen, feature: 'library' },
+  { name: 'Church Operations', href: '/church', icon: Heart, feature: 'church' },
+  { name: 'Super Admin', href: '/super-admin', icon: ShieldCheck, feature: 'super-admin' },
+  { name: 'Settings', href: '/settings', icon: Settings, feature: 'settings' },
 ];
 
 export function Sidebar() {
@@ -48,80 +48,54 @@ export function Sidebar() {
   const filteredNavItems = navItems.filter(item => hasPermission(user?.role || null, item.feature));
 
   return (
-    <div className="flex flex-col h-full w-64 relative overflow-y-auto custom-scrollbar" style={{
-      background: 'linear-gradient(180deg, #0f0a1e 0%, #1a0e2e 25%, #12082a 50%, #0d0618 75%, #08040f 100%)'
-    }}>
-      {/* Animated gradient orbs */}
-      <div className="absolute top-0 left-0 w-48 h-48 bg-fuchsia-600/10 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-32 right-0 w-40 h-40 bg-violet-500/8 rounded-full blur-[60px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-500/5 rounded-full blur-[50px] pointer-events-none" />
-
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
-
-      <div className="p-6 flex items-center gap-3.5 relative z-10">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center shadow-lg shadow-fuchsia-500/20 ring-1 ring-white/10">
-          <Sparkles className="text-white w-5 h-5" />
+    <div className="flex flex-col h-full w-60 bg-slate-900 border-r border-slate-800">
+      {/* Logo */}
+      <div className="h-16 flex items-center gap-3 px-5 border-b border-slate-800 shrink-0">
+        <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+          <Building2 className="text-white w-4 h-4" />
         </div>
         <div>
-          <span className="font-bold text-lg text-white tracking-tight block bg-gradient-to-r from-white to-fuchsia-200 bg-clip-text" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Covenant</span>
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text -mt-0.5 block" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Governance</span>
+          <span className="font-semibold text-sm text-white tracking-tight block leading-tight">CovenantERP</span>
+          <span className="text-[10px] font-medium text-slate-500 tracking-wide uppercase">Governance Platform</span>
         </div>
       </div>
 
-      <nav className="flex-1 px-3 py-6 space-y-0.5 relative z-10">
-        <div className="mb-3 px-4 pb-2 border-b border-white/[0.04]">
-          <p className="text-[9px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-fuchsia-400/50 to-transparent bg-clip-text" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Core Modules</p>
-        </div>
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
+        <p className="px-3 py-2 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Main Menu</p>
         {filteredNavItems.map((item) => (
           <NavLink
             key={item.name}
             to={item.href}
             className={({ isActive }) => cn(
-              "flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-300 group text-[11px] font-bold uppercase tracking-widest relative overflow-hidden",
+              "flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-medium transition-colors",
               isActive 
-                ? "text-white shadow-lg" 
-                : "text-slate-400/70 hover:text-white/90 hover:bg-white/[0.04]"
+                ? "bg-blue-600 text-white" 
+                : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
             )}
-            style={undefined}
           >
-            {({ isActive }) => (
-              <>
-                {isActive && (
-                  <div className={cn("absolute inset-0 bg-gradient-to-r opacity-15", item.gradient)} />
-                )}
-                {isActive && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-full bg-gradient-to-b from-fuchsia-400 to-violet-500" />
-                )}
-                <item.icon className={cn(
-                  "w-4 h-4 transition-all duration-300 relative z-10",
-                  isActive 
-                    ? "text-white drop-shadow-lg" 
-                    : "group-hover:text-fuchsia-400 group-hover:scale-110"
-                )} />
-                <span className="flex-1 relative z-10">{item.name}</span>
-                <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-60 group-hover:translate-x-1 transition-all relative z-10" />
-              </>
-            )}
+            <item.icon className="w-4 h-4 shrink-0" />
+            <span className="truncate">{item.name}</span>
           </NavLink>
         ))}
       </nav>
 
-      <div className="p-4 border-t border-white/[0.04] space-y-3 relative z-10">
-        <div className="px-3 flex items-center gap-3 py-2.5 bg-white/[0.03] rounded-xl border border-white/[0.04] backdrop-blur-sm">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500/20 to-violet-500/20 flex items-center justify-center text-fuchsia-300 font-bold text-xs uppercase ring-1 ring-fuchsia-500/20">
-            {user?.email?.[0] || 'A'}
+      {/* User section */}
+      <div className="p-3 border-t border-slate-800 shrink-0">
+        <div className="flex items-center gap-2.5 px-2 py-2">
+          <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 font-medium text-xs">
+            {user?.email?.[0]?.toUpperCase() || 'A'}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-bold text-white/90 truncate">{user?.email || 'Administrator'}</p>
-            <p className="text-[8px] font-black uppercase tracking-tighter bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{user?.role || 'User'}</p>
+            <p className="text-xs font-medium text-slate-300 truncate">{user?.email || 'Administrator'}</p>
+            <p className="text-[10px] text-slate-500 capitalize">{user?.role?.replace('_', ' ') || 'User'}</p>
           </div>
         </div>
         <button 
           onClick={handleSignOut}
-          className="flex items-center gap-3 px-4 py-2.5 w-full rounded-xl hover:bg-rose-500/10 hover:text-rose-400 transition-all text-[11px] font-bold uppercase tracking-widest group text-slate-500"
+          className="flex items-center gap-2.5 px-3 py-2 w-full rounded-md text-[13px] font-medium text-slate-500 hover:bg-slate-800 hover:text-slate-300 transition-colors mt-1"
         >
-          <LogOut className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <LogOut className="w-4 h-4" />
           <span>Sign Out</span>
         </button>
       </div>

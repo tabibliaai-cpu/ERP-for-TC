@@ -67,20 +67,20 @@ const AI_FEATURES = [
     name: 'AI Tutor',
     description: 'Intelligent study assistance with personalized learning paths, concept explanations, and practice problems.',
     icon: GraduationCap,
-    color: 'from-fuchsia-500 to-pink-500',
-    bgLight: 'bg-fuchsia-50',
-    textLight: 'text-fuchsia-700',
-    badgeBg: 'bg-fuchsia-100',
+    color: 'from-blue-500 to-pink-500',
+    bgLight: 'bg-blue-50',
+    textLight: 'text-blue-700',
+    badgeBg: 'bg-blue-100',
   },
   {
     id: 'ai_lesson_plan',
     name: 'AI Lesson Plan Generator',
     description: 'Automatically generate structured lesson plans, learning objectives, and assessment rubrics for faculty.',
     icon: BookOpen,
-    color: 'from-violet-500 to-purple-500',
-    bgLight: 'bg-violet-50',
-    textLight: 'text-violet-700',
-    badgeBg: 'bg-violet-100',
+    color: 'from-indigo-500 to-purple-500',
+    bgLight: 'bg-indigo-50',
+    textLight: 'text-indigo-700',
+    badgeBg: 'bg-indigo-100',
   },
   {
     id: 'ai_grade_predictor',
@@ -147,7 +147,7 @@ const AI_FEATURES = [
     name: 'AI Chat Assistant',
     description: 'General-purpose conversational AI for institutional Q&A, support, and information retrieval.',
     icon: MessageSquare,
-    color: 'from-purple-500 to-violet-500',
+    color: 'from-purple-500 to-indigo-500',
     bgLight: 'bg-purple-50',
     textLight: 'text-purple-700',
     badgeBg: 'bg-purple-100',
@@ -221,12 +221,12 @@ function NeuralBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* Floating gradient orbs */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-fuchsia-400/10 to-violet-400/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl animate-pulse" />
       <div
-        className="absolute -bottom-48 -left-24 w-[500px] h-[500px] bg-gradient-to-tr from-violet-400/8 to-fuchsia-400/8 rounded-full blur-3xl animate-pulse"
+        className="absolute -bottom-48 -left-24 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-400/8 to-blue-400/8 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: '1s' }}
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-fuchsia-300/5 to-violet-300/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-300/5 to-indigo-300/5 rounded-full blur-3xl" />
 
       {/* Neural network dots pattern */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
@@ -241,17 +241,17 @@ function NeuralBackground() {
       </svg>
 
       {/* Animated connection lines */}
-      <div className="absolute top-20 left-[15%] w-px h-32 bg-gradient-to-b from-transparent via-fuchsia-400/20 to-transparent animate-pulse" />
+      <div className="absolute top-20 left-[15%] w-px h-32 bg-gradient-to-b from-transparent via-blue-400/20 to-transparent animate-pulse" />
       <div
-        className="absolute top-40 right-[20%] w-px h-40 bg-gradient-to-b from-transparent via-violet-400/20 to-transparent animate-pulse"
+        className="absolute top-40 right-[20%] w-px h-40 bg-gradient-to-b from-transparent via-indigo-400/20 to-transparent animate-pulse"
         style={{ animationDelay: '0.5s' }}
       />
       <div
-        className="absolute bottom-20 left-[30%] w-40 h-px bg-gradient-to-r from-transparent via-fuchsia-400/15 to-transparent animate-pulse"
+        className="absolute bottom-20 left-[30%] w-40 h-px bg-gradient-to-r from-transparent via-blue-400/15 to-transparent animate-pulse"
         style={{ animationDelay: '1.5s' }}
       />
       <div
-        className="absolute top-60 left-[60%] w-px h-24 bg-gradient-to-b from-transparent via-violet-400/15 to-transparent animate-pulse"
+        className="absolute top-60 left-[60%] w-px h-24 bg-gradient-to-b from-transparent via-indigo-400/15 to-transparent animate-pulse"
         style={{ animationDelay: '2s' }}
       />
 
@@ -259,7 +259,7 @@ function NeuralBackground() {
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-fuchsia-400/30"
+          className="absolute w-1.5 h-1.5 rounded-full bg-blue-400/30"
           style={{ top: `${15 + i * 15}%`, left: `${10 + i * 16}%` }}
           animate={{ y: [0, -8, 0], opacity: [0.3, 0.7, 0.3] }}
           transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
@@ -268,7 +268,7 @@ function NeuralBackground() {
       {[...Array(4)].map((_, i) => (
         <motion.div
           key={`v-${i}`}
-          className="absolute w-1 h-1 rounded-full bg-violet-400/25"
+          className="absolute w-1 h-1 rounded-full bg-indigo-400/25"
           style={{ top: `${20 + i * 20}%`, right: `${12 + i * 18}%` }}
           animate={{ y: [0, 6, 0], opacity: [0.2, 0.6, 0.2] }}
           transition={{ duration: 4 + i * 0.3, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
@@ -295,10 +295,10 @@ function ToggleSwitch({
       onClick={onChange}
       disabled={disabled}
       className={cn(
-        'relative inline-flex shrink-0 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2',
+        'relative inline-flex shrink-0 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
         isSmall ? 'h-5 w-9' : 'h-6 w-11',
         checked
-          ? 'bg-gradient-to-r from-fuchsia-500 to-violet-600 shadow-md shadow-fuchsia-500/25'
+          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 shadow-md shadow-blue-500/25'
           : 'bg-gray-200',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
@@ -320,7 +320,7 @@ function ToggleSwitch({
 function UsageBar({
   value,
   max,
-  colorClass = 'from-fuchsia-500 to-violet-500',
+  colorClass = 'from-blue-500 to-indigo-500',
   label,
   showValue = true,
 }: {
@@ -417,7 +417,7 @@ function MiniBarChart({ data, maxHeight = 80 }: { data: { label: string; value: 
               transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.05 }}
               className={cn(
                 'w-full max-w-[40px] rounded-t-lg',
-                item.color || 'bg-gradient-to-t from-fuchsia-500 to-violet-500'
+                item.color || 'bg-gradient-to-t from-blue-500 to-indigo-500'
               )}
               style={{ minHeight: 4 }}
             />
@@ -702,8 +702,8 @@ export function AICenterTab() {
         <NeuralBackground />
         <div className="relative z-10 flex flex-col items-center justify-center py-32">
           <div className="relative">
-            <div className="animate-spin w-14 h-14 border-4 border-fuchsia-500/30 border-t-fuchsia-500 rounded-full" />
-            <Brain className="absolute inset-0 m-auto w-6 h-6 text-fuchsia-500" />
+            <div className="animate-spin w-14 h-14 border-4 border-blue-500/30 border-t-blue-500 rounded-full" />
+            <Brain className="absolute inset-0 m-auto w-6 h-6 text-blue-500" />
           </div>
           <p className="text-gray-500 font-medium mt-5">Loading AI Control Center...</p>
           <p className="text-xs text-gray-400 mt-1">Connecting to neural network</p>
@@ -745,7 +745,7 @@ export function AICenterTab() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2.5">
-              <div className="bg-gradient-to-br from-fuchsia-500 to-violet-600 rounded-xl p-2 shadow-lg shadow-fuchsia-500/20">
+              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-2 shadow-lg shadow-blue-500/20">
                 <Brain className="w-5 h-5 text-white" />
               </div>
               AI Control Center
@@ -760,7 +760,7 @@ export function AICenterTab() {
               <select
                 value={selectedInstitution}
                 onChange={e => setSelectedInstitution(e.target.value)}
-                className="pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all appearance-none min-w-[200px]"
+                className="pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none min-w-[200px]"
               >
                 <option value="global">Global Configuration</option>
                 {institutions.map(inst => (
@@ -772,7 +772,7 @@ export function AICenterTab() {
             </div>
             <button
               onClick={loadData}
-              className="p-2.5 bg-white border border-gray-200 rounded-xl text-gray-500 hover:text-fuchsia-600 hover:bg-fuchsia-50 transition-all"
+              className="p-2.5 bg-white border border-gray-200 rounded-xl text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-all"
               title="Refresh data"
             >
               <RefreshCw className="w-4 h-4" />
@@ -789,7 +789,7 @@ export function AICenterTab() {
             value: activeFeaturesCount,
             total: AI_FEATURES.length,
             icon: Brain,
-            gradient: 'from-fuchsia-600 to-violet-600',
+            gradient: 'from-blue-600 to-indigo-600',
             trend: '+2 this week',
             trendUp: true,
           },
@@ -797,7 +797,7 @@ export function AICenterTab() {
             label: 'Total API Calls',
             value: formatNumber(totalApiCalls),
             icon: Activity,
-            gradient: 'from-violet-600 to-purple-600',
+            gradient: 'from-indigo-600 to-purple-600',
             trend: '+12.4% vs last week',
             trendUp: true,
           },
@@ -805,7 +805,7 @@ export function AICenterTab() {
             label: 'Estimated Cost',
             value: formatCurrency(estimatedCost),
             icon: Coins,
-            gradient: 'from-fuchsia-500 to-pink-600',
+            gradient: 'from-blue-500 to-pink-600',
             trend: '-3.2% vs last month',
             trendUp: false,
           },
@@ -813,7 +813,7 @@ export function AICenterTab() {
             label: 'Active Institutions',
             value: institutions.length || 4,
             icon: Building2,
-            gradient: 'from-violet-500 to-fuchsia-600',
+            gradient: 'from-indigo-500 to-blue-600',
             trend: 'All systems online',
             trendUp: true,
           },
@@ -869,8 +869,8 @@ export function AICenterTab() {
                 className={cn(
                   'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
                   isActive
-                    ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-lg shadow-fuchsia-500/25'
-                    : 'text-gray-600 hover:text-fuchsia-600 hover:bg-white/60'
+                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-white/60'
                 )}
               >
                 <TabIcon className="w-4 h-4" />
@@ -899,9 +899,9 @@ export function AICenterTab() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                      <Zap className="w-5 h-5 text-fuchsia-600" />
+                      <Zap className="w-5 h-5 text-blue-600" />
                       AI Feature Toggles
-                      <span className="text-xs font-medium bg-fuchsia-100 text-fuchsia-700 px-2 py-0.5 rounded-full">
+                      <span className="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                         {activeFeaturesCount} active
                       </span>
                     </h3>
@@ -917,7 +917,7 @@ export function AICenterTab() {
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
                       placeholder="Search features..."
-                      className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent transition-all w-full sm:w-56"
+                      className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-full sm:w-56"
                     />
                   </div>
                 </div>
@@ -948,7 +948,7 @@ export function AICenterTab() {
                       >
                         <button
                           onClick={() => setExpandedFeature(isExpanded ? null : feature.id)}
-                          className="w-full px-5 py-4 flex items-center gap-4 hover:bg-fuchsia-50/30 transition-colors text-left"
+                          className="w-full px-5 py-4 flex items-center gap-4 hover:bg-blue-50/30 transition-colors text-left"
                         >
                           <div className={cn('rounded-xl p-2.5 bg-gradient-to-br shadow-sm shrink-0', feature.color)}>
                             <Icon className="w-5 h-5 text-white" />
@@ -1007,7 +1007,7 @@ export function AICenterTab() {
                                     <p className="text-xl font-bold text-gray-800">{formatNumber(usageCount)}</p>
                                     <p className="text-[10px] text-gray-400 mt-0.5">API calls</p>
                                   </div>
-                                  <div className="rounded-xl p-3 border bg-violet-50">
+                                  <div className="rounded-xl p-3 border bg-indigo-50">
                                     <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">
                                       Active Model
                                     </p>
@@ -1017,7 +1017,7 @@ export function AICenterTab() {
                                       tokens
                                     </p>
                                   </div>
-                                  <div className="rounded-xl p-3 border bg-fuchsia-50">
+                                  <div className="rounded-xl p-3 border bg-blue-50">
                                     <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">
                                       Temperature
                                     </p>
@@ -1031,7 +1031,7 @@ export function AICenterTab() {
                                           className={cn(
                                             'h-1 flex-1 rounded-full',
                                             t < Math.round((config?.temperature || 0.7) * 5)
-                                              ? 'bg-gradient-to-r from-fuchsia-500 to-violet-500'
+                                              ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
                                               : 'bg-gray-200'
                                           )}
                                         />
@@ -1089,8 +1089,8 @@ export function AICenterTab() {
                 >
                   <GlassCard className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-100 to-violet-100 flex items-center justify-center">
-                        <item.icon className="w-5 h-5 text-fuchsia-600" />
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                        <item.icon className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{item.label}</p>
@@ -1109,7 +1109,7 @@ export function AICenterTab() {
               <GlassCard>
                 <div className="p-5 border-b border-gray-100">
                   <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-fuchsia-600" />
+                    <TrendingUp className="w-4 h-4 text-blue-600" />
                     Top AI Features by Usage
                   </h3>
                 </div>
@@ -1120,11 +1120,11 @@ export function AICenterTab() {
                         className={cn(
                           'text-xs font-bold w-6 h-6 rounded-lg flex items-center justify-center',
                           i === 0
-                            ? 'bg-gradient-to-br from-fuchsia-500 to-violet-500 text-white'
+                            ? 'bg-gradient-to-br from-blue-500 to-indigo-500 text-white'
                             : i === 1
-                              ? 'bg-fuchsia-100 text-fuchsia-700'
+                              ? 'bg-blue-100 text-blue-700'
                               : i === 2
-                                ? 'bg-violet-100 text-violet-700'
+                                ? 'bg-indigo-100 text-indigo-700'
                                 : 'bg-gray-100 text-gray-500'
                         )}
                       >
@@ -1138,7 +1138,7 @@ export function AICenterTab() {
                         <UsageBar
                           value={feature.value}
                           max={topFeatures[0]?.value || 1}
-                          colorClass="from-fuchsia-500 to-violet-500"
+                          colorClass="from-blue-500 to-indigo-500"
                           showValue={false}
                         />
                       </div>
@@ -1151,7 +1151,7 @@ export function AICenterTab() {
               <GlassCard>
                 <div className="p-5 border-b border-gray-100">
                   <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-fuchsia-600" />
+                    <BarChart3 className="w-4 h-4 text-blue-600" />
                     Weekly API Usage
                   </h3>
                 </div>
@@ -1168,7 +1168,7 @@ export function AICenterTab() {
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-gray-400 font-medium">Peak Day</p>
-                      <p className="text-lg font-bold text-fuchsia-600">
+                      <p className="text-lg font-bold text-blue-600">
                         {dailyUsageSim.reduce((max, d) => (d.value > max.value ? d : max)).label}
                       </p>
                     </div>
@@ -1183,7 +1183,7 @@ export function AICenterTab() {
               <GlassCard>
                 <div className="p-5 border-b border-gray-100">
                   <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-                    <Coins className="w-4 h-4 text-fuchsia-600" />
+                    <Coins className="w-4 h-4 text-blue-600" />
                     Cost Breakdown by Model
                   </h3>
                 </div>
@@ -1202,8 +1202,8 @@ export function AICenterTab() {
                           className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0"
                         >
                           <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-100 to-fuchsia-100 flex items-center justify-center">
-                              <Cpu className="w-4 h-4 text-violet-600" />
+                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center">
+                              <Cpu className="w-4 h-4 text-indigo-600" />
                             </div>
                             <div>
                               <p className="text-sm font-semibold text-gray-800">{model}</p>
@@ -1220,7 +1220,7 @@ export function AICenterTab() {
                   })()}
                   <div className="pt-3 border-t-2 border-gray-200 flex items-center justify-between">
                     <span className="text-sm font-bold text-gray-900">Total Estimated Cost</span>
-                    <span className="text-lg font-bold bg-gradient-to-r from-fuchsia-600 to-violet-600 bg-clip-text text-transparent">
+                    <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                       {formatCurrency(estimatedCost)}
                     </span>
                   </div>
@@ -1231,7 +1231,7 @@ export function AICenterTab() {
               <GlassCard>
                 <div className="p-5 border-b border-gray-100">
                   <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-fuchsia-600" />
+                    <Building2 className="w-4 h-4 text-blue-600" />
                     Per-Institution Usage
                   </h3>
                 </div>
@@ -1256,7 +1256,7 @@ export function AICenterTab() {
                             className={cn(
                               'w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold',
                               i === 0
-                                ? 'bg-gradient-to-br from-fuchsia-500 to-violet-500 text-white'
+                                ? 'bg-gradient-to-br from-blue-500 to-indigo-500 text-white'
                                 : 'bg-gray-100 text-gray-500'
                             )}
                           >
@@ -1300,7 +1300,7 @@ export function AICenterTab() {
             <GlassCard>
               <div className="p-5 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-fuchsia-600" />
+                  <Globe className="w-5 h-5 text-blue-600" />
                   Global Rate Limits
                 </h3>
                 <p className="text-sm text-gray-500 mt-0.5">Platform-wide rate limits applied to all institutions.</p>
@@ -1334,10 +1334,10 @@ export function AICenterTab() {
                     <div>
                       <label className="flex items-center justify-between text-sm font-semibold text-gray-700 mb-2">
                         <span className="flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5 text-fuchsia-500" />
+                          <Clock className="w-3.5 h-3.5 text-blue-500" />
                           Requests Per Minute
                         </span>
-                        <span className="text-fuchsia-600 font-bold">{globalLimit.requestsPerMinute}</span>
+                        <span className="text-blue-600 font-bold">{globalLimit.requestsPerMinute}</span>
                       </label>
                       <input
                         type="range"
@@ -1348,7 +1348,7 @@ export function AICenterTab() {
                         onChange={e =>
                           setGlobalLimit(prev => ({ ...prev, requestsPerMinute: Number(e.target.value) }))
                         }
-                        className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-fuchsia-600"
+                        className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-blue-600"
                       />
                       <div className="flex justify-between text-[10px] text-gray-400 mt-1">
                         <span>10 (Restrictive)</span>
@@ -1359,10 +1359,10 @@ export function AICenterTab() {
                     <div>
                       <label className="flex items-center justify-between text-sm font-semibold text-gray-700 mb-2">
                         <span className="flex items-center gap-1.5">
-                          <Activity className="w-3.5 h-3.5 text-violet-500" />
+                          <Activity className="w-3.5 h-3.5 text-indigo-500" />
                           Requests Per Day
                         </span>
-                        <span className="text-violet-600 font-bold">{formatNumber(globalLimit.requestsPerDay)}</span>
+                        <span className="text-indigo-600 font-bold">{formatNumber(globalLimit.requestsPerDay)}</span>
                       </label>
                       <input
                         type="range"
@@ -1373,7 +1373,7 @@ export function AICenterTab() {
                         onChange={e =>
                           setGlobalLimit(prev => ({ ...prev, requestsPerDay: Number(e.target.value) }))
                         }
-                        className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-violet-600"
+                        className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-indigo-600"
                       />
                       <div className="flex justify-between text-[10px] text-gray-400 mt-1">
                         <span>100 (Restrictive)</span>
@@ -1409,7 +1409,7 @@ export function AICenterTab() {
                     <button
                       onClick={handleSaveRateLimits}
                       disabled={isSaving}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 disabled:opacity-60 text-sm"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
                     >
                       {isSaving ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -1427,7 +1427,7 @@ export function AICenterTab() {
             <GlassCard>
               <div className="p-5 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Sliders className="w-5 h-5 text-fuchsia-600" />
+                  <Sliders className="w-5 h-5 text-blue-600" />
                   User Tier Rate Limits
                 </h3>
                 <p className="text-sm text-gray-500 mt-0.5">Configure rate limits per user subscription tier.</p>
@@ -1455,7 +1455,7 @@ export function AICenterTab() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: i * 0.05 }}
-                          className="hover:bg-fuchsia-50/20 transition-colors"
+                          className="hover:bg-blue-50/20 transition-colors"
                         >
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-2.5">
@@ -1465,10 +1465,10 @@ export function AICenterTab() {
                                   i === 0
                                     ? 'bg-gray-100'
                                     : i === 1
-                                      ? 'bg-fuchsia-100'
+                                      ? 'bg-blue-100'
                                       : i === 2
-                                        ? 'bg-violet-100'
-                                        : 'bg-gradient-to-br from-fuchsia-500 to-violet-500'
+                                        ? 'bg-indigo-100'
+                                        : 'bg-gradient-to-br from-blue-500 to-indigo-500'
                                 )}
                               >
                                 {i < 3 ? (
@@ -1478,8 +1478,8 @@ export function AICenterTab() {
                                       i === 0
                                         ? 'text-gray-500'
                                         : i === 1
-                                          ? 'text-fuchsia-600'
-                                          : 'text-violet-600'
+                                          ? 'text-blue-600'
+                                          : 'text-indigo-600'
                                     )}
                                   >
                                     {tier.label.charAt(0)}
@@ -1503,7 +1503,7 @@ export function AICenterTab() {
                                 newTiers[i] = { ...newTiers[i], requestsPerMinute: Number(e.target.value) };
                                 setTierLimits(newTiers);
                               }}
-                              className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                              className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                           </td>
                           <td className="px-5 py-4">
@@ -1515,7 +1515,7 @@ export function AICenterTab() {
                                 newTiers[i] = { ...newTiers[i], requestsPerDay: Number(e.target.value) };
                                 setTierLimits(newTiers);
                               }}
-                              className="w-24 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                              className="w-24 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                           </td>
                           <td className="px-5 py-4">
@@ -1527,7 +1527,7 @@ export function AICenterTab() {
                                 newTiers[i] = { ...newTiers[i], maxTokens: Number(e.target.value) };
                                 setTierLimits(newTiers);
                               }}
-                              className="w-24 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                              className="w-24 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                           </td>
                           <td className="px-5 py-4">
@@ -1556,7 +1556,7 @@ export function AICenterTab() {
                 <button
                   onClick={handleSaveRateLimits}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-lg shadow-fuchsia-500/25 disabled:opacity-60 text-sm"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   Save Tier Limits
@@ -1582,7 +1582,7 @@ export function AICenterTab() {
             <GlassCard>
               <div className="p-5 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Cpu className="w-5 h-5 text-fuchsia-600" />
+                  <Cpu className="w-5 h-5 text-blue-600" />
                   Model Assignment
                 </h3>
                 <p className="text-sm text-gray-500 mt-0.5">
@@ -1623,7 +1623,7 @@ export function AICenterTab() {
                             <select
                               value={editModel}
                               onChange={e => setEditModel(e.target.value)}
-                              className="flex-1 sm:w-44 px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                              className="flex-1 sm:w-44 px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                               {MODEL_OPTIONS.map(m => (
                                 <option key={m.id} value={m.id}>
@@ -1641,7 +1641,7 @@ export function AICenterTab() {
                                 step={0.1}
                                 value={editTemperature}
                                 onChange={e => setEditTemperature(Number(e.target.value))}
-                                className="w-16 h-1.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-fuchsia-500"
+                                className="w-16 h-1.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-blue-500"
                               />
                               <span className="text-xs font-bold text-gray-600 w-7 text-right">
                                 {editTemperature.toFixed(1)}
@@ -1654,14 +1654,14 @@ export function AICenterTab() {
                                 type="number"
                                 value={editMaxTokens}
                                 onChange={e => setEditMaxTokens(Number(e.target.value))}
-                                className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent"
+                                className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               />
                             </div>
 
                             <button
                               onClick={handleSaveModelConfig}
                               disabled={isSaving}
-                              className="px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-semibold text-xs hover:from-fuchsia-700 hover:to-violet-700 transition-all shadow-md disabled:opacity-60 shrink-0"
+                              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-xs hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md disabled:opacity-60 shrink-0"
                             >
                               {isSaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : 'Save'}
                             </button>
@@ -1688,7 +1688,7 @@ export function AICenterTab() {
                             </div>
                             <button
                               onClick={() => openModelEditor(feature.id)}
-                              className="p-2 text-gray-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 rounded-lg transition-all"
+                              className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                             >
                               <Settings className="w-4 h-4" />
                             </button>
@@ -1705,7 +1705,7 @@ export function AICenterTab() {
             <GlassCard>
               <div className="p-5 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Network className="w-5 h-5 text-fuchsia-600" />
+                  <Network className="w-5 h-5 text-blue-600" />
                   Available Models
                 </h3>
                 <p className="text-sm text-gray-500 mt-0.5">
@@ -1724,17 +1724,17 @@ export function AICenterTab() {
                       transition={{ delay: i * 0.05 }}
                       className={cn(
                         'rounded-xl border-2 p-4 transition-all hover:shadow-lg',
-                        featuresUsingThis > 0 ? 'border-fuchsia-300 bg-fuchsia-50/30' : 'border-gray-100 bg-white'
+                        featuresUsingThis > 0 ? 'border-blue-300 bg-blue-50/30' : 'border-gray-100 bg-white'
                       )}
                     >
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500 to-violet-600 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                           <Cpu className="w-4 h-4 text-white" />
                         </div>
                         <div>
                           <p className="text-sm font-bold text-gray-800">{model.name}</p>
                           {featuresUsingThis > 0 && (
-                            <span className="text-[10px] font-semibold text-fuchsia-600">
+                            <span className="text-[10px] font-semibold text-blue-600">
                               {featuresUsingThis} feature{featuresUsingThis > 1 ? 's' : ''} active
                             </span>
                           )}
@@ -1756,7 +1756,7 @@ export function AICenterTab() {
                                 (model.id.includes('mini') || model.id.includes('haiku') || model.id.includes('flash')
                                   ? 3
                                   : 4)
-                                  ? 'bg-gradient-to-t from-fuchsia-500 to-violet-400'
+                                  ? 'bg-gradient-to-t from-blue-500 to-indigo-400'
                                   : 'bg-gray-200'
                               )}
                             />
@@ -1773,7 +1773,7 @@ export function AICenterTab() {
             <GlassCard>
               <div className="p-5 border-b border-gray-100">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-fuchsia-600" />
+                  <ShieldCheck className="w-5 h-5 text-blue-600" />
                   Content Filtering
                 </h3>
                 <p className="text-sm text-gray-500 mt-0.5">
@@ -1793,7 +1793,7 @@ export function AICenterTab() {
                         transition={{ delay: i * 0.04 }}
                         className={cn(
                           'flex items-center justify-between p-4 rounded-xl border transition-all',
-                          isFiltered ? 'border-fuchsia-200 bg-fuchsia-50/30' : 'border-gray-200 bg-gray-50/50'
+                          isFiltered ? 'border-blue-200 bg-blue-50/30' : 'border-gray-200 bg-gray-50/50'
                         )}
                       >
                         <div className="flex items-center gap-3">
@@ -1802,7 +1802,7 @@ export function AICenterTab() {
                           </div>
                           <div>
                             <p className="text-sm font-semibold text-gray-800">{feature.name}</p>
-                            <p className={cn('text-[10px] font-medium', isFiltered ? 'text-fuchsia-600' : 'text-gray-400')}>
+                            <p className={cn('text-[10px] font-medium', isFiltered ? 'text-blue-600' : 'text-gray-400')}>
                               {isFiltered ? 'Filter enabled' : 'Filter disabled'}
                             </p>
                           </div>
