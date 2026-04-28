@@ -97,7 +97,7 @@ export function Settings() {
         {sections.map((section) => (
           <button 
             key={section.title}
-            className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-sm transition-all text-left group"
+            className="flex items-start gap-4 p-5 bg-white rounded-lg border border-slate-200 hover:border-blue-300 shadow-sm transition-all text-left group"
           >
             <div className="p-3 rounded-xl bg-slate-50 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
               <section.icon className="w-6 h-6" />
@@ -111,19 +111,19 @@ export function Settings() {
       </div>
 
       {/* Branding Section */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-sm">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden text-sm">
         <div className="p-6 border-b border-slate-100 flex items-center gap-3">
           <ImageIcon className="w-5 h-5 text-blue-600" />
-          <h2 className="font-bold text-slate-900  uppercase tracking-widest text-xs">Branding & Logistics</h2>
+          <h2 className="font-bold text-slate-900  uppercase tracking-wide text-xs">Branding & Logistics</h2>
         </div>
         <div className="px-6 py-8 space-y-5">
           <div className="grid grid-cols-3 gap-5">
             <div className="col-span-1">
-              <h4 className="font-bold text-slate-700 uppercase tracking-widest text-[10px]">Institution Logo</h4>
+              <h4 className="font-bold text-slate-700 uppercase tracking-wide text-[10px]">Institution Logo</h4>
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">Official crest or emblem used on receipts and ID cards.</p>
             </div>
             <div className="col-span-2 flex items-center gap-6">
-               <div className="w-24 h-24 rounded-2xl border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-50 overflow-hidden">
+               <div className="w-24 h-24 rounded-lg border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-50 overflow-hidden">
                   {formData.logoUrl ? (
                      <img src={formData.logoUrl} alt="Logo" className="w-full h-full object-contain" />
                   ) : (
@@ -138,12 +138,12 @@ export function Settings() {
           
           <div className="grid grid-cols-3 gap-5 pt-6 border-t border-slate-100">
             <div className="col-span-1">
-              <h4 className="font-bold text-slate-700 uppercase tracking-widest text-[10px]">Portal Banner</h4>
+              <h4 className="font-bold text-slate-700 uppercase tracking-wide text-[10px]">Portal Banner</h4>
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">Landscape image used for the student portal header.</p>
             </div>
             <div className="col-span-2 space-y-4">
                {formData.bannerUrl && (
-                  <div className="w-full h-32 rounded-2xl bg-slate-100 overflow-hidden shadow-inner isolate">
+                  <div className="w-full h-32 rounded-lg bg-slate-100 overflow-hidden shadow-inner isolate">
                      <img src={formData.bannerUrl} alt="Banner" className="w-full h-full object-cover" />
                   </div>
                )}
@@ -156,51 +156,51 @@ export function Settings() {
       </div>
 
       {/* Core Profile Section */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-sm">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden text-sm">
         <div className="p-6 border-b border-slate-100 flex items-center gap-3">
           <ShieldCheck className="w-5 h-5 text-blue-600" />
-          <h2 className="font-bold text-slate-900  uppercase tracking-widest text-xs">Environment Configuration</h2>
+          <h2 className="font-bold text-slate-900  uppercase tracking-wide text-xs">Environment Configuration</h2>
         </div>
         <div className="px-6 py-8 space-y-5">
           <div className="grid grid-cols-3 gap-5">
             <div className="col-span-1">
-              <h4 className="font-bold text-slate-700 uppercase tracking-widest text-[10px]">Institutional Identity</h4>
+              <h4 className="font-bold text-slate-700 uppercase tracking-wide text-[10px]">Institutional Identity</h4>
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">Official branding and governance identifiers.</p>
             </div>
             <div className="col-span-2 space-y-4">
               <div className="space-y-1">
-                 <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Institution Name</label>
+                 <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Institution Name</label>
                  <input 
                     type="text" 
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all font-bold "
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-bold "
                  />
               </div>
               <div className="space-y-1">
-                 <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Lead Dean / Rector</label>
+                 <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Lead Dean / Rector</label>
                  <input 
                     type="text" 
                     value={formData.deanName}
                     onChange={e => setFormData({...formData, deanName: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all font-medium"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-medium"
                  />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                   <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Official Email</label>
-                   <input type="email" value={formData.contactEmail} onChange={e => setFormData({...formData, contactEmail: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-4" />
+                   <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Official Email</label>
+                   <input type="email" value={formData.contactEmail} onChange={e => setFormData({...formData, contactEmail: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2" />
                 </div>
                 <div className="space-y-1">
-                   <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Official Phone</label>
-                   <input type="tel" value={formData.contactPhone} onChange={e => setFormData({...formData, contactPhone: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-4" />
+                   <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Official Phone</label>
+                   <input type="tel" value={formData.contactPhone} onChange={e => setFormData({...formData, contactPhone: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                   <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Theological Tradition</label>
+                   <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Theological Tradition</label>
                    <select 
                       value={formData.tradition}
                       onChange={e => setFormData({...formData, tradition: e.target.value})}
@@ -216,7 +216,7 @@ export function Settings() {
                    </select>
                 </div>
                 <div className="space-y-1">
-                   <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Principal Location (City/Country)</label>
+                   <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Principal Location (City/Country)</label>
                    <input 
                       type="text" 
                       value={formData.location}
@@ -226,7 +226,7 @@ export function Settings() {
                 </div>
               </div>
               <div className="space-y-1">
-                 <label className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Mission Statement / Vision</label>
+                 <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Mission Statement / Vision</label>
                  <textarea 
                     value={formData.missionStatement}
                     onChange={e => setFormData({...formData, missionStatement: e.target.value})}
@@ -246,7 +246,7 @@ export function Settings() {
                <select 
                 value={formData.timezone}
                 onChange={e => setFormData({...formData, timezone: e.target.value})}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all font-medium text-sm"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-medium text-sm"
                >
                  <option value="UTC">Universal Coordinated Time (UTC)</option>
                  <option value="EST">Eastern Standard Time (EST)</option>
@@ -261,11 +261,11 @@ export function Settings() {
               <p className="text-xs text-slate-400 mt-1">Status of military-grade encryption layers.</p>
             </div>
             <div className="col-span-2 flex items-center gap-2">
-              <div className="flex-1 px-4 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+              <div className="flex-1 px-4 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 font-bold text-xs uppercase tracking-wide flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                 Active: Zero-Trust Backend
               </div>
-              <button className="text-[10px] font-black text-blue-600 uppercase tracking-widest px-4">Audit Logs</button>
+              <button className="text-xs font-medium text-blue-600 uppercase tracking-wide px-4">Audit Logs</button>
             </div>
           </div>
 

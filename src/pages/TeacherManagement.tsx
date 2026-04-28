@@ -89,7 +89,7 @@ function ScoreBar({ label, score, max = 10, color = 'bg-gradient-to-r from-blue-
   return (
     <div className="space-y-1">
       <div className="flex justify-between items-center">
-        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{label}</span>
+        <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</span>
         <span className="text-xs font-bold text-slate-700">{score || 0}/{max}</span>
       </div>
       <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -291,8 +291,8 @@ export function TeacherManagement() {
       <AnimatePresence>
         {errorBanner && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-2xl flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
-              <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5" /><span className="text-[10px] font-black uppercase tracking-widest">{errorBanner}</span></div>
+            <div className="p-4 rounded-lg flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
+              <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5" /><span className="text-xs font-medium uppercase tracking-wide">{errorBanner}</span></div>
               <button onClick={() => setErrorBanner(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5"><X className="w-4 h-4" /></button>
             </div>
           </motion.div>
@@ -303,15 +303,15 @@ export function TeacherManagement() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Theological Institution</span>
+            <span className="text-xs font-medium uppercase  text-blue-600">Theological Institution</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Personnel Management</span>
+            <span className="text-xs font-medium uppercase  text-slate-400">Personnel Management</span>
           </div>
-          <h1 className="text-4xl font-bold text-slate-950 tracking-tight italic-serif">Teacher Management</h1>
+          <h1 className="text-xl font-semibold text-slate-900">Teacher Management</h1>
           <p className="text-slate-500 text-sm mt-1 max-w-lg">Spiritual leaders, educators, and ministers — unified in one secure system.</p>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/teacher-enrollment" className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200 group no-underline">
+          <a href="/teacher-enrollment" className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2  group no-underline">
             <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
             <span>Add Teacher</span>
           </a>
@@ -327,12 +327,12 @@ export function TeacherManagement() {
           { label: 'On Leave', value: stats.onLeave, icon: Calendar, color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100' },
           { label: 'Leave Requests', value: stats.pendingLeaves, icon: Clock, color: 'bg-rose-50 text-rose-600', iconBg: 'bg-rose-100' },
         ].map(stat => (
-          <div key={stat.label} className="bg-white p-5 rounded-2xl border border-slate-200/60 shadow-sm flex items-center gap-4">
+          <div key={stat.label} className="bg-white p-5 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-4">
             <div className={cn("w-11 h-11 rounded-xl flex items-center justify-center", stat.iconBg)}>
               <stat.icon className={cn("w-5 h-5", stat.color.split(' ')[1])} />
             </div>
             <div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{stat.label}</p>
               <p className="text-xl font-bold text-slate-900 tabular-nums">{stat.value}</p>
             </div>
           </div>
@@ -340,20 +340,20 @@ export function TeacherManagement() {
       </div>
 
       {/* Search + Filters */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200/60 flex flex-wrap items-center gap-3 shadow-sm">
+      <div className="bg-white p-4 rounded-lg border border-slate-200/60 flex flex-wrap items-center gap-3 shadow-sm">
         <div className="relative flex-1 min-w-[220px]">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
           <input type="text" placeholder="Search by name, email, ID, dept..." value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-xl text-sm outline-none focus:ring-4 focus:ring-blue-100 transition-all placeholder:text-slate-300 font-medium" />
+            className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-300 font-medium" />
         </div>
         <select value={filterDept} onChange={e => setFilterDept(e.target.value)}
-          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest outline-none appearance-none">
+          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-xs font-medium uppercase tracking-wide outline-none appearance-none">
           <option value="all">All Departments</option>
           {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
         </select>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest outline-none appearance-none">
+          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-xs font-medium uppercase tracking-wide outline-none appearance-none">
           <option value="all">All Status</option>
           <option value="active">Active</option>
           <option value="pending">Pending</option>
@@ -364,11 +364,11 @@ export function TeacherManagement() {
       </div>
 
       {/* Teacher List Table */}
-      <div className="bg-white rounded-3xl border border-slate-200/60 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-40 gap-4">
             <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin"></div>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Loading Teacher Registry...</p>
+            <p className="text-xs font-medium uppercase  text-slate-400 animate-pulse">Loading Teacher Registry...</p>
           </div>
         ) : filteredFaculty.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-40 text-center">
@@ -379,14 +379,14 @@ export function TeacherManagement() {
         ) : (
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                <th className="px-8 py-5">Teacher</th>
+              <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                <th className="px-4 py-3">Teacher</th>
                 <th className="px-5 py-5">Department</th>
                 <th className="px-5 py-5">Role</th>
                 <th className="px-5 py-5 text-center">Profile</th>
                 <th className="px-5 py-5 text-center">Status</th>
                 <th className="px-5 py-5 text-center">Calling</th>
-                <th className="px-8 py-5 text-right">Actions</th>
+                <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-sm">
@@ -394,7 +394,7 @@ export function TeacherManagement() {
                 const completion = facultyService.calculateProfileCompletion(teacher);
                 return (
                   <tr key={teacher.id} className="hover:bg-slate-50/50 transition-colors group cursor-pointer">
-                    <td className="px-8 py-5">
+                    <td className="px-4 py-3">
                       <div className="flex items-center gap-4">
                         <div className="w-11 h-11 overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase text-xs">
                           {teacher.photoUrl ? <img src={teacher.photoUrl} alt={teacher.name} className="w-full h-full object-cover" /> :
@@ -403,7 +403,7 @@ export function TeacherManagement() {
                         <div>
                           <p className="font-bold text-slate-900 tracking-tight italic-serif text-sm">{teacher.name}</p>
                           <div className="flex gap-2 items-center mt-0.5">
-                            {teacher.facultyId && <span className="text-[8px] uppercase font-black tracking-widest text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">{teacher.facultyId}</span>}
+                            {teacher.facultyId && <span className="text-[8px] uppercase font-black tracking-wide text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">{teacher.facultyId}</span>}
                             <p className="text-[9px] uppercase font-bold text-slate-400">{teacher.email}</p>
                           </div>
                         </div>
@@ -418,7 +418,7 @@ export function TeacherManagement() {
                     </td>
                     <td className="px-5 py-5">
                       <div className="flex justify-center">
-                        <span className={cn("px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border",
+                        <span className={cn("px-2.5 py-1 rounded-md text-xs font-medium uppercase tracking-wide border",
                           teacher.status === 'active' ? "bg-emerald-50 text-emerald-600 border-emerald-100" :
                           teacher.status === 'pending' ? "bg-amber-50 text-amber-600 border-amber-100" :
                           teacher.status === 'on_leave' ? "bg-blue-50 text-blue-600 border-blue-100" :
@@ -429,27 +429,27 @@ export function TeacherManagement() {
                     </td>
                     <td className="px-5 py-5 text-center">
                       {teacher.ministry?.callingType ? (
-                        <span className="text-[9px] font-black text-purple-600 bg-purple-50 px-2 py-1 rounded uppercase tracking-widest">{teacher.ministry.callingType}</span>
+                        <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded uppercase tracking-wide">{teacher.ministry.callingType}</span>
                       ) : (
-                        <span className="text-[9px] font-black text-slate-300 uppercase">N/A</span>
+                        <span className="text-xs font-medium text-slate-300 uppercase">N/A</span>
                       )}
                     </td>
-                    <td className="px-8 py-5 text-right">
+                    <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-2">
                         {teacher.status === 'pending' && isAdmin && (
                           <>
                             <button onClick={(e) => { e.stopPropagation(); handleApproveTeacher(teacher); }}
-                              className="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-1">
+                              className="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-1">
                               <Check className="w-3 h-3" /> Approve
                             </button>
                             <button onClick={(e) => { e.stopPropagation(); handleRejectTeacher(teacher); }}
-                              className="px-3 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-1">
+                              className="px-3 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-1">
                               <X className="w-3 h-3" /> Reject
                             </button>
                           </>
                         )}
                         <button onClick={() => { setSelectedTeacher(teacher); setActiveTab('overview'); }}
-                          className="px-3 py-1.5 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all shadow-sm border border-slate-100">
+                          className="px-3 py-1.5 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 rounded-lg text-xs font-medium uppercase tracking-wide transition-all shadow-sm border border-slate-100">
                           View
                         </button>
                       </div>
@@ -469,13 +469,13 @@ export function TeacherManagement() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="bg-white rounded-3xl border border-slate-200/60 shadow-lg overflow-hidden"
+            className="bg-white rounded-lg border border-slate-200/60 shadow-lg overflow-hidden"
           >
             {/* Teacher Detail Header */}
             <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-xl shadow-blue-100/20">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-sm shadow-blue-100/20">
                     {selectedTeacher.photoUrl ? <img src={selectedTeacher.photoUrl} alt={selectedTeacher.name} className="w-full h-full object-cover" /> :
                       <Users className="w-8 h-8 text-blue-600" />}
                   </div>
@@ -485,7 +485,7 @@ export function TeacherManagement() {
                       {selectedTeacher.status === 'active' && <div className="w-3 h-3 rounded-full bg-emerald-500 border-2 border-white shadow-sm"></div>}
                     </div>
                     <div className="flex items-center gap-3 mt-1 flex-wrap">
-                      {selectedTeacher.facultyId && <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase tracking-widest">{selectedTeacher.facultyId}</span>}
+                      {selectedTeacher.facultyId && <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase tracking-wide">{selectedTeacher.facultyId}</span>}
                       <span className="text-[10px] font-bold text-slate-400 uppercase">{selectedTeacher.department}</span>
                       <span className="text-slate-300">|</span>
                       <span className="text-[10px] font-bold text-slate-500">{selectedTeacher.employment?.role || selectedTeacher.role}</span>
@@ -495,9 +495,9 @@ export function TeacherManagement() {
                     {selectedTeacher.ministry?.callingType && (
                       <div className="flex items-center gap-2 mt-2">
                         <Church className="w-3.5 h-3.5 text-purple-500" />
-                        <span className="text-[10px] font-black text-purple-600 uppercase tracking-widest">{selectedTeacher.ministry.callingType}</span>
+                        <span className="text-xs font-medium text-purple-600 uppercase tracking-wide">{selectedTeacher.ministry.callingType}</span>
                         {selectedTeacher.ministry.ordinationStatus && (
-                          <span className="text-[9px] font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded uppercase">{selectedTeacher.ministry.ordinationStatus}</span>
+                          <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded uppercase">{selectedTeacher.ministry.ordinationStatus}</span>
                         )}
                       </div>
                     )}
@@ -515,24 +515,24 @@ export function TeacherManagement() {
               {/* Admin Actions */}
               {isAdmin && (
                 <div className="flex items-center gap-3 mt-6 pt-6 border-t border-slate-100">
-                  <a href={`/teacher-enrollment?edit=${selectedTeacher.id}`} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-colors flex items-center gap-2 no-underline">
+                  <a href={`/teacher-enrollment?edit=${selectedTeacher.id}`} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-colors flex items-center gap-2 no-underline">
                     <Settings className="w-3 h-3" /> Edit Profile
                   </a>
                   {selectedTeacher.status === 'pending' && (
                     <>
                       <button onClick={() => handleApproveTeacher(selectedTeacher)}
-                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-2">
+                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-2">
                         <Check className="w-3 h-3" /> Approve
                       </button>
                       <button onClick={() => handleRejectTeacher(selectedTeacher)}
-                        className="px-4 py-2 bg-rose-50 text-rose-600 border border-rose-100 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-2">
+                        className="px-4 py-2 bg-rose-50 text-rose-600 border border-rose-100 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-2">
                         <X className="w-3 h-3" /> Reject
                       </button>
                     </>
                   )}
                   {selectedTeacher.status !== 'retired' && selectedTeacher.status !== 'suspended' && (
                     <button onClick={() => handleDeactivate(selectedTeacher)}
-                      className="px-4 py-2 bg-slate-50 text-slate-500 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-colors flex items-center gap-2">
+                      className="px-4 py-2 bg-slate-50 text-slate-500 border border-slate-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-colors flex items-center gap-2">
                       <Ban className="w-3 h-3" /> Deactivate
                     </button>
                   )}
@@ -546,7 +546,7 @@ export function TeacherManagement() {
                 {TABS.map(tab => (
                   <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                     className={cn(
-                      "flex items-center gap-2 px-4 py-4 text-[10px] font-black uppercase tracking-widest border-b-2 transition-all whitespace-nowrap",
+                      "flex items-center gap-2 px-4 py-4 text-xs font-medium uppercase tracking-wide border-b-2 transition-all whitespace-nowrap",
                       activeTab === tab.id
                         ? "border-blue-500 text-blue-600 bg-blue-50/50"
                         : "border-transparent text-slate-400 hover:text-slate-600 hover:bg-slate-50"
@@ -590,10 +590,10 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
           { label: 'Teaching Assignments', value: d.assignments.filter((a: any) => a.status === 'active').length, icon: ClipboardList },
           { label: 'Total Sermons', value: d.sermons.length, icon: Flame },
         ].map(s => (
-          <div key={s.label} className="bg-slate-50/50 p-5 rounded-2xl border border-slate-100">
+          <div key={s.label} className="bg-slate-50/50 p-5 rounded-lg border border-slate-100">
             <div className="flex items-center gap-2 mb-2">
               <s.icon className={cn("w-4 h-4", s.color || 'text-slate-400')} />
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{s.label}</span>
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">{s.label}</span>
             </div>
             <p className="text-2xl font-bold text-slate-900 tabular-nums">{s.value}</p>
           </div>
@@ -603,7 +603,7 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Contact Info */}
         <div className="space-y-4">
-          <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Phone className="w-4 h-4 text-blue-500" /> Contact Information</h3>
+          <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Phone className="w-4 h-4 text-blue-500" /> Contact Information</h3>
           {[
             { icon: Mail, label: 'Email', value: teacher.email },
             { icon: Phone, label: 'Phone', value: teacher.phone },
@@ -616,7 +616,7 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
             <div key={item.label} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center"><item.icon className="w-4 h-4 text-slate-400" /></div>
               <div>
-                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">{item.label}</p>
+                <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
                 <p className="text-sm font-bold text-slate-800">{item.value}</p>
               </div>
             </div>
@@ -625,8 +625,8 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
 
         {/* Performance Scores */}
         <div className="space-y-4">
-          <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /> Performance Scores</h3>
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 space-y-4">
+          <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /> Performance Scores</h3>
+          <div className="bg-white p-6 rounded-lg border border-slate-100 space-y-4">
             <ScoreBar label="Teaching Quality" score={teacher.performance?.teachingQualityScore} color="bg-gradient-to-r from-blue-500 to-indigo-500" />
             <ScoreBar label="Ministry Impact" score={teacher.performance?.ministryImpactScore} color="bg-purple-500" />
             <ScoreBar label="Student Feedback" score={teacher.performance?.studentFeedbackScore} color="bg-emerald-500" />
@@ -635,30 +635,30 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
 
           {/* Spiritual Snapshot */}
           {teacher.spiritual && (
-            <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100">
-              <h3 className="text-sm font-black text-purple-700 uppercase tracking-widest flex items-center gap-2 mb-4"><Church className="w-4 h-4" /> Spiritual Snapshot</h3>
+            <div className="bg-purple-50/50 p-6 rounded-lg border border-purple-100">
+              <h3 className="text-sm font-black text-purple-700 uppercase tracking-wide flex items-center gap-2 mb-4"><Church className="w-4 h-4" /> Spiritual Snapshot</h3>
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-3 rounded-xl">
-                  <p className="text-[8px] font-black text-slate-400 uppercase">Church</p>
+                  <p className="text-xs font-medium text-slate-400 uppercase">Church</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.currentChurch || 'N/A'}</p>
                 </div>
                 <div className="bg-white p-3 rounded-xl">
-                  <p className="text-[8px] font-black text-slate-400 uppercase">Pastor</p>
+                  <p className="text-xs font-medium text-slate-400 uppercase">Pastor</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.pastorName || 'N/A'}</p>
                 </div>
                 <div className="bg-white p-3 rounded-xl">
-                  <p className="text-[8px] font-black text-slate-400 uppercase">Baptized</p>
+                  <p className="text-xs font-medium text-slate-400 uppercase">Baptized</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.isBaptized ? `Yes (${teacher.spiritual.baptismDate || ''})` : 'No'}</p>
                 </div>
                 <div className="bg-white p-3 rounded-xl">
-                  <p className="text-[8px] font-black text-slate-400 uppercase">Min. Years</p>
+                  <p className="text-xs font-medium text-slate-400 uppercase">Min. Years</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.yearsInMinistry || 0}</p>
                 </div>
               </div>
               {teacher.spiritual.spiritualGifts && teacher.spiritual.spiritualGifts.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {teacher.spiritual.spiritualGifts.map(gift => (
-                    <span key={gift} className="px-2 py-1 bg-purple-100 text-purple-700 rounded-lg text-[8px] font-black uppercase tracking-wider">{gift}</span>
+                    <span key={gift} className="px-2 py-1 bg-purple-100 text-purple-700 rounded-lg text-xs font-medium uppercase tracking-wider">{gift}</span>
                   ))}
                 </div>
               )}
@@ -669,8 +669,8 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
 
       {/* Bio */}
       {teacher.bio && (
-        <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 italic-serif">
-          <h3 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-3">Biography</h3>
+        <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 italic-serif">
+          <h3 className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-3">Biography</h3>
           <p className="text-sm leading-relaxed text-slate-600">{teacher.bio}</p>
         </div>
       )}
@@ -681,18 +681,18 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
 function ClassesTab({ teacher, data }: { teacher: Faculty; data: any }) {
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Teaching Assignments</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide">Teaching Assignments</h3>
       {data.assignments.length === 0 ? (
         <div className="text-center py-16"><BookOpen className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No teaching assignments yet.</p></div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data.assignments.map((a: TeachingAssignment) => (
-            <div key={a.id} className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100 hover:shadow-sm transition-shadow">
+            <div key={a.id} className="p-5 bg-slate-50/50 rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="flex items-center justify-between mb-3">
-                <span className={cn("px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border",
+                <span className={cn("px-2 py-1 rounded-lg text-xs font-medium uppercase tracking-wide border",
                   a.status === 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-slate-100 text-slate-500 border-slate-200'
                 )}>{a.status}</span>
-                <span className="text-[8px] font-black text-slate-400 uppercase">{a.mode}</span>
+                <span className="text-xs font-medium text-slate-400 uppercase">{a.mode}</span>
               </div>
               <h4 className="font-bold text-slate-900 italic-serif">{a.subjectName || 'Untitled'}</h4>
               <div className="flex items-center gap-2 mt-2 text-[10px] text-slate-500 font-bold uppercase">
@@ -712,7 +712,7 @@ function ClassesTab({ teacher, data }: { teacher: Faculty; data: any }) {
       {/* Assigned Subjects from subject collection */}
       {data.subjects.length > 0 && (
         <div className="mt-8">
-          <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-4">Assigned Subjects (from Course Catalog)</h3>
+          <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide mb-4">Assigned Subjects (from Course Catalog)</h3>
           <div className="space-y-3">
             {data.subjects.map(s => (
               <div key={s.id} className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:shadow-sm transition-shadow">
@@ -722,7 +722,7 @@ function ClassesTab({ teacher, data }: { teacher: Faculty; data: any }) {
                     <span>{s.code}</span><span className="text-slate-300">|</span><span>{s.department}</span><span className="text-slate-300">|</span><span>{s.creditHours} credits</span>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase">{s.teacherIds?.includes(teacher.id!) ? 'Teacher' : 'Moderator'}</span>
+                <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase">{s.teacherIds?.includes(teacher.id!) ? 'Teacher' : 'Moderator'}</span>
               </div>
             ))}
           </div>
@@ -737,8 +737,8 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
   const m = teacher.ministry;
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-8 rounded-2xl border border-purple-100">
-        <h3 className="text-sm font-black text-purple-800 uppercase tracking-widest flex items-center gap-2 mb-6"><Church className="w-5 h-5" /> Spiritual Profile</h3>
+      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-8 rounded-lg border border-purple-100">
+        <h3 className="text-sm font-black text-purple-800 uppercase tracking-wide flex items-center gap-2 mb-6"><Church className="w-5 h-5" /> Spiritual Profile</h3>
         {s ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
@@ -752,30 +752,30 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
               <div key={item.label} className="flex items-start gap-3 p-4 bg-white/80 rounded-xl border border-white">
                 <item.icon className="w-4 h-4 text-purple-500 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">{item.label}</p>
+                  <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
                   <p className="text-sm font-bold text-slate-800 mt-0.5">{item.value}</p>
                 </div>
               </div>
             ))}
             {s.spiritualGifts && s.spiritualGifts.length > 0 && (
               <div className="col-span-full">
-                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2">Spiritual Gifts</p>
+                <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Spiritual Gifts</p>
                 <div className="flex flex-wrap gap-2">
                   {s.spiritualGifts.map(gift => (
-                    <span key={gift} className="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-xl text-[9px] font-black uppercase tracking-wider">{gift}</span>
+                    <span key={gift} className="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-xl text-xs font-medium uppercase tracking-wider">{gift}</span>
                   ))}
                 </div>
               </div>
             )}
             {s.personalTestimony && (
               <div className="col-span-full p-5 bg-white/80 rounded-xl border border-white">
-                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2">Personal Testimony</p>
+                <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Personal Testimony</p>
                 <p className="text-sm text-slate-600 italic-serif leading-relaxed">{s.personalTestimony}</p>
               </div>
             )}
             {s.statementOfFaith && (
               <div className="col-span-full p-5 bg-white/80 rounded-xl border border-white">
-                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2">Statement of Faith</p>
+                <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Statement of Faith</p>
                 <p className="text-sm text-slate-600 leading-relaxed">{s.statementOfFaith}</p>
               </div>
             )}
@@ -786,8 +786,8 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
       </div>
 
       {/* Ministry & Calling */}
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-2xl border border-amber-100">
-        <h3 className="text-sm font-black text-amber-800 uppercase tracking-widest flex items-center gap-2 mb-6"><Target className="w-5 h-5" /> Ministry & Calling</h3>
+      <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-lg border border-amber-100">
+        <h3 className="text-sm font-black text-amber-800 uppercase tracking-wide flex items-center gap-2 mb-6"><Target className="w-5 h-5" /> Ministry & Calling</h3>
         {m ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
@@ -799,7 +799,7 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
               { label: 'Ordination Status', value: m.ordinationStatus || 'N/A' },
             ].map(item => (
               <div key={item.label} className="p-4 bg-white/80 rounded-xl border border-white">
-                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">{item.label}</p>
+                <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
                 <p className="text-sm font-bold text-slate-800 mt-1">{item.value}</p>
               </div>
             ))}
@@ -817,9 +817,9 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><DollarSign className="w-4 h-4 text-emerald-500" /> Payroll & Financials</h3>
+        <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><DollarSign className="w-4 h-4 text-emerald-500" /> Payroll & Financials</h3>
         <button onClick={onToggleLock}
-          className={cn("px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-colors",
+          className={cn("px-4 py-2 rounded-xl text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-colors",
             isUnlocked ? "bg-rose-50 text-rose-600 border border-rose-100" : "bg-emerald-50 text-emerald-600 border border-emerald-100"
           )}>
           {isUnlocked ? <><Lock className="w-3 h-3" /> Lock</> : <><Eye className="w-3 h-3" /> Decrypt</>}
@@ -827,15 +827,15 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
       </div>
 
       {!isUnlocked ? (
-        <div className="py-16 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-slate-200 rounded-2xl">
+        <div className="py-16 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-slate-200 rounded-lg">
           <Shield className="w-8 h-8 text-slate-200" />
-          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Financial data encrypted</span>
+          <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Financial data encrypted</span>
           <span className="text-[10px] text-slate-300">Click Decrypt to view</span>
         </div>
       ) : p ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 space-y-4">
-            <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Salary Structure</h4>
+          <div className="bg-white p-6 rounded-lg border border-slate-100 space-y-4">
+            <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide">Salary Structure</h4>
             {[
               { label: 'Basic Salary', value: p.salaryStructure?.basic },
               { label: 'HRA', value: p.salaryStructure?.hra },
@@ -845,7 +845,7 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
               { label: 'Tax', value: p.salaryStructure?.tax },
             ].map(row => (
               <div key={row.label} className="flex justify-between items-center py-2 border-t border-slate-50">
-                <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{row.label}</span>
+                <span className="text-[9px] text-slate-400 font-black uppercase tracking-wide">{row.label}</span>
                 <span className="text-sm font-bold text-slate-800 font-mono">{row.value != null ? `$${row.value.toLocaleString()}` : '—'}</span>
               </div>
             ))}
@@ -856,8 +856,8 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
           </div>
 
           <div className="space-y-4">
-            <div className="bg-white p-6 rounded-2xl border border-slate-100 space-y-3">
-              <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Bank Details</h4>
+            <div className="bg-white p-6 rounded-lg border border-slate-100 space-y-3">
+              <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide">Bank Details</h4>
               {[
                 { label: 'Bank Name', value: p.bankDetails?.bankName },
                 { label: 'Account Number', value: p.bankDetails?.accountNumber },
@@ -866,13 +866,13 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
                 { label: 'PAN Number', value: p.panNumber },
               ].map(row => (
                 <div key={row.label} className="flex justify-between items-center">
-                  <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{row.label}</span>
+                  <span className="text-[9px] text-slate-400 font-black uppercase tracking-wide">{row.label}</span>
                   <span className="text-sm font-bold text-slate-800 font-mono">{row.value || '—'}</span>
                 </div>
               ))}
             </div>
-            <div className="bg-white p-4 rounded-2xl border border-slate-100">
-              <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">Payment Frequency</span>
+            <div className="bg-white p-4 rounded-lg border border-slate-100">
+              <span className="text-[9px] text-slate-400 font-black uppercase tracking-wide">Payment Frequency</span>
               <p className="text-sm font-bold text-slate-800 mt-1">{p.paymentFrequency || 'Monthly'}</p>
             </div>
           </div>
@@ -888,7 +888,7 @@ function DocumentsTab({ teacher }: { teacher: Faculty }) {
   const docs = teacher.documents;
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><FolderOpen className="w-4 h-4 text-blue-500" /> Documents</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><FolderOpen className="w-4 h-4 text-blue-500" /> Documents</h3>
       {docs ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
@@ -900,17 +900,17 @@ function DocumentsTab({ teacher }: { teacher: Faculty }) {
             { label: 'Recommendation Letters', urls: docs.recommendationLettersUrls, icon: Star },
             { label: 'Resume / CV', url: docs.resumeUrl, icon: File },
           ].map(item => (
-            <div key={item.label} className={cn("p-5 rounded-2xl border transition-all hover:shadow-sm",
+            <div key={item.label} className={cn("p-5 rounded-lg border transition-all hover:shadow-sm",
               (item.url || (item.urls && item.urls.length > 0)) ? "bg-white border-slate-100" : "bg-slate-50/50 border-dashed border-slate-200"
             )}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center"><item.icon className="w-4 h-4 text-slate-400" /></div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">{item.label}</span>
+                <span className="text-xs font-medium uppercase tracking-wide text-slate-500">{item.label}</span>
               </div>
               {(item.url || (item.urls && item.urls.length > 0)) ? (
                 <div className="flex flex-wrap gap-2">
-                  {item.url && <span className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase tracking-wider cursor-pointer hover:bg-blue-100">View</span>}
-                  {item.urls?.map((u, i) => <span key={i} className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase tracking-wider cursor-pointer hover:bg-blue-100">Doc {i + 1}</span>)}
+                  {item.url && <span className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-100">View</span>}
+                  {item.urls?.map((u, i) => <span key={i} className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-100">Doc {i + 1}</span>)}
                 </div>
               ) : (
                 <span className="text-[9px] text-slate-300 font-bold uppercase">Not uploaded</span>
@@ -929,11 +929,11 @@ function PerformanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
   const p = teacher.performance;
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /> Performance & Evaluation</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /> Performance & Evaluation</h3>
 
       {/* Current Scores */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100">
-        <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest mb-4">Current Performance Scores</h4>
+      <div className="bg-white p-6 rounded-lg border border-slate-100">
+        <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide mb-4">Current Performance Scores</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ScoreBar label="Teaching Quality" score={p?.teachingQualityScore} color="bg-gradient-to-r from-blue-500 to-indigo-500" />
           <ScoreBar label="Ministry Impact" score={p?.ministryImpactScore} color="bg-purple-500" />
@@ -944,25 +944,25 @@ function PerformanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
 
       {/* Review History */}
       <div>
-        <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest mb-4">Review History</h4>
+        <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide mb-4">Review History</h4>
         {data.reviews.length === 0 ? (
           <div className="text-center py-12"><Star className="w-10 h-10 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No performance reviews yet.</p></div>
         ) : (
           <div className="space-y-3">
             {data.reviews.map((r: TeacherPerformanceReview) => (
-              <div key={r.id} className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <div key={r.id} className="p-5 bg-slate-50/50 rounded-lg border border-slate-100">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase">{r.type} Review</span>
+                    <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase">{r.type} Review</span>
                     <span className="text-[10px] text-slate-400">{r.reviewDate || '—'}</span>
                   </div>
                   <span className="text-[10px] text-slate-400">By: {r.reviewerName || '—'}</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-                  <div className="bg-white p-3 rounded-xl"><p className="text-[8px] font-black text-slate-400 uppercase">Teaching</p><p className="text-sm font-bold text-blue-600">{r.teachingQualityScore || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-[8px] font-black text-slate-400 uppercase">Ministry</p><p className="text-sm font-bold text-purple-600">{r.ministryImpactScore || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-[8px] font-black text-slate-400 uppercase">Feedback</p><p className="text-sm font-bold text-emerald-600">{r.studentFeedbackAvg || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-[8px] font-black text-slate-400 uppercase">Admin</p><p className="text-sm font-bold text-amber-600">{r.adminRating || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Teaching</p><p className="text-sm font-bold text-blue-600">{r.teachingQualityScore || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Ministry</p><p className="text-sm font-bold text-purple-600">{r.ministryImpactScore || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Feedback</p><p className="text-sm font-bold text-emerald-600">{r.studentFeedbackAvg || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Admin</p><p className="text-sm font-bold text-amber-600">{r.adminRating || 0}/10</p></div>
                 </div>
                 {r.reviewNotes && <p className="text-sm text-slate-600 bg-white p-3 rounded-xl mt-2">{r.reviewNotes}</p>}
               </div>
@@ -984,7 +984,7 @@ function AttendanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
 
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><CalendarDays className="w-4 h-4 text-blue-500" /> Attendance Record</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><CalendarDays className="w-4 h-4 text-blue-500" /> Attendance Record</h3>
 
       <div className="grid grid-cols-4 gap-4">
         {[
@@ -993,17 +993,17 @@ function AttendanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
           { label: 'Late', value: late, color: 'text-amber-600', bg: 'bg-amber-50' },
           { label: 'Absent', value: absent, color: 'text-rose-600', bg: 'bg-rose-50' },
         ].map(s => (
-          <div key={s.label} className={cn("p-4 rounded-2xl border text-center", s.bg, `border-${s.color.split('-')[1]}-100`)}>
+          <div key={s.label} className={cn("p-4 rounded-lg border text-center", s.bg, `border-${s.color.split('-')[1]}-100`)}>
             <p className="text-2xl font-bold tabular-nums">{s.value}</p>
-            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-1">{s.label}</p>
+            <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mt-1">{s.label}</p>
           </div>
         ))}
       </div>
 
       {/* Attendance Rate */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100">
+      <div className="bg-white p-6 rounded-lg border border-slate-100">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Attendance Rate</span>
+          <span className="text-xs font-medium text-slate-700 uppercase tracking-wide">Attendance Rate</span>
           <span className="text-lg font-bold text-emerald-600">{pct}%</span>
         </div>
         <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -1014,7 +1014,7 @@ function AttendanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
 
       {/* Recent Records */}
       <div>
-        <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest mb-3">Recent Records</h4>
+        <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide mb-3">Recent Records</h4>
         {records.length === 0 ? (
           <div className="text-center py-12"><CalendarDays className="w-10 h-10 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No attendance records.</p></div>
         ) : (
@@ -1022,7 +1022,7 @@ function AttendanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
             {records.slice(-20).reverse().map((r: TeacherAttendance) => (
               <div key={r.id} className="flex items-center justify-between p-3 bg-slate-50/50 rounded-xl">
                 <span className="text-sm font-bold text-slate-700">{r.date}</span>
-                <span className={cn("px-2 py-1 rounded-lg text-[9px] font-black uppercase",
+                <span className={cn("px-2 py-1 rounded-lg text-xs font-medium uppercase",
                   r.status === 'present' ? 'bg-emerald-50 text-emerald-600' :
                   r.status === 'late' ? 'bg-amber-50 text-amber-600' :
                   r.status === 'absent' ? 'bg-rose-50 text-rose-600' :
@@ -1041,22 +1041,22 @@ function LeaveTab({ teacher, data, onAction }: { teacher: Faculty; data: any; on
   const leaveList = data.leaves;
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Calendar className="w-4 h-4 text-amber-500" /> Leave Management</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Calendar className="w-4 h-4 text-amber-500" /> Leave Management</h3>
 
       {leaveList.length === 0 ? (
         <div className="text-center py-16"><Calendar className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No leave requests.</p></div>
       ) : (
         <div className="space-y-3">
           {leaveList.map((l: TeacherLeave) => (
-            <div key={l.id} className="p-5 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-shadow">
+            <div key={l.id} className="p-5 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <span className={cn("px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border",
+                  <span className={cn("px-2.5 py-1 rounded-lg text-xs font-medium uppercase tracking-wide border",
                     l.status === 'approved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                     l.status === 'pending' ? 'bg-amber-50 text-amber-600 border-amber-100' :
                     'bg-rose-50 text-rose-600 border-rose-100'
                   )}>{l.status}</span>
-                  <span className="px-2 py-1 bg-slate-50 text-slate-600 rounded-lg text-[9px] font-black uppercase">{l.leaveType}</span>
+                  <span className="px-2 py-1 bg-slate-50 text-slate-600 rounded-lg text-xs font-medium uppercase">{l.leaveType}</span>
                 </div>
                 <span className="text-xs font-bold text-slate-500">{l.totalDays} day{l.totalDays > 1 ? 's' : ''}</span>
               </div>
@@ -1067,11 +1067,11 @@ function LeaveTab({ teacher, data, onAction }: { teacher: Faculty; data: any; on
               {l.status === 'pending' && (
                 <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-50">
                   <button onClick={() => onAction(l, 'approved')}
-                    className="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-1">
+                    className="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-1">
                     <Check className="w-3 h-3" /> Approve
                   </button>
                   <button onClick={() => onAction(l, 'rejected')}
-                    className="px-3 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-1">
+                    className="px-3 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-1">
                     <X className="w-3 h-3" /> Reject
                   </button>
                 </div>
@@ -1088,17 +1088,17 @@ function SermonsTab({ teacher, data }: { teacher: Faculty; data: any }) {
   const sermonsList = data.sermons;
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Flame className="w-4 h-4 text-orange-500" /> Sermon & Teaching Archive</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Flame className="w-4 h-4 text-orange-500" /> Sermon & Teaching Archive</h3>
 
       {sermonsList.length === 0 ? (
         <div className="text-center py-16"><Flame className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No sermons uploaded.</p></div>
       ) : (
         <div className="space-y-3">
           {sermonsList.map((s: SermonArchive) => (
-            <div key={s.id} className="p-5 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-shadow">
+            <div key={s.id} className="p-5 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <span className="px-2 py-1 bg-orange-50 text-orange-600 rounded-lg text-[9px] font-black uppercase">{s.type}</span>
+                  <span className="px-2 py-1 bg-orange-50 text-orange-600 rounded-lg text-xs font-medium uppercase">{s.type}</span>
                   {s.date && <span className="text-[10px] text-slate-400">{s.date}</span>}
                 </div>
                 <div className="flex items-center gap-2">
@@ -1129,8 +1129,8 @@ function StudentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
   // Show subjects with student counts
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><GraduationCap className="w-4 h-4 text-blue-500" /> Students</h3>
-      <div className="bg-white p-6 rounded-2xl border border-slate-100">
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><GraduationCap className="w-4 h-4 text-blue-500" /> Students</h3>
+      <div className="bg-white p-6 rounded-lg border border-slate-100">
         <p className="text-sm text-slate-600">Students assigned through courses and subjects will appear here. Use the <strong>Academic System</strong> to manage student assignments.</p>
       </div>
       {data.subjects.length > 0 ? (
@@ -1139,9 +1139,9 @@ function StudentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
             <div key={s.id} className="p-4 bg-slate-50/50 rounded-xl border border-slate-100 flex items-center justify-between">
               <div>
                 <p className="font-bold text-slate-900 italic-serif text-sm">{s.title}</p>
-                <span className="text-[9px] font-black text-slate-400 uppercase">{s.code}</span>
+                <span className="text-xs font-medium text-slate-400 uppercase">{s.code}</span>
               </div>
-              <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black">{s.studentIds?.length || 0} Students</span>
+              <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium">{s.studentIds?.length || 0} Students</span>
             </div>
           ))}
         </div>
@@ -1156,15 +1156,15 @@ function AssignmentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
   const matList = data.materials;
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><ClipboardList className="w-4 h-4 text-blue-500" /> Learning Materials</h3>
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><ClipboardList className="w-4 h-4 text-blue-500" /> Learning Materials</h3>
       {matList.length === 0 ? (
         <div className="text-center py-16"><FileText className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">No learning materials uploaded.</p></div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {matList.map((m: LearningMaterial) => (
-            <div key={m.id} className="p-5 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-shadow">
+            <div key={m.id} className="p-5 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="flex items-center gap-2 mb-2">
-                <span className={cn("px-2 py-1 rounded-lg text-[9px] font-black uppercase",
+                <span className={cn("px-2 py-1 rounded-lg text-xs font-medium uppercase",
                   m.type === 'lecture_notes' ? 'bg-blue-50 text-blue-600' :
                   m.type === 'video' ? 'bg-purple-50 text-purple-600' :
                   m.type === 'assignment' ? 'bg-amber-50 text-amber-600' :
@@ -1186,8 +1186,8 @@ function AssignmentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
 function ActivityTab({ teacher }: { teacher: Faculty }) {
   return (
     <div className="space-y-6">
-      <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2"><Activity className="w-4 h-4 text-slate-500" /> Activity Log</h3>
-      <div className="bg-white p-6 rounded-2xl border border-slate-100 text-center py-12">
+      <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Activity className="w-4 h-4 text-slate-500" /> Activity Log</h3>
+      <div className="bg-white p-6 rounded-lg border border-slate-100 text-center py-12">
         <Activity className="w-10 h-10 text-slate-200 mx-auto mb-3" />
         <p className="text-slate-400 text-sm">Activity tracking for {teacher.name} will be shown here.</p>
         <p className="text-slate-300 text-[10px] mt-2">Actions like profile updates, leave requests, and content uploads are logged.</p>

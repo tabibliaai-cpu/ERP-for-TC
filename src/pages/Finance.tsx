@@ -141,7 +141,7 @@ function statusBadge(status: string) {
   };
   const s = map[status] || map.pending;
   return (
-    <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border', s.bg, s.text, s.border)}>
+    <span className={cn('px-3 py-1.5 rounded-md text-xs font-medium uppercase tracking-wide border', s.bg, s.text, s.border)}>
       {status}
     </span>
   );
@@ -685,7 +685,7 @@ export function Finance() {
   const Spinner = () => (
     <div className="flex flex-col items-center justify-center h-80 gap-4">
       <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin" />
-      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Syncing Ledger...</p>
+      <p className="text-xs font-medium uppercase  text-slate-400 animate-pulse">Syncing Ledger...</p>
     </div>
   );
 
@@ -694,7 +694,7 @@ export function Finance() {
       <Icon className="w-16 h-16 text-slate-200 mb-4" />
       <p className="font-bold">{message}</p>
       {actionLabel && onAction && (
-        <button onClick={onAction} className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all">
+        <button onClick={onAction} className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-slate-900 transition-all">
           {actionLabel}
         </button>
       )}
@@ -710,7 +710,7 @@ export function Finance() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className={cn('bg-white rounded-3xl w-full p-6 relative z-10 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto', wide ? 'max-w-2xl' : 'max-w-lg')}
+            className={cn('bg-white rounded-lg w-full p-6 relative z-10 shadow-md border border-slate-100 max-h-[90vh] overflow-y-auto', wide ? 'max-w-2xl' : 'max-w-lg')}
           >
             <div className="mb-6 flex items-center justify-between">
               <div>
@@ -730,7 +730,7 @@ export function Finance() {
 
   const FormField = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div className="space-y-1">
-      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">{label}</label>
+      <label className="text-xs font-medium uppercase  text-slate-400 pl-1">{label}</label>
       {children}
     </div>
   );
@@ -738,20 +738,20 @@ export function Finance() {
   const FormInput = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
     <input
       {...props}
-      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
+      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
     />
   );
 
   const FormSelect = (props: React.SelectHTMLAttributes<HTMLSelectElement>) => (
     <select
       {...props}
-      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-bold"
+      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm font-bold"
     />
   );
 
   const StudentSearchDropdown = ({ value, onSelect }: { value: string; onSelect: (id: string, name: string) => void }) => (
     <div className="space-y-1 relative">
-      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">Student</label>
+      <label className="text-xs font-medium uppercase  text-slate-400 pl-1">Student</label>
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
         <input
@@ -760,7 +760,7 @@ export function Finance() {
           value={value || studentSearchTerm}
           onFocus={() => setStudentDropdownOpen(true)}
           onChange={(e) => setStudentSearchTerm(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
+          className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm font-medium"
         />
       </div>
       <AnimatePresence>
@@ -771,7 +771,7 @@ export function Finance() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-100 rounded-2xl shadow-2xl z-30 max-h-60 overflow-y-auto p-2"
+              className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-100 rounded-lg shadow-md z-30 max-h-60 overflow-y-auto p-2"
             >
               {filteredStudents.length === 0 ? (
                 <div className="p-4 text-center text-slate-400 text-sm">No students found</div>
@@ -788,7 +788,7 @@ export function Finance() {
                     className="w-full text-left p-3 rounded-xl hover:bg-white border border-transparent hover:border-slate-100 transition-all"
                   >
                     <p className="text-sm font-bold text-slate-900">{s.name}</p>
-                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-tighter">
+                    <p className="text-[10px] font-mono text-slate-400 uppercase ">
                       {s.program} · Sem {s.semester || 1}
                     </p>
                   </button>
@@ -810,7 +810,7 @@ export function Finance() {
         type="submit"
         className={cn(
           'flex-1 py-3 text-white rounded-xl font-bold text-sm shadow-lg transition-all',
-          submitColor === 'dark' ? 'bg-slate-900 hover:bg-slate-800 shadow-slate-200' : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-blue-100',
+          submitColor === 'dark' ? 'bg-slate-900 hover:bg-slate-800 shadow-slate-200' : 'bg-blue-600 hover:bg-blue-700',
         )}
       >
         {submitLabel}
@@ -834,11 +834,11 @@ export function Finance() {
           { label: 'Scholarships', value: scholarshipCount, icon: Sparkles, color: 'text-purple-600', bg: 'bg-purple-50', isCurrency: false },
           { label: 'Overdue Accounts', value: overdueCount, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50', isCurrency: false },
         ].map((stat) => (
-          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm group hover:border-blue-200 transition-all">
+          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm group hover:border-blue-200 transition-all">
             <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-4 shadow-sm', stat.bg, stat.color)}>
               <stat.icon className="w-5 h-5" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{stat.label}</p>
+            <p className="text-xs font-medium uppercase  text-slate-400">{stat.label}</p>
             <h3 className="text-2xl font-bold text-slate-900 mt-2 font-mono tabular-nums leading-none">
               {stat.isCurrency ? formatCurrency(stat.value) : stat.value}
             </h3>
@@ -847,17 +847,17 @@ export function Finance() {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <button onClick={() => { setActiveTab('payments'); setTimeout(() => openPaymentModal(), 100); }} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+        <button onClick={() => { setActiveTab('payments'); setTimeout(() => openPaymentModal(), 100); }} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
           <Plus className="w-4 h-4" />Record Payment
         </button>
-        <button onClick={() => { setActiveTab('fee-structures'); setTimeout(() => openCreateFeeStructure(), 100); }} className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-blue-100">
+        <button onClick={() => { setActiveTab('fee-structures'); setTimeout(() => openCreateFeeStructure(), 100); }} className="px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2 shadow-sm shadow-blue-100">
           <FileText className="w-4 h-4" />Create Fee Structure
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Recent Transactions</p>
+          <p className="text-xs font-medium uppercase  text-slate-400">Recent Transactions</p>
           <button onClick={loadAllData} className="p-2 rounded-xl hover:bg-slate-100 transition-all"><RefreshCcw className="w-4 h-4 text-slate-400" /></button>
         </div>
         {recentPayments.length === 0 ? (
@@ -866,31 +866,31 @@ export function Finance() {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-8 py-5">Student</th>
-                  <th className="px-6 py-5 text-center">Payment ID</th>
-                  <th className="px-6 py-5 text-center">Amount</th>
-                  <th className="px-6 py-5 text-center">Mode</th>
-                  <th className="px-6 py-5 text-center">Status</th>
-                  <th className="px-8 py-5 text-right">Receipt</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Student</th>
+                  <th className="px-4 py-3 text-center">Payment ID</th>
+                  <th className="px-4 py-3 text-center">Amount</th>
+                  <th className="px-4 py-3 text-center">Mode</th>
+                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 text-right">Receipt</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {recentPayments.map((p) => (
                   <tr key={p.id} className="hover:bg-slate-50/50 transition-colors group cursor-pointer text-sm">
-                    <td className="px-8 py-6 text-sm">
+                    <td className="px-4 py-3 text-sm">
                       <p className="font-bold text-slate-900">{p.studentName || getStudentName(p.studentId)}</p>
                     </td>
-                    <td className="px-6 py-6 text-center">
+                    <td className="px-4 py-3 text-center">
                       <span className="text-[10px] font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{p.paymentId}</span>
                     </td>
-                    <td className="px-6 py-6 text-center">
+                    <td className="px-4 py-3 text-center">
                       <span className="font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(p.amount)}</span>
                     </td>
-                    <td className="px-6 py-6 text-center text-[10px] font-black uppercase tracking-widest text-slate-500">{p.paymentMode}</td>
-                    <td className="px-6 py-6 text-center">{statusBadge(p.status)}</td>
-                    <td className="px-8 py-6 text-right">
-                      <span className="text-[9px] font-black uppercase text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{p.receiptNumber}</span>
+                    <td className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wide text-slate-500">{p.paymentMode}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(p.status)}</td>
+                    <td className="px-4 py-3 text-right">
+                      <span className="text-xs font-medium uppercase text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{p.receiptNumber}</span>
                     </td>
                   </tr>
                 ))}
@@ -908,43 +908,43 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search fee structures..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search fee structures..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
-        <button onClick={openCreateFeeStructure} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+        <button onClick={openCreateFeeStructure} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
           <Plus className="w-4 h-4" />Create Fee Structure
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         {feeStructures.length === 0 ? (
           <EmptyState icon={FileText} message="No fee structures defined." actionLabel="Create First Structure" onAction={openCreateFeeStructure} />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-8 py-5">Name</th>
-                  <th className="px-6 py-5 text-center">Program</th>
-                  <th className="px-6 py-5 text-center">Year</th>
-                  <th className="px-6 py-5 text-center">Semester</th>
-                  <th className="px-6 py-5 text-center">Total</th>
-                  <th className="px-6 py-5 text-center">Status</th>
-                  <th className="px-8 py-5 text-right">Actions</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3 text-center">Program</th>
+                  <th className="px-4 py-3 text-center">Year</th>
+                  <th className="px-4 py-3 text-center">Semester</th>
+                  <th className="px-4 py-3 text-center">Total</th>
+                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {feeStructures.filter((fs) => !searchQuery || fs.name.toLowerCase().includes(searchQuery.toLowerCase()) || fs.program.toLowerCase().includes(searchQuery.toLowerCase())).map((fs) => (
                   <tr key={fs.id} className="hover:bg-slate-50/50 transition-colors group text-sm">
-                    <td className="px-8 py-6">
+                    <td className="px-4 py-3">
                       <p className="font-bold text-slate-900">{fs.name}</p>
                       <p className="text-[10px] text-slate-400 mt-0.5">{fs.components.length} component{fs.components.length !== 1 ? 's' : ''}</p>
                     </td>
-                    <td className="px-6 py-6 text-center font-bold text-slate-600">{fs.program}</td>
-                    <td className="px-6 py-6 text-center text-slate-500">{fs.academicYear}</td>
-                    <td className="px-6 py-6 text-center text-slate-500">{fs.semester}</td>
-                    <td className="px-6 py-6 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(fs.totalAmount)}</td>
-                    <td className="px-6 py-6 text-center">{statusBadge(fs.isActive ? 'active' : 'inactive')}</td>
-                    <td className="px-8 py-6 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <td className="px-4 py-3 text-center font-bold text-slate-600">{fs.program}</td>
+                    <td className="px-4 py-3 text-center text-slate-500">{fs.academicYear}</td>
+                    <td className="px-4 py-3 text-center text-slate-500">{fs.semester}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(fs.totalAmount)}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(fs.isActive ? 'active' : 'inactive')}</td>
+                    <td className="px-4 py-3 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button onClick={() => openEditFeeStructure(fs)} className="p-2 rounded-xl hover:bg-blue-50 transition-all"><Edit3 className="w-4 h-4 text-blue-500" /></button>
                       <button onClick={() => handleDeleteFeeStructure(fs.id!)} className="p-2 rounded-xl hover:bg-rose-50 transition-all"><Trash2 className="w-4 h-4 text-rose-500" /></button>
                     </td>
@@ -964,42 +964,42 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search student fees..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search student fees..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
-        <button onClick={openAssignFee} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+        <button onClick={openAssignFee} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
           <UserPlus className="w-4 h-4" />Assign Fee
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         {filteredStudentFees.length === 0 ? (
           <EmptyState icon={Users} message="No student fee assignments." actionLabel="Assign First Fee" onAction={openAssignFee} />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-6 py-5">Student</th>
-                  <th className="px-6 py-5 text-center">Structure</th>
-                  <th className="px-6 py-5 text-center">Total</th>
-                  <th className="px-6 py-5 text-center">Paid</th>
-                  <th className="px-6 py-5 text-center">Balance</th>
-                  <th className="px-6 py-5 text-center">Plan</th>
-                  <th className="px-6 py-5 text-center">Status</th>
-                  <th className="px-6 py-5 text-center">Due Date</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Student</th>
+                  <th className="px-4 py-3 text-center">Structure</th>
+                  <th className="px-4 py-3 text-center">Total</th>
+                  <th className="px-4 py-3 text-center">Paid</th>
+                  <th className="px-4 py-3 text-center">Balance</th>
+                  <th className="px-4 py-3 text-center">Plan</th>
+                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 text-center">Due Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredStudentFees.map((sf) => (
                   <tr key={sf.id} className="hover:bg-slate-50/50 transition-colors text-sm">
-                    <td className="px-6 py-5 font-bold text-slate-900">{getStudentName(sf.studentId)}</td>
-                    <td className="px-6 py-5 text-center text-slate-500 text-xs">{sf.feeStructureName}</td>
-                    <td className="px-6 py-5 text-center font-mono font-medium text-slate-700 tabular-nums">{formatCurrency(sf.totalFee)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-medium text-emerald-600 tabular-nums">{formatCurrency(sf.paidAmount || 0)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-bold tabular-nums">{formatCurrency(sf.balanceAmount || 0)}</td>
-                    <td className="px-6 py-5 text-center text-[10px] font-black uppercase tracking-widest text-slate-400">{sf.paymentPlan}</td>
-                    <td className="px-6 py-5 text-center">{statusBadge(sf.status)}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-400">{sf.dueDate || '—'}</td>
+                    <td className="px-4 py-3 font-bold text-slate-900">{getStudentName(sf.studentId)}</td>
+                    <td className="px-4 py-3 text-center text-slate-500 text-xs">{sf.feeStructureName}</td>
+                    <td className="px-4 py-3 text-center font-mono font-medium text-slate-700 tabular-nums">{formatCurrency(sf.totalFee)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-medium text-emerald-600 tabular-nums">{formatCurrency(sf.paidAmount || 0)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold tabular-nums">{formatCurrency(sf.balanceAmount || 0)}</td>
+                    <td className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wide text-slate-400">{sf.paymentPlan}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(sf.status)}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-400">{sf.dueDate || '—'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1016,46 +1016,46 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search payments..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search payments..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
-        <button onClick={openPaymentModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+        <button onClick={openPaymentModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
           <Plus className="w-4 h-4" />Record Payment
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         {filteredPayments.length === 0 ? (
           <EmptyState icon={CreditCard} message="No payments recorded yet." actionLabel="Record First Payment" onAction={openPaymentModal} />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-6 py-5">Payment ID</th>
-                  <th className="px-6 py-5">Student</th>
-                  <th className="px-6 py-5 text-center">Amount</th>
-                  <th className="px-6 py-5 text-center">Mode</th>
-                  <th className="px-6 py-5 text-center">Reference</th>
-                  <th className="px-6 py-5 text-center">Received By</th>
-                  <th className="px-6 py-5 text-center">Date</th>
-                  <th className="px-6 py-5 text-center">Status</th>
-                  <th className="px-6 py-5 text-right">Actions</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Payment ID</th>
+                  <th className="px-4 py-3">Student</th>
+                  <th className="px-4 py-3 text-center">Amount</th>
+                  <th className="px-4 py-3 text-center">Mode</th>
+                  <th className="px-4 py-3 text-center">Reference</th>
+                  <th className="px-4 py-3 text-center">Received By</th>
+                  <th className="px-4 py-3 text-center">Date</th>
+                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredPayments.map((p) => (
                   <tr key={p.id} className="hover:bg-slate-50/50 transition-colors group text-sm">
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3">
                       <span className="text-[10px] font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{p.paymentId}</span>
                     </td>
-                    <td className="px-6 py-5 font-bold text-slate-900">{p.studentName || getStudentName(p.studentId)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(p.amount)}</td>
-                    <td className="px-6 py-5 text-center text-[10px] font-black uppercase tracking-widest text-slate-500">{p.paymentMode}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-400">{p.transactionRef || '—'}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-400">{p.receivedBy ? p.receivedBy.slice(0, 8) : '—'}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-400">{p.createdAt ? toDate(p.createdAt).toLocaleDateString() : '—'}</td>
-                    <td className="px-6 py-5 text-center">{statusBadge(p.status)}</td>
-                    <td className="px-6 py-5 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <td className="px-4 py-3 font-bold text-slate-900">{p.studentName || getStudentName(p.studentId)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(p.amount)}</td>
+                    <td className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wide text-slate-500">{p.paymentMode}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-400">{p.transactionRef || '—'}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-400">{p.receivedBy ? p.receivedBy.slice(0, 8) : '—'}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-400">{p.createdAt ? toDate(p.createdAt).toLocaleDateString() : '—'}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(p.status)}</td>
+                    <td className="px-4 py-3 text-right flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button onClick={() => printReceipt(p)} className="p-2 rounded-xl hover:bg-blue-50 transition-all"><Printer className="w-4 h-4 text-blue-500" /></button>
                     </td>
                   </tr>
@@ -1074,43 +1074,43 @@ export function Finance() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-          <input type="text" placeholder="Search invoices..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-4 focus:ring-blue-100 transition-all outline-none w-64" />
+          <input type="text" placeholder="Search invoices..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-100 transition-all outline-none w-64" />
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         {filteredInvoices.length === 0 ? (
           <EmptyState icon={Receipt} message="No invoices generated yet." actionLabel="Go to Student Fees" onAction={() => setActiveTab('student-fees')} />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-6 py-5">Invoice #</th>
-                  <th className="px-6 py-5">Student</th>
-                  <th className="px-6 py-5 text-center">Program</th>
-                  <th className="px-6 py-5 text-center">Total</th>
-                  <th className="px-6 py-5 text-center">Discount</th>
-                  <th className="px-6 py-5 text-center">Net</th>
-                  <th className="px-6 py-5 text-center">Paid</th>
-                  <th className="px-6 py-5 text-center">Balance</th>
-                  <th className="px-6 py-5 text-center">Status</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Invoice #</th>
+                  <th className="px-4 py-3">Student</th>
+                  <th className="px-4 py-3 text-center">Program</th>
+                  <th className="px-4 py-3 text-center">Total</th>
+                  <th className="px-4 py-3 text-center">Discount</th>
+                  <th className="px-4 py-3 text-center">Net</th>
+                  <th className="px-4 py-3 text-center">Paid</th>
+                  <th className="px-4 py-3 text-center">Balance</th>
+                  <th className="px-4 py-3 text-center">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredInvoices.map((inv) => (
                   <tr key={inv.id} className="hover:bg-slate-50/50 transition-colors text-sm">
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3">
                       <span className="text-[10px] font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{inv.invoiceNumber}</span>
                     </td>
-                    <td className="px-6 py-5 font-bold text-slate-900">{inv.studentName || getStudentName(inv.studentId)}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-500">{inv.program || '—'}</td>
-                    <td className="px-6 py-5 text-center font-mono font-medium text-slate-700 tabular-nums">{formatCurrency(inv.totalAmount)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-medium text-amber-600 tabular-nums">{formatCurrency(inv.discount)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(inv.netAmount)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-medium text-emerald-600 tabular-nums">{formatCurrency(inv.paidAmount || 0)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-bold tabular-nums">{formatCurrency(inv.balanceDue || 0)}</td>
-                    <td className="px-6 py-5 text-center">{statusBadge(inv.status)}</td>
+                    <td className="px-4 py-3 font-bold text-slate-900">{inv.studentName || getStudentName(inv.studentId)}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-500">{inv.program || '—'}</td>
+                    <td className="px-4 py-3 text-center font-mono font-medium text-slate-700 tabular-nums">{formatCurrency(inv.totalAmount)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-medium text-amber-600 tabular-nums">{formatCurrency(inv.discount)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(inv.netAmount)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-medium text-emerald-600 tabular-nums">{formatCurrency(inv.paidAmount || 0)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold tabular-nums">{formatCurrency(inv.balanceDue || 0)}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(inv.status)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1132,11 +1132,11 @@ export function Finance() {
           { label: 'Fee Assignments', value: studentFees.length, icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
           { label: 'Overdue Accounts', value: overdueCount, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
         ].map((stat) => (
-          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm">
+          <div key={stat.label} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm">
             <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-3 shadow-sm', stat.bg, stat.color)}>
               <stat.icon className="w-5 h-5" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{stat.label}</p>
+            <p className="text-xs font-medium uppercase  text-slate-400">{stat.label}</p>
             <h3 className="text-2xl font-bold text-slate-900 mt-1 font-mono tabular-nums">
               {typeof stat.value === 'number' && stat.value > 999 ? formatCurrency(stat.value) : stat.value}
             </h3>
@@ -1145,9 +1145,9 @@ export function Finance() {
       </div>
 
       {/* Course-wise Collection */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-100 bg-slate-50/30">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Fee Type Breakdown</p>
+          <p className="text-xs font-medium uppercase  text-slate-400">Fee Type Breakdown</p>
         </div>
         <div className="p-6">
           {Object.keys(feeTypeBreakdown).length === 0 ? (
@@ -1155,7 +1155,7 @@ export function Finance() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(feeTypeBreakdown).map(([name, amount]) => (
-                <div key={name} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                <div key={name} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
                   <span className="text-sm font-bold text-slate-700">{name}</span>
                   <span className="font-mono font-bold text-slate-900 tabular-nums">{formatCurrency(amount)}</span>
                 </div>
@@ -1166,10 +1166,10 @@ export function Finance() {
       </div>
 
       {/* Pending Fees Table */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Pending Fees</p>
-          <button onClick={exportReportsCSV} className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2">
+          <p className="text-xs font-medium uppercase  text-slate-400">Pending Fees</p>
+          <button onClick={exportReportsCSV} className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2">
             <Download className="w-3.5 h-3.5" />Export CSV
           </button>
         </div>
@@ -1179,24 +1179,24 @@ export function Finance() {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-6 py-5">Student</th>
-                  <th className="px-6 py-5 text-center">Structure</th>
-                  <th className="px-6 py-5 text-center">Adjusted Fee</th>
-                  <th className="px-6 py-5 text-center">Paid</th>
-                  <th className="px-6 py-5 text-center">Balance</th>
-                  <th className="px-6 py-5 text-center">Status</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3">Student</th>
+                  <th className="px-4 py-3 text-center">Structure</th>
+                  <th className="px-4 py-3 text-center">Adjusted Fee</th>
+                  <th className="px-4 py-3 text-center">Paid</th>
+                  <th className="px-4 py-3 text-center">Balance</th>
+                  <th className="px-4 py-3 text-center">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {studentFees.filter((sf) => sf.status === 'pending' || sf.status === 'overdue' || sf.status === 'partial').map((sf) => (
                   <tr key={sf.id} className="hover:bg-slate-50/50 transition-colors text-sm">
-                    <td className="px-6 py-5 font-bold text-slate-900">{getStudentName(sf.studentId)}</td>
-                    <td className="px-6 py-5 text-center text-xs text-slate-500">{sf.feeStructureName}</td>
-                    <td className="px-6 py-5 text-center font-mono text-slate-600 tabular-nums">{formatCurrency(sf.adjustedFee)}</td>
-                    <td className="px-6 py-5 text-center font-mono text-emerald-600 tabular-nums">{formatCurrency(sf.paidAmount || 0)}</td>
-                    <td className="px-6 py-5 text-center font-mono font-bold text-rose-600 tabular-nums">{formatCurrency(sf.balanceAmount || 0)}</td>
-                    <td className="px-6 py-5 text-center">{statusBadge(sf.status)}</td>
+                    <td className="px-4 py-3 font-bold text-slate-900">{getStudentName(sf.studentId)}</td>
+                    <td className="px-4 py-3 text-center text-xs text-slate-500">{sf.feeStructureName}</td>
+                    <td className="px-4 py-3 text-center font-mono text-slate-600 tabular-nums">{formatCurrency(sf.adjustedFee)}</td>
+                    <td className="px-4 py-3 text-center font-mono text-emerald-600 tabular-nums">{formatCurrency(sf.paidAmount || 0)}</td>
+                    <td className="px-4 py-3 text-center font-mono font-bold text-rose-600 tabular-nums">{formatCurrency(sf.balanceAmount || 0)}</td>
+                    <td className="px-4 py-3 text-center">{statusBadge(sf.status)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1217,9 +1217,9 @@ export function Finance() {
             key={tab}
             onClick={() => setSubTab(tab)}
             className={cn(
-              'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all',
+              'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wide transition-all',
               subTab === tab
-                ? 'bg-slate-900 text-white shadow-xl shadow-slate-200'
+                ? 'bg-slate-900 text-white '
                 : 'bg-slate-100 text-slate-500 hover:bg-slate-200',
             )}
           >
@@ -1232,37 +1232,37 @@ export function Finance() {
         {subTab === 'sponsors' ? (
           <motion.div key="sponsors" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
             <div className="flex justify-end">
-              <button onClick={openSponsorModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+              <button onClick={openSponsorModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
                 <UserPlus className="w-4 h-4" />Add Sponsor
               </button>
             </div>
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
               {sponsors.length === 0 ? (
                 <EmptyState icon={HeartHandshake} message="No sponsors registered." actionLabel="Add First Sponsor" onAction={openSponsorModal} />
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                        <th className="px-8 py-5">Name</th>
-                        <th className="px-6 py-5 text-center">Email</th>
-                        <th className="px-6 py-5 text-center">Phone</th>
-                        <th className="px-6 py-5 text-center">Organization</th>
-                        <th className="px-6 py-5 text-center">Contributed</th>
-                        <th className="px-6 py-5 text-center">Status</th>
-                        <th className="px-8 py-5 text-right">Actions</th>
+                      <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                        <th className="px-4 py-3">Name</th>
+                        <th className="px-4 py-3 text-center">Email</th>
+                        <th className="px-4 py-3 text-center">Phone</th>
+                        <th className="px-4 py-3 text-center">Organization</th>
+                        <th className="px-4 py-3 text-center">Contributed</th>
+                        <th className="px-4 py-3 text-center">Status</th>
+                        <th className="px-4 py-3 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {sponsors.map((sp) => (
                         <tr key={sp.id} className="hover:bg-slate-50/50 transition-colors group text-sm">
-                          <td className="px-8 py-6 font-bold text-slate-900">{sp.name}</td>
-                          <td className="px-6 py-6 text-center text-xs text-slate-500">{sp.email || '—'}</td>
-                          <td className="px-6 py-6 text-center text-xs text-slate-500">{sp.phone || '—'}</td>
-                          <td className="px-6 py-6 text-center text-xs text-slate-500">{sp.organization || '—'}</td>
-                          <td className="px-6 py-6 text-center font-mono font-bold text-emerald-600 tabular-nums">{formatCurrency(sp.totalContributed || 0)}</td>
-                          <td className="px-6 py-6 text-center">{statusBadge(sp.status || 'active')}</td>
-                          <td className="px-8 py-6 text-right opacity-0 group-hover:opacity-100 transition-opacity">
+                          <td className="px-4 py-3 font-bold text-slate-900">{sp.name}</td>
+                          <td className="px-4 py-3 text-center text-xs text-slate-500">{sp.email || '—'}</td>
+                          <td className="px-4 py-3 text-center text-xs text-slate-500">{sp.phone || '—'}</td>
+                          <td className="px-4 py-3 text-center text-xs text-slate-500">{sp.organization || '—'}</td>
+                          <td className="px-4 py-3 text-center font-mono font-bold text-emerald-600 tabular-nums">{formatCurrency(sp.totalContributed || 0)}</td>
+                          <td className="px-4 py-3 text-center">{statusBadge(sp.status || 'active')}</td>
+                          <td className="px-4 py-3 text-right opacity-0 group-hover:opacity-100 transition-opacity">
                             <button onClick={() => handleDeleteSponsor(sp.id!)} className="p-2 rounded-xl hover:bg-rose-50 transition-all"><Trash2 className="w-4 h-4 text-rose-500" /></button>
                           </td>
                         </tr>
@@ -1276,44 +1276,44 @@ export function Finance() {
         ) : (
           <motion.div key="scholarships" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
             <div className="flex justify-end">
-              <button onClick={openScholarshipModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200">
+              <button onClick={openScholarshipModal} className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 ">
                 <Plus className="w-4 h-4" />Add Scholarship
               </button>
             </div>
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
               {scholarships.length === 0 ? (
                 <EmptyState icon={Award} message="No scholarships defined." actionLabel="Add First Scholarship" onAction={openScholarshipModal} />
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                        <th className="px-8 py-5">Name</th>
-                        <th className="px-6 py-5 text-center">Type</th>
-                        <th className="px-6 py-5 text-center">Value</th>
-                        <th className="px-6 py-5 text-center">Criteria</th>
-                        <th className="px-6 py-5 text-center">Recipients</th>
-                        <th className="px-6 py-5 text-center">Status</th>
-                        <th className="px-8 py-5 text-right">Actions</th>
+                      <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                        <th className="px-4 py-3">Name</th>
+                        <th className="px-4 py-3 text-center">Type</th>
+                        <th className="px-4 py-3 text-center">Value</th>
+                        <th className="px-4 py-3 text-center">Criteria</th>
+                        <th className="px-4 py-3 text-center">Recipients</th>
+                        <th className="px-4 py-3 text-center">Status</th>
+                        <th className="px-4 py-3 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {scholarships.map((sc) => (
                         <tr key={sc.id} className="hover:bg-slate-50/50 transition-colors group text-sm">
-                          <td className="px-8 py-6">
+                          <td className="px-4 py-3">
                             <p className="font-bold text-slate-900">{sc.name}</p>
                             {sc.description && <p className="text-[10px] text-slate-400 mt-0.5">{sc.description}</p>}
                           </td>
-                          <td className="px-6 py-6 text-center text-[10px] font-black uppercase tracking-widest text-slate-500">{sc.type}</td>
-                          <td className="px-6 py-6 text-center font-mono font-bold text-blue-600 tabular-nums">
+                          <td className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wide text-slate-500">{sc.type}</td>
+                          <td className="px-4 py-3 text-center font-mono font-bold text-blue-600 tabular-nums">
                             {sc.type === 'percentage' ? `${sc.value}%` : formatCurrency(sc.value)}
                           </td>
-                          <td className="px-6 py-6 text-center text-[10px] font-black uppercase tracking-widest text-slate-400">{sc.criteria || 'general'}</td>
-                          <td className="px-6 py-6 text-center font-mono text-slate-600 tabular-nums">
+                          <td className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wide text-slate-400">{sc.criteria || 'general'}</td>
+                          <td className="px-4 py-3 text-center font-mono text-slate-600 tabular-nums">
                             {sc.currentRecipients || 0}/{sc.maxStudents || '∞'}
                           </td>
-                          <td className="px-6 py-6 text-center">{statusBadge(sc.status || 'active')}</td>
-                          <td className="px-8 py-6 text-right opacity-0 group-hover:opacity-100 transition-opacity">
+                          <td className="px-4 py-3 text-center">{statusBadge(sc.status || 'active')}</td>
+                          <td className="px-4 py-3 text-right opacity-0 group-hover:opacity-100 transition-opacity">
                             <button onClick={() => handleDeleteScholarship(sc.id!)} className="p-2 rounded-xl hover:bg-rose-50 transition-all"><Trash2 className="w-4 h-4 text-rose-500" /></button>
                           </td>
                         </tr>
@@ -1361,17 +1361,17 @@ export function Finance() {
         {/* Dynamic Fee Components */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Fee Components</p>
-            <button type="button" onClick={addFeeComponent} className="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 transition-all flex items-center gap-1.5">
+            <p className="text-xs font-medium uppercase  text-slate-400">Fee Components</p>
+            <button type="button" onClick={addFeeComponent} className="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-blue-100 transition-all flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" />Add Component
             </button>
           </div>
 
           <AnimatePresence>
             {fsForm.components.map((comp, index) => (
-              <motion.div key={index} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="bg-slate-50 rounded-2xl p-4 space-y-3 border border-slate-100">
+              <motion.div key={index} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="bg-slate-50 rounded-lg p-4 space-y-3 border border-slate-100">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Component {index + 1}</span>
+                  <span className="text-xs font-medium uppercase  text-slate-400">Component {index + 1}</span>
                   <button type="button" onClick={() => removeFeeComponent(index)} className="p-1.5 rounded-lg hover:bg-rose-50 transition-all"><X className="w-3.5 h-3.5 text-rose-400" /></button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1408,8 +1408,8 @@ export function Finance() {
           </AnimatePresence>
 
           {fsForm.components.length > 0 && (
-            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-200">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Auto-calculated Total</span>
+            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <span className="text-xs font-medium uppercase  text-blue-400">Auto-calculated Total</span>
               <span className="text-xl font-mono font-bold text-blue-600 tabular-nums">{formatCurrency(fsTotal)}</span>
             </div>
           )}
@@ -1434,7 +1434,7 @@ export function Finance() {
           </FormSelect>
         </FormField>
         {selectedStructure && (
-          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+          <div className="p-4 bg-slate-50 rounded-lg border border-slate-100 space-y-2">
             <div className="flex justify-between text-xs"><span className="text-slate-400">Base Fee:</span><span className="font-mono font-bold text-slate-700">{formatCurrency(selectedStructure.totalAmount)}</span></div>
             <FormField label="Discount">
               <FormInput type="number" min="0" step="0.01" value={sfForm.discount || ''} onChange={(e) => setSfForm({ ...sfForm, discount: Number(e.target.value) })} />
@@ -1473,7 +1473,7 @@ export function Finance() {
           </FormSelect>
         </FormField>
         {selectedAssignment && (
-          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-1">
+          <div className="p-4 bg-slate-50 rounded-lg border border-slate-100 space-y-1">
             <div className="flex justify-between text-xs"><span className="text-slate-400">Student:</span><span className="font-bold text-slate-700">{getStudentName(selectedAssignment.studentId)}</span></div>
             <div className="flex justify-between text-xs"><span className="text-slate-400">Adjusted Fee:</span><span className="font-mono text-slate-600">{formatCurrency(selectedAssignment.adjustedFee)}</span></div>
             <div className="flex justify-between text-xs"><span className="text-slate-400">Already Paid:</span><span className="font-mono text-emerald-600">{formatCurrency(selectedAssignment.paidAmount || 0)}</span></div>
@@ -1499,8 +1499,8 @@ export function Finance() {
           </FormField>
         </div>
         {pmForm.studentFeeId && pmForm.amount > 0 && (
-          <div className="p-4 bg-blue-50 rounded-2xl border border-blue-200 flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Generated IDs</span>
+          <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 flex items-center justify-between">
+            <span className="text-xs font-medium uppercase  text-blue-400">Generated IDs</span>
             <div className="flex gap-3">
               <span className="text-[10px] font-mono text-blue-600 bg-white px-2 py-1 rounded-md">PAY-{new Date().getFullYear()}-XXXXX</span>
               <span className="text-[10px] font-mono text-blue-600 bg-white px-2 py-1 rounded-md">RCPT-{new Date().getFullYear()}-XXXXX</span>
@@ -1531,7 +1531,7 @@ export function Finance() {
           </FormField>
         </div>
         <FormField label="Notes">
-          <textarea placeholder="Optional notes about the sponsor..." value={spForm.notes} onChange={(e) => setSpForm({ ...spForm, notes: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
+          <textarea placeholder="Optional notes about the sponsor..." value={spForm.notes} onChange={(e) => setSpForm({ ...spForm, notes: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
         </FormField>
         <ModalActions onCancel={() => setIsSponsorModalOpen(false)} onSubmit={() => {}} submitLabel="Add Sponsor" />
       </form>
@@ -1565,7 +1565,7 @@ export function Finance() {
           </FormField>
         </div>
         <FormField label="Description">
-          <textarea placeholder="Describe the scholarship..." value={scForm.description} onChange={(e) => setScForm({ ...scForm, description: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
+          <textarea placeholder="Describe the scholarship..." value={scForm.description} onChange={(e) => setScForm({ ...scForm, description: e.target.value })} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm font-medium resize-none" />
         </FormField>
         <ModalActions onCancel={() => setIsScholarshipModalOpen(false)} onSubmit={() => {}} submitLabel="Add Scholarship" />
       </form>
@@ -1591,7 +1591,7 @@ export function Finance() {
       {/* Error Header */}
       <AnimatePresence>
         {errorHeader && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className={cn('mx-6 mt-4 p-4 rounded-2xl border flex items-center gap-3', errorHeader.type === 'error' ? 'bg-rose-50 border-rose-100' : 'bg-amber-50 border-amber-100')}>
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className={cn('mx-6 mt-4 p-4 rounded-lg border flex items-center gap-3', errorHeader.type === 'error' ? 'bg-rose-50 border-rose-100' : 'bg-amber-50 border-amber-100')}>
             <AlertCircle className={cn('w-5 h-5', errorHeader.type === 'error' ? 'text-rose-500' : 'text-amber-500')} />
             <p className={cn('text-sm font-medium', errorHeader.type === 'error' ? 'text-rose-700' : 'text-amber-700')}>{errorHeader.message}</p>
             <button onClick={() => setErrorHeader(null)} className="ml-auto p-1 rounded-lg hover:bg-white/50 transition-all"><X className="w-4 h-4" /></button>
@@ -1620,7 +1620,7 @@ export function Finance() {
               key={tab.id}
               onClick={() => { setActiveTab(tab.id); setSearchQuery(''); }}
               className={cn(
-                'flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all border-b-2 -mb-px',
+                'flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wide whitespace-nowrap transition-all border-b-2 -mb-px',
                 activeTab === tab.id
                   ? 'text-blue-600 border-blue-500'
                   : 'text-slate-400 border-transparent hover:text-slate-600 hover:border-slate-200',

@@ -66,7 +66,7 @@ const THEOLOGICAL_DEGREES = ['B.Th', 'B.D.', 'M.Div', 'M.Th', 'Th.M', 'PhD', 'D.
 function FormField({ label, children, required = false, span = 1 }: { label: string; children: React.ReactNode; required?: boolean; span?: number }) {
   return (
     <div className={cn(span === 2 && "col-span-2")}>
-      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 mb-2 block">
+      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 mb-2 block">
         {label} {required && <span className="text-rose-400">*</span>}
       </label>
       {children}
@@ -82,8 +82,8 @@ function InputField({ label, value, onChange, type = 'text', placeholder, requir
     <FormField label={label} required={required} span={span}>
       <input type={type} value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} disabled={disabled}
         className={cn(
-          "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-bold text-sm transition-all",
-          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-4 focus:ring-blue-100",
+          "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-bold text-sm transition-all",
+          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-2 focus:ring-blue-100",
           type === 'number' && "font-mono"
         )} />
     </FormField>
@@ -97,7 +97,7 @@ function SelectField({ label, value, onChange, options, required, span }: {
   return (
     <FormField label={label} required={required} span={span}>
       <select value={value ?? ''} onChange={e => onChange(e.target.value)}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[11px] font-black uppercase tracking-widest appearance-none transition-all focus:bg-white focus:ring-4 focus:ring-blue-100">
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-[11px] font-black uppercase tracking-wide appearance-none transition-all focus:bg-white focus:ring-2 focus:ring-blue-100">
         <option value="">Select...</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -112,7 +112,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3, span }: 
   return (
     <FormField label={label} span={span}>
       <textarea value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-medium text-sm transition-all focus:bg-white focus:ring-4 focus:ring-blue-100 resize-none placeholder:text-slate-300" />
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-medium text-sm transition-all focus:bg-white focus:ring-2 focus:ring-blue-100 resize-none placeholder:text-slate-300" />
     </FormField>
   );
 }
@@ -125,7 +125,7 @@ function CheckboxGroup({ label, options, selected, onToggle }: {
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onToggle(opt)}
-            className={cn("px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all border",
+            className={cn("px-3 py-1.5 rounded-xl text-xs font-medium uppercase tracking-wider transition-all border",
               selected.includes(opt)
                 ? "bg-blue-50 text-blue-600 border-blue-200"
                 : "bg-slate-50 text-slate-400 border-slate-100 hover:bg-slate-100"
@@ -141,14 +141,14 @@ function CheckboxGroup({ label, options, selected, onToggle }: {
 function SectionHeader({ section, isOpen, onToggle, sectionIndex }: { section: SectionDef; isOpen: boolean; onToggle: () => void; sectionIndex: number }) {
   return (
     <button type="button" onClick={onToggle}
-      className="w-full flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-all group">
+      className="w-full flex items-center justify-between p-6 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-all group">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
           <section.icon className="w-5 h-5 text-blue-600" />
         </div>
         <div className="text-left">
           <div className="flex items-center gap-3">
-            <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Section {sectionIndex + 1}</span>
+            <span className="text-xs font-medium text-slate-300 uppercase tracking-wide">Section {sectionIndex + 1}</span>
           </div>
           <h3 className="text-base font-bold text-slate-900 italic-serif">{section.label}</h3>
           <p className="text-[10px] text-slate-400 mt-0.5">{section.description}</p>
@@ -289,11 +289,11 @@ export function TeacherEnrollment() {
       {/* Page Header */}
       <div className="border-b border-slate-100 pb-10">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Teacher Management</span>
+          <span className="text-xs font-medium uppercase  text-blue-600">Teacher Management</span>
           <ChevronRight className="w-3 h-3 text-slate-300" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{editId ? 'Edit Profile' : 'New Enrollment'}</span>
+          <span className="text-xs font-medium uppercase  text-slate-400">{editId ? 'Edit Profile' : 'New Enrollment'}</span>
         </div>
-        <h1 className="text-4xl font-bold text-slate-950 tracking-tight italic-serif">
+        <h1 className="text-xl font-semibold text-slate-900">
           {editId ? 'Edit Teacher Profile' : 'Teacher Enrollment'}
         </h1>
         <p className="text-slate-500 text-sm mt-1 max-w-lg">
@@ -305,16 +305,16 @@ export function TeacherEnrollment() {
       <AnimatePresence>
         {error && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-2xl flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
-              <div className="flex items-center gap-3"><X className="w-5 h-5" /><span className="text-[10px] font-black uppercase tracking-widest">{error}</span></div>
+            <div className="p-4 rounded-lg flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
+              <div className="flex items-center gap-3"><X className="w-5 h-5" /><span className="text-xs font-medium uppercase tracking-wide">{error}</span></div>
               <button onClick={() => setError(null)}><X className="w-4 h-4" /></button>
             </div>
           </motion.div>
         )}
         {success && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-2xl shadow-lg bg-emerald-50 border border-emerald-100 text-emerald-700">
-              <span className="text-[10px] font-black uppercase tracking-widest">Teacher profile saved successfully! Redirecting...</span>
+            <div className="p-4 rounded-lg shadow-lg bg-emerald-50 border border-emerald-100 text-emerald-700">
+              <span className="text-xs font-medium uppercase tracking-wide">Teacher profile saved successfully! Redirecting...</span>
             </div>
           </motion.div>
         )}
@@ -325,7 +325,7 @@ export function TeacherEnrollment() {
         {/* Photo Upload Section */}
         <div className="flex justify-center py-6">
           <div className="relative group cursor-pointer w-28 h-28">
-            <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
               {formData.photoUrl ? (
                 <img src={formData.photoUrl} alt="Preview" className="w-full h-full object-cover" />
               ) : (
@@ -334,7 +334,7 @@ export function TeacherEnrollment() {
             </div>
             <input type="file" accept="image/*" onChange={handlePhotoUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-            <div className="absolute -bottom-2 bg-white px-3 py-0.5 rounded-full border border-slate-200 text-[8px] font-black uppercase tracking-widest shadow-sm left-1/2 transform -translate-x-1/2 flex items-center gap-1">
+            <div className="absolute -bottom-2 bg-white px-3 py-0.5 rounded-full border border-slate-200 text-xs font-medium uppercase tracking-wide shadow-sm left-1/2 transform -translate-x-1/2 flex items-center gap-1">
               <Camera className="w-3 h-3" /> Upload Photo
             </div>
           </div>
@@ -347,7 +347,7 @@ export function TeacherEnrollment() {
             {openSections.has('basic') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Full Legal Name" value={formData.name} onChange={v => updateField('name', v)} required placeholder="e.g. Dr. Samuel Johnson" span={2} />
                     <SelectField label="Gender" value={formData.gender} onChange={v => updateField('gender', v)}
@@ -371,14 +371,14 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('contact') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Email Address" value={formData.email} onChange={v => updateField('email', v)} required type="email" placeholder="email@institution.com" />
                     <InputField label="Phone Number" value={formData.phone} onChange={v => updateField('phone', v)} required type="tel" placeholder="+91 98765 43210" />
                     <TextAreaField label="Full Address" value={formData.address} onChange={v => updateField('address', v)} placeholder="Street, City, State, PIN" span={2} />
                   </div>
                   <div className="border-t border-slate-100 pt-6">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 pl-1">Emergency Contact</p>
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4 pl-1">Emergency Contact</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <InputField label="Emergency Contact Name" value={formData.emergencyContact?.name} onChange={v => setFormData(prev => ({ ...prev, emergencyContact: { ...prev.emergencyContact!, name: v } }))} placeholder="Name" />
                       <InputField label="Emergency Contact Phone" value={formData.emergencyContact?.phone} onChange={v => setFormData(prev => ({ ...prev, emergencyContact: { ...prev.emergencyContact!, phone: v } }))} placeholder="Phone" />
@@ -397,11 +397,11 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('spiritual') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Date of Conversion" value={formData.spiritual?.conversionDate} onChange={v => updateNested('spiritual', 'conversionDate', v)} type="date" />
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Baptized?</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Baptized?</label>
                       <div className="flex items-center gap-4">
                         <label className="flex items-center gap-2 cursor-pointer">
                           <input type="checkbox" checked={formData.spiritual?.isBaptized || false}
@@ -434,7 +434,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('qualifications') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Highest Qualification" value={formData.qualifications?.highestQualification} onChange={v => updateNested('qualifications', 'highestQualification', v)}
                       options={[
@@ -466,7 +466,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('employment') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Employee ID (Auto-generated if empty)" value={formData.employment?.employeeId} onChange={v => updateNested('employment', 'employeeId', v)} disabled={!!editId} />
                     <SelectField label="Role" value={formData.employment?.role} onChange={v => updateNested('employment', 'role', v)}
@@ -502,7 +502,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('ministry') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg border border-amber-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Calling Type" value={formData.ministry?.callingType} onChange={v => updateNested('ministry', 'callingType', v)}
                       options={[
@@ -536,8 +536,8 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('payroll') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 p-3 rounded-xl flex items-center gap-2">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
+                  <p className="text-xs font-medium text-blue-600 uppercase tracking-wide bg-blue-50 p-3 rounded-xl flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4" /> All financial data is encrypted end-to-end
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -549,7 +549,7 @@ export function TeacherEnrollment() {
                     <InputField label="Tax" value={formData.payroll?.salaryStructure?.tax} onChange={v => updateNested('payroll', 'salaryStructure', { ...formData.payroll?.salaryStructure, tax: parseFloat(v) || 0 })} type="number" />
                   </div>
                   <div className="border-t border-slate-100 pt-6">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 pl-1">Bank Details</p>
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4 pl-1">Bank Details</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <InputField label="Bank Name" value={formData.payroll?.bankDetails?.bankName} onChange={v => updateNested('payroll', 'bankDetails', { ...formData.payroll?.bankDetails, bankName: v })} placeholder="Bank Name" />
                       <InputField label="Account Number" value={formData.payroll?.bankDetails?.accountNumber} onChange={v => updateNested('payroll', 'bankDetails', { ...formData.payroll?.bankDetails, accountNumber: v })} placeholder="Account No." />
@@ -574,10 +574,10 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('accommodation') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Hostel / Staff Quarters Assigned</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Hostel / Staff Quarters Assigned</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.accommodation?.hostelAssigned || false}
                           onChange={e => updateNested('accommodation', 'hostelAssigned', e.target.checked)}
@@ -586,7 +586,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Transport Facility</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Transport Facility</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.accommodation?.transportFacility || false}
                           onChange={e => updateNested('accommodation', 'transportFacility', e.target.checked)}
@@ -608,7 +608,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('medical') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <TextAreaField label="Health Conditions" value={formData.medical?.healthConditions} onChange={v => updateNested('medical', 'healthConditions', v)} placeholder="Any known conditions..." />
                     <TextAreaField label="Emergency Medical Info" value={formData.medical?.emergencyMedicalInfo} onChange={v => updateNested('medical', 'emergencyMedicalInfo', v)} placeholder="Blood group, allergies, etc." />
@@ -629,8 +629,8 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('documents') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Upload URLs for documents (Firebase Storage integration coming soon)</p>
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
+                  <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Upload URLs for documents (Firebase Storage integration coming soon)</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="ID Proof URL" value={formData.documents?.idProofUrl} onChange={v => updateNested('documents', 'idProofUrl', v)} placeholder="https://..." />
                     <InputField label="Aadhaar / Passport URL" value={formData.documents?.aadhaarOrPassportUrl} onChange={v => updateNested('documents', 'aadhaarOrPassportUrl', v)} placeholder="https://..." />
@@ -649,8 +649,8 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('performance') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Initial Performance Scores (1-10 scale)</p>
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
+                  <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Initial Performance Scores (1-10 scale)</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Teaching Quality Score" value={formData.performance?.teachingQualityScore} onChange={v => updateNested('performance', 'teachingQualityScore', parseInt(v) || 0)} type="number" />
                     <InputField label="Ministry Impact Score" value={formData.performance?.ministryImpactScore} onChange={v => updateNested('performance', 'ministryImpactScore', parseInt(v) || 0)} type="number" />
@@ -669,7 +669,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('teaching') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Class / Batch" value={formData.teachingConfig?.classBatch} onChange={v => updateNested('teachingConfig', 'classBatch', v)} placeholder="e.g. 2024-Batch A" />
                     <InputField label="Weekly Lecture Hours" value={formData.teachingConfig?.weeklyLectureHours} onChange={v => updateNested('teachingConfig', 'weeklyLectureHours', parseInt(v) || 0)} type="number" />
@@ -696,7 +696,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('attendance') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Casual Leave Balance" value={formData.attendanceConfig?.casualLeave} onChange={v => updateNested('attendanceConfig', 'casualLeave', parseInt(v) || 0)} type="number" />
                     <InputField label="Medical Leave Balance" value={formData.attendanceConfig?.medicalLeave} onChange={v => updateNested('attendanceConfig', 'medicalLeave', parseInt(v) || 0)} type="number" />
@@ -728,7 +728,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('permissions') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-50 rounded-2xl border border-blue-200 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-50 rounded-lg border border-blue-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="System Role" value={formData.adminConfig?.systemRole} onChange={v => updateNested('adminConfig', 'systemRole', v)}
                       options={[
@@ -763,10 +763,10 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('content') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Can Upload Lecture Notes</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Upload Lecture Notes</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canUploadLectureNotes || false}
                           onChange={e => updateNested('contentConfig', 'canUploadLectureNotes', e.target.checked)}
@@ -775,7 +775,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Can Create Video Classes</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Video Classes</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateVideoClasses || false}
                           onChange={e => updateNested('contentConfig', 'canCreateVideoClasses', e.target.checked)}
@@ -784,7 +784,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Can Create Assignments</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Assignments</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateAssignments || false}
                           onChange={e => updateNested('contentConfig', 'canCreateAssignments', e.target.checked)}
@@ -793,7 +793,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Can Create Exams</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Exams</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateExams || false}
                           onChange={e => updateNested('contentConfig', 'canCreateExams', e.target.checked)}
@@ -802,7 +802,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Can Submit Grades</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Submit Grades</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.contentConfig?.canSubmitGrades || false}
                           onChange={e => updateNested('contentConfig', 'canSubmitGrades', e.target.checked)}
@@ -832,7 +832,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('admin') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-slate-50 to-gray-50 rounded-2xl border border-slate-200 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-slate-50 to-gray-50 rounded-lg border border-slate-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Approval Status" value={formData.status} onChange={v => updateField('status', v)}
                       options={[
@@ -844,7 +844,7 @@ export function TeacherEnrollment() {
                     {!editId && <p className="text-[9px] text-amber-500 font-bold col-span-2 pl-1">Approval status can only be changed in edit mode</p>}
                     <TextAreaField label="Assigned Institutions (comma-separated)" value={formData.adminConfig?.assignedInstitutions} onChange={v => updateNested('adminConfig', 'assignedInstitutions', v)} placeholder="e.g. Main Campus, Extension Center" />
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Activity Monitoring Enabled</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Activity Monitoring Enabled</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.activityMonitoring || false}
                           onChange={e => updateNested('adminConfig', 'activityMonitoring', e.target.checked)}
@@ -853,7 +853,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Login Tracking Enabled</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Login Tracking Enabled</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.loginTracking || false}
                           onChange={e => updateNested('adminConfig', 'loginTracking', e.target.checked)}
@@ -862,7 +862,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Two-Factor Authentication Required</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Two-Factor Authentication Required</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.twoFactorAuth || false}
                           onChange={e => updateNested('adminConfig', 'twoFactorAuth', e.target.checked)}
@@ -887,13 +887,13 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('security') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl border border-emerald-100 space-y-6">
-                  <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 p-3 rounded-xl flex items-center gap-2 border border-emerald-100">
+                <div className="p-8 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-emerald-100 space-y-6">
+                  <p className="text-xs font-medium text-emerald-600 uppercase tracking-wide bg-emerald-50 p-3 rounded-xl flex items-center gap-2 border border-emerald-100">
                     <Lock className="w-4 h-4" /> All sensitive data is encrypted end-to-end by default
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Personal Data Encrypted</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Personal Data Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.personalDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -901,7 +901,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Spiritual Records Encrypted</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Spiritual Records Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.spiritualDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -909,7 +909,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Financial Data Encrypted</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Financial Data Encrypted</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.financialDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -924,7 +924,7 @@ export function TeacherEnrollment() {
                         { value: 'Permanent', label: 'Permanent' },
                       ]} />
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Data Sharing Consent</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Data Sharing Consent</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.dataSharingConsent || false}
                           onChange={e => updateNested('securityConfig', 'dataSharingConsent', e.target.checked)}
@@ -933,7 +933,7 @@ export function TeacherEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">GDPR / Data Protection Compliant</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">GDPR / Data Protection Compliant</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.gdprCompliant || false}
                           onChange={e => updateNested('securityConfig', 'gdprCompliant', e.target.checked)}
@@ -951,11 +951,11 @@ export function TeacherEnrollment() {
         {/* ============================== SUBMIT ============================== */}
         <div className="flex items-center justify-between pt-6 border-t border-slate-100">
           <button type="button" onClick={() => navigate('/teachers')}
-            className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-widest">
+            className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-wide">
             Cancel
           </button>
           <button type="submit" disabled={isSaving}
-            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2  disabled:opacity-50 disabled:cursor-not-allowed">
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Saving...' : editId ? 'Update Profile' : 'Enroll Teacher'}</span>
           </button>

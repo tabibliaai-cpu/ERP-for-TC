@@ -151,7 +151,7 @@ const SuccessModal: React.FC<{
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md w-full max-w-md mx-4 overflow-hidden">
         <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-white">
           <div className="flex items-center gap-3">
             <div className="bg-white/20 rounded-full p-2">
@@ -223,7 +223,7 @@ function EmptyState({ icon: Icon, title, description }: { icon: React.ElementTyp
 // ─── Glass Card ───
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
       {children}
     </div>
   );
@@ -770,7 +770,7 @@ export function SuperAdmin() {
       </div>
 
       {/* ─── Tab Content ─── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-4 py-3">
 
         {/* ═══════════════════════════════════════════════════════════
             TAB 1: OVERVIEW
@@ -781,7 +781,7 @@ export function SuperAdmin() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative overflow-hidden rounded-3xl bg-slate-800 p-8 text-white shadow-2xl"
+              className="relative overflow-hidden rounded-lg bg-slate-800 p-8 text-white shadow-md"
               style={{ background: '#1e293b' }}
             >
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
@@ -810,7 +810,7 @@ export function SuperAdmin() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={cn('relative overflow-hidden rounded-2xl p-5 text-white shadow-lg', kpi.color, kpi.shadow)}
+                  className={cn('relative overflow-hidden rounded-lg p-5 text-white shadow-lg', kpi.color, kpi.shadow)}
                 >
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
                   <div className="relative z-10 flex items-center justify-between">
@@ -884,7 +884,7 @@ export function SuperAdmin() {
                 { label: 'Students', value: institutions.reduce((s, i) => s + (i.studentCount || 0), 0).toLocaleString(), icon: Users, color: 'bg-sky-500' },
                 { label: 'Faculty', value: institutions.reduce((s, i) => s + (i.facultyCount || 0), 0).toLocaleString(), icon: Presentation, color: 'bg-rose-500' },
               ].map((s, i) => (
-                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-2xl p-4 text-white shadow-lg', s.color)}>
+                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-lg p-4 text-white shadow-lg', s.color)}>
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-white/80 text-xs font-medium">{s.label}</p>
@@ -976,7 +976,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'users' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-blue-700 p-6 text-white shadow-xl" style={{ background: '#1d4ed8' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-blue-700 p-6 text-white shadow-sm" style={{ background: '#1d4ed8' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Users className="w-8 h-8 text-blue-200" />
@@ -1085,7 +1085,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'features' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #059669, #0d9488, #0e7490)' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #059669, #0d9488, #0e7490)' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(20,184,166,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Layers className="w-8 h-8 text-emerald-200" />
@@ -1182,7 +1182,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'finance' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-600 via-orange-600 to-rose-600 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #d97706, #ea580c, #e11d48)' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-amber-600 via-orange-600 to-rose-600 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #d97706, #ea580c, #e11d48)' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,191,36,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -1211,7 +1211,7 @@ export function SuperAdmin() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                     className={cn(
-                      'relative overflow-hidden rounded-2xl p-6 text-white shadow-xl',
+                      'relative overflow-hidden rounded-lg p-6 text-white shadow-sm',
                       plan.id === 'basic' && 'bg-gradient-to-br from-blue-600 to-indigo-700',
                       plan.id === 'premium' && 'bg-blue-700',
                       plan.id === 'enterprise' && 'bg-gradient-to-br from-amber-500 via-orange-500 to-rose-600',
@@ -1298,7 +1298,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'security' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-slate-700 p-6 text-white shadow-xl" style={{ background: '#334155' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-slate-700 p-6 text-white shadow-sm" style={{ background: '#334155' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Shield className="w-8 h-8 text-blue-200" />
@@ -1378,7 +1378,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'announcements' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb, #4338ca)' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb, #4338ca)' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Megaphone className="w-8 h-8 text-sky-200" />
@@ -1445,7 +1445,7 @@ export function SuperAdmin() {
                   setIsCreatingAnn(false);
                 }}
                 disabled={isCreatingAnn}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 shadow-lg shadow-blue-500/25 transition-all"
+                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 shadow-lg shadow-blue-500/25 transition-all"
               >
                 {isCreatingAnn ? <><div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div> Publishing...</> : <><Bell className="w-4 h-4" /> Publish Announcement</>}
               </button>
@@ -1532,7 +1532,7 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'settings' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-700 via-gray-800 to-zinc-900 p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, #334155, #1f2937, #18181b)' }}>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-slate-700 via-gray-800 to-zinc-900 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #334155, #1f2937, #18181b)' }}>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(100,116,139,0.3),transparent_60%)]"></div>
               <div className="relative z-10 flex items-center gap-3">
                 <Settings className="w-8 h-8 text-slate-300" />
@@ -1661,7 +1661,7 @@ export function SuperAdmin() {
       {/* Add Institution Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-lg shadow-md w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
                 <div className="bg-blue-600 rounded-xl p-2">
@@ -1724,7 +1724,7 @@ export function SuperAdmin() {
       {/* Edit Institution / Provision Admin Modal */}
       {isEditModalOpen && selectedInstitution && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-lg shadow-md w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
                 <div className="bg-blue-600 rounded-xl p-2">
@@ -1820,7 +1820,7 @@ export function SuperAdmin() {
       {/* ─── IMPERSONATION MODAL ─── */}
       {impersonateModalOpen && impersonateTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-md w-full max-w-md mx-4 overflow-hidden">
             <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-white">
               <div className="flex items-center gap-3">
                 <div className="bg-white/20 rounded-full p-2">
@@ -1886,7 +1886,7 @@ export function SuperAdmin() {
       {/* ─── ACTIVE TOKENS PANEL ─── */}
       {showActiveTokens && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-md w-full max-w-lg mx-4 overflow-hidden">
             <div className="bg-blue-700 p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <KeyRound className="w-6 h-6" />

@@ -171,7 +171,7 @@ function GlassCard({ children, className }: { children: React.ReactNode; classNa
   return (
     <div
       className={cn(
-        'bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20',
+        'bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20',
         className,
       )}
     >
@@ -188,7 +188,7 @@ function GradientButton({
   return (
     <button
       className={cn(
-        'bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold',
+        'bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold',
         'hover:from-blue-700 hover:to-indigo-700 transition-all duration-200',
         'shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none',
@@ -306,7 +306,7 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
         transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
         className="relative mb-8"
       >
-        <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-blue-500/30">
+        <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/30">
           <Church className="w-14 h-14 text-white" />
         </div>
         <motion.div
@@ -333,7 +333,7 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3"
+        className="text-3xl md:text-4xl font-bold bg-blue-600 bg-clip-text text-transparent mb-3"
       >
         Welcome to CovenantERP
       </motion.h1>
@@ -369,7 +369,7 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
           (feature) => (
             <span
               key={feature}
-              className="px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-xs font-medium text-blue-600"
+              className="px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-md text-xs font-medium text-blue-600"
             >
               {feature}
             </span>

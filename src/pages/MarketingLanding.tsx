@@ -453,7 +453,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
             </button>
             <button
               onClick={() => onNavigate("/login")}
-              className="rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
+              className="rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-sm hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
             >
               Get Started
             </button>
@@ -583,7 +583,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             >
               <button
                 onClick={() => onNavigate("/login")}
-                className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
+                className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-sm hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
               >
                 Get Started
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -627,8 +627,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-indigo-200 via-indigo-200 to-purple-200 opacity-40 blur-2xl" />
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-2xl shadow-indigo-500/10">
+            <div className="absolute -inset-4 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-200 to-purple-200 opacity-40 blur-2xl" />
+            <div className="relative overflow-hidden rounded-lg border border-slate-200/80 bg-white shadow-md shadow-indigo-500/10">
               <BrowserChrome url="app.covenanterp.com/dashboard" />
               <img
                 src={dashboardPreview}
@@ -653,7 +653,7 @@ function TrustSection() {
     <section className="relative bg-white py-16 px-5 border-y border-slate-100">
       <div className="mx-auto max-w-7xl">
         <FadeIn className="text-center mb-10">
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-400">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-400">
             Trusted by seminaries & Bible colleges worldwide
           </p>
         </FadeIn>
@@ -706,7 +706,7 @@ function FeaturesSection() {
       <div className="mx-auto max-w-7xl">
         <FadeIn className="mb-16 max-w-2xl">
           <SectionBadge icon={Layers}>Complete Platform</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             Six powerful modules. <GradientText>One unified system.</GradientText>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-500">
@@ -718,7 +718,7 @@ function FeaturesSection() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.07}>
-              <div className="group h-full rounded-2xl border border-slate-200/80 bg-white p-7 transition-all duration-300 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 hover:-translate-y-1">
+              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all duration-300 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 hover:-translate-y-1">
                 <div
                   className={cn(
                     "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl shadow-sm",
@@ -761,7 +761,7 @@ function UniqueValueSection() {
       <div className="relative mx-auto max-w-7xl">
         <FadeIn className="mb-16 max-w-2xl mx-auto text-center">
           <SectionBadge icon={Award}>Why CovenantERP</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             What makes us <GradientText>fundamentally different</GradientText>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-500">
@@ -777,7 +777,7 @@ function UniqueValueSection() {
               delay={i * 0.08}
               direction={i % 2 === 0 ? "right" : "left"}
             >
-              <div className="h-full rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-lg hover:border-indigo-100">
+              <div className="h-full rounded-lg border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-lg hover:border-indigo-100">
                 <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg shadow-indigo-500/15">
                   <v.icon className="h-6 w-6 text-white" />
                 </div>
@@ -809,7 +809,7 @@ function HowItWorksSection() {
       <div className="mx-auto max-w-5xl">
         <FadeIn className="mb-16 text-center">
           <SectionBadge icon={Clock}>Quick Setup</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             Up and running in <GradientText>three steps</GradientText>
           </h2>
           <p className="mt-4 text-base text-slate-500">
@@ -827,7 +827,7 @@ function HowItWorksSection() {
                   <div className="relative mb-7">
                     <div
                       className={cn(
-                        "flex h-[76px] w-[76px] items-center justify-center rounded-2xl bg-gradient-to-br shadow-xl shadow-indigo-500/15",
+                        "flex h-[76px] w-[76px] items-center justify-center rounded-lg bg-gradient-to-br shadow-sm shadow-indigo-500/15",
                         s.gradient
                       )}
                     >
@@ -865,7 +865,7 @@ function ScreensPreviewSection() {
       <div className="mx-auto max-w-7xl">
         <FadeIn className="mb-14 text-center">
           <SectionBadge icon={Monitor}>Live Preview</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             See CovenantERP <GradientText>in action</GradientText>
           </h2>
           <p className="mt-4 text-base text-slate-500">
@@ -902,7 +902,7 @@ function ScreensPreviewSection() {
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3 shadow-xl shadow-slate-200/50">
+                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 /50">
                   <div className="mb-3 rounded-xl border border-slate-100 bg-white p-2.5">
                     <BrowserChrome
                       url={`app.covenanterp.com/${SCREENS[active].title.toLowerCase().replace(/\s+/g, "-")}`}
@@ -936,7 +936,7 @@ function TestimonialsSection() {
       <div className="mx-auto max-w-7xl">
         <FadeIn className="mb-16 text-center">
           <SectionBadge icon={Star}>Social Proof</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             Trusted by <GradientText>administrators</GradientText> nationwide
           </h2>
           <p className="mt-4 text-base text-slate-500">
@@ -947,7 +947,7 @@ function TestimonialsSection() {
         <div className="grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-              <div className="group h-full rounded-2xl border border-slate-200/80 bg-white p-7 transition-all hover:shadow-lg hover:border-indigo-100 md:p-8">
+              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all hover:shadow-lg hover:border-indigo-100 md:p-8">
                 <Quote className="mb-5 h-7 w-7 text-indigo-100" />
                 <p className="mb-6 text-sm leading-relaxed text-slate-600 italic">
                   &ldquo;{t.quote}&rdquo;
@@ -990,7 +990,7 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
       <div className="mx-auto max-w-6xl">
         <FadeIn className="mb-16 text-center">
           <SectionBadge icon={DollarSign}>Pricing</SectionBadge>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-4xl">
             Simple, transparent <GradientText>pricing</GradientText>
           </h2>
           <p className="mt-4 text-base text-slate-500">
@@ -1004,9 +1004,9 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
             <FadeIn key={plan.name} delay={i * 0.1}>
               <div
                 className={cn(
-                  "relative flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-all hover:shadow-xl",
+                  "relative flex h-full flex-col rounded-lg border p-7 md:p-8 transition-all hover:shadow-sm",
                   plan.highlighted
-                    ? "border-indigo-200 bg-white shadow-2xl shadow-indigo-500/10 scale-[1.02]"
+                    ? "border-indigo-200 bg-white shadow-md shadow-indigo-500/10 scale-[1.02]"
                     : "border-slate-200 bg-white hover:border-indigo-100"
                 )}
               >
@@ -1055,7 +1055,7 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
                   className={cn(
                     "w-full rounded-xl py-3.5 text-sm font-semibold transition-all active:scale-[0.98]",
                     plan.highlighted
-                      ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:brightness-110"
+                      ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-sm hover:shadow-indigo-500/30 hover:brightness-110"
                       : "border border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50"
                   )}
                 >
@@ -1095,7 +1095,7 @@ function FinalCTASection({ onNavigate }: { onNavigate: (path: string) => void })
           </p>
           <button
             onClick={() => onNavigate("/login")}
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-indigo-700 shadow-xl transition-all hover:bg-indigo-50 hover:shadow-2xl active:scale-[0.98]"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-indigo-700 shadow-sm transition-all hover:bg-indigo-50 hover:shadow-md active:scale-[0.98]"
           >
             Get Started
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

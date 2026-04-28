@@ -648,7 +648,7 @@ export default function AcademicConfig() {
       pending: 'bg-yellow-50 text-yellow-600',
     };
     return (
-      <span className={cn('px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase', map[status] || 'bg-slate-100 text-slate-500')}>
+      <span className={cn('px-2.5 py-1 rounded-lg text-xs font-medium tracking-wide uppercase', map[status] || 'bg-slate-100 text-slate-500')}>
         {status}
       </span>
     );
@@ -660,7 +660,7 @@ export default function AcademicConfig() {
       <div className="flex items-center justify-center min-h-screen bg-[#F8FAFC]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin" />
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Loading Configuration System...</p>
+          <p className="text-xs font-medium uppercase  text-slate-400">Loading Configuration System...</p>
         </div>
       </div>
     );
@@ -672,14 +672,14 @@ export default function AcademicConfig() {
       {/* ── Header ── */}
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-[1600px] mx-auto px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-wide">
             <GraduationCap className="w-4 h-4" />
             <span>Academic Setup</span>
             <ChevronRight className="w-3 h-3" />
             <span className="text-slate-900">Configuration System</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
               {user?.name || 'Administrator'}
             </span>
             <div className="w-8 h-8 bg-slate-900 text-white rounded-xl flex items-center justify-center text-[10px] font-bold">
@@ -699,12 +699,12 @@ export default function AcademicConfig() {
             { label: 'Curriculum Maps', value: curriculums.length, icon: LayoutGrid, color: 'text-rose-600', bg: 'bg-rose-50' },
           ].map((s, i) => (
             <div key={i} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-5 flex items-center gap-4">
-              <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center', s.bg)}>
+              <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', s.bg)}>
                 <s.icon className={cn('w-5 h-5', s.color)} />
               </div>
               <div>
                 <p className="text-2xl font-bold text-slate-900">{s.value}</p>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{s.label}</p>
+                <p className="text-xs font-medium uppercase  text-slate-400">{s.label}</p>
               </div>
             </div>
           ))}
@@ -720,7 +720,7 @@ export default function AcademicConfig() {
                   key={tab.id}
                   onClick={() => { setActiveTab(tab.id); setSearchQuery(''); }}
                   className={cn(
-                    'flex items-center gap-2.5 px-5 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.15em] transition-all whitespace-nowrap',
+                    'flex items-center gap-2.5 px-5 py-3 rounded-lg text-xs font-medium uppercase  transition-all whitespace-nowrap',
                     activeTab === tab.id
                       ? 'bg-slate-900 text-white shadow-lg'
                       : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50'
@@ -742,7 +742,7 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Program Builder</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Manage degree & certificate programs
                 </p>
               </div>
@@ -753,13 +753,13 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search programs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
                   onClick={() => { resetProgramForm(); openDrawer('program'); }}
                   disabled={!canEdit}
-                  className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <Plus className="w-4 h-4" /> {canEdit ? 'Create Program' : (canSuggest ? 'Suggest Program' : 'View Only')}
                 </button>
@@ -772,10 +772,10 @@ export default function AcademicConfig() {
                   !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((p) => (
-                  <div key={p.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
+                  <div key={p.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black tracking-widest uppercase">
+                        <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium tracking-wide uppercase">
                           {p.level}
                         </span>
                         <StatusBadge status={p.status} />
@@ -796,42 +796,42 @@ export default function AcademicConfig() {
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{p.name}</h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">{p.code}</p>
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{p.code}</p>
                     <div className="grid grid-cols-3 gap-3 mb-4">
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">{p.durationYears}Y</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Duration</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Duration</p>
                       </div>
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">{p.totalCredits}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Credits</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Credits</p>
                       </div>
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">{p.durationSemesters}S</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Pattern</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Pattern</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
                       {p.enableMinistryPracticum && (
-                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-lg text-[7px] font-black uppercase tracking-widest">Practicum</span>
+                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Practicum</span>
                       )}
                       {p.enableInternship && (
-                        <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-widest">Internship</span>
+                        <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Internship</span>
                       )}
                       {p.enableThesis && (
-                        <span className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-lg text-[7px] font-black uppercase tracking-widest">Thesis</span>
+                        <span className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Thesis</span>
                       )}
                     </div>
                     <div className="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {p.isMasterProgram && (
-                          <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-widest flex items-center gap-1">
+                          <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-wide flex items-center gap-1">
                             <Globe className="w-2.5 h-2.5" /> Shared
                           </span>
                         )}
-                        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{p.creditSystem} credits &middot; {p.gradingSystem}</span>
+                        <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{p.creditSystem} credits &middot; {p.gradingSystem}</span>
                       </div>
-                      <span className="text-[9px] font-black text-blue-500">v{p.version}</span>
+                      <span className="text-xs font-medium text-blue-500">v{p.version}</span>
                     </div>
                   </div>
                 ))}
@@ -842,7 +842,7 @@ export default function AcademicConfig() {
                 <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                   <div className="text-center">
                     <GraduationCap className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No programs configured yet</p>
+                    <p className="text-xs font-medium uppercase  text-slate-300">No programs configured yet</p>
                   </div>
                 </div>
               )}
@@ -858,7 +858,7 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Course Builder</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Design and manage academic courses
                 </p>
               </div>
@@ -869,12 +869,12 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search courses..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
                   onClick={() => { resetCourseForm(); openDrawer('course'); }}
-                  className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2"
+                  className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" /> Create Course
                 </button>
@@ -887,10 +887,10 @@ export default function AcademicConfig() {
                   !searchQuery || c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((c) => (
-                  <div key={c.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
+                  <div key={c.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <span className={cn(
-                        'px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase',
+                        'px-2.5 py-1 rounded-lg text-xs font-medium tracking-wide uppercase',
                         c.courseType === 'core' ? 'bg-blue-50 text-blue-600' :
                         c.courseType === 'elective' ? 'bg-amber-50 text-amber-600' :
                         'bg-slate-100 text-slate-500'
@@ -903,30 +903,30 @@ export default function AcademicConfig() {
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{c.name}</h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">{c.code}</p>
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{c.code}</p>
                     <div className="grid grid-cols-3 gap-3 mb-4">
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">{c.credits}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Credits</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Credits</p>
                       </div>
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">L{c.level || 1}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Level</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Level</p>
                       </div>
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">{c.prerequisites?.length || 0}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Prereqs</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Prereqs</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <StatusBadge status={c.status} />
                       <div className="flex items-center gap-2">
                         {depWarnings.find((dw) => dw.courseId === c.id) && (
-                          <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-50 text-amber-600 rounded-lg text-[7px] font-black uppercase tracking-widest">
+                          <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-50 text-amber-600 rounded-lg text-[7px] font-black uppercase tracking-wide">
                             <AlertTriangle className="w-2.5 h-2.5" /> Dep Issue
                           </span>
                         )}
-                        <span className="text-[9px] font-black text-blue-500">v{c.version}</span>
+                        <span className="text-xs font-medium text-blue-500">v{c.version}</span>
                       </div>
                     </div>
                   </div>
@@ -938,7 +938,7 @@ export default function AcademicConfig() {
                 <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                   <div className="text-center">
                     <BookOpen className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No courses configured yet</p>
+                    <p className="text-xs font-medium uppercase  text-slate-300">No courses configured yet</p>
                   </div>
                 </div>
               )}
@@ -954,7 +954,7 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Curriculum Designer</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Build semester-wise curriculum maps
                 </p>
               </div>
@@ -975,7 +975,7 @@ export default function AcademicConfig() {
                       });
                     }
                   }}
-                  className="px-5 py-3 bg-white border border-slate-100 rounded-2xl text-sm outline-none focus:ring-8 focus:ring-blue-100 transition-all appearance-none cursor-pointer font-medium"
+                  className="px-5 py-3 bg-white border border-slate-100 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer font-medium"
                 >
                   <option value="">Select Program</option>
                   {programs.map((p) => (
@@ -986,7 +986,7 @@ export default function AcademicConfig() {
                   <button
                     onClick={handleAIGenerateCurriculum}
                     disabled={!selectedProgramId || isGeneratingAI}
-                    className="px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-purple-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-100"
+                    className="px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-purple-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-100"
                   >
                     {isGeneratingAI ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -1000,7 +1000,7 @@ export default function AcademicConfig() {
                   <button
                     onClick={handleAISuggestCourses}
                     disabled={!selectedProgramId || isGeneratingAI}
-                    className="px-5 py-3 bg-white border border-blue-200 text-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="px-5 py-3 bg-white border border-blue-200 text-blue-600 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-blue-50 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <Zap className="w-4 h-4" /> AI Suggest
                   </button>
@@ -1015,7 +1015,7 @@ export default function AcademicConfig() {
                     openDrawer('curriculum');
                   }}
                   disabled={!selectedProgramId || !canEdit}
-                  className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <Plus className="w-4 h-4" /> Create Curriculum
                 </button>
@@ -1024,7 +1024,7 @@ export default function AcademicConfig() {
               {/* AI Status Banner */}
               {(aiStatusMessage || depWarnings.length > 0) && (
                 <div className={cn(
-                  "p-4 rounded-2xl flex items-center gap-3 border",
+                  "p-4 rounded-lg flex items-center gap-3 border",
                   depWarnings.length > 0 ? "bg-amber-50 border-amber-100" : "bg-blue-50 border-blue-200"
                 )}>
                   {depWarnings.length > 0 ? <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" /> : <Sparkles className="w-5 h-5 text-blue-500 shrink-0" />}
@@ -1050,14 +1050,14 @@ export default function AcademicConfig() {
                       <Sparkles className="w-5 h-5 text-blue-600" />
                       <h3 className="text-sm font-bold text-slate-900">AI-Recommended Courses</h3>
                     </div>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">{aiSuggestions.length} suggestions</span>
+                    <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">{aiSuggestions.length} suggestions</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {aiSuggestions.map((s, idx) => (
-                      <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-4 flex items-center justify-between">
+                      <div key={idx} className="bg-white rounded-lg border border-slate-100 p-4 flex items-center justify-between">
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-slate-900 truncate">{s.name}</p>
-                          <p className="text-[9px] font-black uppercase text-slate-400">{s.code} &middot; {s.credits}cr &middot; {s.type}</p>
+                          <p className="text-xs font-medium uppercase text-slate-400">{s.code} &middot; {s.credits}cr &middot; {s.type}</p>
                           <p className="text-[9px] text-slate-500 mt-1 truncate">{s.rationale}</p>
                         </div>
                         <button
@@ -1079,11 +1079,11 @@ export default function AcademicConfig() {
               {curriculums
                 .filter((c) => !selectedProgramId || c.programId === selectedProgramId)
                 .map((cur) => (
-                  <div key={cur.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all duration-300">
+                  <div key={cur.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300">
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <StatusBadge status={cur.status} />
-                        <span className="text-[9px] font-black text-blue-500 ml-2">v{cur.version}</span>
+                        <span className="text-xs font-medium text-blue-500 ml-2">v{cur.version}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <button
@@ -1109,7 +1109,7 @@ export default function AcademicConfig() {
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{cur.programName}</h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">
                       {cur.academicYear} &middot; Batch {cur.batch || 'N/A'} &middot; {cur.semesters.length} Semesters
                     </p>
                     <div className="space-y-2 max-h-48 overflow-y-auto">
@@ -1121,7 +1121,7 @@ export default function AcademicConfig() {
                       ))}
                     </div>
                     <div className="mt-4 pt-3 border-t border-slate-50 text-right">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Total: {cur.totalCredits} credits</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Total: {cur.totalCredits} credits</span>
                     </div>
                   </div>
                 ))}
@@ -1130,7 +1130,7 @@ export default function AcademicConfig() {
                 <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                   <div className="text-center">
                     <LayoutGrid className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
+                    <p className="text-xs font-medium uppercase  text-slate-300">
                       {selectedProgramId ? 'No curricula for this program' : 'Select a program to view curricula'}
                     </p>
                   </div>
@@ -1148,7 +1148,7 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Elective Selection</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Configure elective groups and pools
                 </p>
               </div>
@@ -1159,12 +1159,12 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search electives..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
                   onClick={() => { resetElectiveForm(); openDrawer('elective'); }}
-                  className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2"
+                  className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" /> Create Elective Group
                 </button>
@@ -1177,7 +1177,7 @@ export default function AcademicConfig() {
                   !searchQuery || e.name.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((e) => (
-                  <div key={e.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
+                  <div key={e.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <StatusBadge status={e.status} />
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -1186,17 +1186,17 @@ export default function AcademicConfig() {
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{e.name}</h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">
                       {e.code || 'No Code'} &middot; {getProgramName(e.programId || '')} &middot; Sem {e.semester || '-'}
                     </p>
                     <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">Min {e.minElectives}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Minimum</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Minimum</p>
                       </div>
-                      <div className="text-center p-2.5 bg-slate-50 rounded-2xl">
+                      <div className="text-center p-2.5 bg-slate-50 rounded-lg">
                         <p className="text-sm font-bold text-slate-900">Max {e.maxElectives}</p>
-                        <p className="text-[8px] font-black uppercase text-slate-400">Maximum</p>
+                        <p className="text-xs font-medium uppercase text-slate-400">Maximum</p>
                       </div>
                     </div>
                     <div className="space-y-1.5 max-h-32 overflow-y-auto">
@@ -1207,13 +1207,13 @@ export default function AcademicConfig() {
                         </div>
                       ))}
                       {e.courseIds.length > 4 && (
-                        <p className="text-[9px] font-black text-blue-500 pl-3.5">+{e.courseIds.length - 4} more courses</p>
+                        <p className="text-xs font-medium text-blue-500 pl-3.5">+{e.courseIds.length - 4} more courses</p>
                       )}
                     </div>
                     <div className="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{e.courseIds.length} courses</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{e.courseIds.length} courses</span>
                       {e.eligibilityCriteria && (
-                        <span className="text-[9px] font-black uppercase tracking-widest text-amber-500">{e.eligibilityCriteria}</span>
+                        <span className="text-xs font-medium uppercase tracking-wide text-amber-500">{e.eligibilityCriteria}</span>
                       )}
                     </div>
                   </div>
@@ -1223,7 +1223,7 @@ export default function AcademicConfig() {
                 <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                   <div className="text-center">
                     <Puzzle className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No elective groups configured</p>
+                    <p className="text-xs font-medium uppercase  text-slate-300">No elective groups configured</p>
                   </div>
                 </div>
               )}
@@ -1239,13 +1239,13 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Credits & Grades</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Configure grading systems and credit structures
                 </p>
               </div>
               <button
                 onClick={() => { resetGradingForm(); openDrawer('grading'); }}
-                className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2"
+                className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" /> Create Grading Config
               </button>
@@ -1253,22 +1253,22 @@ export default function AcademicConfig() {
 
             <div className="space-y-5">
               {gradingConfigs.map((gc) => (
-                <div key={gc.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group">
+                <div key={gc.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
+                      <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
                         <Award className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-slate-900">{gc.name}</h3>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                           {gc.type} system &middot; {gc.creditSystem} credits
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       {gc.isDefault && (
-                        <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">Default</span>
+                        <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">Default</span>
                       )}
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button onClick={() => { fillGradingForm(gc); openDrawer('grading', gc); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
@@ -1278,27 +1278,27 @@ export default function AcademicConfig() {
                   </div>
 
                   <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="p-3 bg-slate-50 rounded-2xl text-center">
+                    <div className="p-3 bg-slate-50 rounded-lg text-center">
                       <p className="text-lg font-bold text-slate-900">{gc.maxMarks}</p>
-                      <p className="text-[8px] font-black uppercase text-slate-400">Max Marks</p>
+                      <p className="text-xs font-medium uppercase text-slate-400">Max Marks</p>
                     </div>
-                    <div className="p-3 bg-slate-50 rounded-2xl text-center">
+                    <div className="p-3 bg-slate-50 rounded-lg text-center">
                       <p className="text-lg font-bold text-slate-900">{gc.passingMarks}</p>
-                      <p className="text-[8px] font-black uppercase text-slate-400">Passing Marks</p>
+                      <p className="text-xs font-medium uppercase text-slate-400">Passing Marks</p>
                     </div>
-                    <div className="p-3 bg-slate-50 rounded-2xl text-center">
+                    <div className="p-3 bg-slate-50 rounded-lg text-center">
                       <p className="text-lg font-bold text-slate-900">{gc.creditsPerSubject || '-'}</p>
-                      <p className="text-[8px] font-black uppercase text-slate-400">Credits/Subject</p>
+                      <p className="text-xs font-medium uppercase text-slate-400">Credits/Subject</p>
                     </div>
                   </div>
 
                   {/* Grade Mapping Table */}
-                  <div className="rounded-2xl border border-slate-100 overflow-hidden">
+                  <div className="rounded-lg border border-slate-100 overflow-hidden">
                     <div className="grid grid-cols-4 bg-slate-50 px-4 py-2.5">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Grade</span>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-center">Min</span>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-center">Max</span>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-right">Points</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Grade</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-center">Min</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-center">Max</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-right">Points</span>
                     </div>
                     {(gc.gradeMappings || []).map((gm, idx) => (
                       <div key={idx} className="grid grid-cols-4 px-4 py-2.5 border-t border-slate-50 hover:bg-slate-50/50 transition-colors">
@@ -1316,7 +1316,7 @@ export default function AcademicConfig() {
                 <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                   <div className="text-center">
                     <Award className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No grading configurations yet</p>
+                    <p className="text-xs font-medium uppercase  text-slate-300">No grading configurations yet</p>
                   </div>
                 </div>
               )}
@@ -1332,7 +1332,7 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Course Assignment</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Smart course-to-faculty assignment system
                 </p>
               </div>
@@ -1343,12 +1343,12 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search assignments..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
                   />
                 </div>
                 <button
                   onClick={() => { resetAssignmentForm(); openDrawer('assignment'); }}
-                  className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2"
+                  className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" /> Assign Course
                 </button>
@@ -1361,13 +1361,13 @@ export default function AcademicConfig() {
               <div className="col-span-12 lg:col-span-4">
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5">
                   <h3 className="text-sm font-bold text-slate-900 mb-1">Available Courses</h3>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-4">{courses.length} total</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{courses.length} total</p>
                   <div className="space-y-2 max-h-96 overflow-y-auto">
                     {courses.map((c) => (
                       <div key={c.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-slate-900 truncate">{c.name}</p>
-                          <p className="text-[9px] font-black uppercase text-slate-400">{c.code} &middot; {c.credits}cr</p>
+                          <p className="text-xs font-medium uppercase text-slate-400">{c.code} &middot; {c.credits}cr</p>
                         </div>
                         <StatusBadge status={c.status} />
                       </div>
@@ -1381,7 +1381,7 @@ export default function AcademicConfig() {
                 {/* Faculty Panel */}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5 mb-5">
                   <h3 className="text-sm font-bold text-slate-900 mb-1">Faculty Members</h3>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-4">{faculty.filter(f => f.status === 'active').length} active</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{faculty.filter(f => f.status === 'active').length} active</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto">
                     {faculty.filter((f) => f.status === 'active').map((f) => {
                       const workload = assignments.filter((a) => a.facultyId === f.id && a.status === 'active').length;
@@ -1392,7 +1392,7 @@ export default function AcademicConfig() {
                           </div>
                           <div className="min-w-0 flex-1">
                             <p className="text-[11px] font-bold text-slate-900 truncate">{f.name}</p>
-                            <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">{f.role} &middot; {workload} assigned</p>
+                            <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{f.role} &middot; {workload} assigned</p>
                           </div>
                         </div>
                       );
@@ -1409,21 +1409,21 @@ export default function AcademicConfig() {
                       getFacultyName(a.facultyId).toLowerCase().includes(searchQuery.toLowerCase())
                     )
                     .map((a) => (
-                      <div key={a.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 flex items-center justify-between hover:shadow-md transition-all">
+                      <div key={a.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-4 flex items-center justify-between hover:shadow-md transition-all">
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 font-bold text-sm">
                             {a.subjectCode?.[0] || '?'}
                           </div>
                           <div>
                             <p className="text-sm font-bold text-slate-900">{a.subjectName || 'Unnamed Course'}</p>
-                            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                            <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                               {getFacultyName(a.facultyId)} &middot; {a.batch || 'No Batch'} &middot; Sem {a.semester || '-'}
                             </p>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <span className={cn(
-                            'text-[9px] font-black uppercase tracking-widest',
+                            'text-xs font-medium uppercase tracking-wide',
                             a.mode === 'Online' ? 'text-blue-500' : a.mode === 'Hybrid' ? 'text-purple-500' : 'text-slate-400'
                           )}>{a.mode}</span>
                           <StatusBadge status={a.status || 'active'} />
@@ -1435,7 +1435,7 @@ export default function AcademicConfig() {
                     <div className="flex items-center justify-center py-16 border-4 border-dashed border-slate-100 rounded-[2rem]">
                       <div className="text-center">
                         <Users className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No course assignments yet</p>
+                        <p className="text-xs font-medium uppercase  text-slate-300">No course assignments yet</p>
                       </div>
                     </div>
                   )}
@@ -1453,13 +1453,13 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Version Control</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Track program changes across academic years
                 </p>
               </div>
               <button
                 onClick={() => { resetVersionForm(); openDrawer('version'); }}
-                className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center gap-2"
+                className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" /> Create Version
               </button>
@@ -1478,8 +1478,8 @@ export default function AcademicConfig() {
                       {/* Timeline dot */}
                       <div className="relative z-10 shrink-0">
                         <div className={cn(
-                          'w-16 h-16 rounded-2xl flex items-center justify-center text-sm font-bold shadow-sm',
-                          v.status === 'active' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white' :
+                          'w-16 h-16 rounded-lg flex items-center justify-center text-sm font-bold shadow-sm',
+                          v.status === 'active' ? 'bg-blue-600 text-white' :
                           v.status === 'superseded' ? 'bg-slate-200 text-slate-500' :
                           'bg-amber-100 text-amber-700'
                         )}>
@@ -1488,11 +1488,11 @@ export default function AcademicConfig() {
                       </div>
 
                       {/* Content card */}
-                      <div className="flex-1 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group">
+                      <div className="flex-1 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-lg font-bold text-slate-900">{v.programName}</h3>
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                               Version {v.version} &middot; Batch {v.effectiveBatch || 'N/A'}
                             </p>
                           </div>
@@ -1500,25 +1500,25 @@ export default function AcademicConfig() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="p-3 bg-slate-50 rounded-2xl flex items-center gap-3">
+                          <div className="p-3 bg-slate-50 rounded-lg flex items-center gap-3">
                             <CalendarDays className="w-4 h-4 text-blue-500" />
                             <div>
-                              <p className="text-[8px] font-black uppercase text-slate-400">Effective From</p>
+                              <p className="text-xs font-medium uppercase text-slate-400">Effective From</p>
                               <p className="text-xs font-bold text-slate-900">{v.effectiveFrom || 'Not set'}</p>
                             </div>
                           </div>
-                          <div className="p-3 bg-slate-50 rounded-2xl flex items-center gap-3">
+                          <div className="p-3 bg-slate-50 rounded-lg flex items-center gap-3">
                             <Layers className="w-4 h-4 text-emerald-500" />
                             <div>
-                              <p className="text-[8px] font-black uppercase text-slate-400">Semesters Snapshotted</p>
+                              <p className="text-xs font-medium uppercase text-slate-400">Semesters Snapshotted</p>
                               <p className="text-xs font-bold text-slate-900">{v.curriculumSnapshot?.length || 0} semesters</p>
                             </div>
                           </div>
                         </div>
 
                         {v.changes && (
-                          <div className="p-4 bg-slate-50 rounded-2xl">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Change Description</p>
+                          <div className="p-4 bg-slate-50 rounded-lg">
+                            <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-2">Change Description</p>
                             <p className="text-sm text-slate-600 leading-relaxed">{v.changes}</p>
                           </div>
                         )}
@@ -1530,7 +1530,7 @@ export default function AcademicConfig() {
                   <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
                     <div className="text-center">
                       <GitBranch className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No versions created yet</p>
+                      <p className="text-xs font-medium uppercase  text-slate-300">No versions created yet</p>
                     </div>
                   </div>
                 )}
@@ -1547,12 +1547,12 @@ export default function AcademicConfig() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 font-display">Course Marketplace</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-xs font-medium uppercase  text-slate-400 mt-1">
                   Multi-institution course sharing and discovery
                 </p>
               </div>
               {isSuperAdmin && (
-                <span className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest">
+                <span className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-medium uppercase tracking-wide">
                   <ShieldCheck className="w-4 h-4" /> Super Admin Access
                 </span>
               )}
@@ -1560,7 +1560,7 @@ export default function AcademicConfig() {
 
             {/* Permission Notice */}
             {isTeacher && (
-              <div className="p-4 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3">
+              <div className="p-4 bg-amber-50 border border-amber-100 rounded-lg flex items-center gap-3">
                 <Lock className="w-5 h-5 text-amber-500 shrink-0" />
                 <p className="text-xs text-amber-700 font-medium">
                   As a faculty member, you can browse the marketplace but cannot import or share courses. Contact your administrator for access.
@@ -1575,7 +1575,7 @@ export default function AcademicConfig() {
                   <Globe className="w-5 h-5 text-blue-600" />
                   <h3 className="text-sm font-bold text-slate-900">Shared Courses</h3>
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
                   {courses.filter((c) => c.isMasterCourse && c.sharedWithTenants && c.sharedWithTenants.length > 0).length} available
                 </span>
               </div>
@@ -1584,12 +1584,12 @@ export default function AcademicConfig() {
                 {courses
                   .filter((c) => c.isMasterCourse || (c.sharedWithTenants && c.sharedWithTenants.length > 0))
                   .map((c) => (
-                    <div key={c.id} className="bg-white rounded-[2.5rem] border border-blue-200 shadow-sm p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                    <div key={c.id} className="bg-white rounded-[2.5rem] border border-blue-200 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 -translate-y-8 translate-x-8 rounded-full" />
                       <div className="relative">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-2">
-                            <span className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">
+                            <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">
                               Shared
                             </span>
                             <StatusBadge status={c.status} />
@@ -1599,15 +1599,15 @@ export default function AcademicConfig() {
                           )}
                         </div>
                         <h3 className="text-lg font-bold text-slate-900 mb-1">{c.name}</h3>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">{c.code} &middot; {c.department || 'General'}</p>
+                        <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{c.code} &middot; {c.department || 'General'}</p>
                         <div className="grid grid-cols-2 gap-3 mb-4">
-                          <div className="text-center p-2.5 bg-blue-50/50 rounded-2xl">
+                          <div className="text-center p-2.5 bg-blue-50/50 rounded-lg">
                             <p className="text-sm font-bold text-blue-700">{c.credits}</p>
-                            <p className="text-[8px] font-black uppercase text-blue-400">Credits</p>
+                            <p className="text-xs font-medium uppercase text-blue-400">Credits</p>
                           </div>
-                          <div className="text-center p-2.5 bg-blue-50/50 rounded-2xl">
+                          <div className="text-center p-2.5 bg-blue-50/50 rounded-lg">
                             <p className="text-sm font-bold text-blue-700">{c.sharedWithTenants?.length || 0}</p>
-                            <p className="text-[8px] font-black uppercase text-blue-400">Shared</p>
+                            <p className="text-xs font-medium uppercase text-blue-400">Shared</p>
                           </div>
                         </div>
                         {c.description && (
@@ -1616,12 +1616,12 @@ export default function AcademicConfig() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => { fillCourseForm(c); openDrawer('course', c); }}
-                            className="flex-1 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
                           >
                             <Eye className="w-3.5 h-3.5" /> View Details
                           </button>
                           {canEdit && (
-                            <button className="flex-1 py-2.5 bg-slate-900 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5">
+                            <button className="flex-1 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5">
                               <Download className="w-3.5 h-3.5" /> Import
                             </button>
                           )}
@@ -1634,7 +1634,7 @@ export default function AcademicConfig() {
                   <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-blue-200 rounded-[2.5rem] bg-blue-50/10">
                     <div className="text-center">
                       <Globe className="w-12 h-12 text-indigo-200 mx-auto mb-3" />
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-300">No shared courses available yet</p>
+                      <p className="text-xs font-medium uppercase  text-indigo-300">No shared courses available yet</p>
                       <p className="text-[9px] text-blue-400 mt-2">Super admins can share programs and courses across institutions</p>
                     </div>
                   </div>
@@ -1657,14 +1657,14 @@ export default function AcademicConfig() {
                     .map((p) => (
                       <div key={p.id} className="bg-white rounded-[2.5rem] border border-emerald-100 shadow-sm p-6">
                         <div className="flex items-center gap-2 mb-3">
-                          <span className="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-[8px] font-black tracking-widest uppercase">Master</span>
+                          <span className="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">Master</span>
                           <StatusBadge status={p.status} />
                         </div>
                         <h3 className="text-lg font-bold text-slate-900 mb-1">{p.name}</h3>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">{p.code}</p>
+                        <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-3">{p.code}</p>
                         <div className="flex items-center justify-between pt-3 border-t border-slate-50">
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{p.durationYears}Y &middot; {p.totalCredits} credits</span>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">{p.sharedWithTenants?.length || 0} tenants</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{p.durationYears}Y &middot; {p.totalCredits} credits</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-emerald-500">{p.sharedWithTenants?.length || 0} tenants</span>
                         </div>
                       </div>
                     ))}
@@ -1673,7 +1673,7 @@ export default function AcademicConfig() {
                     <div className="col-span-full flex items-center justify-center py-12 border-4 border-dashed border-emerald-100 rounded-[2rem]">
                       <div className="text-center">
                         <Share2 className="w-8 h-8 text-emerald-200 mx-auto mb-2" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-300">No programs shared yet</p>
+                        <p className="text-xs font-medium uppercase  text-emerald-300">No programs shared yet</p>
                         <p className="text-[9px] text-emerald-400 mt-1">Toggle "Master Program" in a program to share it</p>
                       </div>
                     </div>
@@ -1703,7 +1703,7 @@ export default function AcademicConfig() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-2xl h-full bg-white shadow-2xl flex flex-col overflow-hidden"
+              className="relative w-full max-w-2xl h-full bg-white shadow-md flex flex-col overflow-hidden"
             >
               {/* Drawer Header */}
               <div className="p-8 pb-4 border-b border-slate-100 shrink-0">
@@ -1712,13 +1712,13 @@ export default function AcademicConfig() {
                     <h2 className="text-2xl font-bold text-slate-900 font-display tracking-tight">
                       {editingItem ? `Edit ${drawerType}` : `Create ${drawerType}`}
                     </h2>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mt-1">
                       Academic Configuration
                     </p>
                   </div>
                   <button
                     onClick={closeDrawer}
-                    className="w-10 h-10 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-all"
+                    className="w-10 h-10 bg-slate-50 text-slate-400 rounded-lg flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-all"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -1753,7 +1753,7 @@ export default function AcademicConfig() {
 
                     {/* Power Features */}
                     <div className="space-y-1">
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Power Features</p>
+                      <p className="text-xs font-medium uppercase  text-slate-400 mb-3">Power Features</p>
                       <ToggleRow label="Ministry Practicum" checked={programForm.enableMinistryPracticum} onChange={(v) => setProgramForm({ ...programForm, enableMinistryPracticum: v })} />
                       <ToggleRow label="Internship" checked={programForm.enableInternship} onChange={(v) => setProgramForm({ ...programForm, enableInternship: v })} />
                       <ToggleRow label="Thesis" checked={programForm.enableThesis} onChange={(v) => setProgramForm({ ...programForm, enableThesis: v })} />
@@ -1763,8 +1763,8 @@ export default function AcademicConfig() {
 
                     {/* Multi-Institution Control */}
                     {isSuperAdmin && (
-                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-200">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-3 flex items-center gap-2">
+                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-lg border border-blue-200">
+                        <p className="text-xs font-medium uppercase  text-blue-600 mb-3 flex items-center gap-2">
                           <Globe className="w-3.5 h-3.5" /> Multi-Institution Control
                         </p>
                         <ToggleRow label="Master Program (share across institutions)" checked={!!(programForm as any).isMasterProgram} onChange={handleToggleMasterProgram} />
@@ -1794,8 +1794,8 @@ export default function AcademicConfig() {
 
                     {/* Multi-Institution Control for Courses */}
                     {isSuperAdmin && (
-                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-200">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-3 flex items-center gap-2">
+                      <div className="space-y-3 p-4 bg-blue-50/50 rounded-lg border border-blue-200">
+                        <p className="text-xs font-medium uppercase  text-blue-600 mb-3 flex items-center gap-2">
                           <Globe className="w-3.5 h-3.5" /> Multi-Institution Control
                         </p>
                         <ToggleRow label="Master Course (share across institutions)" checked={!!(courseForm as any).isMasterCourse} onChange={handleToggleMasterCourse} />
@@ -1804,7 +1804,7 @@ export default function AcademicConfig() {
 
                     {/* Prerequisites Multi-Select */}
                     <div className="space-y-3">
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Prerequisites (click to toggle)</p>
+                      <p className="text-xs font-medium uppercase  text-slate-400">Prerequisites (click to toggle)</p>
                       <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">
                         {courses
                           .filter((c) => c.id !== editingItem?.id)
@@ -1857,7 +1857,7 @@ export default function AcademicConfig() {
                     {/* Semester Editor */}
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Semesters ({curriculumForm.semesters.length})</p>
+                        <p className="text-xs font-medium uppercase  text-slate-400">Semesters ({curriculumForm.semesters.length})</p>
                         {curriculumForm.programId && curriculumForm.semesters.length === 0 && (
                           <button
                             type="button"
@@ -1865,7 +1865,7 @@ export default function AcademicConfig() {
                               const prog = programs.find((p) => p.id === curriculumForm.programId);
                               if (prog) handleInitCurriculumSemesters(prog.durationSemesters);
                             }}
-                            className="text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors"
+                            className="text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors"
                           >
                             Auto-generate from program
                           </button>
@@ -1873,7 +1873,7 @@ export default function AcademicConfig() {
                       </div>
 
                       {curriculumForm.semesters.map((sem, idx) => (
-                        <div key={idx} className="bg-slate-50 rounded-2xl p-4 space-y-3">
+                        <div key={idx} className="bg-slate-50 rounded-lg p-4 space-y-3">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xs font-bold">
@@ -1881,7 +1881,7 @@ export default function AcademicConfig() {
                               </div>
                               <div>
                                 <p className="text-sm font-bold text-slate-900">{sem.semesterName}</p>
-                                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                                <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                                   {sem.courseIds.length} courses &middot; {sem.totalCredits} credits
                                 </p>
                               </div>
@@ -1922,14 +1922,14 @@ export default function AcademicConfig() {
                                 </div>
                                 <button
                                   type="button" onClick={() => setAddCourseSemesterIdx(null)}
-                                  className="text-[9px] font-black text-slate-400 hover:text-slate-600"
+                                  className="text-xs font-medium text-slate-400 hover:text-slate-600"
                                 >Done</button>
                               </div>
                             ) : (
                               <button
                                 type="button"
                                 onClick={() => setAddCourseSemesterIdx(idx)}
-                                className="flex items-center gap-1.5 text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors"
+                                className="flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors"
                               >
                                 <Plus className="w-3 h-3" /> Add Course
                               </button>
@@ -1968,7 +1968,7 @@ export default function AcademicConfig() {
 
                     {/* Course Multi-Select */}
                     <div className="space-y-3">
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      <p className="text-xs font-medium uppercase  text-slate-400">
                         Courses ({electiveForm.courseIds.length} selected — click to toggle)
                       </p>
                       <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto">
@@ -2016,43 +2016,43 @@ export default function AcademicConfig() {
                     {/* Grade Mapping Editor */}
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Grade Mappings</p>
+                        <p className="text-xs font-medium uppercase  text-slate-400">Grade Mappings</p>
                         <button
                           type="button" onClick={addGradeMappingRow}
-                          className="text-[9px] font-black text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1"
+                          className="text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1"
                         >
                           <Plus className="w-3 h-3" /> Add Row
                         </button>
                       </div>
-                      <div className="rounded-2xl border border-slate-100 overflow-hidden">
+                      <div className="rounded-lg border border-slate-100 overflow-hidden">
                         <div className="grid grid-cols-4 bg-slate-50 px-4 py-2.5">
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Grade</span>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-center">Min</span>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-center">Max</span>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 text-right">Points</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Grade</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-center">Min</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-center">Max</span>
+                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400 text-right">Points</span>
                         </div>
                         {gradingForm.gradeMappings.map((gm, idx) => (
                           <div key={idx} className="grid grid-cols-4 gap-2 px-4 py-2 border-t border-slate-50 items-center">
                             <input
                               type="text" value={gm.grade}
                               onChange={(e) => updateGradeMapping(idx, 'grade', e.target.value)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all font-bold"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-bold"
                             />
                             <input
                               type="number" value={gm.minMarks}
                               onChange={(e) => updateGradeMapping(idx, 'minMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-center"
                             />
                             <input
                               type="number" value={gm.maxMarks}
                               onChange={(e) => updateGradeMapping(idx, 'maxMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-center"
                             />
                             <div className="flex items-center gap-1 justify-end">
                               <input
                                 type="number" step="0.1" value={gm.gradePoints}
                                 onChange={(e) => updateGradeMapping(idx, 'gradePoints', parseFloat(e.target.value) || 0)}
-                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all text-right font-bold text-blue-600"
+                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-right font-bold text-blue-600"
                               />
                               <button
                                 type="button" onClick={() => removeGradeMappingRow(idx)}
@@ -2147,12 +2147,12 @@ function InputField({ label, value, onChange, placeholder, type = 'text', requir
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">{label}</label>
+      <label className="text-xs font-medium uppercase  text-slate-400 pl-1">{label}</label>
       <input
         type={type} required={required} disabled={disabled}
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
         className={cn(
-          'w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm',
+          'w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm',
           disabled && 'opacity-50 cursor-not-allowed bg-slate-100'
         )}
       />
@@ -2166,11 +2166,11 @@ function SelectField({ label, value, onChange, options, required = false }: {
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">{label}</label>
+      <label className="text-xs font-medium uppercase  text-slate-400 pl-1">{label}</label>
       <select
         value={value} required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm appearance-none cursor-pointer"
+        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm appearance-none cursor-pointer"
       >
         {typeof options[0] === 'string'
           ? (options as string[]).map((o) => <option key={o} value={o}>{o}</option>)
@@ -2186,10 +2186,10 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3 }: {
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 pl-1">{label}</label>
+      <label className="text-xs font-medium uppercase  text-slate-400 pl-1">{label}</label>
       <textarea
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none text-sm resize-none"
+        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm resize-none"
       />
     </div>
   );
@@ -2197,7 +2197,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3 }: {
 
 function ToggleRow({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
-    <div className="flex items-center justify-between p-3 bg-white rounded-2xl border border-slate-100">
+    <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-100">
       <span className="text-sm font-medium text-slate-700">{label}</span>
       <button type="button" onClick={() => onChange(!checked)} className="focus:outline-none">
         {checked ? (
@@ -2215,21 +2215,21 @@ function DrawerFooter({ onCancel, onDelete, submitting }: { onCancel: () => void
     <div className="flex gap-3 pt-6 border-t border-slate-100 mt-4">
       <button
         type="button" onClick={onCancel}
-        className="flex-1 py-4 bg-slate-50 text-slate-400 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-100 transition-all"
+        className="flex-1 py-4 bg-slate-50 text-slate-400 rounded-lg font-black uppercase tracking-wide text-[10px] hover:bg-slate-100 transition-all"
       >
         Cancel
       </button>
       {onDelete && (
         <button
           type="button" onClick={onDelete}
-          className="px-6 py-4 bg-rose-50 text-rose-500 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-rose-100 transition-all"
+          className="px-6 py-4 bg-rose-50 text-rose-500 rounded-lg font-black uppercase tracking-wide text-[10px] hover:bg-rose-100 transition-all"
         >
           Delete
         </button>
       )}
       <button
         type="submit" disabled={submitting}
-        className="flex-2 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+        className="flex-2 py-4 bg-slate-900 text-white rounded-lg font-black uppercase tracking-wide text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {submitting ? (
           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

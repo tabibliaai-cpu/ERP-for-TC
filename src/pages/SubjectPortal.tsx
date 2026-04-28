@@ -291,7 +291,7 @@ export default function SubjectPortal() {
       submitted: 'bg-amber-50 text-amber-600', reviewed: 'bg-emerald-50 text-emerald-600',
       returned: 'bg-rose-50 text-rose-600', paused: 'bg-amber-50 text-amber-600',
     };
-    return <span className={cn('px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase', m[status] || 'bg-slate-100 text-slate-500')}>{status}</span>;
+    return <span className={cn('px-2.5 py-1 rounded-lg text-xs font-medium tracking-wide uppercase', m[status] || 'bg-slate-100 text-slate-500')}>{status}</span>;
   };
 
   // ─── Loading ───────────────────────────────────────────
@@ -300,7 +300,7 @@ export default function SubjectPortal() {
       <div className="flex items-center justify-center min-h-screen bg-[#F8FAFC]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin" />
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Loading Pedagogical Portal...</p>
+          <p className="text-xs font-medium uppercase  text-slate-400">Loading Pedagogical Portal...</p>
         </div>
       </div>
     );
@@ -309,13 +309,13 @@ export default function SubjectPortal() {
   // ─── DRAWER ────────────────────────────────────────────
   const DrawerField = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div className="space-y-2">
-      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</label>
+      <label className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</label>
       {children}
     </div>
   );
 
-  const inputCls = 'bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all w-full';
-  const btnCls = 'w-full py-3.5 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all flex items-center justify-center gap-2 disabled:opacity-40';
+  const inputCls = 'bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-full';
+  const btnCls = 'w-full py-3.5 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center justify-center gap-2 disabled:opacity-40';
 
   const renderDrawer = () => {
     if (!isDrawerOpen) return null;
@@ -343,7 +343,7 @@ export default function SubjectPortal() {
           <DrawerField label="Ministry Applications (comma-separated)"><input className={inputCls} value={f.ministryApplications} onChange={e => setLessonForm(p => ({ ...p, ministryApplications: e.target.value }))} /></DrawerField>
           <DrawerField label="Status"><select className={inputCls} value={f.status} onChange={e => setLessonForm(p => ({ ...p, status: e.target.value as any }))}><option value="draft">Draft</option><option value="published">Published</option><option value="completed">Completed</option></select></DrawerField>
           <div className="border-t border-slate-100 pt-5">
-            <p className="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-4 flex items-center gap-2"><Mic className="w-3.5 h-3.5" /> Sermon Builder</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-purple-600 mb-4 flex items-center gap-2"><Mic className="w-3.5 h-3.5" /> Sermon Builder</p>
             <div className="space-y-4">
               <DrawerField label="Sermon Topic"><input className={inputCls} value={f.sermonTopic} onChange={e => setLessonForm(p => ({ ...p, sermonTopic: e.target.value }))} /></DrawerField>
               <DrawerField label="Scripture"><input className={inputCls} value={f.sermonScripture} onChange={e => setLessonForm(p => ({ ...p, sermonScripture: e.target.value }))} /></DrawerField>
@@ -447,8 +447,8 @@ export default function SubjectPortal() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex justify-end">
           <div className="absolute inset-0 bg-black/30" onClick={closeDrawer} />
           <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="relative w-full max-w-xl bg-white h-full overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 z-10 bg-white border-b border-slate-100 px-8 py-6 flex items-center justify-between">
+            className="relative w-full max-w-xl bg-white h-full overflow-y-auto shadow-md">
+            <div className="sticky top-0 z-10 bg-white border-b border-slate-100 px-4 py-3 flex items-center justify-between">
               <h2 className="text-lg font-bold text-slate-900">{title}</h2>
               <button onClick={closeDrawer} className="p-2 hover:bg-slate-100 rounded-xl transition-all"><X className="w-5 h-5" /></button>
             </div>
@@ -467,12 +467,12 @@ export default function SubjectPortal() {
       {/* Header */}
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-[1600px] mx-auto px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-wide">
             <GraduationCap className="w-4 h-4" /><span>Pedagogical Portal</span>
             <ChevronRight className="w-3 h-3" /><span className="text-slate-900">Teaching & Formation</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{user?.name || 'User'}</span>
+            <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">{user?.name || 'User'}</span>
             <div className="w-8 h-8 bg-slate-900 text-white rounded-xl flex items-center justify-center text-[10px] font-bold">{(user?.name || 'U')[0]}</div>
           </div>
         </div>
@@ -488,8 +488,8 @@ export default function SubjectPortal() {
             { label: 'Resources', value: resources.length, icon: FolderOpen, color: 'text-rose-600', bg: 'bg-rose-50' },
           ].map((s, i) => (
             <div key={i} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-5 flex items-center gap-4">
-              <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center', s.bg)}><s.icon className={cn('w-5 h-5', s.color)} /></div>
-              <div><p className="text-2xl font-bold text-slate-900">{s.value}</p><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{s.label}</p></div>
+              <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', s.bg)}><s.icon className={cn('w-5 h-5', s.color)} /></div>
+              <div><p className="text-2xl font-bold text-slate-900">{s.value}</p><p className="text-xs font-medium uppercase  text-slate-400">{s.label}</p></div>
             </div>
           ))}
         </div>
@@ -501,7 +501,7 @@ export default function SubjectPortal() {
               const Icon = tab.icon;
               return (
                 <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSearchQuery(''); }}
-                  className={cn('flex items-center gap-2.5 px-5 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.15em] transition-all whitespace-nowrap', activeTab === tab.id ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50')}>
+                  className={cn('flex items-center gap-2.5 px-5 py-3 rounded-lg text-xs font-medium uppercase  transition-all whitespace-nowrap', activeTab === tab.id ? 'bg-slate-900 text-white shadow-lg' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50')}>
                   <Icon className="w-4 h-4" /><span>{tab.label}</span>
                 </button>
               );
@@ -513,10 +513,10 @@ export default function SubjectPortal() {
         {activeTab === 'lessons' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Lesson Plans</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Planning, Sermon Builder & Content Calendar</p></div>
+              <div><h2 className="text-2xl font-bold text-slate-900">Lesson Plans</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Planning, Sermon Builder & Content Calendar</p></div>
               <div className="flex items-center gap-3">
-                <div className="relative"><Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" /><input type="text" placeholder="Search plans..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-8 focus:ring-blue-100 w-64" /></div>
-                <button onClick={() => { setLessonForm({ topic: '', date: '', duration: 60, objectives: '', teachingMethodId: '', materialsRequired: '', activitiesPlanned: '', scriptureReferences: '', ministryApplications: '', status: 'draft', sermonTopic: '', sermonScripture: '', sermonOutline: '', sermonApplication: '' }); openDrawer('lesson'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Create Plan</button>
+                <div className="relative"><Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" /><input type="text" placeholder="Search plans..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 w-64" /></div>
+                <button onClick={() => { setLessonForm({ topic: '', date: '', duration: 60, objectives: '', teachingMethodId: '', materialsRequired: '', activitiesPlanned: '', scriptureReferences: '', ministryApplications: '', status: 'draft', sermonTopic: '', sermonScripture: '', sermonOutline: '', sermonApplication: '' }); openDrawer('lesson'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Create Plan</button>
               </div>
             </div>
             {/* Content Calendar Preview */}
@@ -527,10 +527,10 @@ export default function SubjectPortal() {
                   const d = new Date(); d.setDate(d.getDate() - d.getDay() + 1 + i);
                   const dayPlans = lessonPlans.filter(lp => lp.date === d.toISOString().split('T')[0]);
                   return (
-                    <div key={day} className="text-center p-3 rounded-2xl bg-slate-50 min-h-[80px]">
-                      <p className="text-[9px] font-black uppercase text-slate-400">{day}</p>
+                    <div key={day} className="text-center p-3 rounded-lg bg-slate-50 min-h-[80px]">
+                      <p className="text-xs font-medium uppercase text-slate-400">{day}</p>
                       <p className="text-sm font-bold text-slate-900 mt-1">{d.getDate()}</p>
-                      {dayPlans.length > 0 && <div className="mt-2 w-2 h-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mx-auto" title={`${dayPlans.length} plan(s)`} />}
+                      {dayPlans.length > 0 && <div className="mt-2 w-2 h-2 bg-blue-600 rounded-full mx-auto" title={`${dayPlans.length} plan(s)`} />}
                     </div>
                   );
                 })}
@@ -538,9 +538,9 @@ export default function SubjectPortal() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
               {lessonPlans.filter(lp => !searchQuery || lp.topic.toLowerCase().includes(searchQuery.toLowerCase())).map(lp => (
-                <div key={lp.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:border-blue-200 transition-all group">
+                <div key={lp.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all group">
                   <div className="flex items-start justify-between mb-4">
-                    <div><StatusBadge status={lp.status} /><span className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-2">{lp.duration}min</span></div>
+                    <div><StatusBadge status={lp.status} /><span className="text-xs font-medium uppercase tracking-wide text-slate-400 ml-2">{lp.duration}min</span></div>
                     {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button onClick={() => { setLessonForm({ topic: lp.topic, date: lp.date, duration: lp.duration, objectives: lp.objectives?.join(', ') || '', teachingMethodId: lp.teachingMethodId || '', materialsRequired: lp.materialsRequired?.join(', ') || '', activitiesPlanned: lp.activitiesPlanned?.join(', ') || '', scriptureReferences: lp.scriptureReferences?.join(', ') || '', ministryApplications: lp.ministryApplications?.join(', ') || '', status: lp.status, sermonTopic: lp.sermonOutline?.topic || '', sermonScripture: lp.sermonOutline?.scripture || '', sermonOutline: lp.sermonOutline?.outline || '', sermonApplication: lp.sermonOutline?.application || '' }); openDrawer('lesson', lp); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(lessonPlanService, lp.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">{lp.topic}</h3>
@@ -550,17 +550,17 @@ export default function SubjectPortal() {
                   )}
                   {lp.sermonOutline && (
                     <div className="mt-3 p-3 bg-purple-50/50 rounded-xl border border-purple-100">
-                      <p className="text-[9px] font-black uppercase text-purple-600 mb-1 flex items-center gap-1"><Mic className="w-3 h-3" /> Sermon</p>
+                      <p className="text-xs font-medium uppercase text-purple-600 mb-1 flex items-center gap-1"><Mic className="w-3 h-3" /> Sermon</p>
                       <p className="text-xs font-bold text-slate-900">{lp.sermonOutline.topic}</p>
                       <p className="text-[9px] text-slate-500">{lp.sermonOutline.scripture}</p>
                     </div>
                   )}
-                  <div className="mt-4 pt-4 border-t border-slate-50 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-slate-400">
+                  <div className="mt-4 pt-4 border-t border-slate-50 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-slate-400">
                     <Calendar className="w-3 h-3" />{getFacultyName(lp.facultyId)}
                   </div>
                 </div>
               ))}
-              {lessonPlans.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><FileText className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No lesson plans yet</p></div>}
+              {lessonPlans.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><FileText className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300">No lesson plans yet</p></div>}
             </div>
           </div>
         )}
@@ -569,16 +569,16 @@ export default function SubjectPortal() {
         {activeTab === 'methods' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Teaching Methods</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Framework & Pedagogy Templates</p></div>
-              <button onClick={() => { setMethodForm({ name: '', description: '', style: 'lecture', expectedOutcomes: '', isTemplate: false, templateCategory: 'custom' }); openDrawer('method'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Create Method</button>
+              <div><h2 className="text-2xl font-bold text-slate-900">Teaching Methods</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Framework & Pedagogy Templates</p></div>
+              <button onClick={() => { setMethodForm({ name: '', description: '', style: 'lecture', expectedOutcomes: '', isTemplate: false, templateCategory: 'custom' }); openDrawer('method'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Create Method</button>
             </div>
             {/* Pedagogy Templates */}
             <div>
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Zap className="w-4 h-4 text-amber-500" /> Pre-built Pedagogy Templates</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {TEMPLATES.map((t, i) => (
-                  <button key={i} onClick={() => fillTemplate(t)} className="p-5 bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] border border-blue-200 text-left hover:shadow-xl hover:border-blue-300 transition-all group">
-                    <div className="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center mb-3 group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all"><Sparkles className="w-5 h-5 text-blue-600 group-hover:text-white" /></div>
+                  <button key={i} onClick={() => fillTemplate(t)} className="p-5 bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] border border-blue-200 text-left hover:shadow-sm hover:border-blue-300 transition-all group">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all"><Sparkles className="w-5 h-5 text-blue-600 group-hover:text-white" /></div>
                     <h4 className="text-sm font-bold text-slate-900 mb-1">{t.name}</h4>
                     <p className="text-xs text-slate-500 leading-relaxed">{t.description}</p>
                     <div className="flex flex-wrap gap-1.5 mt-3">{t.outcomes.map((o, j) => <span key={j} className="px-2 py-0.5 bg-white/60 rounded-lg text-[7px] font-black uppercase text-blue-600">{o}</span>)}</div>
@@ -591,9 +591,9 @@ export default function SubjectPortal() {
               {teachingMethods.map(m => {
                 const styleInfo = METHOD_STYLES[m.style] || METHOD_STYLES.lecture;
                 return (
-                  <div key={m.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all group">
+                  <div key={m.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all group">
                     <div className="flex items-start justify-between mb-4">
-                      <span className={cn('px-2.5 py-1 rounded-lg text-[8px] font-black tracking-widest uppercase', styleInfo.bg, styleInfo.color)}>{styleInfo.label}</span>
+                      <span className={cn('px-2.5 py-1 rounded-lg text-xs font-medium tracking-wide uppercase', styleInfo.bg, styleInfo.color)}>{styleInfo.label}</span>
                       {m.isTemplate && <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg text-[7px] font-black uppercase">Template</span>}
                       {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100"><button onClick={() => { setMethodForm({ name: m.name, description: m.description || '', style: m.style, expectedOutcomes: m.expectedOutcomes?.join(', ') || '', isTemplate: m.isTemplate || false, templateCategory: m.templateCategory || 'custom' }); openDrawer('method', m); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl"><Pencil className="w-3.5 h-3.5" /></button><button onClick={() => deleteItem(teachingMethodService, m.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                     </div>
@@ -605,7 +605,7 @@ export default function SubjectPortal() {
                   </div>
                 );
               })}
-              {teachingMethods.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><Lightbulb className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No methods defined yet</p></div>}
+              {teachingMethods.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><Lightbulb className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300">No methods defined yet</p></div>}
             </div>
           </div>
         )}
@@ -614,9 +614,9 @@ export default function SubjectPortal() {
         {activeTab === 'resources' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Teaching Resources Hub</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Notes, Sermons, Videos, PDFs & Links</p></div>
+              <div><h2 className="text-2xl font-bold text-slate-900">Teaching Resources Hub</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Notes, Sermons, Videos, PDFs & Links</p></div>
               <div className="flex items-center gap-3">
-                <button onClick={() => { setResourceForm({ title: '', type: 'note', url: '', courseId: '', topic: '', scriptureTags: '', description: '' }); openDrawer('resource'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Upload Resource</button>
+                <button onClick={() => { setResourceForm({ title: '', type: 'note', url: '', courseId: '', topic: '', scriptureTags: '', description: '' }); openDrawer('resource'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Upload Resource</button>
               </div>
             </div>
             {/* Scripture Search */}
@@ -629,7 +629,7 @@ export default function SubjectPortal() {
             {/* Filter */}
             <div className="flex items-center gap-2 overflow-x-auto">
               {['all', 'note', 'sermon', 'video', 'pdf', 'link', 'presentation'].map(t => (
-                <button key={t} onClick={() => setFilterType(t)} className={cn('px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all', filterType === t ? 'bg-slate-900 text-white' : 'bg-white border border-slate-100 text-slate-400 hover:text-slate-600')}>{t === 'all' ? 'All Types' : t}</button>
+                <button key={t} onClick={() => setFilterType(t)} className={cn('px-4 py-2 rounded-xl text-xs font-medium uppercase tracking-wide transition-all', filterType === t ? 'bg-slate-900 text-white' : 'bg-white border border-slate-100 text-slate-400 hover:text-slate-600')}>{t === 'all' ? 'All Types' : t}</button>
               ))}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -640,23 +640,23 @@ export default function SubjectPortal() {
               }).map(r => {
                 const Icon = RESOURCE_ICONS[r.type] || FileText;
                 return (
-                  <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all group">
+                  <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all group">
                     <div className="flex items-start justify-between mb-4">
-                      <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center', r.type === 'sermon' ? 'bg-purple-50 text-purple-600' : 'bg-blue-50 text-blue-600')}><Icon className="w-6 h-6" /></div>
+                      <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', r.type === 'sermon' ? 'bg-purple-50 text-purple-600' : 'bg-blue-50 text-blue-600')}><Icon className="w-6 h-6" /></div>
                       {canEdit && <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100"><button onClick={() => deleteItem(teachingResourceService, r.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"><Trash2 className="w-3.5 h-3.5" /></button></div>}
                     </div>
                     <h3 className="text-sm font-bold text-slate-900 mb-1">{r.title}</h3>
                     <span className="px-2 py-0.5 bg-slate-50 rounded-lg text-[7px] font-black uppercase text-slate-500">{r.type}</span>
                     {r.scriptureTags && r.scriptureTags.length > 0 && <div className="flex flex-wrap gap-1 mt-2">{r.scriptureTags.map((t, i) => <span key={i} className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-lg text-[7px] font-black">{t}</span>)}</div>}
                     {r.description && <p className="text-xs text-slate-500 mt-2 line-clamp-2">{r.description}</p>}
-                    <div className="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-slate-400">
+                    <div className="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
                       <span>{getCourseName(r.courseId || '')}</span>
                       {r.downloadCount !== undefined && <span className="flex items-center gap-1"><Download className="w-3 h-3" />{r.downloadCount}</span>}
                     </div>
                   </div>
                 );
               })}
-              {resources.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><FolderOpen className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No resources uploaded yet</p></div>}
+              {resources.length === 0 && <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><FolderOpen className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300">No resources uploaded yet</p></div>}
             </div>
           </div>
         )}
@@ -665,8 +665,8 @@ export default function SubjectPortal() {
         {activeTab === 'engagement' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Student Engagement & Formation</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Tracking, Analytics & Spiritual Formation</p></div>
-              <button onClick={() => { setEngagementForm({ studentId: '', type: 'participation', score: 5, details: '', date: new Date().toISOString().split('T')[0] }); openDrawer('engagement'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Log Engagement</button>
+              <div><h2 className="text-2xl font-bold text-slate-900">Student Engagement & Formation</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Tracking, Analytics & Spiritual Formation</p></div>
+              <button onClick={() => { setEngagementForm({ studentId: '', type: 'participation', score: 5, details: '', date: new Date().toISOString().split('T')[0] }); openDrawer('engagement'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Log Engagement</button>
             </div>
             {/* Teaching Effectiveness Mini-Dashboard */}
             <div className="grid grid-cols-3 gap-4">
@@ -675,7 +675,7 @@ export default function SubjectPortal() {
                 { label: 'Clarity Index', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'discussion').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'discussion').length)) : 0, icon: Brain, color: 'text-emerald-600', bg: 'bg-emerald-50', suffix: '/10' },
                 { label: 'Satisfaction', value: engagementLogs.length > 0 ? Math.round(engagementLogs.filter(e => e.type === 'assignment').reduce((s, e) => s + e.score, 0) / Math.max(1, engagementLogs.filter(e => e.type === 'assignment').length)) : 0, icon: Heart, color: 'text-rose-600', bg: 'bg-rose-50', suffix: '/10' },
               ].map((m, i) => (
-                <div key={i} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-5"><div className="flex items-center gap-3 mb-3"><div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', m.bg)}><m.icon className={cn('w-5 h-5', m.color)} /></div><p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{m.label}</p></div><p className="text-3xl font-bold text-slate-900">{m.value}<span className="text-sm text-slate-400">{m.suffix}</span></p></div>
+                <div key={i} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-5"><div className="flex items-center gap-3 mb-3"><div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', m.bg)}><m.icon className={cn('w-5 h-5', m.color)} /></div><p className="text-xs font-medium uppercase tracking-wide text-slate-400">{m.label}</p></div><p className="text-xl font-semibold text-slate-900">{m.value}<span className="text-sm text-slate-400">{m.suffix}</span></p></div>
               ))}
             </div>
             {/* Spiritual Formation */}
@@ -686,7 +686,7 @@ export default function SubjectPortal() {
                   const logs = engagementLogs.filter(e => e.type === type);
                   const avg = logs.length > 0 ? (logs.reduce((s, e) => s + e.score, 0) / logs.length).toFixed(1) : '0';
                   const label = type === 'devotion' ? 'Devotional Participation' : type === 'prayer' ? 'Prayer Sessions' : 'Bible Study Involvement';
-                  return (<div key={type} className="bg-white/80 rounded-2xl p-4 text-center"><p className="text-2xl font-bold text-purple-600">{avg}</p><p className="text-[8px] font-black uppercase tracking-widest text-slate-500 mt-1">{label}</p><p className="text-[9px] text-slate-400 mt-1">{logs.length} entries</p></div>);
+                  return (<div key={type} className="bg-white/80 rounded-lg p-4 text-center"><p className="text-2xl font-bold text-purple-600">{avg}</p><p className="text-xs font-medium uppercase tracking-wide text-slate-500 mt-1">{label}</p><p className="text-[9px] text-slate-400 mt-1">{logs.length} entries</p></div>);
                 })}
               </div>
             </div>
@@ -697,7 +697,7 @@ export default function SubjectPortal() {
                 {students.slice(0, 10).map(s => {
                   const pts = engagementLogs.filter(e => e.studentId === s.id).reduce((sum, e) => sum + (e.gamificationPoints || 0), 0);
                   return (
-                    <div key={s.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl">
+                    <div key={s.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                       <div className="flex items-center gap-3"><div className="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center font-bold text-slate-500 text-xs">{s.name[0]}</div><span className="text-sm font-medium text-slate-700">{s.name}</span></div>
                       <div className="flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /><span className="text-sm font-bold text-slate-900">{pts}</span></div>
                     </div>
@@ -710,10 +710,10 @@ export default function SubjectPortal() {
               <div className="p-6 border-b border-slate-100"><h3 className="text-sm font-bold text-slate-900">Recent Engagement Logs</h3></div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead><tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100"><th className="px-6 py-4">Student</th><th className="px-6 py-4">Type</th><th className="px-6 py-4">Score</th><th className="px-6 py-4">Level</th><th className="px-6 py-4">Points</th><th className="px-6 py-4">Date</th></tr></thead>
+                  <thead><tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100"><th className="px-6 py-4">Student</th><th className="px-6 py-4">Type</th><th className="px-6 py-4">Score</th><th className="px-6 py-4">Level</th><th className="px-6 py-4">Points</th><th className="px-6 py-4">Date</th></tr></thead>
                   <tbody className="divide-y divide-slate-100">{engagementLogs.slice(-10).reverse().map(e => (
-                    <tr key={e.id} className="hover:bg-slate-50/50"><td className="px-6 py-4 text-sm font-medium text-slate-900">{getStudentName(e.studentId)}</td><td className="px-6 py-4"><span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black uppercase">{e.type}</span></td><td className="px-6 py-4 text-sm font-bold">{e.score}/10</td><td className="px-6 py-4"><StatusBadge status={e.engagementLevel} /></td><td className="px-6 py-4 text-sm font-bold text-amber-600">{e.gamificationPoints || 0}</td><td className="px-6 py-4 text-xs text-slate-400">{e.date}</td></tr>
-                  ))}{engagementLogs.length === 0 && <tr><td colSpan={6} className="py-10 text-center text-[10px] font-black uppercase text-slate-300">No engagement logs</td></tr>}</tbody>
+                    <tr key={e.id} className="hover:bg-slate-50/50"><td className="px-6 py-4 text-sm font-medium text-slate-900">{getStudentName(e.studentId)}</td><td className="px-6 py-4"><span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase">{e.type}</span></td><td className="px-6 py-4 text-sm font-bold">{e.score}/10</td><td className="px-6 py-4"><StatusBadge status={e.engagementLevel} /></td><td className="px-6 py-4 text-sm font-bold text-amber-600">{e.gamificationPoints || 0}</td><td className="px-6 py-4 text-xs text-slate-400">{e.date}</td></tr>
+                  ))}{engagementLogs.length === 0 && <tr><td colSpan={6} className="py-10 text-center text-xs font-medium uppercase text-slate-300">No engagement logs</td></tr>}</tbody>
                 </table>
               </div>
             </div>
@@ -724,10 +724,10 @@ export default function SubjectPortal() {
         {activeTab === 'mentorship' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Mentorship & Reflections</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Guidance, Spiritual Growth & Reflective Learning</p></div>
+              <div><h2 className="text-2xl font-bold text-slate-900">Mentorship & Reflections</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Guidance, Spiritual Growth & Reflective Learning</p></div>
               <div className="flex items-center gap-3">
-                <button onClick={() => { setReflectionForm({ studentId: '', type: 'journal', title: '', content: '', scriptureReferenced: '' }); openDrawer('reflection'); }} disabled={!canEdit} className="px-5 py-3 bg-white border border-slate-200 text-slate-900 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Add Reflection</button>
-                <button onClick={() => { setMentorshipForm({ facultyId: '', studentId: '', type: 'spiritual', nextMeetingDate: '', guidanceNotes: '' }); openDrawer('mentorship'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Assign Mentor</button>
+                <button onClick={() => { setReflectionForm({ studentId: '', type: 'journal', title: '', content: '', scriptureReferenced: '' }); openDrawer('reflection'); }} disabled={!canEdit} className="px-5 py-3 bg-white border border-slate-200 text-slate-900 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-50 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Add Reflection</button>
+                <button onClick={() => { setMentorshipForm({ facultyId: '', studentId: '', type: 'spiritual', nextMeetingDate: '', guidanceNotes: '' }); openDrawer('mentorship'); }} disabled={!canEdit} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2 disabled:opacity-40"><Plus className="w-4 h-4" /> Assign Mentor</button>
               </div>
             </div>
             {/* Mentorships */}
@@ -735,9 +735,9 @@ export default function SubjectPortal() {
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><Users className="w-4 h-4 text-blue-600" /> Active Mentorships ({mentorships.filter(m => m.status === 'active').length})</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 {mentorships.map(m => (
-                  <div key={m.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all">
+                  <div key={m.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-xs">{getFacultyName(m.facultyId)[0]}</div>
+                      <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs">{getFacultyName(m.facultyId)[0]}</div>
                       <ArrowRight className="w-4 h-4 text-slate-300" />
                       <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">{getStudentName(m.studentId)[0]}</div>
                     </div>
@@ -746,13 +746,13 @@ export default function SubjectPortal() {
                       <div className="flex items-center gap-2"><StatusBadge status={m.status} /><span className="px-2 py-0.5 bg-slate-50 rounded-lg text-[7px] font-black uppercase text-slate-500">{m.type}</span></div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-2.5 bg-slate-50 rounded-xl text-center"><p className="text-sm font-bold">{m.meetingCount}</p><p className="text-[8px] font-black uppercase text-slate-400">Meetings</p></div>
-                      <div className="p-2.5 bg-slate-50 rounded-xl text-center"><p className="text-sm font-bold">{m.nextMeetingDate || 'N/A'}</p><p className="text-[8px] font-black uppercase text-slate-400">Next</p></div>
+                      <div className="p-2.5 bg-slate-50 rounded-xl text-center"><p className="text-sm font-bold">{m.meetingCount}</p><p className="text-xs font-medium uppercase text-slate-400">Meetings</p></div>
+                      <div className="p-2.5 bg-slate-50 rounded-xl text-center"><p className="text-sm font-bold">{m.nextMeetingDate || 'N/A'}</p><p className="text-xs font-medium uppercase text-slate-400">Next</p></div>
                     </div>
                     {m.guidanceNotes && <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-50 line-clamp-2">{m.guidanceNotes}</p>}
                   </div>
                 ))}
-                {mentorships.length === 0 && <div className="col-span-full py-16 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><Users className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No mentorships assigned</p></div>}
+                {mentorships.length === 0 && <div className="col-span-full py-16 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><Users className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300">No mentorships assigned</p></div>}
               </div>
             </div>
             {/* Reflections */}
@@ -760,7 +760,7 @@ export default function SubjectPortal() {
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><BookMarked className="w-4 h-4 text-purple-600" /> Reflective Learning Journals ({reflections.length})</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 {reflections.map(r => (
-                  <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-xl transition-all">
+                  <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all">
                     <div className="flex items-start justify-between mb-3">
                       <div><StatusBadge status={r.status} /><span className="px-2 py-0.5 bg-slate-50 rounded-lg text-[7px] font-black uppercase text-slate-500 ml-2">{r.type.replace('_', ' ')}</span></div>
                       {canEdit && r.status === 'submitted' && <button onClick={() => { const fb = prompt('Enter teacher feedback:'); if (fb) addFeedbackToReflection(r.id!, fb); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl"><MessageSquare className="w-3.5 h-3.5" /></button>}
@@ -770,14 +770,14 @@ export default function SubjectPortal() {
                     {r.scriptureReferenced && <span className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-lg text-[7px] font-black">{r.scriptureReferenced}</span>}
                     {r.teacherFeedback && (
                       <div className="mt-3 p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                        <p className="text-[8px] font-black uppercase text-emerald-600 mb-1">Teacher Feedback</p>
+                        <p className="text-xs font-medium uppercase text-emerald-600 mb-1">Teacher Feedback</p>
                         <p className="text-xs text-slate-700">{r.teacherFeedback}</p>
                       </div>
                     )}
-                    <div className="mt-4 pt-3 border-t border-slate-50 text-[9px] font-black uppercase tracking-widest text-slate-400">{getStudentName(r.studentId)}</div>
+                    <div className="mt-4 pt-3 border-t border-slate-50 text-xs font-medium uppercase tracking-wide text-slate-400">{getStudentName(r.studentId)}</div>
                   </div>
                 ))}
-                {reflections.length === 0 && <div className="col-span-full py-16 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><BookMarked className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">No reflections yet</p></div>}
+                {reflections.length === 0 && <div className="col-span-full py-16 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center"><BookMarked className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300">No reflections yet</p></div>}
               </div>
             </div>
           </div>
@@ -787,15 +787,15 @@ export default function SubjectPortal() {
         {activeTab === 'reports' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div><h2 className="text-2xl font-bold text-slate-900">Pedagogical Reports</h2><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">Analytics, AI Insights & Adaptive Teaching</p></div>
-              <button onClick={() => { setReportForm({ type: 'teaching_quality', facultyId: '', courseId: '', period: new Date().toISOString().split('T')[0].slice(0, 7) }); openDrawer('report'); }} className="px-5 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Generate Report</button>
+              <div><h2 className="text-2xl font-bold text-slate-900">Pedagogical Reports</h2><p className="text-xs font-medium uppercase  text-slate-400 mt-1">Analytics, AI Insights & Adaptive Teaching</p></div>
+              <button onClick={() => { setReportForm({ type: 'teaching_quality', facultyId: '', courseId: '', period: new Date().toISOString().split('T')[0].slice(0, 7) }); openDrawer('report'); }} className="px-5 py-3 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Generate Report</button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {reports.map(r => (
                 <div key={r.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3"><span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase">{r.type.replace('_', ' ')}</span><span className="text-[9px] text-slate-400">{r.period}</span></div>
-                    {r.facultyId && <span className="text-[9px] font-black text-slate-500">{getFacultyName(r.facultyId)}</span>}
+                    <div className="flex items-center gap-3"><span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase">{r.type.replace('_', ' ')}</span><span className="text-[9px] text-slate-400">{r.period}</span></div>
+                    {r.facultyId && <span className="text-xs font-medium text-slate-500">{getFacultyName(r.facultyId)}</span>}
                   </div>
                   {/* Metrics Grid */}
                   <div className="grid grid-cols-2 gap-3 mb-6">
@@ -806,22 +806,22 @@ export default function SubjectPortal() {
                       return (
                         <div key={key} className="p-3 bg-slate-50 rounded-xl text-center">
                           <p className={cn('text-xl font-bold', colors[idx % colors.length])}>{val}%</p>
-                          <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">{labels[key] || key}</p>
+                          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{labels[key] || key}</p>
                         </div>
                       );
                     })}
                   </div>
                   {/* AI Suggestions */}
                   {r.aiSuggestions && r.aiSuggestions.length > 0 && (
-                    <div className="mb-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-100">
-                      <p className="text-[9px] font-black uppercase text-amber-600 mb-2 flex items-center gap-1"><Sparkles className="w-3 h-3" /> AI Teaching Assistant Suggestions</p>
+                    <div className="mb-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-100">
+                      <p className="text-xs font-medium uppercase text-amber-600 mb-2 flex items-center gap-1"><Sparkles className="w-3 h-3" /> AI Teaching Assistant Suggestions</p>
                       <ul className="space-y-1.5">{r.aiSuggestions.map((s, i) => <li key={i} className="text-xs text-slate-700 flex items-start gap-2"><ArrowRight className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" /><span>{s}</span></li>)}</ul>
                     </div>
                   )}
                   {/* Recommendations */}
                   {r.recommendations && r.recommendations.length > 0 && (
-                    <div className="p-4 bg-slate-50 rounded-2xl">
-                      <p className="text-[9px] font-black uppercase text-slate-500 mb-2">Recommendations</p>
+                    <div className="p-4 bg-slate-50 rounded-lg">
+                      <p className="text-xs font-medium uppercase text-slate-500 mb-2">Recommendations</p>
                       <ul className="space-y-1.5">{r.recommendations.map((rec, i) => <li key={i} className="text-xs text-slate-600 flex items-start gap-2"><CheckCircle2 className="w-3 h-3 text-emerald-500 mt-0.5 flex-shrink-0" /><span>{rec}</span></li>)}</ul>
                     </div>
                   )}
@@ -829,7 +829,7 @@ export default function SubjectPortal() {
               ))}
               {reports.length === 0 && (
                 <div className="col-span-full py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem] text-center">
-                  <BarChart3 className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2">No reports generated yet</p>
+                  <BarChart3 className="w-12 h-12 text-slate-200 mx-auto mb-3" /><p className="text-xs font-medium uppercase  text-slate-300 mb-2">No reports generated yet</p>
                   <p className="text-xs text-slate-400">Click "Generate Report" to create your first pedagogical analysis</p>
                 </div>
               )}
@@ -844,8 +844,8 @@ export default function SubjectPortal() {
                   { title: 'Weakest Area', value: 'Field Application', sub: 'Needs more focus' },
                   { title: 'Growth Trend', value: engagementLogs.length >= 2 ? (engagementLogs.slice(-5).reduce((s, e) => s + e.score, 0) > engagementLogs.slice(-10, -5).reduce((s, e) => s + e.score, 0) ? 'Improving' : 'Declining') : 'N/A', sub: 'Last 5 vs previous 5' },
                 ].map((insight, i) => (
-                  <div key={i} className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
-                    <p className="text-[9px] font-black uppercase text-indigo-300">{insight.sub}</p>
+                  <div key={i} className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <p className="text-xs font-medium uppercase text-indigo-300">{insight.sub}</p>
                     <p className="text-xl font-bold mt-1">{insight.value}</p>
                     <p className="text-[8px] uppercase text-slate-400 mt-1">{insight.title}</p>
                   </div>

@@ -68,7 +68,7 @@ const MEDIUMS = ['English', 'Hindi', 'Tamil', 'Telugu', 'Malayalam', 'Kannada', 
 function FormField({ label, children, required = false, span = 1 }: { label: string; children: React.ReactNode; required?: boolean; span?: number }) {
   return (
     <div className={cn(span === 2 && "col-span-2")}>
-      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 mb-2 block">
+      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 mb-2 block">
         {label} {required && <span className="text-rose-400">*</span>}
       </label>
       {children}
@@ -84,8 +84,8 @@ function InputField({ label, value, onChange, type = 'text', placeholder, requir
     <FormField label={label} required={required} span={span}>
       <input type={type} value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} disabled={disabled}
         className={cn(
-          "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-bold text-sm transition-all",
-          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-4 focus:ring-blue-100",
+          "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-bold text-sm transition-all",
+          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-2 focus:ring-blue-100",
           type === 'number' && "font-mono"
         )} />
     </FormField>
@@ -99,7 +99,7 @@ function SelectField({ label, value, onChange, options, required, span }: {
   return (
     <FormField label={label} required={required} span={span}>
       <select value={value ?? ''} onChange={e => onChange(e.target.value)}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none text-[11px] font-black uppercase tracking-widest appearance-none transition-all focus:bg-white focus:ring-4 focus:ring-blue-100">
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-[11px] font-black uppercase tracking-wide appearance-none transition-all focus:bg-white focus:ring-2 focus:ring-blue-100">
         <option value="">Select...</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -114,7 +114,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3, span }: 
   return (
     <FormField label={label} span={span}>
       <textarea value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-2xl outline-none font-medium text-sm transition-all focus:bg-white focus:ring-4 focus:ring-blue-100 resize-none placeholder:text-slate-300" />
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-medium text-sm transition-all focus:bg-white focus:ring-2 focus:ring-blue-100 resize-none placeholder:text-slate-300" />
     </FormField>
   );
 }
@@ -127,7 +127,7 @@ function CheckboxGroup({ label, options, selected, onToggle }: {
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onToggle(opt)}
-            className={cn("px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all border",
+            className={cn("px-3 py-1.5 rounded-xl text-xs font-medium uppercase tracking-wider transition-all border",
               selected.includes(opt)
                 ? "bg-blue-50 text-blue-600 border-blue-200"
                 : "bg-slate-50 text-slate-400 border-slate-100 hover:bg-slate-100"
@@ -156,7 +156,7 @@ function FileUploadField({ label, value, onChange, accept }: {
       <div className="flex items-center gap-3">
         <label className="flex-1 flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl border border-dashed border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all">
           <Upload className="w-4 h-4 text-slate-400" />
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
             {value ? 'File selected — Change' : 'Choose File'}
           </span>
           <input type="file" accept={accept || '*'} onChange={handleFileUpload} className="hidden" />
@@ -175,14 +175,14 @@ function FileUploadField({ label, value, onChange, accept }: {
 function SectionHeader({ section, isOpen, onToggle, sectionIndex }: { section: SectionDef; isOpen: boolean; onToggle: () => void; sectionIndex: number }) {
   return (
     <button type="button" onClick={onToggle}
-      className="w-full flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-sm transition-all group">
+      className="w-full flex items-center justify-between p-6 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-all group">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
           <section.icon className="w-5 h-5 text-blue-600" />
         </div>
         <div className="text-left">
           <div className="flex items-center gap-3">
-            <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Section {sectionIndex + 1}</span>
+            <span className="text-xs font-medium text-slate-300 uppercase tracking-wide">Section {sectionIndex + 1}</span>
           </div>
           <h3 className="text-base font-bold text-slate-900 italic-serif">{section.label}</h3>
           <p className="text-[10px] text-slate-400 mt-0.5">{section.description}</p>
@@ -328,11 +328,11 @@ export function StudentEnrollment() {
       {/* Page Header */}
       <div className="border-b border-slate-100 pb-10">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Student Management</span>
+          <span className="text-xs font-medium uppercase  text-blue-600">Student Management</span>
           <ChevronRight className="w-3 h-3 text-slate-300" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{editId ? 'Edit Profile' : 'New Enrollment'}</span>
+          <span className="text-xs font-medium uppercase  text-slate-400">{editId ? 'Edit Profile' : 'New Enrollment'}</span>
         </div>
-        <h1 className="text-4xl font-bold text-slate-950 tracking-tight italic-serif">
+        <h1 className="text-xl font-semibold text-slate-900">
           {editId ? 'Edit Student Profile' : 'Student Enrollment'}
         </h1>
         <p className="text-slate-500 text-sm mt-1 max-w-lg">
@@ -344,16 +344,16 @@ export function StudentEnrollment() {
       <AnimatePresence>
         {error && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-2xl flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
-              <div className="flex items-center gap-3"><X className="w-5 h-5" /><span className="text-[10px] font-black uppercase tracking-widest">{error}</span></div>
+            <div className="p-4 rounded-lg flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
+              <div className="flex items-center gap-3"><X className="w-5 h-5" /><span className="text-xs font-medium uppercase tracking-wide">{error}</span></div>
               <button onClick={() => setError(null)}><X className="w-4 h-4" /></button>
             </div>
           </motion.div>
         )}
         {success && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-2xl shadow-lg bg-emerald-50 border border-emerald-100 text-emerald-700">
-              <span className="text-[10px] font-black uppercase tracking-widest">Student profile saved successfully! Redirecting...</span>
+            <div className="p-4 rounded-lg shadow-lg bg-emerald-50 border border-emerald-100 text-emerald-700">
+              <span className="text-xs font-medium uppercase tracking-wide">Student profile saved successfully! Redirecting...</span>
             </div>
           </motion.div>
         )}
@@ -364,7 +364,7 @@ export function StudentEnrollment() {
         {/* Photo Upload Section */}
         <div className="flex justify-center py-6">
           <div className="relative group cursor-pointer w-28 h-28">
-            <div className="w-full h-full rounded-3xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
               {formData.photoUrl ? (
                 <img src={formData.photoUrl} alt="Preview" className="w-full h-full object-cover" />
               ) : (
@@ -373,7 +373,7 @@ export function StudentEnrollment() {
             </div>
             <input type="file" accept="image/*" onChange={handlePhotoUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-            <div className="absolute -bottom-2 bg-white px-3 py-0.5 rounded-full border border-slate-200 text-[8px] font-black uppercase tracking-widest shadow-sm left-1/2 transform -translate-x-1/2 flex items-center gap-1">
+            <div className="absolute -bottom-2 bg-white px-3 py-0.5 rounded-full border border-slate-200 text-xs font-medium uppercase tracking-wide shadow-sm left-1/2 transform -translate-x-1/2 flex items-center gap-1">
               <Camera className="w-3 h-3" /> Upload Photo
             </div>
           </div>
@@ -386,7 +386,7 @@ export function StudentEnrollment() {
             {openSections.has('basic') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Full Legal Name" value={formData.name} onChange={v => updateField('name', v)} required placeholder="e.g. John Samuel" span={2} />
                     <SelectField label="Gender" value={formData.gender} onChange={v => updateField('gender', v)} required
@@ -411,7 +411,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('contact') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Email Address" value={formData.email} onChange={v => updateField('email', v)} required type="email" placeholder="student@institution.com" />
                     <InputField label="Phone Number" value={formData.phone} onChange={v => updateField('phone', v)} type="tel" placeholder="+91 98765 43210" />
@@ -419,7 +419,7 @@ export function StudentEnrollment() {
                     <TextAreaField label="Current Address (if different)" value={formData.currentAddress} onChange={v => updateField('currentAddress', v)} placeholder="Hostel / rented address" span={2} />
                   </div>
                   <div className="border-t border-slate-100 pt-6">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 pl-1">Emergency Contact</p>
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4 pl-1">Emergency Contact</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <InputField label="Emergency Contact Name" value={formData.emergencyContact?.name} onChange={v => setFormData(prev => ({ ...prev, emergencyContact: { ...prev.emergencyContact!, name: v } }))} placeholder="Name" />
                       <InputField label="Emergency Contact Phone" value={formData.emergencyContact?.phone} onChange={v => setFormData(prev => ({ ...prev, emergencyContact: { ...prev.emergencyContact!, phone: v } }))} placeholder="Phone" />
@@ -438,7 +438,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('family') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Father's Name" value={formData.family?.fatherName} onChange={v => updateNested('family', 'fatherName', v)} placeholder="Father's Full Name" />
                     <InputField label="Mother's Name" value={formData.family?.motherName} onChange={v => updateNested('family', 'motherName', v)} placeholder="Mother's Full Name" />
@@ -464,11 +464,11 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('spiritual') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Date of Conversion" value={formData.spiritual?.conversionDate} onChange={v => updateNested('spiritual', 'conversionDate', v)} type="date" />
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Baptized?</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Baptized?</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white/60 rounded-xl">
                         <input type="checkbox" checked={formData.spiritual?.isBaptized || false}
                           onChange={e => updateNested('spiritual', 'isBaptized', e.target.checked)}
@@ -497,7 +497,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('education') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Highest Qualification" value={formData.previousEducation?.qualification} onChange={v => updateNested('previousEducation', 'qualification', v)}
                       options={[
@@ -527,7 +527,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('program') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-2xl border border-sky-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-lg border border-sky-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Program" value={formData.program} onChange={v => updateField('program', v)} required
                       options={PROGRAMS.map(p => ({ value: p, label: p }))} />
@@ -556,10 +556,10 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('accommodation') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Hostel Required</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Hostel Required</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.hostelRequired || false}
                           onChange={e => updateField('hostelRequired', e.target.checked)}
@@ -568,7 +568,7 @@ export function StudentEnrollment() {
                       </label>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Transport Required</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Transport Required</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.transportRequired || false}
                           onChange={e => updateField('transportRequired', e.target.checked)}
@@ -590,14 +590,14 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('financial') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 p-3 rounded-xl flex items-center gap-2">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
+                  <p className="text-xs font-medium text-blue-600 uppercase tracking-wide bg-blue-50 p-3 rounded-xl flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4" /> All financial data is encrypted end-to-end
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Fee Structure" value={formData.financial?.feeStructure} onChange={v => updateNested('financial', 'feeStructure', v)} placeholder="e.g. Standard, Scholarship" />
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Has Scholarship?</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Has Scholarship?</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
                         <input type="checkbox" checked={formData.financial?.hasScholarship || false}
                           onChange={e => updateNested('financial', 'hasScholarship', e.target.checked)}
@@ -633,7 +633,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('medical') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <TextAreaField label="Medical Notes" value={formData.medicalNotes} onChange={v => updateField('medicalNotes', v)} placeholder="Any known health conditions..." />
                     <InputField label="Allergies" value={formData.allergies} onChange={v => updateField('allergies', v)} placeholder="e.g. Penicillin, Peanuts" />
@@ -654,8 +654,8 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('documents') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-white rounded-2xl border border-slate-100 space-y-6">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Upload required documents for enrollment verification</p>
+                <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
+                  <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Upload required documents for enrollment verification</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FileUploadField label="ID Proof (Aadhaar / Voter / Passport)" value={formData.documents?.idProofUrl} onChange={v => updateNested('documents', 'idProofUrl', v)} accept=".pdf,.jpg,.png" />
                     <FileUploadField label="Academic Certificates / Marksheet" value={formData.documents?.academicCertsUrl} onChange={v => updateNested('documents', 'academicCertsUrl', v)} accept=".pdf,.jpg,.png" />
@@ -674,10 +674,10 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('ministry') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg border border-amber-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 block">Called to Ministry?</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Called to Ministry?</label>
                       <label className="flex items-center gap-3 cursor-pointer p-3 bg-white/60 rounded-xl">
                         <input type="checkbox" checked={formData.ministry?.isCalled || false}
                           onChange={e => updateNested('ministry', 'isCalled', e.target.checked)}
@@ -704,7 +704,7 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('admin') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-slate-50 to-gray-50 rounded-2xl border border-slate-200 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-slate-50 to-gray-50 rounded-lg border border-slate-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Admission Status" value={formData.admissionStatus} onChange={v => updateField('admissionStatus', v)}
                       options={[
@@ -729,13 +729,13 @@ export function StudentEnrollment() {
           <AnimatePresence>
             {openSections.has('declaration') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl border border-emerald-100 space-y-6">
+                <div className="p-8 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-emerald-100 space-y-6">
                   <div className="space-y-4">
-                    <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 p-3 rounded-xl flex items-center gap-2 border border-emerald-100">
+                    <p className="text-xs font-medium text-emerald-600 uppercase tracking-wide bg-emerald-50 p-3 rounded-xl flex items-center gap-2 border border-emerald-100">
                       <CheckCircle className="w-4 h-4" /> Please read and accept before submitting
                     </p>
 
-                    <div className="bg-white/70 rounded-2xl p-6 border border-emerald-100 space-y-3">
+                    <div className="bg-white/70 rounded-lg p-6 border border-emerald-100 space-y-3">
                       <p className="text-xs font-bold text-slate-700 leading-relaxed">
                         I hereby declare that all the information provided in this enrollment form is true and accurate to the best of my knowledge. I understand that:
                       </p>
@@ -790,11 +790,11 @@ export function StudentEnrollment() {
         {/* ============================== SUBMIT ============================== */}
         <div className="flex items-center justify-between pt-6 border-t border-slate-100">
           <button type="button" onClick={() => navigate('/admissions')}
-            className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-widest">
+            className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-wide">
             Cancel
           </button>
           <button type="submit" disabled={isSaving || !declarationAccepted}
-            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2  disabled:opacity-50 disabled:cursor-not-allowed">
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Saving...' : editId ? 'Update Profile' : 'Enroll Student'}</span>
           </button>

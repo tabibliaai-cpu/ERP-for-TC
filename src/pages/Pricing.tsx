@@ -255,16 +255,16 @@ const PlanCard: React.FC<{
       transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
       whileHover={{ y: -6 }}
       className={cn(
-        "relative flex flex-col rounded-2xl p-[1px] transition-shadow duration-300",
+        "relative flex flex-col rounded-lg p-[1px] transition-shadow duration-300",
         plan.popular
-          ? "scale-[1.03] shadow-2xl shadow-blue-500/20 md:scale-105"
-          : "shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-blue-500/10"
+          ? "scale-[1.03] shadow-md shadow-blue-500/20 md:scale-105"
+          : "shadow-lg shadow-black/20 hover:shadow-sm hover:shadow-blue-500/10"
       )}
     >
       {/* Gradient border for popular */}
       <div
         className={cn(
-          "absolute inset-0 rounded-2xl",
+          "absolute inset-0 rounded-lg",
           plan.popular
             ? "bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600"
             : "bg-gradient-to-br from-slate-700/60 via-slate-600/40 to-slate-700/60"
@@ -274,7 +274,7 @@ const PlanCard: React.FC<{
       {/* Glass card */}
       <div
         className={cn(
-          "relative flex flex-col h-full rounded-2xl p-6 sm:p-8",
+          "relative flex flex-col h-full rounded-lg p-6 sm:p-8",
           "bg-slate-900/70 backdrop-blur-xl border border-white/[0.06]"
         )}
       >
@@ -543,7 +543,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-slate-800/60 bg-slate-900/40 backdrop-blur-sm scrollbar-thin">
+          <div className="overflow-x-auto rounded-lg border border-slate-800/60 bg-slate-900/40 backdrop-blur-sm scrollbar-thin">
             <table className="w-full min-w-[640px] text-left">
               {/* Header */}
               <thead>
@@ -569,7 +569,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
                     <tr key={`cat-${gi}`}>
                       <td
                         colSpan={4}
-                        className="px-5 py-3 text-xs font-bold uppercase tracking-widest text-blue-400/80 bg-slate-800/20"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-blue-400/80 bg-slate-800/20"
                       >
                         <span className="inline-flex items-center gap-2">
                           {CATEGORY_ICONS[group.category]}
@@ -627,7 +627,7 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-800/60 bg-slate-900/40 backdrop-blur-sm px-6 sm:px-8">
+            <div className="rounded-lg border border-slate-800/60 bg-slate-900/40 backdrop-blur-sm px-6 sm:px-8">
               {FAQS.map((faq, i) => (
                 <FAQItem
                   key={i}
@@ -648,14 +648,14 @@ export function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: string) => voi
           transition={{ duration: 0.5 }}
           className="pb-24 sm:pb-32"
         >
-          <div className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/50 backdrop-blur-xl p-8 text-center sm:p-12">
+          <div className="relative mx-auto max-w-2xl overflow-hidden rounded-lg border border-slate-800/60 bg-slate-900/50 backdrop-blur-xl p-8 text-center sm:p-12">
             {/* Glow inside */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
               <div className="h-[200px] w-[300px] rounded-full bg-blue-500/[0.08] blur-[80px]" />
             </div>
 
             <div className="relative z-10">
-              <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
+              <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
                 <Mail className="h-7 w-7 text-blue-400" />
               </div>
               <h2 className="text-2xl font-bold sm:text-3xl">Still have questions?</h2>

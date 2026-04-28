@@ -237,7 +237,7 @@ function formatPermissionLabel(key: string) {
 
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
       {children}
     </div>
   );
@@ -647,7 +647,7 @@ export function RolesPermissionsTab() {
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -20, x: '-50%' }}
             className={cn(
-              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-xl flex items-center gap-2 text-sm font-semibold',
+              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-sm flex items-center gap-2 text-sm font-semibold',
               toast.type === 'success'
                 ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white'
                 : 'bg-gradient-to-r from-rose-500 to-red-600 text-white'
@@ -688,7 +688,7 @@ export function RolesPermissionsTab() {
               <button
                 onClick={handleBatchSave}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
+                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
               >
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 Save Changes
@@ -697,7 +697,7 @@ export function RolesPermissionsTab() {
           )}
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
+            className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
           >
             <Plus className="w-4 h-4" />
             Create Role
@@ -708,7 +708,7 @@ export function RolesPermissionsTab() {
       {/* ─── Stats Row ─── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total Roles', value: roles.length, icon: Shield, gradient: 'from-blue-600 to-indigo-600' },
+          { label: 'Total Roles', value: roles.length, icon: Shield, gradient: '' },
           { label: 'System Roles', value: roles.filter(r => r.isSystemRole).length, icon: Lock, gradient: 'from-amber-500 to-orange-500' },
           { label: 'Custom Roles', value: roles.filter(r => !r.isSystemRole).length, icon: Layers, gradient: 'from-cyan-500 to-teal-500' },
           { label: 'Total Permissions', value: ALL_PERMISSIONS.length, icon: Key, gradient: 'from-emerald-500 to-green-500' },
@@ -718,7 +718,7 @@ export function RolesPermissionsTab() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
-            className={cn('rounded-2xl bg-gradient-to-br p-4 text-white shadow-lg', stat.gradient)}
+            className={cn('rounded-lg bg-gradient-to-br p-4 text-white shadow-lg', stat.gradient)}
           >
             <div className="flex items-center justify-between">
               <div>
@@ -1112,11 +1112,11 @@ export function RolesPermissionsTab() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-hidden"
+              className="bg-white rounded-lg shadow-md w-full max-w-2xl max-h-[85vh] overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+              <div className="bg-blue-600 p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="bg-white/20 rounded-xl p-2">
@@ -1268,7 +1268,7 @@ export function RolesPermissionsTab() {
                 <button
                   onClick={handleCreateRole}
                   disabled={isCreating || !newRoleName.trim()}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 disabled:cursor-not-allowed text-sm"
                 >
                   {isCreating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                   Create Role
@@ -1295,7 +1295,7 @@ export function RolesPermissionsTab() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
+              className="bg-white rounded-lg shadow-md w-full max-w-sm overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               <div className="p-6 text-center">

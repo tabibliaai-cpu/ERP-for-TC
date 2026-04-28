@@ -141,7 +141,7 @@ export function Messaging() {
   const filteredFaculty = faculty.filter(f => f.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="h-[calc(100vh-160px)] flex bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+    <div className="h-[calc(100vh-160px)] flex bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
       {/* Contact List */}
       <div className="w-80 border-r border-slate-100 flex flex-col shrink-0">
         <div className="p-4 border-b border-slate-100">
@@ -171,7 +171,7 @@ export function Messaging() {
           {filteredFaculty.length === 0 && (
              <div className="p-6 text-center text-slate-400 flex flex-col items-center gap-2">
                 <Users className="w-8 h-8 text-slate-200" />
-                <span className="text-[10px] uppercase font-bold tracking-widest">No Contacts</span>
+                <span className="text-[10px] uppercase font-bold tracking-wide">No Contacts</span>
              </div>
           )}
         </div>
@@ -190,7 +190,7 @@ export function Messaging() {
                   <h3 className="font-bold text-slate-900 tracking-tight ">{activeChat.name}</h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{activeChat.role}</span>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">{activeChat.role}</span>
                   </div>
                 </div>
               </div>
@@ -223,11 +223,11 @@ export function Messaging() {
                         value={passphrase}
                         onChange={(e) => setPassphrase(e.target.value)}
                         onKeyPress={e => e.key === 'Enter' && handleUnlock()}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-100 transition-all text-center"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-100 transition-all text-center"
                       />
                       <button 
                         onClick={handleUnlock}
-                        className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all"
+                        className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all"
                       >
                         Unlock Conversation
                       </button>
@@ -237,7 +237,7 @@ export function Messaging() {
                   messages.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-2">
                        <ShieldCheck className="w-8 h-8 opacity-20" />
-                       <span className="text-[10px] font-black uppercase tracking-widest opacity-50">Start Secure Connection</span>
+                       <span className="text-xs font-medium uppercase tracking-wide opacity-50">Start Secure Connection</span>
                     </div>
                   ) : (
                     messages.map((msg) => (
@@ -251,9 +251,9 @@ export function Messaging() {
                         )}
                       >
                         <div className={cn(
-                          "px-4 py-3 rounded-2xl text-sm relative group",
+                          "px-4 py-3 rounded-lg text-sm relative group",
                           msg.senderId === user?.uid 
-                            ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-md shadow-blue-100" 
+                            ? "bg-blue-600 text-white rounded-tr-none shadow-md shadow-blue-100" 
                             : "bg-white text-slate-900 border border-slate-100 rounded-tl-none shadow-sm"
                         )}>
                           {isUnlocked && msg.id ? (decryptedTexts[msg.id] || '[Decrypting...]') : '[Encrypted Payload]'}
@@ -291,7 +291,7 @@ export function Messaging() {
                   <button 
                     onClick={handleSend}
                     disabled={!input}
-                    className="p-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all group disabled:opacity-50"
+                    className="p-3 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all group disabled:opacity-50"
                   >
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
@@ -304,7 +304,7 @@ export function Messaging() {
               <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center">
                  <Lock className="w-8 h-8 text-slate-300" />
               </div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Select Contact to establish secure connection</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-400">Select Contact to establish secure connection</p>
            </div>
         )}
       </div>

@@ -164,12 +164,12 @@ export function Admissions() {
             className="overflow-hidden"
           >
             <div className={cn(
-              "p-4 rounded-2xl flex items-center justify-between shadow-lg",
+              "p-4 rounded-lg flex items-center justify-between shadow-lg",
               errorHeader.type === 'error' ? "bg-rose-50 border border-rose-100 text-rose-700" : "bg-amber-50 border border-amber-100 text-amber-700"
             )}>
               <div className="flex items-center gap-3">
                 <AlertCircle className="w-5 h-5" />
-                <span className="text-[10px] font-black uppercase tracking-widest">{errorHeader.message}</span>
+                <span className="text-xs font-medium uppercase tracking-wide">{errorHeader.message}</span>
               </div>
               <button onClick={() => setErrorHeader(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 transition-colors">
                 <X className="w-4 h-4" />
@@ -182,16 +182,16 @@ export function Admissions() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Academic Affairs</span>
+            <span className="text-xs font-medium uppercase  text-blue-600">Academic Affairs</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Student Management</span>
+            <span className="text-xs font-medium uppercase  text-slate-400">Student Management</span>
           </div>
-          <h1 className="text-4xl font-bold text-slate-950 tracking-tight italic-serif">Registry Hub</h1>
+          <h1 className="text-xl font-semibold text-slate-900">Registry Hub</h1>
           <p className="text-slate-500 text-sm mt-1 max-w-lg">Unified management of student identities, academic lifecycles, and cryptographic status logs.</p>
         </div>
         <button 
           onClick={() => setIsAddModalOpen(true)}
-          className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-200"
+          className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 "
         >
           <UserPlus className="w-4 h-4" />
           <span>New Enrollment</span>
@@ -206,9 +206,9 @@ export function Admissions() {
           { label: 'Alumni', value: stats.graduated, icon: Plus, color: 'amber' },
           { label: 'Withdrawn', value: stats.withdrawn, icon: Filter, color: 'rose' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm flex items-center gap-4">
+          <div key={i} className="bg-white p-6 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-4">
             <div className={cn(
-              "w-12 h-12 rounded-2xl flex items-center justify-center",
+              "w-12 h-12 rounded-lg flex items-center justify-center",
               stat.color === 'indigo' ? "bg-blue-50 text-blue-600" :
               stat.color === 'emerald' ? "bg-emerald-50 text-emerald-600" :
               stat.color === 'amber' ? "bg-amber-50 text-amber-600" : "bg-rose-50 text-rose-600"
@@ -216,14 +216,14 @@ export function Admissions() {
               <stat.icon className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{stat.label}</p>
               <p className="text-xl font-bold text-slate-900 tabular-nums">{stat.value}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm min-h-[400px]">
+      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm min-h-[400px]">
         <div className="p-6 border-b border-slate-100 bg-slate-50/30 flex flex-wrap gap-4 items-center justify-between">
           <div className="relative w-full max-w-sm">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -232,11 +232,11 @@ export function Admissions() {
               placeholder="Search registry..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder:text-slate-300 font-medium"
+              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-slate-300 font-medium"
             />
           </div>
           <div className="flex gap-2">
-            <button className="px-5 py-3 border border-slate-200 rounded-xl text-slate-500 hover:bg-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all">
+            <button className="px-5 py-3 border border-slate-200 rounded-xl text-slate-500 hover:bg-white text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-all">
               <Filter className="w-4 h-4" />
               <span>Filters</span>
             </button>
@@ -246,7 +246,7 @@ export function Admissions() {
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-80 gap-4">
              <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin"></div>
-             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 animate-pulse">Decrypting Records...</p>
+             <p className="text-xs font-medium uppercase  text-slate-400 animate-pulse">Decrypting Records...</p>
           </div>
         ) : filteredStudents.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-80 text-center p-10">
@@ -260,12 +260,12 @@ export function Admissions() {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
-                  <th className="px-8 py-5 whitespace-nowrap">Identity</th>
-                  <th className="px-6 py-5 whitespace-nowrap text-center">Module</th>
-                  <th className="px-6 py-5 whitespace-nowrap text-center">Cohort</th>
-                  <th className="px-6 py-5 whitespace-nowrap text-center">Status</th>
-                  <th className="px-8 py-5 text-right">Integrity</th>
+                <tr className="bg-slate-50/50 text-xs font-medium text-slate-400 uppercase  border-b border-slate-100">
+                  <th className="px-4 py-3 whitespace-nowrap">Identity</th>
+                  <th className="px-4 py-3 whitespace-nowrap text-center">Module</th>
+                  <th className="px-4 py-3 whitespace-nowrap text-center">Cohort</th>
+                  <th className="px-4 py-3 whitespace-nowrap text-center">Status</th>
+                  <th className="px-4 py-3 text-right">Integrity</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
@@ -275,9 +275,9 @@ export function Admissions() {
                     onClick={() => navigate(`/admissions/${student.id}`)}
                     className="hover:bg-slate-50/50 transition-colors group cursor-pointer"
                   >
-                    <td className="px-8 py-6">
+                    <td className="px-4 py-3">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 overflow-hidden rounded-2xl bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm uppercase shadow-sm group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500">
+                        <div className="w-12 h-12 overflow-hidden rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm uppercase shadow-sm group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500">
                           {student.photoUrl ? (
                             <img src={student.photoUrl} alt={student.name} className="w-full h-full object-cover" />
                           ) : (
@@ -288,37 +288,37 @@ export function Admissions() {
                           <p className="font-bold text-slate-900 tracking-tight italic-serif">{student.name}</p>
                           <div className="flex items-center gap-2 mt-0.5">
                             {student.studentId && (
-                              <span className="px-1.5 py-0.5 bg-slate-100 rounded text-[9px] font-black uppercase text-slate-500">{student.studentId}</span>
+                              <span className="px-1.5 py-0.5 bg-slate-100 rounded text-xs font-medium uppercase text-slate-500">{student.studentId}</span>
                             )}
                             <p className="text-[10px] font-mono text-slate-400">{student.email}</p>
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-6 text-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">{student.program}</span>
+                    <td className="px-4 py-3 text-center">
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">{student.program}</span>
                     </td>
-                    <td className="px-6 py-6 text-center">
+                    <td className="px-4 py-3 text-center">
                       <span className="font-mono text-xs text-slate-500">YEAR {student.year}</span>
                     </td>
-                    <td className="px-6 py-6 scroll-m-0">
+                    <td className="px-4 py-3 scroll-m-0">
                       <div className="flex justify-center">
                         <span className={cn(
-                          "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.1em]",
+                          "px-3 py-1 rounded-md text-xs font-medium uppercase ",
                           student.status === 'active' ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-slate-100 text-slate-500 border border-slate-200"
                         )}>
                           {student.status}
                         </span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-right">
+                    <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-3">
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
                             setStudentToEdit(student);
                           }}
-                          className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline"
+                          className="text-xs font-medium text-blue-600 uppercase tracking-wide hover:underline"
                         >
                           Modify
                         </button>
@@ -358,12 +358,12 @@ export function Admissions() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] w-full max-w-2xl p-10 relative z-10 shadow-2xl border border-slate-100"
+              className="bg-white rounded-xl w-full max-w-2xl p-10 relative z-10 shadow-md border border-slate-100"
             >
               <div className="mb-8 border-b border-slate-50 pb-6 flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight italic-serif">Enroll New Student</h2>
-                  <p className="text-sm text-slate-500 mt-1 uppercase tracking-widest font-black text-[10px]">Institutional Registry Protocol</p>
+                  <h2 className="text-lg font-semibold text-slate-900">Enroll New Student</h2>
+                  <p className="text-sm text-slate-500 mt-1 uppercase tracking-wide font-black text-[10px]">Institutional Registry Protocol</p>
                 </div>
                 <div className="flex gap-1 p-1 bg-slate-100 rounded-xl">
                   {(['academic', 'personal', 'emergency'] as const).map((tab) => (
@@ -372,7 +372,7 @@ export function Admissions() {
                       type="button"
                       onClick={() => setFormTab(tab)}
                       className={cn(
-                        "px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
+                        "px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wide transition-all",
                         formTab === tab ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                       )}
                     >
@@ -387,57 +387,57 @@ export function Admissions() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-2 gap-6">
                        <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Student ID/Roll No.</label>
+                         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Student ID/Roll No.</label>
                          <input 
                            type="text" 
                            value={newStudent.studentId || ''}
                            onChange={(e) => setNewStudent({...newStudent, studentId: e.target.value})}
                            placeholder="Auto-generated if empty"
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                          />
                        </div>
                        <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Profile Photo URL</label>
+                         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Profile Photo URL</label>
                          <input 
                            type="url" 
                            value={newStudent.photoUrl || ''}
                            onChange={(e) => setNewStudent({...newStudent, photoUrl: e.target.value})}
                            placeholder="https://..."
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                          />
                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Full Identity</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Full Identity</label>
                         <input 
                           required
                           type="text" 
                           value={newStudent.name}
                           onChange={(e) => setNewStudent({...newStudent, name: e.target.value})}
                           placeholder="Legal name"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Institutional Email</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Institutional Email</label>
                         <input 
                           required
                           type="email" 
                           value={newStudent.email}
                           onChange={(e) => setNewStudent({...newStudent, email: e.target.value})}
                           placeholder="email@institution.edu"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Program Selection</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Program Selection</label>
                         <select 
                           value={newStudent.program}
                           onChange={(e) => setNewStudent({...newStudent, program: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-wide text-xs appearance-none"
                         >
                           <option>M.Div</option>
                           <option>B.Th</option>
@@ -446,14 +446,14 @@ export function Admissions() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Academic Year</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Academic Year</label>
                         <input 
                           type="number" 
                           min="1"
                           max="6"
                           value={newStudent.year}
                           onChange={(e) => setNewStudent({...newStudent, year: parseInt(e.target.value)})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
@@ -464,32 +464,32 @@ export function Admissions() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Contact Phone</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Contact Phone</label>
                         <input 
                           type="tel" 
                           value={newStudent.phone || ''}
                           onChange={(e) => setNewStudent({...newStudent, phone: e.target.value})}
                           placeholder="+1 (555) 000-0000"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Date of Birth</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Date of Birth</label>
                         <input 
                           type="date" 
                           value={newStudent.dob || ''}
                           onChange={(e) => setNewStudent({...newStudent, dob: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Gender</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Gender</label>
                         <select 
                           value={newStudent.gender || 'Other'}
                           onChange={(e) => setNewStudent({...newStudent, gender: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-widest text-xs appearance-none"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold uppercase tracking-wide text-xs appearance-none"
                         >
                           <option>Male</option>
                           <option>Female</option>
@@ -498,24 +498,24 @@ export function Admissions() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Blood Group</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Blood Group</label>
                         <input 
                           type="text" 
                           value={newStudent.bloodGroup || ''}
                           onChange={(e) => setNewStudent({...newStudent, bloodGroup: e.target.value})}
                           placeholder="A+"
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Residential Address</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Residential Address</label>
                       <textarea 
                         value={newStudent.address || ''}
                         onChange={(e) => setNewStudent({...newStudent, address: e.target.value})}
                         placeholder="Street, City, Postal Code"
                         rows={2}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -523,14 +523,14 @@ export function Admissions() {
 
                 {formTab === 'emergency' && (
                   <div className="space-y-6">
-                    <div className="p-6 bg-rose-50/30 rounded-3xl border border-rose-100/50 space-y-6">
+                    <div className="p-6 bg-rose-50/30 rounded-lg border border-rose-100/50 space-y-6">
                       <div className="flex items-center gap-2 mb-2">
                          <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-                         <span className="text-[10px] font-black uppercase tracking-widest text-rose-600">Primary Emergency Contact</span>
+                         <span className="text-xs font-medium uppercase tracking-wide text-rose-600">Primary Emergency Contact</span>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Contact Name</label>
+                          <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Contact Name</label>
                           <input 
                             type="text" 
                             value={newStudent.emergencyContact?.name || ''}
@@ -538,11 +538,11 @@ export function Admissions() {
                               ...newStudent, 
                               emergencyContact: { ...newStudent.emergencyContact!, name: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                            className="w-full px-4 py-2.5 bg-white border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Relationship</label>
+                          <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Relationship</label>
                           <input 
                             type="text" 
                             value={newStudent.emergencyContact?.relationship || ''}
@@ -550,12 +550,12 @@ export function Admissions() {
                               ...newStudent, 
                               emergencyContact: { ...newStudent.emergencyContact!, relationship: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                            className="w-full px-4 py-2.5 bg-white border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Emergency Phone</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Emergency Phone</label>
                         <input 
                           type="tel" 
                           value={newStudent.emergencyContact?.phone || ''}
@@ -563,18 +563,18 @@ export function Admissions() {
                             ...newStudent, 
                             emergencyContact: { ...newStudent.emergencyContact!, phone: e.target.value } 
                           })}
-                          className="w-full px-6 py-4 bg-white/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-white border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Medical Observations</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Medical Observations</label>
                       <textarea 
                         value={newStudent.medicalNotes || ''}
                         onChange={(e) => setNewStudent({...newStudent, medicalNotes: e.target.value})}
                         placeholder="Allergies, chronic conditions, or medications..."
                         rows={3}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -584,13 +584,13 @@ export function Admissions() {
                   <button 
                     type="button"
                     onClick={() => setIsAddModalOpen(false)}
-                    className="flex-1 py-5 bg-slate-100 text-slate-500 rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition-all"
+                    className="flex-1 py-5 bg-slate-100 text-slate-500 rounded-lg font-black text-[10px] uppercase tracking-wide hover:bg-slate-200 transition-all"
                   >
                     Discard Entry
                   </button>
                   <button 
                     type="submit"
-                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 shadow-2xl shadow-blue-100 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] py-5 bg-slate-900 text-white rounded-lg font-black text-[10px] uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-100 transition-all flex items-center justify-center gap-2"
                   >
                     <UserPlus className="w-4 h-4" />
                     Authorize Enrollment
@@ -617,22 +617,22 @@ export function Admissions() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-[32px] w-full max-w-lg p-8 relative z-10 shadow-2xl border border-slate-100"
+              className="bg-white rounded-xl w-full max-w-lg p-8 relative z-10 shadow-md border border-slate-100"
             >
               <div className="mb-8 border-b border-slate-100 pb-6">
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight italic-serif">Modify Student Record</h2>
-                <p className="text-sm text-slate-500 mt-1 uppercase tracking-widest font-black text-[10px]">Registry Identification: {studentToEdit.id?.slice(-8)}</p>
+                <h2 className="text-lg font-semibold text-slate-900">Modify Student Record</h2>
+                <p className="text-sm text-slate-500 mt-1 uppercase tracking-wide font-black text-[10px]">Registry Identification: {studentToEdit.id?.slice(-8)}</p>
               </div>
 
               <form onSubmit={handleUpdateStudent} className="space-y-6 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar">
-                <div className="flex gap-1 p-1 bg-slate-50 rounded-2xl mb-6">
+                <div className="flex gap-1 p-1 bg-slate-50 rounded-lg mb-6">
                   {(['academic', 'personal', 'emergency'] as const).map((tab) => (
                     <button
                       key={tab}
                       type="button"
                       onClick={() => setFormTab(tab)}
                       className={cn(
-                        "flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all",
+                        "flex-1 py-3 rounded-xl text-xs font-medium uppercase tracking-wide transition-all",
                         formTab === tab ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                       )}
                     >
@@ -645,52 +645,52 @@ export function Admissions() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
                        <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Student ID/Roll No.</label>
+                         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Student ID/Roll No.</label>
                          <input 
                            type="text" 
                            value={studentToEdit.studentId || ''}
                            onChange={(e) => setStudentToEdit({...studentToEdit, studentId: e.target.value})}
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
+                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
                          />
                        </div>
                        <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Profile Photo URL</label>
+                         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Profile Photo URL</label>
                          <input 
                            type="url" 
                            value={studentToEdit.photoUrl || ''}
                            onChange={(e) => setStudentToEdit({...studentToEdit, photoUrl: e.target.value})}
-                           className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
+                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-sm"
                          />
                        </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Full Identity</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Full Identity</label>
                       <input 
                         required
                         type="text" 
                         value={studentToEdit.name}
                         onChange={(e) => setStudentToEdit({...studentToEdit, name: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Institutional Email</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Institutional Email</label>
                       <input 
                         required
                         type="email" 
                         value={studentToEdit.email}
                         onChange={(e) => setStudentToEdit({...studentToEdit, email: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Academic Program</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Academic Program</label>
                         <select 
                           value={studentToEdit.program}
                           onChange={(e) => setStudentToEdit({...studentToEdit, program: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-wide"
                         >
                           <option>M.Div</option>
                           <option>B.Th</option>
@@ -699,11 +699,11 @@ export function Admissions() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Lifecycle Status</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Lifecycle Status</label>
                         <select 
                           value={studentToEdit.status}
                           onChange={(e) => setStudentToEdit({...studentToEdit, status: e.target.value as any})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-wide"
                         >
                           <option value="active">Active Enrollment</option>
                           <option value="graduated">Alumni (Graduated)</option>
@@ -718,31 +718,31 @@ export function Admissions() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Contact Phone</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Contact Phone</label>
                         <input 
                           type="tel" 
                           value={studentToEdit.phone || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, phone: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Date of Birth</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Date of Birth</label>
                         <input 
                           type="date" 
                           value={studentToEdit.dob || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, dob: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Gender</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Gender</label>
                         <select 
                           value={studentToEdit.gender || 'Other'}
                           onChange={(e) => setStudentToEdit({...studentToEdit, gender: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-widest"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-sm appearance-none uppercase tracking-wide"
                         >
                           <option>Male</option>
                           <option>Female</option>
@@ -751,22 +751,22 @@ export function Admissions() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Blood Group</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Blood Group</label>
                         <input 
                           type="text" 
                           value={studentToEdit.bloodGroup || ''}
                           onChange={(e) => setStudentToEdit({...studentToEdit, bloodGroup: e.target.value})}
-                          className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold uppercase"
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Residential Address</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Residential Address</label>
                       <textarea 
                         value={studentToEdit.address || ''}
                         onChange={(e) => setStudentToEdit({...studentToEdit, address: e.target.value})}
                         rows={2}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -774,9 +774,9 @@ export function Admissions() {
 
                 {formTab === 'emergency' && (
                   <div className="space-y-6">
-                    <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 space-y-4">
+                    <div className="p-6 bg-slate-50 rounded-lg border border-slate-100 space-y-4">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Contact Name</label>
+                        <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Contact Name</label>
                         <input 
                           type="text" 
                           value={studentToEdit.emergencyContact?.name || ''}
@@ -784,12 +784,12 @@ export function Admissions() {
                             ...studentToEdit, 
                             emergencyContact: { ...(studentToEdit.emergencyContact || {relationship:'', phone:''}), name: e.target.value } 
                           })}
-                          className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                          className="w-full px-6 py-4 bg-white border border-slate-100 rounded-lg focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Relationship</label>
+                          <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Relationship</label>
                           <input 
                             type="text" 
                             value={studentToEdit.emergencyContact?.relationship || ''}
@@ -797,11 +797,11 @@ export function Admissions() {
                               ...studentToEdit, 
                               emergencyContact: { ...(studentToEdit.emergencyContact || {name:'', phone:''}), relationship: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-lg focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Emergency Phone</label>
+                          <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Emergency Phone</label>
                           <input 
                             type="tel" 
                             value={studentToEdit.emergencyContact?.phone || ''}
@@ -809,18 +809,18 @@ export function Admissions() {
                               ...studentToEdit, 
                               emergencyContact: { ...(studentToEdit.emergencyContact || {name:'', relationship:''}), phone: e.target.value } 
                             })}
-                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-3xl focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold"
+                            className="w-full px-6 py-4 bg-white border border-slate-100 rounded-lg focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold"
                           />
                         </div>
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Medical Observations</label>
+                      <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1">Medical Observations</label>
                       <textarea 
                         value={studentToEdit.medicalNotes || ''}
                         onChange={(e) => setStudentToEdit({...studentToEdit, medicalNotes: e.target.value})}
                         rows={3}
-                        className="w-full px-6 py-4 bg-slate-50/50 border border-slate-100 rounded-3xl focus:bg-white focus:ring-8 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold resize-none"
                       />
                     </div>
                   </div>
@@ -830,13 +830,13 @@ export function Admissions() {
                   <button 
                     type="button"
                     onClick={() => setStudentToEdit(null)}
-                    className="flex-1 py-5 bg-slate-100 text-slate-500 rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition-all"
+                    className="flex-1 py-5 bg-slate-100 text-slate-500 rounded-lg font-black text-[10px] uppercase tracking-wide hover:bg-slate-200 transition-all"
                   >
                     Discard Changes
                   </button>
                   <button 
                     type="submit"
-                    className="flex-[2] py-5 bg-slate-900 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest hover:from-blue-700 hover:to-indigo-700 shadow-2xl shadow-blue-100 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] py-5 bg-slate-900 text-white rounded-lg font-black text-[10px] uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-100 transition-all flex items-center justify-center gap-2"
                   >
                     <Save className="w-4 h-4" />
                     Commit Update
@@ -862,7 +862,7 @@ export function Admissions() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-[32px] w-full max-w-sm p-8 relative z-10 shadow-2xl border border-rose-100 text-center"
+              className="bg-white rounded-xl w-full max-w-sm p-8 relative z-10 shadow-md border border-rose-100 text-center"
             >
               <div className="w-20 h-20 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-6">
                 <AlertCircle className="w-10 h-10 text-rose-500" />
@@ -870,18 +870,18 @@ export function Admissions() {
               <h3 className="text-2xl font-bold text-slate-900 italic-serif mb-3">Permanent Withdrawal</h3>
               <p className="text-slate-500 text-sm leading-relaxed mb-8">
                 Are you sure you want to mark this student as withdrawn? 
-                <span className="block mt-2 font-bold text-rose-600 uppercase text-[10px] tracking-widest">This action cannot be undone.</span>
+                <span className="block mt-2 font-bold text-rose-600 uppercase text-[10px] tracking-wide">This action cannot be undone.</span>
               </p>
               <div className="flex gap-3">
                 <button 
                   onClick={() => setIsWithdrawModalOpen(false)}
-                  className="flex-1 py-3.5 bg-slate-100 text-slate-500 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-200 transition-all"
+                  className="flex-1 py-3.5 bg-slate-100 text-slate-500 rounded-lg font-black uppercase tracking-wide text-[10px] hover:bg-slate-200 transition-all"
                 >
                   Cancel
                 </button>
                 <button 
                   onClick={handleWithdrawStudent}
-                  className="flex-1 py-3.5 bg-rose-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-rose-700 shadow-xl shadow-rose-100 transition-all"
+                  className="flex-1 py-3.5 bg-rose-600 text-white rounded-lg font-black uppercase tracking-wide text-[10px] hover:bg-rose-700 shadow-sm shadow-rose-100 transition-all"
                 >
                   Confirm
                 </button>

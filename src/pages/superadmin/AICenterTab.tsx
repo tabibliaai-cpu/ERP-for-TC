@@ -211,7 +211,7 @@ function getFeatureDef(featureId: string) {
 
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
       {children}
     </div>
   );
@@ -728,7 +728,7 @@ export function AICenterTab() {
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -20, x: '-50%' }}
             className={cn(
-              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-xl flex items-center gap-2 text-sm font-semibold',
+              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-sm flex items-center gap-2 text-sm font-semibold',
               toast.type === 'success'
                 ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white'
                 : 'bg-gradient-to-r from-rose-500 to-red-600 text-white'
@@ -789,7 +789,7 @@ export function AICenterTab() {
             value: activeFeaturesCount,
             total: AI_FEATURES.length,
             icon: Brain,
-            gradient: 'from-blue-600 to-indigo-600',
+            gradient: '',
             trend: '+2 this week',
             trendUp: true,
           },
@@ -823,7 +823,7 @@ export function AICenterTab() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
-            className="rounded-2xl bg-gradient-to-br p-5 text-white shadow-lg relative overflow-hidden"
+            className="rounded-lg bg-gradient-to-br p-5 text-white shadow-lg relative overflow-hidden"
           >
             <div className={cn('absolute inset-0 bg-gradient-to-br opacity-100', stat.gradient)} />
             <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl" />
@@ -858,7 +858,7 @@ export function AICenterTab() {
         transition={{ delay: 0.2 }}
         className="relative z-10"
       >
-        <div className="flex gap-1 p-1 bg-gray-100/80 backdrop-blur-sm rounded-2xl overflow-x-auto">
+        <div className="flex gap-1 p-1 bg-gray-100/80 backdrop-blur-sm rounded-lg overflow-x-auto">
           {tabs.map(tab => {
             const TabIcon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -869,7 +869,7 @@ export function AICenterTab() {
                 className={cn(
                   'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
                   isActive
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                     : 'text-gray-600 hover:text-blue-600 hover:bg-white/60'
                 )}
               >
@@ -1220,7 +1220,7 @@ export function AICenterTab() {
                   })()}
                   <div className="pt-3 border-t-2 border-gray-200 flex items-center justify-between">
                     <span className="text-sm font-bold text-gray-900">Total Estimated Cost</span>
-                    <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <span className="text-lg font-bold bg-blue-600 bg-clip-text text-transparent">
                       {formatCurrency(estimatedCost)}
                     </span>
                   </div>
@@ -1409,7 +1409,7 @@ export function AICenterTab() {
                     <button
                       onClick={handleSaveRateLimits}
                       disabled={isSaving}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
                     >
                       {isSaving ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -1556,7 +1556,7 @@ export function AICenterTab() {
                 <button
                   onClick={handleSaveRateLimits}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60 text-sm"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   Save Tier Limits
@@ -1661,7 +1661,7 @@ export function AICenterTab() {
                             <button
                               onClick={handleSaveModelConfig}
                               disabled={isSaving}
-                              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-xs hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md disabled:opacity-60 shrink-0"
+                              className="px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold text-xs hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md disabled:opacity-60 shrink-0"
                             >
                               {isSaving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : 'Save'}
                             </button>

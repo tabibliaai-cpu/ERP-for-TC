@@ -300,7 +300,7 @@ const DEFAULT_CURRICULUM: Omit<CurriculumStandard, 'id' | 'createdAt' | 'updated
 
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
       {children}
     </div>
   );
@@ -316,7 +316,7 @@ function StatCard({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className={cn('rounded-2xl bg-gradient-to-br p-4 text-white shadow-lg', gradient)}
+      className={cn('rounded-lg bg-gradient-to-br p-4 text-white shadow-lg', gradient)}
     >
       <div className="flex items-center justify-between">
         <div>
@@ -827,7 +827,7 @@ export function AcademicsControlTab() {
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -20, x: '-50%' }}
             className={cn(
-              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-xl flex items-center gap-2 text-sm font-semibold',
+              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-sm flex items-center gap-2 text-sm font-semibold',
               toast.type === 'success'
                 ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white'
                 : 'bg-gradient-to-r from-rose-500 to-red-600 text-white'
@@ -860,7 +860,7 @@ export function AcademicsControlTab() {
           {activeSection === 'templates' && (
             <button
               onClick={() => setShowCreateTemplate(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
             >
               <Plus className="w-4 h-4" />
               New Template
@@ -869,7 +869,7 @@ export function AcademicsControlTab() {
           {activeSection === 'grades' && (
             <button
               onClick={() => setShowCreateGradeScale(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
             >
               <Plus className="w-4 h-4" />
               New Grade Scale
@@ -880,7 +880,7 @@ export function AcademicsControlTab() {
 
       {/* ─── Stats Row ─── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Total Templates" value={stats.totalTemplates} icon={LayoutGrid} gradient="from-blue-600 to-indigo-600" delay={0} />
+        <StatCard label="Total Templates" value={stats.totalTemplates} icon={LayoutGrid} gradient="" delay={0} />
         <StatCard label="Active Templates" value={stats.activeTemplates} icon={BookOpen} gradient="from-indigo-500 to-purple-600" delay={0.06} />
         <StatCard label="Global Policies" value={stats.activePolicies} icon={Shield} gradient="from-amber-500 to-orange-500" delay={0.12} />
         <StatCard label="Grade Scales" value={stats.gradeScales} icon={BarChart3} gradient="from-emerald-500 to-green-600" delay={0.18} />
@@ -908,7 +908,7 @@ export function AcademicsControlTab() {
               className={cn(
                 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
                 isActive
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                   : 'bg-white/80 text-gray-600 hover:bg-gray-100 border border-gray-200'
               )}
             >
@@ -1101,7 +1101,7 @@ export function AcademicsControlTab() {
                                 </button>
                                 <button
                                   onClick={() => setShowPushModal(template.id!)}
-                                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-blue-500/20"
+                                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-blue-500/20"
                                 >
                                   <Send className="w-3.5 h-3.5" />
                                   Push to Institution
@@ -1518,7 +1518,7 @@ export function AcademicsControlTab() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
+              className="bg-white rounded-lg shadow-md w-full max-w-lg max-h-[85vh] overflow-y-auto"
               onClick={e => e.stopPropagation()}
             >
               <div className="p-6 border-b border-gray-100 flex items-center justify-between">
@@ -1647,7 +1647,7 @@ export function AcademicsControlTab() {
                 <button
                   onClick={handleCreateTemplate}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                   Create Template
@@ -1674,7 +1674,7 @@ export function AcademicsControlTab() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
+              className="bg-white rounded-lg shadow-md w-full max-w-lg max-h-[85vh] overflow-y-auto"
               onClick={e => e.stopPropagation()}
             >
               <div className="p-6 border-b border-gray-100 flex items-center justify-between">
@@ -1715,7 +1715,7 @@ export function AcademicsControlTab() {
                         className={cn(
                           'px-4 py-2 rounded-xl text-xs font-bold transition-all',
                           gradeScaleForm.scaleType === t.key
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
+                            ? 'bg-blue-600 text-white shadow-md'
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         )}
                       >
@@ -1818,7 +1818,7 @@ export function AcademicsControlTab() {
                           }));
                           setNewGradeRow({ grade: '', minScore: 0, maxScore: 100, description: '', isPassing: true, color: 'bg-blue-500' });
                         }}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all"
                       >
                         <Plus className="w-3 h-3" />
                         Add
@@ -1838,7 +1838,7 @@ export function AcademicsControlTab() {
                 <button
                   onClick={handleCreateGradeScale}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                   Create Scale
@@ -1865,7 +1865,7 @@ export function AcademicsControlTab() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-md"
+              className="bg-white rounded-lg shadow-md w-full max-w-md"
               onClick={e => e.stopPropagation()}
             >
               <div className="p-6 border-b border-gray-100 flex items-center justify-between">
