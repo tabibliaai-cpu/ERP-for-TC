@@ -180,6 +180,41 @@ const FAQ_ITEMS = [
 
 const AVATAR_COLORS = ['#2563eb', '#059669', '#d97706', '#0284c7', '#7c3aed'];
 
+/* ─── Accent color maps ─── */
+const accentIconBg: Record<string, string> = {
+  indigo: 'bg-blue-50 text-blue-600',
+  emerald: 'bg-emerald-50 text-emerald-600',
+  amber: 'bg-amber-50 text-amber-600',
+  rose: 'bg-rose-50 text-rose-600',
+  sky: 'bg-sky-50 text-sky-600',
+  violet: 'bg-violet-50 text-violet-600',
+  teal: 'bg-teal-50 text-teal-600',
+  orange: 'bg-orange-50 text-orange-600',
+};
+
+const accentTopBar: Record<string, string> = {
+  indigo: 'bg-blue-500',
+  emerald: 'bg-emerald-500',
+  amber: 'bg-amber-500',
+  rose: 'bg-rose-500',
+  sky: 'bg-sky-500',
+  violet: 'bg-violet-500',
+  teal: 'bg-teal-500',
+  orange: 'bg-orange-500',
+};
+
+const accentAvatar: Record<string, string> = {
+  indigo: 'bg-blue-100 text-blue-700',
+  emerald: 'bg-emerald-100 text-emerald-700',
+  amber: 'bg-amber-100 text-amber-700',
+};
+
+const accentBorder: Record<string, string> = {
+  indigo: 'border-t-blue-500',
+  emerald: 'border-t-emerald-500',
+  amber: 'border-t-amber-500',
+};
+
 /* ═══════════════════════════════════════════════════════════════════════ */
 
 const LandingPage = () => {
@@ -203,58 +238,97 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="lp-root">
+    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden">
 
       {/* ═══ NAVBAR ═══ */}
-      <nav
-        className="lp-nav"
-        style={{ borderBottom: navScrolled ? '1px solid var(--lp-border-light)' : '1px solid transparent' }}
-      >
-        <div className="lp-nav-inner">
-          <div className="lp-nav-brand">
-            <div className="lp-nav-logo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <nav className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md transition-colors duration-200 ${navScrolled ? 'border-b border-slate-200' : 'border-b border-transparent'}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          {/* Brand */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <div className="flex items-center justify-center">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#2563eb" />
                 <path d="M2 17l10 5 10-5" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M2 12l10 5 10-5" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="lp-nav-name">CovenantERP</span>
+            <span className="font-bold text-lg tracking-tight text-slate-900">CovenantERP</span>
           </div>
-          <div className="lp-nav-links">
-            <a href="#features">Features</a>
-            <a href="#preview">Product</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#faq">FAQ</a>
+
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-1">
+            {['Features', 'Product', 'Testimonials', 'FAQ'].map((link) => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+              >
+                {link}
+              </a>
+            ))}
           </div>
-          <div className="lp-nav-actions">
-            <button className="lp-nav-login" onClick={() => navigate('/login')}>Sign In</button>
-            <button className="lp-nav-cta" onClick={() => navigate('/login')}>Get Started</button>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => navigate('/login')}
+              className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors cursor-pointer"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => navigate('/login')}
+              className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors cursor-pointer"
+            >
+              Get Started
+            </button>
           </div>
+
+          {/* Mobile Hamburger */}
           <button
-            className={`lp-nav-hamburger ${mobileMenuOpen ? 'open' : ''}`}
+            className={`md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 bg-transparent border-none cursor-pointer p-2 rounded-md hover:bg-slate-50 transition-colors`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span /><span /><span />
+            <span className={`block w-[18px] h-[1.5px] bg-slate-900 rounded transition-all duration-200 origin-center ${mobileMenuOpen ? 'translate-y-[3.5px] rotate-45' : ''}`} />
+            <span className={`block w-[18px] h-[1.5px] bg-slate-900 rounded transition-all duration-200 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block w-[18px] h-[1.5px] bg-slate-900 rounded transition-all duration-200 origin-center ${mobileMenuOpen ? '-translate-y-[3.5px] -rotate-45' : ''}`} />
           </button>
         </div>
+
+        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              className="lp-mobile-menu"
+              className="overflow-hidden border-t border-slate-100 bg-white px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <a href="#features" onClick={() => setMobileMenuOpen(false)}>Features</a>
-              <a href="#preview" onClick={() => setMobileMenuOpen(false)}>Product</a>
-              <a href="#testimonials" onClick={() => setMobileMenuOpen(false)}>Testimonials</a>
-              <a href="#faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-              <div className="lp-mobile-actions">
-                <button className="lp-nav-login" onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Sign In</button>
-                <button className="lp-nav-cta" onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Get Started</button>
+              {['Features', 'Product', 'Testimonials', 'FAQ'].map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-3.5 text-base font-medium text-slate-500 hover:text-blue-600 border-b border-slate-50 last:border-b-0 transition-colors"
+                >
+                  {link}
+                </a>
+              ))}
+              <div className="flex gap-3 py-4 pb-5">
+                <button
+                  onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}
+                  className="flex-1 text-center py-2.5 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}
+                  className="flex-1 text-center py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
+                >
+                  Get Started
+                </button>
               </div>
             </motion.div>
           )}
@@ -262,94 +336,127 @@ const LandingPage = () => {
       </nav>
 
       {/* ═══ 1. HERO ═══ */}
-      <section className="lp-hero">
-        <div className="lp-hero-inner">
-          <div className="lp-hero-content">
+      <section className="min-h-screen pt-32 pb-24 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="max-w-xl">
             <FadeIn>
-              <div className="lp-hero-badge">
-                <span className="lp-badge-dot" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-sm font-medium text-blue-600 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 Now serving 120+ institutions worldwide
               </div>
             </FadeIn>
             <FadeIn delay={0.08}>
-              <h1 className="lp-hero-title">
-                The ERP built for
-                <span className="lp-title-accent"> theological education.</span>
+              <h1 className="text-4xl sm:text-[2.75rem] lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-slate-900 mb-5">
+                The ERP built for{' '}
+                <span className="text-blue-600">theological education.</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.16}>
-              <p className="lp-hero-desc">
+              <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8">
                 Manage admissions, academics, finance, library, faculty, and campus operations
                 from one unified platform. Designed for seminaries, Bible colleges,
                 and theological institutions.
               </p>
             </FadeIn>
             <FadeIn delay={0.24}>
-              <div className="lp-hero-actions">
-                <button className="lp-btn-primary" onClick={() => navigate('/login')}>
+              <div className="flex flex-wrap gap-3 mb-10">
+                <button
+                  onClick={() => navigate('/login')}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
+                >
                   Start Free Trial
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
                 </button>
-                <button className="lp-btn-outline">
+                <button className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-slate-300 cursor-pointer">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Watch Demo
                 </button>
               </div>
             </FadeIn>
             <FadeIn delay={0.32}>
-              <div className="lp-hero-proof">
-                <div className="lp-avatars">
+              <div className="flex items-center gap-3.5">
+                <div className="flex">
                   {['SR', 'MT', 'DK', 'AJ', 'PN'].map((a, i) => (
-                    <div key={i} className="lp-avatar" style={{
-                      zIndex: 5 - i,
-                      marginLeft: i > 0 ? '-8px' : '0',
-                      background: AVATAR_COLORS[i],
-                    }}>{a}</div>
+                    <div
+                      key={i}
+                      className="w-8 h-8 rounded-full text-white flex items-center justify-center text-[0.6rem] font-semibold border-2 border-white shadow-sm hover:-translate-y-0.5 transition-transform"
+                      style={{
+                        zIndex: 5 - i,
+                        marginLeft: i > 0 ? '-8px' : '0',
+                        background: AVATAR_COLORS[i],
+                      }}
+                    >
+                      {a}
+                    </div>
                   ))}
                 </div>
-                <div className="lp-proof-text">
-                  <div className="lp-stars">
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex gap-px">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     ))}
                   </div>
-                  <span>Trusted by 120+ institutions</span>
+                  <span className="text-xs font-medium text-slate-400">Trusted by 120+ institutions</span>
                 </div>
               </div>
             </FadeIn>
           </div>
 
+          {/* Right Visual */}
           <FadeIn delay={0.15} direction="right">
-            <div className="lp-hero-visual">
-              <div className="lp-hero-mockup">
-                <div className="lp-mockup-bar">
-                  <div className="lp-mockup-dots">
-                    <span /><span /><span />
+            <div className="relative">
+              {/* Browser Mockup */}
+              <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                {/* Browser Bar */}
+                <div className="flex items-center px-4 py-3 bg-slate-50 border-b border-slate-100 gap-3">
+                  <div className="flex gap-1.5 shrink-0">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                   </div>
-                  <div className="lp-mockup-tabs">
-                    <span className="active">Dashboard</span>
-                    <span>Students</span>
-                    <span>Finance</span>
+                  <div className="flex-1 flex items-center gap-2">
+                    {['Dashboard', 'Students', 'Finance'].map((tab, i) => (
+                      <span
+                        key={tab}
+                        className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                          i === 0
+                            ? 'bg-white text-slate-900 shadow-sm'
+                            : 'text-slate-400 hover:text-slate-500'
+                        }`}
+                      >
+                        {tab}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <img src={dashboardImg} alt="CovenantERP Dashboard" className="lp-mockup-img" />
+                {/* Screenshot */}
+                <img
+                  src={dashboardImg}
+                  alt="CovenantERP Dashboard"
+                  className="block w-full h-auto"
+                />
               </div>
-              <div className="lp-float-card lp-float-1">
-                <div className="lp-float-icon lp-float-green">
+
+              {/* Floating Stat Card 1 */}
+              <div className="hidden lg:flex absolute top-[8%] -right-3 items-center gap-2.5 px-3.5 py-2.5 bg-white border border-slate-100 rounded-xl shadow-lg z-10">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
                 <div>
-                  <div className="lp-float-label">Enrollment</div>
-                  <div className="lp-float-value lp-float-value-green">+24%</div>
+                  <div className="text-[0.65rem] text-slate-400 font-medium leading-none mb-0.5">Enrollment</div>
+                  <div className="text-sm font-bold text-emerald-600 leading-none">+24%</div>
                 </div>
               </div>
-              <div className="lp-float-card lp-float-2">
-                <div className="lp-float-icon lp-float-indigo">
+
+              {/* Floating Stat Card 2 */}
+              <div className="hidden lg:flex absolute bottom-[12%] -left-3 items-center gap-2.5 px-3.5 py-2.5 bg-white border border-slate-100 rounded-xl shadow-lg z-10">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
                 <div>
-                  <div className="lp-float-label">Fees Collected</div>
-                  <div className="lp-float-value">$48,250</div>
+                  <div className="text-[0.65rem] text-slate-400 font-medium leading-none mb-0.5">Fees Collected</div>
+                  <div className="text-sm font-bold text-slate-900 leading-none">$48,250</div>
                 </div>
               </div>
             </div>
@@ -358,74 +465,111 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ 2. TRUSTED BY ═══ */}
-      <section className="lp-trust">
+      <section className="py-10 px-4 sm:px-6 lg:px-8 border-t border-b border-slate-100">
         <FadeIn>
-          <p className="lp-trust-label">Trusted by leading theological institutions</p>
+          <p className="text-center text-xs font-medium text-slate-400 uppercase tracking-wide mb-5">
+            Trusted by leading theological institutions
+          </p>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <div className="lp-trust-logos">
+          <div className="max-w-6xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-8">
             {TRUST_LOGOS.map((name, i) => (
-              <span key={i} className="lp-trust-logo">{name}</span>
+              <span
+                key={i}
+                className="text-sm sm:text-base font-semibold text-slate-300 opacity-35 hover:opacity-70 transition-opacity select-none tracking-tight"
+              >
+                {name}
+              </span>
             ))}
           </div>
         </FadeIn>
       </section>
 
       {/* ═══ 3. FEATURES ═══ */}
-      <section className="lp-features" id="features">
-        <FadeIn>
-          <p className="lp-section-label">Features</p>
-        </FadeIn>
-        <FadeIn delay={0.08}>
-          <h2 className="lp-section-title">Everything your institution needs.</h2>
-        </FadeIn>
-        <FadeIn delay={0.16}>
-          <p className="lp-section-desc">Eight core modules, one unified platform. Each module integrates seamlessly with the others.</p>
-        </FadeIn>
-
-        <div className="lp-bento">
-          {FEATURES.map((f, i) => (
-            <FadeIn key={i} delay={i * 0.04}>
-              <div className={`lp-bento-card lp-accent-${f.accent}`}>
-                <div className={`lp-bento-icon lp-icon-${f.accent}`}>{f.icon}</div>
-                <h3 className="lp-bento-title">{f.title}</h3>
-                <p className="lp-bento-desc">{f.desc}</p>
-                <div className="lp-bento-arrow">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-                </div>
-              </div>
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8" id="features">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <FadeIn>
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3">
+                <span className="w-4 h-0.5 bg-blue-600 rounded" />
+                Features
+              </p>
             </FadeIn>
-          ))}
+            <FadeIn delay={0.08}>
+              <h2 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-bold tracking-tight leading-tight text-slate-900 mb-4">
+                Everything your institution needs.
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.16}>
+              <p className="text-base text-slate-500 leading-relaxed max-w-lg mx-auto">
+                Eight core modules, one unified platform. Each module integrates seamlessly with the others.
+              </p>
+            </FadeIn>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {FEATURES.map((f, i) => (
+              <FadeIn key={i} delay={i * 0.04}>
+                <div className="group relative bg-white border border-slate-100 rounded-xl p-6 text-left hover:border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+                  {/* Top accent line on hover */}
+                  <div className={`absolute top-0 left-0 right-0 h-0.5 ${accentTopBar[f.accent]} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${accentIconBg[f.accent]}`}>
+                    {f.icon}
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 mb-2 tracking-tight">{f.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed pr-4">{f.desc}</p>
+                  <div className="absolute bottom-6 right-6 w-6 h-6 rounded-full flex items-center justify-center text-slate-300 opacity-0 -translate-x-1 group-hover:opacity-50 group-hover:translate-x-0 transition-all duration-200">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ═══ 4. PRODUCT PREVIEW ═══ */}
-      <section className="lp-preview" id="preview">
-        <div className="lp-preview-inner">
-          <div className="lp-preview-text">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50" id="preview">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-12 items-start">
+          <div>
             <FadeIn>
-              <p className="lp-section-label">Product Preview</p>
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3">
+                <span className="w-4 h-0.5 bg-blue-600 rounded" />
+                Product Preview
+              </p>
             </FadeIn>
             <FadeIn delay={0.08}>
-              <h2 className="lp-section-title">See it in action.</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-bold tracking-tight leading-tight text-slate-900 mb-4">
+                See it in action.
+              </h2>
             </FadeIn>
             <FadeIn delay={0.16}>
-              <p className="lp-section-desc">Explore the modules that power theological institutions worldwide.</p>
+              <p className="text-base text-slate-500 leading-relaxed mb-6">
+                Explore the modules that power theological institutions worldwide.
+              </p>
             </FadeIn>
-            <div className="lp-preview-list">
+            <div className="flex flex-col gap-1">
               {SCREENS.map((s, i) => (
                 <FadeIn key={i} delay={0.24 + i * 0.05}>
                   <button
-                    className={`lp-preview-item ${i === activeScreen ? 'active' : ''}`}
+                    className={`flex items-center gap-3 px-3.5 py-3 rounded-lg text-left transition-all duration-150 w-full cursor-pointer ${
+                      i === activeScreen
+                        ? 'bg-white border border-slate-200 shadow-sm'
+                        : 'bg-transparent border border-transparent hover:bg-white hover:border-slate-100'
+                    }`}
                     onClick={() => setActiveScreen(i)}
                   >
-                    <span className="lp-preview-dot" />
-                    <div>
-                      <div className="lp-preview-item-title">{s.label}</div>
-                      <div className="lp-preview-item-desc">{s.desc}</div>
+                    <span className={`w-2 h-2 rounded-full shrink-0 transition-all duration-150 ${
+                      i === activeScreen
+                        ? 'bg-blue-600 border-blue-600'
+                        : 'border-slate-300'
+                    }`} style={i === activeScreen ? {} : { borderWidth: '2px' }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-slate-900">{s.label}</div>
+                      <div className="text-xs text-slate-400 leading-none">{s.desc}</div>
                     </div>
                     {i === activeScreen && (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 shrink-0">
                         <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
                       </svg>
                     )}
@@ -434,19 +578,26 @@ const LandingPage = () => {
               ))}
             </div>
           </div>
+
           <FadeIn delay={0.12} direction="right">
-            <div className="lp-preview-screen">
-              <div className="lp-preview-browser">
-                <div className="lp-browser-bar">
-                  <span /><span /><span />
-                  <div className="lp-browser-url">app.covenanterp.com/{SCREENS[activeScreen].label.toLowerCase()}</div>
+            <div className="relative">
+              <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                {/* Browser Bar */}
+                <div className="flex items-center px-4 py-3 bg-slate-50 border-b border-slate-100 gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                  <div className="ml-2.5 text-xs text-slate-400 bg-white px-3 py-1 rounded-md border border-slate-100 flex-1 truncate font-mono">
+                    app.covenanterp.com/{SCREENS[activeScreen].label.toLowerCase()}
+                  </div>
                 </div>
+                {/* Screenshot */}
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeScreen}
                     src={SCREENS[activeScreen].src}
                     alt={SCREENS[activeScreen].label}
-                    className="lp-browser-img"
+                    className="block w-full h-auto"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -460,16 +611,17 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ 5. STATS ═══ */}
-      <section className="lp-stats">
-        <div className="lp-stats-grid">
+      <section className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 border-t border-b border-slate-100">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
           {STATS.map((s, i) => (
             <FadeIn key={i} delay={i * 0.06}>
-              <div className="lp-stat">
-                <span className="lp-stat-value">
+              <div className="relative flex flex-col items-center text-center py-7 px-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                <div className="hidden lg:block absolute right-0 top-[20%] h-[60%] w-px bg-slate-100 last:hidden" />
+                <span className="text-3xl sm:text-[2.5rem] lg:text-[2.75rem] font-extrabold tracking-tight text-blue-600 leading-none">
                   <CountUp end={s.value} suffix={s.suffix} decimals={s.decimals || 0} />
                 </span>
-                <span className="lp-stat-label">{s.label}</span>
-                <span className="lp-stat-desc">{s.desc}</span>
+                <span className="text-sm sm:text-base font-semibold text-slate-900 mt-2">{s.label}</span>
+                <span className="text-xs text-slate-400 mt-1">{s.desc}</span>
               </div>
             </FadeIn>
           ))}
@@ -477,63 +629,110 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ 6. TESTIMONIALS ═══ */}
-      <section className="lp-testimonials" id="testimonials">
-        <FadeIn>
-          <p className="lp-section-label">Testimonials</p>
-        </FadeIn>
-        <FadeIn delay={0.08}>
-          <h2 className="lp-section-title">Loved by administrators.</h2>
-        </FadeIn>
-        <FadeIn delay={0.16}>
-          <p className="lp-section-desc">Hear from the leaders who transformed their institutions with CovenantERP.</p>
-        </FadeIn>
-        <div className="lp-testimonial-grid">
-          {TESTIMONIALS.map((t, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div className={`lp-testimonial-card lp-card-${t.color}`}>
-                <div className="lp-testimonial-stars">
-                  {[...Array(5)].map((_, j) => (
-                    <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  ))}
-                </div>
-                <p className="lp-testimonial-quote">&ldquo;{t.quote}&rdquo;</p>
-                <div className="lp-testimonial-author">
-                  <div className={`lp-author-avatar lp-avatar-${t.color}`}>{t.initials}</div>
-                  <div>
-                    <div className="lp-author-name">{t.name}</div>
-                    <div className="lp-author-role">{t.role}</div>
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8" id="testimonials">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <FadeIn>
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3">
+                <span className="w-4 h-0.5 bg-blue-600 rounded" />
+                Testimonials
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <h2 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-bold tracking-tight leading-tight text-slate-900 mb-4">
+                Loved by administrators.
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.16}>
+              <p className="text-base text-slate-500 leading-relaxed max-w-lg mx-auto">
+                Hear from the leaders who transformed their institutions with CovenantERP.
+              </p>
+            </FadeIn>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {TESTIMONIALS.map((t, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <div className={`bg-white border border-slate-100 border-t-2 ${accentBorder[t.color]} rounded-xl p-6 text-left hover:shadow-md hover:-translate-y-0.5 transition-all duration-200`}>
+                  <div className="flex gap-0.5 mb-3.5">
+                    {[...Array(5)].map((_, j) => (
+                      <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    ))}
+                  </div>
+                  <p className="text-sm text-slate-500 leading-relaxed italic mb-6">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${accentAvatar[t.color]}`}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-slate-900">{t.name}</div>
+                      <div className="text-xs text-slate-400">{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ═══ 7. FAQ ═══ */}
-      <section className="lp-faq" id="faq">
-        <div className="lp-faq-inner">
-          <div className="lp-faq-text">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50" id="faq">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 lg:gap-12 items-start">
+          <div>
             <FadeIn>
-              <p className="lp-section-label">FAQ</p>
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3">
+                <span className="w-4 h-0.5 bg-blue-600 rounded" />
+                FAQ
+              </p>
             </FadeIn>
             <FadeIn delay={0.08}>
-              <h2 className="lp-section-title">Common questions.</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-bold tracking-tight leading-tight text-slate-900 mb-4">
+                Common questions.
+              </h2>
             </FadeIn>
             <FadeIn delay={0.16}>
-              <p className="lp-section-desc">Everything you need to know about getting started with CovenantERP.</p>
+              <p className="text-base text-slate-500 leading-relaxed">
+                Everything you need to know about getting started with CovenantERP.
+              </p>
             </FadeIn>
           </div>
-          <div className="lp-faq-list">
+
+          <div className="flex flex-col gap-2">
             {FAQ_ITEMS.map((item, i) => (
               <FadeIn key={i} delay={i * 0.04}>
-                <div className={`lp-faq-item ${faqOpen === i ? 'open' : ''}`}>
-                  <button className="lp-faq-q" onClick={() => setFaqOpen(faqOpen === i ? null : i)}>
-                    <span>{item.q}</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <div className={`bg-white border rounded-xl overflow-hidden transition-all duration-200 ${
+                  faqOpen === i
+                    ? 'border-blue-100 shadow-sm'
+                    : 'border-slate-100 hover:border-slate-200'
+                }`}>
+                  <button
+                    className="flex items-center justify-between gap-4 w-full px-5 py-4 bg-transparent border-none cursor-pointer text-left text-sm font-semibold text-slate-900 transition-colors"
+                    onClick={() => setFaqOpen(faqOpen === i ? null : i)}
+                  >
+                    <span className={faqOpen === i ? 'text-blue-600' : ''}>{item.q}</span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`shrink-0 transition-all duration-200 ${faqOpen === i ? 'rotate-180 text-blue-600' : 'text-slate-400'}`}
+                    >
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
                   </button>
-                  <div className="lp-faq-a">
-                    <p>{item.a}</p>
+                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    faqOpen === i ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}>
+                    <p className="px-5 pb-4 text-sm text-slate-500 leading-relaxed">
+                      {item.a}
+                    </p>
                   </div>
                 </div>
               </FadeIn>
@@ -543,65 +742,88 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ 8. CTA ═══ */}
-      <section className="lp-cta">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white text-center relative overflow-hidden">
         <FadeIn>
-          <h2 className="lp-cta-title">Ready to modernize your institution?</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-[2.4rem] font-bold tracking-tight mb-4 relative z-10">
+            Ready to modernize your institution?
+          </h2>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <p className="lp-cta-desc">Join 120+ theological institutions already using CovenantERP. Start your free trial today.</p>
+          <p className="text-base text-slate-400 max-w-md mx-auto leading-relaxed mb-8 relative z-10">
+            Join 120+ theological institutions already using CovenantERP. Start your free trial today.
+          </p>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <div className="lp-cta-actions">
-            <button className="lp-btn-primary" onClick={() => navigate('/login')}>
+          <div className="flex flex-wrap gap-3 justify-center relative z-10">
+            <button
+              onClick={() => navigate('/login')}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all cursor-pointer"
+            >
               Get Started Free
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
             </button>
-            <button className="lp-btn-outline-white">Book a Demo</button>
+            <button className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/40 transition-all cursor-pointer">
+              Book a Demo
+            </button>
           </div>
         </FadeIn>
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="lp-footer">
-        <div className="lp-footer-inner">
-          <div className="lp-footer-top">
-            <div className="lp-footer-brand">
-              <div className="lp-nav-logo">
+      <footer className="bg-slate-900 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+          {/* Top */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-10 lg:gap-16 pb-12 border-b border-white/[0.08]">
+            {/* Brand */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2.5">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#60a5fa" />
                   <path d="M2 17l10 5 10-5" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M2 12l10 5 10-5" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
+                <span className="font-bold text-lg tracking-tight text-white">CovenantERP</span>
               </div>
-              <span className="lp-footer-name">CovenantERP</span>
-              <p className="lp-footer-tagline">The complete ERP platform for theological institutions.</p>
+              <p className="text-sm text-white/40 leading-relaxed max-w-[280px]">
+                The complete ERP platform for theological institutions.
+              </p>
             </div>
-            <div className="lp-footer-columns">
-              <div className="lp-footer-col">
-                <h4>Product</h4>
-                <a href="#features">Features</a>
-                <a href="#preview">Preview</a>
-                <a href="#faq">FAQ</a>
+
+            {/* Columns */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+              <div className="flex flex-col gap-3">
+                <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-1">Product</h4>
+                <a href="#features" className="text-sm text-white/60 hover:text-white transition-colors">Features</a>
+                <a href="#preview" className="text-sm text-white/60 hover:text-white transition-colors">Preview</a>
+                <a href="#faq" className="text-sm text-white/60 hover:text-white transition-colors">FAQ</a>
               </div>
-              <div className="lp-footer-col">
-                <h4>Company</h4>
-                <a href="#about">About</a>
-                <a href="#careers">Careers</a>
-                <a href="#contact">Contact</a>
+              <div className="flex flex-col gap-3">
+                <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-1">Company</h4>
+                <a href="#about" className="text-sm text-white/60 hover:text-white transition-colors">About</a>
+                <a href="#careers" className="text-sm text-white/60 hover:text-white transition-colors">Careers</a>
+                <a href="#contact" className="text-sm text-white/60 hover:text-white transition-colors">Contact</a>
               </div>
-              <div className="lp-footer-col">
-                <h4>Legal</h4>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#security">Security</a>
+              <div className="flex flex-col gap-3">
+                <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-1">Legal</h4>
+                <a href="#privacy" className="text-sm text-white/60 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#terms" className="text-sm text-white/60 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#security" className="text-sm text-white/60 hover:text-white transition-colors">Security</a>
               </div>
             </div>
           </div>
-          <div className="lp-footer-bottom">
-            <span>&copy; {new Date().getFullYear()} CovenantERP. All rights reserved.</span>
-            <div className="lp-footer-socials">
-              <a href="#twitter" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-              <a href="#linkedin" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+
+          {/* Bottom */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
+            <span className="text-xs text-white/30">
+              &copy; {new Date().getFullYear()} CovenantERP. All rights reserved.
+            </span>
+            <div className="flex gap-4">
+              <a href="#twitter" aria-label="Twitter" className="text-white/30 hover:text-white/70 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+              </a>
+              <a href="#linkedin" aria-label="LinkedIn" className="text-white/30 hover:text-white/70 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
             </div>
           </div>
         </div>

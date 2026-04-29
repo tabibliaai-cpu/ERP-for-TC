@@ -84,7 +84,7 @@ function CompletionRing({ percent }: { percent: number }) {
 // HELPER: Score Bar
 // ===================================================================
 
-function ScoreBar({ label, score, max = 10, color = 'bg-gradient-to-r from-blue-500 to-indigo-500' }: { label: string; score?: number; max?: number; color?: string }) {
+function ScoreBar({ label, score, max = 10, color = 'bg-blue-600' }: { label: string; score?: number; max?: number; color?: string }) {
   const pct = score ? (score / max) * 100 : 0;
   return (
     <div className="space-y-1">
@@ -291,7 +291,7 @@ export function TeacherManagement() {
       <AnimatePresence>
         {errorBanner && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-lg flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
+            <div className="p-4 rounded-lg flex items-center justify-between shadow-sm bg-rose-50 border border-rose-100 text-rose-700">
               <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5" /><span className="text-xs font-medium uppercase tracking-wide">{errorBanner}</span></div>
               <button onClick={() => setErrorBanner(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5"><X className="w-4 h-4" /></button>
             </div>
@@ -311,7 +311,7 @@ export function TeacherManagement() {
           <p className="text-slate-500 text-sm mt-1 max-w-lg">Spiritual leaders, educators, and ministers — unified in one secure system.</p>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/teacher-enrollment" className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2  group no-underline">
+          <a href="/teacher-enrollment" className="px-6 py-3 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2  group no-underline">
             <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
             <span>Add Teacher</span>
           </a>
@@ -328,7 +328,7 @@ export function TeacherManagement() {
           { label: 'Leave Requests', value: stats.pendingLeaves, icon: Clock, color: 'bg-rose-50 text-rose-600', iconBg: 'bg-rose-100' },
         ].map(stat => (
           <div key={stat.label} className="bg-white p-5 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-4">
-            <div className={cn("w-11 h-11 rounded-xl flex items-center justify-center", stat.iconBg)}>
+            <div className={cn("w-11 h-11 rounded-lg flex items-center justify-center", stat.iconBg)}>
               <stat.icon className={cn("w-5 h-5", stat.color.split(' ')[1])} />
             </div>
             <div>
@@ -345,15 +345,15 @@ export function TeacherManagement() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
           <input type="text" placeholder="Search by name, email, ID, dept..." value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-300 font-medium" />
+            className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300 font-medium" />
         </div>
         <select value={filterDept} onChange={e => setFilterDept(e.target.value)}
-          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-xs font-medium uppercase tracking-wide outline-none appearance-none">
+          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-xs font-medium uppercase tracking-wide outline-none appearance-none">
           <option value="all">All Departments</option>
           {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
         </select>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-xs font-medium uppercase tracking-wide outline-none appearance-none">
+          className="px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-xs font-medium uppercase tracking-wide outline-none appearance-none">
           <option value="all">All Status</option>
           <option value="active">Active</option>
           <option value="pending">Pending</option>
@@ -396,7 +396,7 @@ export function TeacherManagement() {
                   <tr key={teacher.id} className="hover:bg-slate-50/50 transition-colors group cursor-pointer">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-4">
-                        <div className="w-11 h-11 overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase text-xs">
+                        <div className="w-11 h-11 overflow-hidden rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:bg-blue-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase text-xs">
                           {teacher.photoUrl ? <img src={teacher.photoUrl} alt={teacher.name} className="w-full h-full object-cover" /> :
                             <span>{teacher.name.split(' ').map(n => n[0]).join('')}</span>}
                         </div>
@@ -429,7 +429,7 @@ export function TeacherManagement() {
                     </td>
                     <td className="px-5 py-5 text-center">
                       {teacher.ministry?.callingType ? (
-                        <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded uppercase tracking-wide">{teacher.ministry.callingType}</span>
+                        <span className="text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase tracking-wide">{teacher.ministry.callingType}</span>
                       ) : (
                         <span className="text-xs font-medium text-slate-300 uppercase">N/A</span>
                       )}
@@ -469,13 +469,13 @@ export function TeacherManagement() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="bg-white rounded-lg border border-slate-200/60 shadow-lg overflow-hidden"
+            className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden"
           >
             {/* Teacher Detail Header */}
-            <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+            <div className="p-8 border-b border-slate-100 bg-slate-50">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-sm shadow-blue-100/20">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-sm/20">
                     {selectedTeacher.photoUrl ? <img src={selectedTeacher.photoUrl} alt={selectedTeacher.name} className="w-full h-full object-cover" /> :
                       <Users className="w-8 h-8 text-blue-600" />}
                   </div>
@@ -494,8 +494,8 @@ export function TeacherManagement() {
                     </div>
                     {selectedTeacher.ministry?.callingType && (
                       <div className="flex items-center gap-2 mt-2">
-                        <Church className="w-3.5 h-3.5 text-purple-500" />
-                        <span className="text-xs font-medium text-purple-600 uppercase tracking-wide">{selectedTeacher.ministry.callingType}</span>
+                        <Church className="w-3.5 h-3.5 text-indigo-500" />
+                        <span className="text-xs font-medium text-indigo-600 uppercase tracking-wide">{selectedTeacher.ministry.callingType}</span>
                         {selectedTeacher.ministry.ordinationStatus && (
                           <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded uppercase">{selectedTeacher.ministry.ordinationStatus}</span>
                         )}
@@ -506,7 +506,7 @@ export function TeacherManagement() {
                 <div className="flex items-center gap-3">
                   <CompletionRing percent={selectedTeacherData?.profileCompletion || 0} />
                   <button onClick={() => setSelectedTeacher(null)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors border border-slate-100">
+                    className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors border border-slate-100">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
@@ -515,24 +515,24 @@ export function TeacherManagement() {
               {/* Admin Actions */}
               {isAdmin && (
                 <div className="flex items-center gap-3 mt-6 pt-6 border-t border-slate-100">
-                  <a href={`/teacher-enrollment?edit=${selectedTeacher.id}`} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-colors flex items-center gap-2 no-underline">
+                  <a href={`/teacher-enrollment?edit=${selectedTeacher.id}`} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-blue-700 hover:text-white transition-colors flex items-center gap-2 no-underline">
                     <Settings className="w-3 h-3" /> Edit Profile
                   </a>
                   {selectedTeacher.status === 'pending' && (
                     <>
                       <button onClick={() => handleApproveTeacher(selectedTeacher)}
-                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-2">
+                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-2">
                         <Check className="w-3 h-3" /> Approve
                       </button>
                       <button onClick={() => handleRejectTeacher(selectedTeacher)}
-                        className="px-4 py-2 bg-rose-50 text-rose-600 border border-rose-100 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-2">
+                        className="px-4 py-2 bg-rose-50 text-rose-600 border border-rose-100 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-rose-600 hover:text-white transition-colors flex items-center gap-2">
                         <X className="w-3 h-3" /> Reject
                       </button>
                     </>
                   )}
                   {selectedTeacher.status !== 'retired' && selectedTeacher.status !== 'suspended' && (
                     <button onClick={() => handleDeactivate(selectedTeacher)}
-                      className="px-4 py-2 bg-slate-50 text-slate-500 border border-slate-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-colors flex items-center gap-2">
+                      className="px-4 py-2 bg-slate-50 text-slate-500 border border-slate-200 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-colors flex items-center gap-2">
                       <Ban className="w-3 h-3" /> Deactivate
                     </button>
                   )}
@@ -613,7 +613,7 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
             { icon: Calendar, label: 'Joined', value: teacher.employment?.dateOfJoining || 'N/A' },
             { icon: Globe, label: 'Employment Type', value: teacher.employment?.employmentType || 'N/A' },
           ].map(item => (
-            <div key={item.label} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-100 hover:shadow-sm transition-shadow">
+            <div key={item.label} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
               <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center"><item.icon className="w-4 h-4 text-slate-400" /></div>
               <div>
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
@@ -627,30 +627,30 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
         <div className="space-y-4">
           <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" /> Performance Scores</h3>
           <div className="bg-white p-6 rounded-lg border border-slate-100 space-y-4">
-            <ScoreBar label="Teaching Quality" score={teacher.performance?.teachingQualityScore} color="bg-gradient-to-r from-blue-500 to-indigo-500" />
-            <ScoreBar label="Ministry Impact" score={teacher.performance?.ministryImpactScore} color="bg-purple-500" />
+            <ScoreBar label="Teaching Quality" score={teacher.performance?.teachingQualityScore} color="bg-blue-600" />
+            <ScoreBar label="Ministry Impact" score={teacher.performance?.ministryImpactScore} color="bg-indigo-500" />
             <ScoreBar label="Student Feedback" score={teacher.performance?.studentFeedbackScore} color="bg-emerald-500" />
             <ScoreBar label="Admin Rating" score={teacher.performance?.adminRating} color="bg-amber-500" />
           </div>
 
           {/* Spiritual Snapshot */}
           {teacher.spiritual && (
-            <div className="bg-purple-50/50 p-6 rounded-lg border border-purple-100">
-              <h3 className="text-sm font-black text-purple-700 uppercase tracking-wide flex items-center gap-2 mb-4"><Church className="w-4 h-4" /> Spiritual Snapshot</h3>
+            <div className="bg-indigo-50/50 p-6 rounded-lg border border-indigo-100">
+              <h3 className="text-sm font-black text-indigo-700 uppercase tracking-wide flex items-center gap-2 mb-4"><Church className="w-4 h-4" /> Spiritual Snapshot</h3>
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-white p-3 rounded-xl">
+                <div className="bg-white p-3 rounded-lg">
                   <p className="text-xs font-medium text-slate-400 uppercase">Church</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.currentChurch || 'N/A'}</p>
                 </div>
-                <div className="bg-white p-3 rounded-xl">
+                <div className="bg-white p-3 rounded-lg">
                   <p className="text-xs font-medium text-slate-400 uppercase">Pastor</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.pastorName || 'N/A'}</p>
                 </div>
-                <div className="bg-white p-3 rounded-xl">
+                <div className="bg-white p-3 rounded-lg">
                   <p className="text-xs font-medium text-slate-400 uppercase">Baptized</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.isBaptized ? `Yes (${teacher.spiritual.baptismDate || ''})` : 'No'}</p>
                 </div>
-                <div className="bg-white p-3 rounded-xl">
+                <div className="bg-white p-3 rounded-lg">
                   <p className="text-xs font-medium text-slate-400 uppercase">Min. Years</p>
                   <p className="text-xs font-bold text-slate-800 mt-1">{teacher.spiritual.yearsInMinistry || 0}</p>
                 </div>
@@ -658,7 +658,7 @@ function OverviewTab({ teacher, data, subjects }: { teacher: Faculty; data: NonN
               {teacher.spiritual.spiritualGifts && teacher.spiritual.spiritualGifts.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {teacher.spiritual.spiritualGifts.map(gift => (
-                    <span key={gift} className="px-2 py-1 bg-purple-100 text-purple-700 rounded-lg text-xs font-medium uppercase tracking-wider">{gift}</span>
+                    <span key={gift} className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-medium uppercase tracking-wider">{gift}</span>
                   ))}
                 </div>
               )}
@@ -715,7 +715,7 @@ function ClassesTab({ teacher, data }: { teacher: Faculty; data: any }) {
           <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide mb-4">Assigned Subjects (from Course Catalog)</h3>
           <div className="space-y-3">
             {data.subjects.map(s => (
-              <div key={s.id} className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:shadow-sm transition-shadow">
+              <div key={s.id} className="flex items-center justify-between p-4 bg-white rounded-lg border border-slate-100 hover:shadow-sm transition-shadow">
                 <div>
                   <p className="font-bold text-slate-900 italic-serif">{s.title}</p>
                   <div className="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase mt-1">
@@ -737,8 +737,8 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
   const m = teacher.ministry;
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-8 rounded-lg border border-purple-100">
-        <h3 className="text-sm font-black text-purple-800 uppercase tracking-wide flex items-center gap-2 mb-6"><Church className="w-5 h-5" /> Spiritual Profile</h3>
+      <div className="bg-indigo-50 p-8 rounded-lg border border-indigo-100">
+        <h3 className="text-sm font-black text-indigo-800 uppercase tracking-wide flex items-center gap-2 mb-6"><Church className="w-5 h-5" /> Spiritual Profile</h3>
         {s ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
@@ -749,8 +749,8 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
               { label: 'Ministry Involvement', value: s.ministryInvolvement || 'N/A', icon: Globe },
               { label: 'Years in Ministry', value: s.yearsInMinistry ? `${s.yearsInMinistry} years` : 'N/A', icon: Timer },
             ].map(item => (
-              <div key={item.label} className="flex items-start gap-3 p-4 bg-white/80 rounded-xl border border-white">
-                <item.icon className="w-4 h-4 text-purple-500 mt-0.5 shrink-0" />
+              <div key={item.label} className="flex items-start gap-3 p-4 bg-white rounded-lg border border-white">
+                <item.icon className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
                 <div>
                   <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
                   <p className="text-sm font-bold text-slate-800 mt-0.5">{item.value}</p>
@@ -762,31 +762,31 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Spiritual Gifts</p>
                 <div className="flex flex-wrap gap-2">
                   {s.spiritualGifts.map(gift => (
-                    <span key={gift} className="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-xl text-xs font-medium uppercase tracking-wider">{gift}</span>
+                    <span key={gift} className="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-medium uppercase tracking-wider">{gift}</span>
                   ))}
                 </div>
               </div>
             )}
             {s.personalTestimony && (
-              <div className="col-span-full p-5 bg-white/80 rounded-xl border border-white">
+              <div className="col-span-full p-5 bg-white rounded-lg border border-white">
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Personal Testimony</p>
                 <p className="text-sm text-slate-600 italic-serif leading-relaxed">{s.personalTestimony}</p>
               </div>
             )}
             {s.statementOfFaith && (
-              <div className="col-span-full p-5 bg-white/80 rounded-xl border border-white">
+              <div className="col-span-full p-5 bg-white rounded-lg border border-white">
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Statement of Faith</p>
                 <p className="text-sm text-slate-600 leading-relaxed">{s.statementOfFaith}</p>
               </div>
             )}
           </div>
         ) : (
-          <div className="text-center py-12"><Church className="w-12 h-12 text-purple-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">Spiritual profile not yet filled.</p></div>
+          <div className="text-center py-12"><Church className="w-12 h-12 text-indigo-200 mx-auto mb-3" /><p className="text-slate-400 text-sm">Spiritual profile not yet filled.</p></div>
         )}
       </div>
 
       {/* Ministry & Calling */}
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-lg border border-amber-100">
+      <div className="bg-amber-50 p-8 rounded-lg border border-amber-100">
         <h3 className="text-sm font-black text-amber-800 uppercase tracking-wide flex items-center gap-2 mb-6"><Target className="w-5 h-5" /> Ministry & Calling</h3>
         {m ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -798,7 +798,7 @@ function SpiritualTab({ teacher }: { teacher: Faculty }) {
               { label: 'Field Experience', value: m.fieldExperience || 'N/A' },
               { label: 'Ordination Status', value: m.ordinationStatus || 'N/A' },
             ].map(item => (
-              <div key={item.label} className="p-4 bg-white/80 rounded-xl border border-white">
+              <div key={item.label} className="p-4 bg-white rounded-lg border border-white">
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">{item.label}</p>
                 <p className="text-sm font-bold text-slate-800 mt-1">{item.value}</p>
               </div>
@@ -819,7 +819,7 @@ function PayrollTab({ teacher, isUnlocked, onToggleLock }: { teacher: Faculty; i
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2"><DollarSign className="w-4 h-4 text-emerald-500" /> Payroll & Financials</h3>
         <button onClick={onToggleLock}
-          className={cn("px-4 py-2 rounded-xl text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-colors",
+          className={cn("px-4 py-2 rounded-lg text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-colors",
             isUnlocked ? "bg-rose-50 text-rose-600 border border-rose-100" : "bg-emerald-50 text-emerald-600 border border-emerald-100"
           )}>
           {isUnlocked ? <><Lock className="w-3 h-3" /> Lock</> : <><Eye className="w-3 h-3" /> Decrypt</>}
@@ -935,8 +935,8 @@ function PerformanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
       <div className="bg-white p-6 rounded-lg border border-slate-100">
         <h4 className="text-xs font-medium text-slate-700 uppercase tracking-wide mb-4">Current Performance Scores</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ScoreBar label="Teaching Quality" score={p?.teachingQualityScore} color="bg-gradient-to-r from-blue-500 to-indigo-500" />
-          <ScoreBar label="Ministry Impact" score={p?.ministryImpactScore} color="bg-purple-500" />
+          <ScoreBar label="Teaching Quality" score={p?.teachingQualityScore} color="bg-blue-600" />
+          <ScoreBar label="Ministry Impact" score={p?.ministryImpactScore} color="bg-indigo-500" />
           <ScoreBar label="Student Feedback" score={p?.studentFeedbackScore} color="bg-emerald-500" />
           <ScoreBar label="Admin Rating" score={p?.adminRating} color="bg-amber-500" />
         </div>
@@ -959,12 +959,12 @@ function PerformanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
                   <span className="text-[10px] text-slate-400">By: {r.reviewerName || '—'}</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Teaching</p><p className="text-sm font-bold text-blue-600">{r.teachingQualityScore || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Ministry</p><p className="text-sm font-bold text-purple-600">{r.ministryImpactScore || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Feedback</p><p className="text-sm font-bold text-emerald-600">{r.studentFeedbackAvg || 0}/10</p></div>
-                  <div className="bg-white p-3 rounded-xl"><p className="text-xs font-medium text-slate-400 uppercase">Admin</p><p className="text-sm font-bold text-amber-600">{r.adminRating || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-lg"><p className="text-xs font-medium text-slate-400 uppercase">Teaching</p><p className="text-sm font-bold text-blue-600">{r.teachingQualityScore || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-lg"><p className="text-xs font-medium text-slate-400 uppercase">Ministry</p><p className="text-sm font-bold text-indigo-600">{r.ministryImpactScore || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-lg"><p className="text-xs font-medium text-slate-400 uppercase">Feedback</p><p className="text-sm font-bold text-emerald-600">{r.studentFeedbackAvg || 0}/10</p></div>
+                  <div className="bg-white p-3 rounded-lg"><p className="text-xs font-medium text-slate-400 uppercase">Admin</p><p className="text-sm font-bold text-amber-600">{r.adminRating || 0}/10</p></div>
                 </div>
-                {r.reviewNotes && <p className="text-sm text-slate-600 bg-white p-3 rounded-xl mt-2">{r.reviewNotes}</p>}
+                {r.reviewNotes && <p className="text-sm text-slate-600 bg-white p-3 rounded-lg mt-2">{r.reviewNotes}</p>}
               </div>
             ))}
           </div>
@@ -1020,7 +1020,7 @@ function AttendanceTab({ teacher, data }: { teacher: Faculty; data: any }) {
         ) : (
           <div className="space-y-2 max-h-80 overflow-y-auto">
             {records.slice(-20).reverse().map((r: TeacherAttendance) => (
-              <div key={r.id} className="flex items-center justify-between p-3 bg-slate-50/50 rounded-xl">
+              <div key={r.id} className="flex items-center justify-between p-3 bg-slate-50/50 rounded-lg">
                 <span className="text-sm font-bold text-slate-700">{r.date}</span>
                 <span className={cn("px-2 py-1 rounded-lg text-xs font-medium uppercase",
                   r.status === 'present' ? 'bg-emerald-50 text-emerald-600' :
@@ -1063,7 +1063,7 @@ function LeaveTab({ teacher, data, onAction }: { teacher: Faculty; data: any; on
               <div className="flex items-center gap-4 text-[10px] text-slate-500 font-bold uppercase">
                 <span>{l.startDate}</span><span className="text-slate-300">to</span><span>{l.endDate}</span>
               </div>
-              {l.reason && <p className="text-sm text-slate-600 mt-2 bg-slate-50 p-3 rounded-xl">{l.reason}</p>}
+              {l.reason && <p className="text-sm text-slate-600 mt-2 bg-slate-50 p-3 rounded-lg">{l.reason}</p>}
               {l.status === 'pending' && (
                 <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-50">
                   <button onClick={() => onAction(l, 'approved')}
@@ -1136,7 +1136,7 @@ function StudentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
       {data.subjects.length > 0 ? (
         <div className="space-y-3">
           {data.subjects.map((s: Subject) => (
-            <div key={s.id} className="p-4 bg-slate-50/50 rounded-xl border border-slate-100 flex items-center justify-between">
+            <div key={s.id} className="p-4 bg-slate-50/50 rounded-lg border border-slate-100 flex items-center justify-between">
               <div>
                 <p className="font-bold text-slate-900 italic-serif text-sm">{s.title}</p>
                 <span className="text-xs font-medium text-slate-400 uppercase">{s.code}</span>
@@ -1166,7 +1166,7 @@ function AssignmentsTab({ teacher, data }: { teacher: Faculty; data: any }) {
               <div className="flex items-center gap-2 mb-2">
                 <span className={cn("px-2 py-1 rounded-lg text-xs font-medium uppercase",
                   m.type === 'lecture_notes' ? 'bg-blue-50 text-blue-600' :
-                  m.type === 'video' ? 'bg-purple-50 text-purple-600' :
+                  m.type === 'video' ? 'bg-indigo-50 text-indigo-600' :
                   m.type === 'assignment' ? 'bg-amber-50 text-amber-600' :
                   m.type === 'exam' ? 'bg-rose-50 text-rose-600' :
                   'bg-slate-50 text-slate-600'

@@ -57,12 +57,15 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 sm:p-6">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle, #94a3b8 0.8px, transparent 0.8px)',
-        backgroundSize: '24px 24px'
-      }} />
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 sm:p-6 relative">
+      {/* Subtle background dot pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #94a3b8 0.8px, transparent 0.8px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -71,21 +74,24 @@ export function Login() {
         className="w-full max-w-[400px] relative z-10"
       >
         <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+          {/* ─── Accent bar (SAP-inspired) ─── */}
+          <div className="h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600" />
+
           {/* ─── Header ─── */}
-          <div className="px-8 pt-10 pb-8 text-center">
-            <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center mx-auto mb-5 shadow-sm">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <div className="px-8 pt-10 pb-6 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-blue-600/20">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2L2 7l10 5 10-5-10-5z" fill="white" />
                 <path d="M2 17l10 5 10-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M2 12l10 5 10-5" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">CovenantERP</h1>
-            <p className="text-sm text-slate-500 mt-1.5">Sign in to your institution account</p>
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">CovenantERP</h1>
+            <p className="text-sm text-slate-500 mt-1.5">Enterprise Resource Planning Platform</p>
           </div>
 
           {/* ─── Tab Switcher ─── */}
-          <div className="px-8 mb-6">
+          <div className="px-8 mb-5">
             <div className="flex bg-slate-100 rounded-lg p-1 gap-1">
               <button
                 onClick={() => { setShowGovernance(false); setError(''); }}
@@ -141,7 +147,7 @@ export function Login() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="admin@institution.edu"
-                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+                        className="erp-input w-full pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -154,14 +160,14 @@ export function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
-                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+                        className="erp-input w-full pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
                       />
                     </div>
                   </div>
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 active:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm shadow-blue-600/15"
                   >
                     {isLoading ? (
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -193,7 +199,7 @@ export function Login() {
                         value={govEmail}
                         onChange={(e) => setGovEmail(e.target.value)}
                         placeholder="super@covenanterp.com"
-                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+                        className="erp-input w-full pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -207,14 +213,14 @@ export function Login() {
                         value={govPassword}
                         onChange={(e) => setGovPassword(e.target.value)}
                         placeholder="Enter master password"
-                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+                        className="erp-input w-full pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
                       />
                     </div>
                   </div>
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800 active:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
                   >
                     {isLoading ? (
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -234,7 +240,7 @@ export function Login() {
           </div>
 
           {/* ─── Footer ─── */}
-          <div className="border-t border-slate-100 px-4 py-3">
+          <div className="border-t border-slate-100 px-8 py-3.5 bg-slate-50/50">
             <div className="flex items-center gap-2.5 text-xs text-slate-400">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               <span>AES-256 encrypted. Your data never leaves your device.</span>

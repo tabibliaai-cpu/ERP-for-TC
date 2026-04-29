@@ -187,7 +187,7 @@ export function StudentProfile() {
         <p className="text-slate-400 text-sm mt-1 max-w-[280px]">The requested student ID does not match any entry in the current registry.</p>
         <button 
           onClick={() => navigate('/admissions')}
-          className="mt-8 px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2"
+          className="mt-8 px-6 py-3 bg-slate-900 text-white rounded-lg text-xs font-bold uppercase tracking-wide hover:bg-blue-700 transition-all flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Return to Registry
@@ -216,14 +216,14 @@ export function StudentProfile() {
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <div className="w-24 h-24 rounded-xl overflow-hidden bg-blue-600 text-white flex items-center justify-center text-3xl font-bold shadow-md shadow-blue-200">
+            <div className="w-24 h-24 rounded-lg overflow-hidden bg-blue-600 text-white flex items-center justify-center text-3xl font-bold shadow-sm">
               {student.photoUrl ? (
                 <img src={student.photoUrl} alt="Profile" className="w-full h-full object-cover" />
               ) : (
                 <span>{student.name.split(' ').map(n => n[0]).join('')}</span>
               )}
             </div>
-            <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-lg border-4 border-slate-50 flex items-center justify-center shadow-lg">
+            <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-lg border-4 border-slate-50 flex items-center justify-center shadow-md">
               <BadgeCheck className="w-5 h-5 text-emerald-500" />
             </div>
           </div>
@@ -261,28 +261,28 @@ export function StudentProfile() {
           <div className="flex items-center gap-2">
             <button 
               onClick={() => alert(`Printing ID Card for ${student.name}...`)}
-              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-wide hover:text-blue-600 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all shadow-sm flex items-center gap-2"
+              className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-500 font-bold text-[10px] uppercase tracking-wide hover:text-blue-600 hover:border-blue-200 hover:shadow-sm transition-all shadow-sm flex items-center gap-2"
               title="Print ID Card"
             >
               <User className="w-4 h-4" /> ID Card
             </button>
             <button 
               onClick={() => alert(`Generating Admit Card for ${student.name}...`)}
-              className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-500 font-bold text-[10px] uppercase tracking-wide hover:text-blue-600 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all shadow-sm flex items-center gap-2"
+              className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-500 font-bold text-[10px] uppercase tracking-wide hover:text-blue-600 hover:border-blue-200 hover:shadow-sm transition-all shadow-sm flex items-center gap-2"
               title="Print Admit Card"
             >
               <FileText className="w-4 h-4" /> Admit Card
             </button>
             <button 
               onClick={() => setIsEditModalOpen(true)}
-              className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-blue-600 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all shadow-sm"
+              className="p-2.5 bg-white border border-slate-200 rounded-lg text-slate-400 hover:text-blue-600 hover:border-blue-200 hover:shadow-sm transition-all shadow-sm"
               title="Edit Profile"
             >
               <Edit3 className="w-4 h-4" />
             </button>
             <button 
               onClick={exportToCSV}
-              className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-emerald-600 hover:border-emerald-100 hover:shadow-lg hover:shadow-emerald-50 transition-all shadow-sm"
+              className="p-2.5 bg-white border border-slate-200 rounded-lg text-slate-400 hover:text-emerald-600 hover:border-emerald-100 hover:shadow-sm transition-all shadow-sm"
               title="Export Financials"
             >
               <Download className="w-4 h-4" />
@@ -295,7 +295,7 @@ export function StudentProfile() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
-        <div className="bg-white p-6 rounded-xl border border-slate-200/60 shadow-sm flex items-center gap-5">
+        <div className="bg-white p-6 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-5">
           <div className="w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
             <TrendingUp className="w-7 h-7" />
           </div>
@@ -304,7 +304,7 @@ export function StudentProfile() {
             <p className="text-2xl font-bold text-slate-900 tabular-nums">{calculateGPA()} </p>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-xl border border-slate-200/60 shadow-sm flex items-center gap-5">
+        <div className="bg-white p-6 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-5">
           <div className="w-14 h-14 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
             <CheckCircle2 className="w-7 h-7" />
           </div>
@@ -313,7 +313,7 @@ export function StudentProfile() {
             <p className="text-2xl font-bold text-slate-900 tabular-nums">{calculateAttendanceRate()}</p>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-xl border border-slate-200/60 shadow-sm flex items-center gap-5">
+        <div className="bg-white p-6 rounded-lg border border-slate-200/60 shadow-sm flex items-center gap-5">
           <div className="w-14 h-14 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
             <Receipt className="w-7 h-7" />
           </div>
@@ -332,8 +332,8 @@ export function StudentProfile() {
           <button 
             onClick={() => setActiveTab('overview')}
             className={cn(
-              "px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wide transition-all outline-none",
-              activeTab === 'overview' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              "px-6 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wide transition-all outline-none",
+              activeTab === 'overview' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white text-slate-400"
             )}
           >
             Overview
@@ -341,8 +341,8 @@ export function StudentProfile() {
           <button 
             onClick={() => setActiveTab('academic')}
             className={cn(
-              "px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wide transition-all outline-none",
-              activeTab === 'academic' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              "px-6 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wide transition-all outline-none",
+              activeTab === 'academic' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white text-slate-400"
             )}
           >
             Academic
@@ -350,8 +350,8 @@ export function StudentProfile() {
           <button 
             onClick={() => setActiveTab('spiritual')}
             className={cn(
-              "px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wide transition-all outline-none",
-              activeTab === 'spiritual' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              "px-6 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wide transition-all outline-none",
+              activeTab === 'spiritual' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white text-slate-400"
             )}
           >
             Spiritual
@@ -359,8 +359,8 @@ export function StudentProfile() {
           <button 
             onClick={() => setActiveTab('financial')}
             className={cn(
-              "px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wide transition-all outline-none",
-              activeTab === 'financial' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              "px-6 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wide transition-all outline-none",
+              activeTab === 'financial' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white text-slate-400"
             )}
           >
             Financial
@@ -368,8 +368,8 @@ export function StudentProfile() {
           <button 
             onClick={() => setActiveTab('documents')}
             className={cn(
-              "px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wide transition-all outline-none",
-              activeTab === 'documents' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white/50 text-slate-400"
+              "px-6 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wide transition-all outline-none",
+              activeTab === 'documents' ? "bg-white text-blue-600 shadow-sm" : "hover:bg-white text-slate-400"
             )}
           >
             Documents
@@ -378,7 +378,7 @@ export function StudentProfile() {
 
         {activeTab === 'academic' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden lg:col-span-2">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden lg:col-span-2">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Previous Educational Qualifications</h3>
               </div>
@@ -410,10 +410,10 @@ export function StudentProfile() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                     <Book className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Enrolled Subjects</h3>
@@ -440,17 +440,17 @@ export function StudentProfile() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                     <TrendingUp className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Performance Matrix</h3>
                 </div>
                 <button 
                   onClick={() => alert(`Opening public result portal for ${student.name}...`)}
-                  className="px-4 py-2 bg-white text-blue-600 border border-slate-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all flex items-center gap-2"
+                  className="px-4 py-2 bg-white text-blue-600 border border-slate-200 rounded-lg text-xs font-medium uppercase tracking-wide hover:border-blue-200 hover:shadow-sm transition-all flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" /> View Result Sheet
                 </button>
@@ -511,7 +511,7 @@ export function StudentProfile() {
                       <div key={grade.id} className="p-4 bg-slate-50/50 rounded-lg border border-transparent flex items-center justify-between group">
                         <div className="flex items-center gap-4">
                           <div className={cn(
-                            "w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm",
+                            "w-12 h-12 rounded-lg flex items-center justify-center font-bold text-sm",
                             percentage >= 80 ? "bg-emerald-50 text-emerald-600" : percentage >= 60 ? "bg-amber-50 text-amber-600" : "bg-rose-50 text-rose-600"
                           )}>
                             {percentage >= 90 ? 'A' : percentage >= 80 ? 'B+' : percentage >= 70 ? 'B' : 'C'}
@@ -550,7 +550,7 @@ export function StudentProfile() {
 
         {activeTab === 'financial' && (
           <div className="space-y-8">
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Financial Portfolio & Grants</h3>
               </div>
@@ -582,10 +582,10 @@ export function StudentProfile() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                     <CreditCard className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Financial Transaction Ledger</h3>
@@ -644,10 +644,10 @@ export function StudentProfile() {
         )}
 
         {activeTab === 'attendance' && (
-          <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
             <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                   <Clock className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Live Attendance Log</h3>
@@ -662,10 +662,10 @@ export function StudentProfile() {
                   return (
                     <div key={record.id} className="p-4 bg-slate-50/50 rounded-lg border border-transparent flex items-center gap-4">
                       <div className={cn(
-                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-sm",
-                        record.status === 'present' ? "bg-emerald-50 text-emerald-500 shadow-emerald-500/10" : 
-                        record.status === 'late' ? "bg-amber-50 text-amber-500 shadow-amber-500/10" : 
-                        "bg-rose-50 text-rose-500 shadow-rose-500/10"
+                        "w-10 h-10 rounded-lg flex items-center justify-center transition-all shadow-sm",
+                        record.status === 'present' ? "bg-emerald-50 text-emerald-500 " : 
+                        record.status === 'late' ? "bg-amber-50 text-amber-500 " : 
+                        "bg-rose-50 text-rose-500 "
                       )}>
                         {record.status === 'present' ? <CheckCircle2 className="w-5 h-5" /> : <Clock className="w-5 h-5" />}
                       </div>
@@ -693,7 +693,7 @@ export function StudentProfile() {
 
         {activeTab === 'spiritual' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Spiritual Profile</h3>
               </div>
@@ -741,7 +741,7 @@ export function StudentProfile() {
               </div>
             </div>
             
-            <div className="bg-slate-900 text-white rounded-xl border border-slate-800 shadow-sm overflow-hidden flex flex-col">
+            <div className="bg-slate-900 text-white rounded-lg border border-slate-800 shadow-sm overflow-hidden flex flex-col">
               <div className="p-8 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                 <h3 className="text-lg font-bold text-white italic-serif uppercase tracking-wide">Calling & Ministry</h3>
               </div>
@@ -776,7 +776,7 @@ export function StudentProfile() {
         )}
 
         {activeTab === 'documents' && (
-          <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
             <div className="p-8 border-b border-slate-100 bg-slate-50/30 flex items-center justify-between">
                <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Document Repository</h3>
             </div>
@@ -790,7 +790,7 @@ export function StudentProfile() {
                 ].map((doc, i) => (
                   <div key={i} className="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                         <FileText className="w-5 h-5" />
                       </div>
                       <div>
@@ -801,11 +801,11 @@ export function StudentProfile() {
                       </div>
                     </div>
                     {doc.url ? (
-                      <a href={doc.url} target="_blank" rel="noopener noreferrer" className="p-2 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all">
+                      <a href={doc.url} target="_blank" rel="noopener noreferrer" className="p-2 border border-slate-200 rounded-lg hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all">
                         <Download className="w-4 h-4" />
                       </a>
                     ) : (
-                      <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-[10px] font-bold uppercase tracking-wide text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all">
+                      <button className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-[10px] font-bold uppercase tracking-wide text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all">
                         Upload
                       </button>
                     )}
@@ -819,7 +819,7 @@ export function StudentProfile() {
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+              <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
                 <div className="p-8 border-b border-slate-100 bg-slate-50/30">
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Personal Identification</h3>
                 </div>
@@ -863,7 +863,7 @@ export function StudentProfile() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+              <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
                 <div className="p-8 border-b border-slate-100 bg-slate-50/30">
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide">Family & Background</h3>
                 </div>
@@ -895,7 +895,7 @@ export function StudentProfile() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm overflow-hidden">
+              <div className="bg-white rounded-lg border border-slate-200/60 shadow-sm overflow-hidden">
                 <div className="p-8 border-b border-slate-100 bg-slate-50/30">
                   <h3 className="text-lg font-bold text-slate-900 italic-serif uppercase tracking-wide text-rose-600">Medical Observations</h3>
                 </div>
@@ -919,7 +919,7 @@ export function StudentProfile() {
             </div>
 
             <div className="space-y-8">
-              <div className="bg-slate-900 text-white rounded-xl p-8  border border-slate-800">
+              <div className="bg-slate-900 text-white rounded-lg p-8  border border-slate-800">
                 <h3 className="text-lg font-bold italic-serif uppercase tracking-wide mb-6 text-blue-400">Emergency Protocol</h3>
                 <div className="space-y-6">
                   <div>
@@ -952,7 +952,7 @@ export function StudentProfile() {
         {isEditModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsEditModalOpen(false)} className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm" />
-            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="bg-white rounded-xl w-full max-w-2xl p-10 relative z-10 shadow-md border border-slate-100 overflow-hidden flex flex-col max-h-[90vh]">
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="bg-white rounded-lg w-full max-w-2xl p-10 relative z-10 shadow-md border border-slate-100 overflow-hidden flex flex-col max-h-[90vh]">
               <div className="mb-8 flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold text-slate-900 italic-serif uppercase">Edit Candidate Profile</h2>
@@ -1048,7 +1048,7 @@ export function StudentProfile() {
                 <button 
                   onClick={handleUpdate}
                   disabled={isSaving}
-                  className="px-10 py-3 bg-blue-600 text-white rounded-lg font-bold uppercase tracking-wide hover:bg-slate-900 transition-all shadow-sm shadow-blue-100 flex items-center gap-2"
+                  className="px-10 py-3 bg-blue-600 text-white rounded-lg font-bold uppercase tracking-wide hover:bg-slate-900 transition-all shadow-sm flex items-center gap-2"
                 >
                   {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   {isSaving ? 'Saving...' : 'Archive Changes'}

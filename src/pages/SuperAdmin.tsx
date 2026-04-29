@@ -111,7 +111,7 @@ function LoadingSpinner({ text = 'Loading...' }: { text?: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16">
       <div className="animate-spin w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full mb-4"></div>
-      <p className="text-gray-500 font-medium">{text}</p>
+      <p className="text-slate-500 font-medium">{text}</p>
     </div>
   );
 }
@@ -152,9 +152,9 @@ const SuccessModal: React.FC<{
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="bg-white rounded-lg shadow-md w-full max-w-md mx-4 overflow-hidden">
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-white">
+        <div className="bg-emerald-600 p-6 text-white">
           <div className="flex items-center gap-3">
-            <div className="bg-white/20 rounded-full p-2">
+            <div className="bg-emerald-500 rounded-full p-2">
               <CheckCircle className="w-8 h-8" />
             </div>
             <div>
@@ -164,28 +164,28 @@ const SuccessModal: React.FC<{
           </div>
         </div>
         <div className="p-6 space-y-4">
-          <p className="text-gray-600 text-sm">
+          <p className="text-slate-600 text-sm">
             {result.isExistingUser
               ? 'This email already has an account. They have been granted admin access.'
               : 'Save these credentials — share them securely with the admin.'}
           </p>
-          <div className="bg-gray-50 rounded-xl p-4 space-y-3 border border-gray-200">
+          <div className="bg-slate-50 rounded-lg p-4 space-y-3 border border-slate-200">
             <div>
-              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Email Address</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Email Address</label>
               <div className="flex items-center gap-2 mt-1">
                 <Mail className="w-4 h-4 text-blue-500" />
-                <span className="font-mono text-gray-800 text-sm break-all">{result.email}</span>
+                <span className="font-mono text-slate-800 text-sm break-all">{result.email}</span>
               </div>
             </div>
             {!result.isExistingUser && (
-              <div className="border-t border-gray-200 pt-3">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Temporary Password</label>
+              <div className="border-t border-slate-200 pt-3">
+                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Temporary Password</label>
                 <div className="flex items-center gap-2 mt-1">
                   <Key className="w-4 h-4 text-blue-500" />
-                  <span className="font-mono text-gray-800 text-sm flex-1">
+                  <span className="font-mono text-slate-800 text-sm flex-1">
                     {showPassword ? result.tempPassword : '••••••••••'}
                   </span>
-                  <button onClick={() => setShowPassword(!showPassword)} className="text-gray-400 hover:text-gray-600 transition-colors" title={showPassword ? 'Hide' : 'Show'}>
+                  <button onClick={() => setShowPassword(!showPassword)} className="text-slate-400 hover:text-slate-600 transition-colors" title={showPassword ? 'Hide' : 'Show'}>
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
@@ -193,15 +193,15 @@ const SuccessModal: React.FC<{
             )}
           </div>
           <div className="flex gap-3">
-            <button onClick={copyPassword} className={cn('flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all', copied ? 'bg-green-500 text-white' : 'bg-blue-50 text-blue-700 hover:bg-blue-100')}>
+            <button onClick={copyPassword} className={cn('flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all', copied ? 'bg-green-500 text-white' : 'bg-blue-50 text-blue-700 hover:bg-blue-100')}>
               {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copied ? 'Copied!' : 'Copy Password'}
             </button>
-            <button onClick={openMail} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-xl text-sm font-semibold transition-all">
+            <button onClick={openMail} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg text-sm font-semibold transition-all">
               <Mail className="w-4 h-4" />Open Mail
             </button>
           </div>
-          <button onClick={onClose} className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition-colors">Done</button>
+          <button onClick={onClose} className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Done</button>
           <p className="text-xs text-center text-amber-600 bg-amber-50 rounded-lg p-2">⚠ This password will not be shown again. Please save it now.</p>
         </div>
       </div>
@@ -213,9 +213,9 @@ const SuccessModal: React.FC<{
 function EmptyState({ icon: Icon, title, description }: { icon: React.ElementType; title: string; description: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <Icon className="w-16 h-16 text-gray-300 mb-4" />
-      <p className="text-lg font-semibold text-gray-600">{title}</p>
-      <p className="text-sm text-gray-400 mt-1 max-w-sm">{description}</p>
+      <Icon className="w-16 h-16 text-slate-300 mb-4" />
+      <p className="text-lg font-semibold text-slate-600">{title}</p>
+      <p className="text-sm text-slate-400 mt-1 max-w-sm">{description}</p>
     </div>
   );
 }
@@ -223,7 +223,7 @@ function EmptyState({ icon: Icon, title, description }: { icon: React.ElementTyp
 // ─── Glass Card ───
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white border border-slate-200 rounded-lg', className)}>
       {children}
     </div>
   );
@@ -671,7 +671,7 @@ export function SuperAdmin() {
     if (a.includes('update') || a.includes('edit') || a.includes('change')) return 'bg-blue-100 text-blue-700';
     if (a.includes('delete') || a.includes('remove')) return 'bg-rose-100 text-rose-700';
     if (a.includes('login') || a.includes('auth')) return 'bg-purple-100 text-purple-700';
-    return 'bg-gray-100 text-gray-700';
+    return 'bg-slate-100 text-slate-700';
   };
 
   // ═══════════════════════════════════════════════════════════════════
@@ -679,38 +679,38 @@ export function SuperAdmin() {
   // ═══════════════════════════════════════════════════════════════════
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
+    <div className="min-h-screen bg-slate-50">
       {/* ─── Header ─── */}
-      <div className="bg-white/80 backdrop-blur-xl border-b border-gray-200/60 sticky top-0 z-40">
+      <div className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-blue-700 rounded-xl p-2.5 shadow-lg shadow-blue-500/20">
+            <div className="bg-blue-600 rounded-lg p-2">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-blue-700">
+              <h1 className="text-lg font-semibold text-slate-900">
                 Super Admin
               </h1>
-              <p className="text-xs text-gray-500">Platform Operating System</p>
+              <p className="text-xs text-slate-500">Platform Operating System</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={loadActiveTokens}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white text-gray-700 border border-gray-200 rounded-xl font-semibold hover:bg-gray-50 transition-all text-sm"
+              className="flex items-center gap-2 px-4 py-2.5 bg-white text-slate-600 border border-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50 transition-all"
             >
               <ArrowLeftRight className="w-4 h-4" />
               Tokens
             </button>
             <button
               onClick={() => { setIsAddModalOpen(true); setActiveTab('institutions'); }}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-blue-500/20 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all"
             >
               <Plus className="w-4 h-4" />
               Add Institution
             </button>
             {/* Real-time Sync Indicator */}
-            <div className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium', isLive ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500')}>
+            <div className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium', isLive ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500')}>
               {isLive ? <Wifi className="w-3.5 h-3.5" /> : <WifiOff className="w-3.5 h-3.5" />}
               {isLive ? 'Live Sync' : 'Offline'}
               {lastSyncTime && <span className="text-[10px] opacity-70">{new Date(lastSyncTime).toLocaleTimeString()}</span>}
@@ -721,14 +721,14 @@ export function SuperAdmin() {
 
       {/* ─── Impersonation Banner ─── */}
       {isImpersonating && impersonationContext && (
-        <div className="bg-amber-500 text-white px-4 py-3 flex items-center justify-between">
+        <div className="bg-amber-50 border-b border-amber-200 text-amber-800 px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-amber-600 rounded-full p-1.5">
+            <div className="bg-amber-100 rounded-full p-1.5">
               <Eye className="w-4 h-4" />
             </div>
             <div>
               <p className="font-bold text-sm">Impersonation Mode Active</p>
-              <p className="text-amber-100 text-xs">
+              <p className="text-amber-600 text-xs">
                 Viewing as <span className="font-semibold">{impersonationContext.institutionName}</span> ({impersonationContext.adminEmail})
                 {impersonationContext.reason && <> — {impersonationContext.reason}</>}
               </p>
@@ -736,7 +736,7 @@ export function SuperAdmin() {
           </div>
           <button
             onClick={handleStopImpersonation}
-            className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-100 hover:bg-amber-200 rounded-lg text-sm font-semibold text-amber-800 transition-colors"
           >
             <StopCircle className="w-4 h-4" />
             Exit Impersonation
@@ -755,10 +755,10 @@ export function SuperAdmin() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
+                  'flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all whitespace-nowrap',
                   isActive
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-blue-200 hover:text-blue-600'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -781,44 +781,40 @@ export function SuperAdmin() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative overflow-hidden rounded-lg bg-slate-800 p-8 text-white shadow-md"
-              style={{ background: '#1e293b' }}
+              className="bg-blue-600 text-white rounded-lg p-6"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.1),transparent_60%)]"></div>
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-2">
-                  <Sparkles className="w-8 h-8 text-amber-400" />
-                  <h2 className="text-3xl font-bold">Platform Analytics</h2>
-                </div>
-                <p className="text-indigo-200 max-w-lg">Real-time overview of your entire SaaS platform. Monitor institutions, users, revenue, and system health at a glance.</p>
+              <div className="flex items-center gap-3 mb-2">
+                <Sparkles className="w-8 h-8 text-amber-300" />
+                <h2 className="text-2xl font-bold">Platform Analytics</h2>
               </div>
+              <p className="text-blue-100 max-w-lg">Real-time overview of your entire SaaS platform. Monitor institutions, users, revenue, and system health at a glance.</p>
             </motion.div>
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { label: 'Total Institutions', value: platformStats?.totalInstitutions ?? institutions.length, icon: Building2, color: 'bg-blue-600', shadow: 'shadow-blue-500/20' },
-                { label: 'Active Users', value: platformStats?.totalUsers ?? '-', icon: Users, color: 'bg-emerald-500', shadow: 'shadow-emerald-500/20' },
-                { label: 'Monthly Revenue', value: `$${(platformStats?.totalRevenue ?? 0).toLocaleString()}`, icon: DollarSign, color: 'bg-amber-500', shadow: 'shadow-amber-500/20' },
-                { label: 'Total Students', value: platformStats?.totalStudents ?? '-', icon: BookOpen, color: 'bg-sky-500', shadow: 'shadow-sky-500/20' },
-                { label: 'Faculty Count', value: platformStats?.totalFaculty ?? '-', icon: Presentation, color: 'bg-rose-500', shadow: 'shadow-rose-500/20' },
-                { label: 'System Health', value: '99.9%', icon: Activity, color: 'bg-slate-600', shadow: 'shadow-slate-500/20' },
+                { label: 'Total Institutions', value: platformStats?.totalInstitutions ?? institutions.length, icon: Building2, color: 'text-blue-600', border: 'border-l-blue-500', bg: 'bg-blue-50' },
+                { label: 'Active Users', value: platformStats?.totalUsers ?? '-', icon: Users, color: 'text-emerald-600', border: 'border-l-emerald-500', bg: 'bg-emerald-50' },
+                { label: 'Monthly Revenue', value: `$${(platformStats?.totalRevenue ?? 0).toLocaleString()}`, icon: DollarSign, color: 'text-amber-600', border: 'border-l-amber-500', bg: 'bg-amber-50' },
+                { label: 'Total Students', value: platformStats?.totalStudents ?? '-', icon: BookOpen, color: 'text-sky-600', border: 'border-l-sky-500', bg: 'bg-sky-50' },
+                { label: 'Faculty Count', value: platformStats?.totalFaculty ?? '-', icon: Presentation, color: 'text-rose-600', border: 'border-l-rose-500', bg: 'bg-rose-50' },
+                { label: 'System Health', value: '99.9%', icon: Activity, color: 'text-slate-600', border: 'border-l-slate-500', bg: 'bg-slate-100' },
               ].map((kpi, i) => (
                 <motion.div
                   key={kpi.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={cn('relative overflow-hidden rounded-lg p-5 text-white shadow-lg', kpi.color, kpi.shadow)}
+                  className={cn('bg-white border border-slate-200 rounded-lg p-4 border-l-4', kpi.border)}
                 >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
-                  <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-white/80 text-sm font-medium">{kpi.label}</p>
-                      <p className="text-3xl font-bold mt-1">{kpi.value}</p>
+                      <p className="text-slate-500 text-sm font-medium">{kpi.label}</p>
+                      <p className="text-2xl font-bold mt-1 text-slate-900">{kpi.value}</p>
                     </div>
-                    <kpi.icon className="w-10 h-10 text-white/40" />
+                    <div className={cn('w-10 h-10 rounded-lg flex items-center justify-center', kpi.bg)}>
+                      <kpi.icon className={cn('w-5 h-5', kpi.color)} />
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -827,7 +823,7 @@ export function SuperAdmin() {
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-blue-600" /> Platform Summary
                 </h3>
                 <div className="space-y-3">
@@ -837,8 +833,8 @@ export function SuperAdmin() {
                     { label: 'Total Announcements', value: platformStats?.totalAnnouncements ?? '-', color: 'text-amber-600' },
                     { label: 'Audit Log Entries', value: platformStats?.totalAuditLogs ?? '-', color: 'text-indigo-600' },
                   ].map(item => (
-                    <div key={item.label} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                      <span className="text-gray-600 text-sm">{item.label}</span>
+                    <div key={item.label} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
+                      <span className="text-slate-600 text-sm">{item.label}</span>
                       <span className={cn('font-bold text-lg', item.color)}>{item.value}</span>
                     </div>
                   ))}
@@ -846,7 +842,7 @@ export function SuperAdmin() {
               </GlassCard>
 
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Crown className="w-5 h-5 text-amber-500" /> Subscription Distribution
                 </h3>
                 <div className="space-y-3">
@@ -856,10 +852,10 @@ export function SuperAdmin() {
                     return (
                       <div key={plan.id}>
                         <div className="flex justify-between text-sm mb-1">
-                          <span className="font-medium text-gray-700">{plan.name}</span>
-                          <span className="text-gray-500">{count} institutions</span>
+                          <span className="font-medium text-slate-700">{plan.name}</span>
+                          <span className="text-slate-500">{count} institutions</span>
                         </div>
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                           <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ delay: 0.3, duration: 0.8 }} className="h-full bg-blue-600 rounded-full"></motion.div>
                         </div>
                       </div>
@@ -884,7 +880,7 @@ export function SuperAdmin() {
                 { label: 'Students', value: institutions.reduce((s, i) => s + (i.studentCount || 0), 0).toLocaleString(), icon: Users, color: 'bg-sky-500' },
                 { label: 'Faculty', value: institutions.reduce((s, i) => s + (i.facultyCount || 0), 0).toLocaleString(), icon: Presentation, color: 'bg-rose-500' },
               ].map((s, i) => (
-                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-lg p-4 text-white shadow-lg', s.color)}>
+                <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={cn('rounded-lg p-4 text-white shadow-sm', s.color)}>
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-white/80 text-xs font-medium">{s.label}</p>
@@ -898,8 +894,8 @@ export function SuperAdmin() {
 
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search institutions by name or admin email..." className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search institutions by name or admin email..." className="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
             </div>
 
             {/* Institutions Table */}
@@ -912,27 +908,27 @@ export function SuperAdmin() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50/80">
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Institution</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Type</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Plan</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Stats</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Status</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                      <tr className="border-b border-slate-200 bg-slate-50">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Institution</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Type</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Plan</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Stats</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Status</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {filteredInstitutions.map((inst) => (
-                        <tr key={inst.id} className="border-b border-gray-100 hover:bg-slate-50 transition-colors">
+                        <tr key={inst.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="bg-blue-50 rounded-lg p-2">
                                 <Building2 className="w-4 h-4 text-blue-600" />
                               </div>
                               <div>
-                                <div className="font-semibold text-gray-900">{inst.name}</div>
-                                {inst.location && <div className="text-xs text-gray-400 flex items-center gap-1"><Globe2 className="w-3 h-3" />{inst.location}</div>}
-                                {inst.subdomain && <div className="text-xs text-gray-400">{inst.subdomain}.covenant-erp.com</div>}
+                                <div className="font-semibold text-slate-900">{inst.name}</div>
+                                {inst.location && <div className="text-xs text-slate-400 flex items-center gap-1"><Globe2 className="w-3 h-3" />{inst.location}</div>}
+                                {inst.subdomain && <div className="text-xs text-slate-400">{inst.subdomain}.covenant-erp.com</div>}
                               </div>
                             </div>
                           </td>
@@ -943,14 +939,14 @@ export function SuperAdmin() {
                               (inst.subscriptionPlan || 'free') === 'enterprise' && 'bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700',
                               (inst.subscriptionPlan || 'free') === 'premium' && 'bg-blue-50 text-blue-700',
                               (inst.subscriptionPlan || 'free') === 'basic' && 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700',
-                              (inst.subscriptionPlan || 'free') === 'free' && 'bg-gray-100 text-gray-600',
+                              (inst.subscriptionPlan || 'free') === 'free' && 'bg-slate-100 text-slate-600',
                             )}>
                               {inst.subscriptionPlan || 'free'}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-600">{inst.studentCount || 0}S / {inst.facultyCount || 0}F</td>
+                          <td className="px-6 py-4 text-sm text-slate-600">{inst.studentCount || 0}S / {inst.facultyCount || 0}F</td>
                           <td className="px-6 py-4">
-                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', inst.status === 'active' && 'bg-emerald-100 text-emerald-700', inst.status === 'suspended' && 'bg-rose-100 text-rose-700', inst.status === 'inactive' && 'bg-gray-100 text-gray-600')}>
+                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', inst.status === 'active' && 'bg-emerald-100 text-emerald-700', inst.status === 'suspended' && 'bg-rose-100 text-rose-700', inst.status === 'inactive' && 'bg-slate-100 text-slate-600')}>
                               {inst.status}
                             </span>
                           </td>
@@ -976,9 +972,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'users' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-blue-700 p-6 text-white shadow-sm" style={{ background: '#1d4ed8' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.3),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center gap-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-blue-700 p-6 text-white rounded-lg shadow-sm" style={{ background: '#1d4ed8' }}>
+              <div className="flex items-center gap-3">
                 <Users className="w-8 h-8 text-blue-200" />
                 <div>
                   <h2 className="text-2xl font-bold">Global User Management</h2>
@@ -989,10 +984,10 @@ export function SuperAdmin() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input type="text" value={usersSearch} onChange={(e) => setUsersSearch(e.target.value)} placeholder="Search users by name, email..." className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input type="text" value={usersSearch} onChange={(e) => setUsersSearch(e.target.value)} placeholder="Search users by name, email..." className="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
               </div>
-              <select value={usersRoleFilter} onChange={(e) => setUsersRoleFilter(e.target.value)} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 min-w-[160px]">
+              <select value={usersRoleFilter} onChange={(e) => setUsersRoleFilter(e.target.value)} className="px-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 min-w-[160px]">
                 <option value="all">All Roles</option>
                 <option value="student">Students</option>
                 <option value="faculty">Faculty</option>
@@ -1009,13 +1004,13 @@ export function SuperAdmin() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50/80">
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Name</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Email</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Role</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Institution</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Status</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                      <tr className="border-b border-slate-200 bg-slate-50">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Name</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Email</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Role</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Institution</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Status</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1030,16 +1025,16 @@ export function SuperAdmin() {
                         })
                         .slice(0, 100)
                         .map(user => (
-                          <tr key={user.id} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
+                          <tr key={user.id} className="border-b border-slate-100 hover:bg-blue-50/50 transition-colors">
                             <td className="px-6 py-4">
                               <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">
                                   {(user.displayName || user.email || '?')[0].toUpperCase()}
                                 </div>
-                                <span className="font-medium text-gray-900 text-sm">{user.displayName || user.email?.split('@')[0] || '-'}</span>
+                                <span className="font-medium text-slate-900 text-sm">{user.displayName || user.email?.split('@')[0] || '-'}</span>
                               </div>
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
+                            <td className="px-6 py-4 text-sm text-slate-600">{user.email}</td>
                             <td className="px-6 py-4">
                               <span className={cn(
                                 'px-2.5 py-1 rounded-lg text-xs font-semibold',
@@ -1047,10 +1042,10 @@ export function SuperAdmin() {
                                 user.role === 'admin' && 'bg-blue-50 text-blue-700',
                                 (user.role === 'faculty' || user.role === 'teacher') && 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700',
                                 user.role === 'student' && 'bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700',
-                                !['super-admin', 'admin', 'faculty', 'teacher', 'student'].includes(user.role) && 'bg-gray-100 text-gray-600',
+                                !['super-admin', 'admin', 'faculty', 'teacher', 'student'].includes(user.role) && 'bg-slate-100 text-slate-600',
                               )}>{user.role || '-'}</span>
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">{user.institutionName || '-'}</td>
+                            <td className="px-6 py-4 text-sm text-slate-600">{user.institutionName || '-'}</td>
                             <td className="px-6 py-4">
                               <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', user.status === 'active' && 'bg-emerald-100 text-emerald-700', user.status === 'suspended' && 'bg-rose-100 text-rose-700', (!user.status || user.status === 'pending_auth') && 'bg-amber-100 text-amber-700')}>
                                 {user.status || 'active'}
@@ -1085,9 +1080,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'features' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #059669, #0d9488, #0e7490)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(20,184,166,0.3),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center gap-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-emerald-600 p-6 text-white rounded-lg shadow-sm" style={{ background: 'linear-gradient(135deg, #059669, #0d9488, #0e7490)' }}>
+              <div className="flex items-center gap-3">
                 <Layers className="w-8 h-8 text-emerald-200" />
                 <div>
                   <h2 className="text-2xl font-bold">Feature Toggles</h2>
@@ -1099,8 +1093,8 @@ export function SuperAdmin() {
             {/* Institution Selector */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
               <div className="flex-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Select Institution</label>
-                <select value={selectedFlagInstitution} onChange={(e) => { setSelectedFlagInstitution(e.target.value); setFlagOverrides({}); }} className="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-emerald-500">
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Select Institution</label>
+                <select value={selectedFlagInstitution} onChange={(e) => { setSelectedFlagInstitution(e.target.value); setFlagOverrides({}); }} className="w-full px-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500">
                   <option value="">— Choose institution —</option>
                   {institutions.map(inst => <option key={inst.id} value={inst.id}>{inst.name}</option>)}
                 </select>
@@ -1114,7 +1108,7 @@ export function SuperAdmin() {
                   setFlagOverrides(allOn);
                 }}
                 disabled={!selectedFlagInstitution}
-                className="px-4 py-3 bg-emerald-100 text-emerald-700 rounded-xl text-sm font-semibold hover:bg-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-3 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-semibold hover:bg-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Enable All
               </button>
@@ -1126,11 +1120,11 @@ export function SuperAdmin() {
                   setFlagOverrides(allOff);
                 }}
                 disabled={!selectedFlagInstitution}
-                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-xl text-sm font-semibold hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-3 bg-slate-100 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Disable All
               </button>
-              <button onClick={handleSaveFlags} disabled={isSavingFlags || !selectedFlagInstitution || Object.keys(flagOverrides).length === 0} className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-sm font-semibold hover:from-emerald-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/25 transition-all">
+              <button onClick={handleSaveFlags} disabled={isSavingFlags || !selectedFlagInstitution || Object.keys(flagOverrides).length === 0} className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg text-sm font-semibold hover:from-emerald-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-emerald-500/25 transition-all">
                 <Save className="w-4 h-4" /> {isSavingFlags ? 'Saving...' : 'Save Changes'}
               </button>
             </div>
@@ -1144,14 +1138,14 @@ export function SuperAdmin() {
                       const currentVal = mod.id in flagOverrides ? flagOverrides[mod.id] : (existingFlags[mod.id] ?? false);
                       const isChanged = mod.id in flagOverrides;
                       return (
-                        <div key={mod.id} className={cn('flex items-center justify-between p-4 rounded-xl border transition-all', isChanged ? 'border-emerald-300 bg-emerald-50/50' : 'border-gray-200 bg-white/50 hover:bg-gray-50')}>
+                        <div key={mod.id} className={cn('flex items-center justify-between p-4 rounded-lg border transition-all', isChanged ? 'border-emerald-300 bg-emerald-50/50' : 'border-slate-200 bg-white hover:bg-slate-50')}>
                           <div className="flex items-center gap-3">
-                            <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', currentVal ? 'bg-emerald-100 text-emerald-600' : 'bg-gray-100 text-gray-400')}>
+                            <div className={cn('w-10 h-10 rounded-lg flex items-center justify-center', currentVal ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400')}>
                               <Zap className="w-5 h-5" />
                             </div>
                             <div>
-                              <p className="font-semibold text-gray-900">{mod.label}</p>
-                              <p className="text-xs text-gray-500">{mod.description} &middot; {mod.category}</p>
+                              <p className="font-semibold text-slate-900">{mod.label}</p>
+                              <p className="text-xs text-slate-500">{mod.description} &middot; {mod.category}</p>
                             </div>
                           </div>
                           <button onClick={() => handleToggleFlag(mod.id)} className="focus:outline-none">
@@ -1160,7 +1154,7 @@ export function SuperAdmin() {
                                 <ToggleRight className="w-4 h-4" /> ON
                               </div>
                             ) : (
-                              <div className="flex items-center gap-1.5 bg-gray-200 text-gray-500 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                              <div className="flex items-center gap-1.5 bg-slate-200 text-slate-500 px-3 py-1.5 rounded-lg text-xs font-semibold">
                                 <ToggleLeft className="w-4 h-4" /> OFF
                               </div>
                             )}
@@ -1182,9 +1176,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'finance' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-amber-600 via-orange-600 to-rose-600 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #d97706, #ea580c, #e11d48)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,191,36,0.3),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center justify-between">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-amber-600 p-6 text-white rounded-lg shadow-sm" style={{ background: 'linear-gradient(135deg, #d97706, #ea580c, #e11d48)' }}>
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <DollarSign className="w-8 h-8 text-amber-200" />
                   <div>
@@ -1249,8 +1242,8 @@ export function SuperAdmin() {
 
             {/* Subscriptions Table */}
             <GlassCard className="overflow-hidden">
-              <div className="p-5 border-b border-gray-100">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <div className="p-5 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-amber-500" /> All Subscriptions
                 </h3>
               </div>
@@ -1258,30 +1251,30 @@ export function SuperAdmin() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50/80">
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Institution</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Plan</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Status</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Price</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Start Date</th>
+                      <tr className="border-b border-slate-200 bg-slate-50">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Institution</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Plan</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Status</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Price</th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Start Date</th>
                       </tr>
                     </thead>
                     <tbody>
                       {subscriptions.map((sub: any) => (
-                        <tr key={sub.id} className="border-b border-gray-100 hover:bg-amber-50/30 transition-colors">
-                          <td className="px-6 py-4 font-medium text-gray-900 text-sm">{sub.institutionName || sub.institutionId}</td>
+                        <tr key={sub.id} className="border-b border-slate-100 hover:bg-amber-50/30 transition-colors">
+                          <td className="px-6 py-4 font-medium text-slate-900 text-sm">{sub.institutionName || sub.institutionId}</td>
                           <td className="px-6 py-4">
-                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.plan === 'enterprise' && 'bg-amber-100 text-amber-700', sub.plan === 'premium' && 'bg-blue-50 text-blue-700', sub.plan === 'basic' && 'bg-blue-100 text-blue-700', sub.plan === 'free' && 'bg-gray-100 text-gray-600')}>
+                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.plan === 'enterprise' && 'bg-amber-100 text-amber-700', sub.plan === 'premium' && 'bg-blue-50 text-blue-700', sub.plan === 'basic' && 'bg-blue-100 text-blue-700', sub.plan === 'free' && 'bg-slate-100 text-slate-600')}>
                               {sub.plan}
                             </span>
                           </td>
                           <td className="px-6 py-4">
-                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.status === 'active' && 'bg-emerald-100 text-emerald-700', sub.status === 'trial' && 'bg-blue-100 text-blue-700', sub.status === 'past_due' && 'bg-rose-100 text-rose-700', sub.status === 'cancelled' && 'bg-gray-100 text-gray-600')}>
+                            <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', sub.status === 'active' && 'bg-emerald-100 text-emerald-700', sub.status === 'trial' && 'bg-blue-100 text-blue-700', sub.status === 'past_due' && 'bg-rose-100 text-rose-700', sub.status === 'cancelled' && 'bg-slate-100 text-slate-600')}>
                               {sub.status}
                             </span>
                           </td>
-                          <td className="px-6 py-4 font-semibold text-gray-900">${sub.monthlyPrice || 0}/mo</td>
-                          <td className="px-6 py-4 text-sm text-gray-500">{sub.startDate?.seconds ? new Date(sub.startDate.seconds * 1000).toLocaleDateString() : '-'}</td>
+                          <td className="px-6 py-4 font-semibold text-slate-900">${sub.monthlyPrice || 0}/mo</td>
+                          <td className="px-6 py-4 text-sm text-slate-500">{sub.startDate?.seconds ? new Date(sub.startDate.seconds * 1000).toLocaleDateString() : '-'}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1298,9 +1291,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'security' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-slate-700 p-6 text-white shadow-sm" style={{ background: '#334155' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center gap-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-700 p-6 text-white rounded-lg shadow-sm" style={{ background: '#334155' }}>
+              <div className="flex items-center gap-3">
                 <Shield className="w-8 h-8 text-blue-200" />
                 <div>
                   <h2 className="text-2xl font-bold">Security & Audit Logs</h2>
@@ -1311,15 +1303,15 @@ export function SuperAdmin() {
 
             {/* Filters */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <select value={logInstitutionFilter} onChange={(e) => { setLogInstitutionFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 min-w-[180px]">
+              <select value={logInstitutionFilter} onChange={(e) => { setLogInstitutionFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 min-w-[180px]">
                 <option value="">All Institutions</option>
                 {institutions.map(inst => <option key={inst.id} value={inst.id}>{inst.name}</option>)}
               </select>
-              <select value={logModuleFilter} onChange={(e) => { setLogModuleFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-gray-200 rounded-xl bg-white/80 backdrop-blur focus:ring-2 focus:ring-blue-500 min-w-[180px]">
+              <select value={logModuleFilter} onChange={(e) => { setLogModuleFilter(e.target.value); setLogPage(1); }} className="px-4 py-3 border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 min-w-[180px]">
                 <option value="">All Modules</option>
                 {availableModules.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
               </select>
-              <button onClick={async () => { setLogsLoading(true); const fresh = await superAdminService.getAuditLogs(500); setAuditLogs(fresh); setLogsLoading(false); }} className="flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-100 transition-colors">
+              <button onClick={async () => { setLogsLoading(true); const fresh = await superAdminService.getAuditLogs(500); setAuditLogs(fresh); setLogsLoading(false); }} className="flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">
                 <RefreshCw className="w-4 h-4" /> Refresh
               </button>
             </div>
@@ -1330,28 +1322,28 @@ export function SuperAdmin() {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b border-gray-200 bg-gray-50/80">
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Timestamp</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">User</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Action</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Module</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Institution</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Details</th>
+                        <tr className="border-b border-slate-200 bg-slate-50">
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Timestamp</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">User</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Action</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Module</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Institution</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Details</th>
                         </tr>
                       </thead>
                       <tbody>
                         {paginatedLogs.map((log: any) => (
-                          <tr key={log.id} className="border-b border-gray-100 hover:bg-slate-50 transition-colors">
-                            <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">
+                          <tr key={log.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                            <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
                               <div className="flex items-center gap-1"><Clock className="w-3 h-3" />{log.timestamp?.seconds ? new Date(log.timestamp.seconds * 1000).toLocaleString() : '-'}</div>
                             </td>
-                            <td className="px-4 py-3 text-sm text-gray-900 font-medium">{log.userName || log.userEmail || log.userId || '-'}</td>
+                            <td className="px-4 py-3 text-sm text-slate-900 font-medium">{log.userName || log.userEmail || log.userId || '-'}</td>
                             <td className="px-4 py-3">
                               <span className={cn('px-2.5 py-1 rounded-lg text-xs font-semibold', getActionColor(log.action))}>{log.action}</span>
                             </td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{log.module || '-'}</td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{log.institutionName || '-'}</td>
-                            <td className="px-4 py-3 text-xs text-gray-500 max-w-[200px] truncate">{log.details || '-'}</td>
+                            <td className="px-4 py-3 text-sm text-slate-600">{log.module || '-'}</td>
+                            <td className="px-4 py-3 text-sm text-slate-600">{log.institutionName || '-'}</td>
+                            <td className="px-4 py-3 text-xs text-slate-500 max-w-[200px] truncate">{log.details || '-'}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1359,10 +1351,10 @@ export function SuperAdmin() {
                     {filteredLogs.length === 0 && <EmptyState icon={Shield} title="No audit logs found" description="Audit logs will appear as actions are performed across the platform." />}
                   </div>
                   {totalLogPages > 1 && (
-                    <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100">
-                      <span className="text-sm text-gray-500">Showing {(logPage - 1) * logsPerPage + 1}–{Math.min(logPage * logsPerPage, filteredLogs.length)} of {filteredLogs.length}</span>
+                    <div className="flex items-center justify-between px-6 py-4 border-t border-slate-100">
+                      <span className="text-sm text-slate-500">Showing {(logPage - 1) * logsPerPage + 1}–{Math.min(logPage * logsPerPage, filteredLogs.length)} of {filteredLogs.length}</span>
                       <div className="flex gap-2">
-                        <button onClick={() => setLogPage(p => Math.max(1, p - 1))} disabled={logPage === 1} className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm disabled:opacity-50">Previous</button>
+                        <button onClick={() => setLogPage(p => Math.max(1, p - 1))} disabled={logPage === 1} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm disabled:opacity-50">Previous</button>
                         <button onClick={() => setLogPage(p => Math.min(totalLogPages, p + 1))} disabled={logPage === totalLogPages} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm disabled:opacity-50">Next</button>
                       </div>
                     </div>
@@ -1378,9 +1370,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'announcements' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb, #4338ca)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.3),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center gap-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-blue-600 p-6 text-white rounded-lg shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb, #4338ca)' }}>
+              <div className="flex items-center gap-3">
                 <Megaphone className="w-8 h-8 text-sky-200" />
                 <div>
                   <h2 className="text-2xl font-bold">Platform Announcements</h2>
@@ -1391,18 +1382,18 @@ export function SuperAdmin() {
 
             {/* Create Announcement Form */}
             <GlassCard className="p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <Plus className="w-5 h-5 text-blue-500" /> Create Announcement
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Title</label>
-                  <input type="text" value={newAnn.title} onChange={(e) => setNewAnn(prev => ({ ...prev, title: e.target.value }))} placeholder="Announcement title" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Title</label>
+                  <input type="text" value={newAnn.title} onChange={(e) => setNewAnn(prev => ({ ...prev, title: e.target.value }))} placeholder="Announcement title" className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Type</label>
-                    <select value={newAnn.type} onChange={(e) => setNewAnn(prev => ({ ...prev, type: e.target.value as any }))} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500">
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Type</label>
+                    <select value={newAnn.type} onChange={(e) => setNewAnn(prev => ({ ...prev, type: e.target.value as any }))} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-blue-500">
                       <option value="info">Info</option>
                       <option value="warning">Warning</option>
                       <option value="maintenance">Maintenance</option>
@@ -1410,13 +1401,13 @@ export function SuperAdmin() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Target</label>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Target</label>
                     <select
                       value={newAnn.targetInstitutions.length === 0 ? 'all' : 'specific'}
                       onChange={(e) => {
                         if (e.target.value === 'all') setNewAnn(prev => ({ ...prev, targetInstitutions: [] }));
                       }}
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="all">All Institutions</option>
                       <option value="specific">Specific...</option>
@@ -1425,8 +1416,8 @@ export function SuperAdmin() {
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Content</label>
-                <textarea value={newAnn.content} onChange={(e) => setNewAnn(prev => ({ ...prev, content: e.target.value }))} rows={3} placeholder="Write your announcement..." className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Content</label>
+                <textarea value={newAnn.content} onChange={(e) => setNewAnn(prev => ({ ...prev, content: e.target.value }))} rows={3} placeholder="Write your announcement..." className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" />
               </div>
               <button
                 onClick={async () => {
@@ -1445,7 +1436,7 @@ export function SuperAdmin() {
                   setIsCreatingAnn(false);
                 }}
                 disabled={isCreatingAnn}
-                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 shadow-lg shadow-blue-500/25 transition-all"
+                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 shadow-sm shadow-blue-500/25 transition-all"
               >
                 {isCreatingAnn ? <><div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div> Publishing...</> : <><Bell className="w-4 h-4" /> Publish Announcement</>}
               </button>
@@ -1453,13 +1444,13 @@ export function SuperAdmin() {
 
             {/* Announcements Table */}
             <GlassCard className="overflow-hidden">
-              <div className="p-5 border-b border-gray-100">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <div className="p-5 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-blue-500" /> All Announcements ({announcements.length})
                 </h3>
               </div>
               {annLoading ? <LoadingSpinner text="Loading announcements..." /> : (
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-slate-100">
                   {announcements.map((ann: any) => (
                     <div key={ann.id} className="p-5 hover:bg-blue-50/30 transition-colors flex items-start justify-between gap-4">
                       <div className="flex-1">
@@ -1467,13 +1458,13 @@ export function SuperAdmin() {
                           <span className={cn('px-2.5 py-0.5 rounded-lg text-xs font-semibold', ann.type === 'info' && 'bg-blue-100 text-blue-700', ann.type === 'warning' && 'bg-amber-100 text-amber-700', ann.type === 'maintenance' && 'bg-rose-100 text-rose-700', ann.type === 'feature' && 'bg-emerald-100 text-emerald-700')}>
                             {ann.type}
                           </span>
-                          <span className={cn('px-2.5 py-0.5 rounded-lg text-xs font-semibold', ann.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500')}>
+                          <span className={cn('px-2.5 py-0.5 rounded-lg text-xs font-semibold', ann.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500')}>
                             {ann.isActive ? 'Active' : 'Inactive'}
                           </span>
                         </div>
-                        <h4 className="font-bold text-gray-900">{ann.title}</h4>
-                        <p className="text-sm text-gray-600 mt-1 line-clamp-2">{ann.content}</p>
-                        <p className="text-xs text-gray-400 mt-2">{ann.targetInstitutions?.length ? `Target: ${ann.targetInstitutions.length} institutions` : 'Target: All institutions'}</p>
+                        <h4 className="font-bold text-slate-900">{ann.title}</h4>
+                        <p className="text-sm text-slate-600 mt-1 line-clamp-2">{ann.content}</p>
+                        <p className="text-xs text-slate-400 mt-2">{ann.targetInstitutions?.length ? `Target: ${ann.targetInstitutions.length} institutions` : 'Target: All institutions'}</p>
                       </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <button
@@ -1532,9 +1523,8 @@ export function SuperAdmin() {
         ═══════════════════════════════════════════════════════════ */}
         {activeTab === 'settings' && (
           <div className="space-y-6">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative overflow-hidden rounded-lg bg-gradient-to-br from-slate-700 via-gray-800 to-zinc-900 p-6 text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #334155, #1f2937, #18181b)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(100,116,139,0.3),transparent_60%)]"></div>
-              <div className="relative z-10 flex items-center gap-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-700 p-6 text-white rounded-lg shadow-sm" style={{ background: 'linear-gradient(135deg, #334155, #1f2937, #18181b)' }}>
+              <div className="flex items-center gap-3">
                 <Settings className="w-8 h-8 text-slate-300" />
                 <div>
                   <h2 className="text-2xl font-bold">Platform Settings</h2>
@@ -1546,25 +1536,25 @@ export function SuperAdmin() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Platform Configuration */}
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Globe className="w-5 h-5 text-blue-600" /> Platform Configuration
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Platform Name</label>
-                    <input type="text" defaultValue="CovenantERP" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500" />
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Platform Name</label>
+                    <input type="text" defaultValue="CovenantERP" className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Version</label>
-                      <input type="text" defaultValue="2.4.0" readOnly className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-500" />
+                      <label className="block text-sm font-semibold text-slate-700 mb-1">Version</label>
+                      <input type="text" defaultValue="2.4.0" readOnly className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-slate-50 text-slate-500" />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Environment</label>
-                      <input type="text" defaultValue="Production" readOnly className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-500" />
+                      <label className="block text-sm font-semibold text-slate-700 mb-1">Environment</label>
+                      <input type="text" defaultValue="Production" readOnly className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-slate-50 text-slate-500" />
                     </div>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-200">
                     <div className="flex items-center gap-2">
                       <Activity className="w-4 h-4 text-emerald-600" />
                       <span className="text-sm font-medium text-emerald-700">System Status</span>
@@ -1576,7 +1566,7 @@ export function SuperAdmin() {
 
               {/* Data Retention */}
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Database className="w-5 h-5 text-blue-600" /> Data Retention Policies
                 </h3>
                 <div className="space-y-3">
@@ -1585,11 +1575,11 @@ export function SuperAdmin() {
                     { label: 'Activity Logs', period: '180 days', color: 'bg-purple-50 border-purple-200' },
                     { label: 'Login Sessions', period: '90 days', color: 'bg-amber-50 border-amber-200' },
                     { label: 'Temporary Files', period: '30 days', color: 'bg-rose-50 border-rose-200' },
-                    { label: 'Deleted Records', period: '90 days (soft delete)', color: 'bg-gray-50 border-gray-200' },
+                    { label: 'Deleted Records', period: '90 days (soft delete)', color: 'bg-slate-50 border-slate-200' },
                   ].map(policy => (
-                    <div key={policy.label} className={cn('flex items-center justify-between p-3 rounded-xl border', policy.color)}>
-                      <span className="text-sm font-medium text-gray-700">{policy.label}</span>
-                      <span className="text-sm text-gray-500">{policy.period}</span>
+                    <div key={policy.label} className={cn('flex items-center justify-between p-3 rounded-lg border', policy.color)}>
+                      <span className="text-sm font-medium text-slate-700">{policy.label}</span>
+                      <span className="text-sm text-slate-500">{policy.period}</span>
                     </div>
                   ))}
                 </div>
@@ -1597,7 +1587,7 @@ export function SuperAdmin() {
 
               {/* Security Policies */}
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Lock className="w-5 h-5 text-indigo-600" /> Security Policies
                 </h3>
                 <div className="space-y-3">
@@ -1609,12 +1599,12 @@ export function SuperAdmin() {
                     { label: 'Password Expiry', value: '90 days', icon: RefreshCw },
                     { label: 'IP Whitelisting', value: 'Disabled', icon: Globe2 },
                   ].map(policy => (
-                    <div key={policy.label} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <div key={policy.label} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
                       <div className="flex items-center gap-2">
-                        <policy.icon className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm font-medium text-gray-700">{policy.label}</span>
+                        <policy.icon className="w-4 h-4 text-slate-400" />
+                        <span className="text-sm font-medium text-slate-700">{policy.label}</span>
                       </div>
-                      <span className="text-sm text-gray-500">{policy.value}</span>
+                      <span className="text-sm text-slate-500">{policy.value}</span>
                     </div>
                   ))}
                 </div>
@@ -1622,27 +1612,27 @@ export function SuperAdmin() {
 
               {/* System Maintenance */}
               <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Zap className="w-5 h-5 text-amber-500" /> System Maintenance
                 </h3>
                 <div className="space-y-4">
-                  <div className="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                  <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
                     <div className="flex items-center gap-2 mb-2">
                       <AlertCircle className="w-4 h-4 text-amber-600" />
                       <span className="text-sm font-semibold text-amber-700">Backup & Restore</span>
                     </div>
                     <p className="text-xs text-amber-600 mb-3">Trigger a manual backup of all platform data. This includes institutions, users, subscriptions, and audit logs.</p>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-sm font-semibold hover:from-amber-600 hover:to-orange-600 shadow-lg shadow-amber-500/25 transition-all">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg text-sm font-semibold hover:from-amber-600 hover:to-orange-600 shadow-sm shadow-amber-500/25 transition-all">
                       <Database className="w-4 h-4" /> Trigger System Backup
                     </button>
                   </div>
-                  <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                  <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <div className="flex items-center gap-2 mb-2">
                       <RefreshCw className="w-4 h-4 text-blue-600" />
                       <span className="text-sm font-semibold text-blue-700">Cache Invalidation</span>
                     </div>
                     <p className="text-xs text-blue-600 mb-3">Clear all server-side and client-side caches. Users may experience brief loading delays.</p>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl text-sm font-semibold hover:from-blue-600 hover:to-indigo-600 shadow-lg shadow-blue-500/25 transition-all">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg text-sm font-semibold hover:from-blue-600 hover:to-indigo-600 shadow-sm shadow-blue-500/25 transition-all">
                       <RefreshCw className="w-4 h-4" /> Clear All Caches
                     </button>
                   </div>
@@ -1662,24 +1652,24 @@ export function SuperAdmin() {
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-lg shadow-md w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
+            <div className="p-6 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-600 rounded-xl p-2">
+                <div className="bg-blue-600 rounded-lg p-2">
                   <Plus className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">Add New Institution</h2>
+                <h2 className="text-xl font-bold text-slate-900">Add New Institution</h2>
               </div>
-              <button onClick={() => setIsAddModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg"><X className="w-5 h-5" /></button>
+              <button onClick={() => setIsAddModalOpen(false)} className="p-2 hover:bg-slate-100 rounded-lg"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Institution Name *</label>
-                <input type="text" value={newInstitution.name} onChange={(e) => setNewInstitution({ ...newInstitution, name: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., Westminster Theological Seminary" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Institution Name *</label>
+                <input type="text" value={newInstitution.name} onChange={(e) => setNewInstitution({ ...newInstitution, name: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., Westminster Theological Seminary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Institution Type</label>
-                  <select value={newInstitution.institutionType} onChange={(e) => setNewInstitution({ ...newInstitution, institutionType: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500">
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Institution Type</label>
+                  <select value={newInstitution.institutionType} onChange={(e) => setNewInstitution({ ...newInstitution, institutionType: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
                     <option value="seminary">Seminary</option>
                     <option value="bible-college">Bible College</option>
                     <option value="christian-university">Christian University</option>
@@ -1687,32 +1677,32 @@ export function SuperAdmin() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Location</label>
-                  <input type="text" value={newInstitution.location} onChange={(e) => setNewInstitution({ ...newInstitution, location: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="City, Country" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Location</label>
+                  <input type="text" value={newInstitution.location} onChange={(e) => setNewInstitution({ ...newInstitution, location: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="City, Country" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Email *</label>
-                <input type="email" value={newInstitution.adminEmail} onChange={(e) => setNewInstitution({ ...newInstitution, adminEmail: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="admin@institution.com" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Admin Email *</label>
+                <input type="email" value={newInstitution.adminEmail} onChange={(e) => setNewInstitution({ ...newInstitution, adminEmail: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="admin@institution.com" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Password (auto-generated if empty)</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Admin Password (auto-generated if empty)</label>
                 <div className="flex gap-2">
-                  <input type="text" value={newInstitution.adminPassword} readOnly className="flex-1 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 font-mono" placeholder="Auto-generates on creation" />
-                  <button onClick={() => setNewInstitution({ ...newInstitution, adminPassword: generatePassword() })} className="px-4 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 rounded-xl text-sm font-semibold transition-colors">Regenerate</button>
+                  <input type="text" value={newInstitution.adminPassword} readOnly className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-600 font-mono" placeholder="Auto-generates on creation" />
+                  <button onClick={() => setNewInstitution({ ...newInstitution, adminPassword: generatePassword() })} className="px-4 py-2.5 bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 rounded-lg text-sm font-semibold transition-colors">Regenerate</button>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Subdomain (optional)</label>
-                <input type="text" value={newInstitution.subdomain} onChange={(e) => setNewInstitution({ ...newInstitution, subdomain: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g., westminster" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Subdomain (optional)</label>
+                <input type="text" value={newInstitution.subdomain} onChange={(e) => setNewInstitution({ ...newInstitution, subdomain: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="e.g., westminster" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Tradition / Denomination</label>
-                <input type="text" value={newInstitution.tradition} onChange={(e) => setNewInstitution({ ...newInstitution, tradition: e.target.value })} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g., Reformed, Baptist, Pentecostal" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Tradition / Denomination</label>
+                <input type="text" value={newInstitution.tradition} onChange={(e) => setNewInstitution({ ...newInstitution, tradition: e.target.value })} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="e.g., Reformed, Baptist, Pentecostal" />
               </div>
               <div className="flex gap-3 pt-2">
-                <button onClick={() => setIsAddModalOpen(false)} className="flex-1 px-4 py-2.5 border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors">Cancel</button>
-                <button onClick={handleAddInstitution} disabled={isSavingTenant} className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold disabled:opacity-50 shadow-lg shadow-blue-500/20 transition-all">
+                <button onClick={() => setIsAddModalOpen(false)} className="flex-1 px-4 py-2.5 border border-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+                <button onClick={handleAddInstitution} disabled={isSavingTenant} className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold disabled:opacity-50 shadow-sm shadow-blue-500/20 transition-all">
                   {isSavingTenant ? 'Creating...' : 'Create Institution'}
                 </button>
               </div>
@@ -1725,25 +1715,25 @@ export function SuperAdmin() {
       {isEditModalOpen && selectedInstitution && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-lg shadow-md w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
+            <div className="p-6 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-600 rounded-xl p-2">
+                <div className="bg-blue-600 rounded-lg p-2">
                   <Building2 className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">{selectedInstitution.name}</h2>
-                  <p className="text-sm text-gray-500">Manage institution and administrators</p>
+                  <h2 className="text-xl font-bold text-slate-900">{selectedInstitution.name}</h2>
+                  <p className="text-sm text-slate-500">Manage institution and administrators</p>
                 </div>
               </div>
-              <button onClick={() => { setIsEditModalOpen(false); setSelectedInstitution(null); }} className="p-2 hover:bg-gray-100 rounded-lg"><X className="w-5 h-5" /></button>
+              <button onClick={() => { setIsEditModalOpen(false); setSelectedInstitution(null); }} className="p-2 hover:bg-slate-100 rounded-lg"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-6">
               {/* Institution Status */}
-              <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Institution Status</label>
+              <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Institution Status</label>
                 <div className="flex gap-2">
                   {(['active', 'suspended', 'inactive'] as const).map(status => (
-                    <button key={status} onClick={() => handleUpdateStatus(selectedInstitution.id, status)} className={cn('px-4 py-2 rounded-lg font-semibold text-sm transition-all', selectedInstitution.status === status ? (status === 'active' ? 'bg-emerald-600 text-white' : status === 'suspended' ? 'bg-rose-600 text-white' : 'bg-gray-600 text-white') : 'bg-gray-200 text-gray-700 hover:bg-gray-300')}>
+                    <button key={status} onClick={() => handleUpdateStatus(selectedInstitution.id, status)} className={cn('px-4 py-2 rounded-lg font-semibold text-sm transition-all', selectedInstitution.status === status ? (status === 'active' ? 'bg-emerald-600 text-white' : status === 'suspended' ? 'bg-rose-600 text-white' : 'bg-slate-600 text-white') : 'bg-slate-200 text-slate-700 hover:bg-slate-300')}>
                       {status.charAt(0).toUpperCase() + status.slice(1)}
                     </button>
                   ))}
@@ -1752,20 +1742,20 @@ export function SuperAdmin() {
 
               {/* Admins List */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><Users className="w-5 h-5 text-blue-600" /> Institution Administrators</h3>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2"><Users className="w-5 h-5 text-blue-600" /> Institution Administrators</h3>
                 <div className="space-y-2 mb-4">
                   {tenantAdmins.length === 0 ? (
-                    <p className="text-gray-500 text-sm">No administrators provisioned yet.</p>
+                    <p className="text-slate-500 text-sm">No administrators provisioned yet.</p>
                   ) : (
                     tenantAdmins.map((admin) => (
-                      <div key={admin.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:bg-slate-50 transition-colors">
+                      <div key={admin.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">
                             {(admin.displayName || admin.email)[0].toUpperCase()}
                           </div>
                           <div>
-                            <p className="font-semibold text-gray-900">{admin.displayName || admin.email}</p>
-                            <p className="text-sm text-gray-500">{admin.email}</p>
+                            <p className="font-semibold text-slate-900">{admin.displayName || admin.email}</p>
+                            <p className="text-sm text-slate-500">{admin.email}</p>
                           </div>
                         </div>
                         <button onClick={() => handleDeleteAdmin(admin.id, admin.email)} className="p-2 text-rose-600 hover:bg-rose-100 rounded-lg transition-colors" title="Remove admin"><Trash2 className="w-4 h-4" /></button>
@@ -1776,33 +1766,33 @@ export function SuperAdmin() {
               </div>
 
               {/* Provision New Admin */}
-              <div className="border-t border-gray-200 pt-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><UserCheck className="w-5 h-5 text-emerald-600" /> Provision New Administrator</h3>
+              <div className="border-t border-slate-200 pt-6">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2"><UserCheck className="w-5 h-5 text-emerald-600" /> Provision New Administrator</h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Admin Email</label>
-                    <input type="email" value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="admin@example.com" />
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Admin Email</label>
+                    <input type="email" value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="admin@example.com" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Temporary Password</label>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Temporary Password</label>
                     <div className="flex gap-2">
                       <div className="flex-1 relative">
-                        <input type={showNewAdminPassword ? 'text' : 'password'} value={newAdminPassword} onChange={(e) => setNewAdminPassword(e.target.value)} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" />
-                        <button onClick={() => setShowNewAdminPassword(!showNewAdminPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600">
+                        <input type={showNewAdminPassword ? 'text' : 'password'} value={newAdminPassword} onChange={(e) => setNewAdminPassword(e.target.value)} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" />
+                        <button onClick={() => setShowNewAdminPassword(!showNewAdminPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600">
                           {showNewAdminPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
                       </div>
-                      <button onClick={() => setNewAdminPassword(generatePassword())} className="px-3 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors" title="Generate new password"><RefreshCw className="w-5 h-5 text-gray-600" /></button>
+                      <button onClick={() => setNewAdminPassword(generatePassword())} className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors" title="Generate new password"><RefreshCw className="w-5 h-5 text-slate-600" /></button>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">Auto-generated secure password. You can edit it if needed.</p>
+                    <p className="text-xs text-slate-500 mt-1">Auto-generated secure password. You can edit it if needed.</p>
                   </div>
                   {provisionError && (
-                    <div className="flex items-start gap-2 p-3 bg-rose-50 border border-rose-200 rounded-xl">
+                    <div className="flex items-start gap-2 p-3 bg-rose-50 border border-rose-200 rounded-lg">
                       <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
                       <p className="text-sm text-rose-700">{provisionError}</p>
                     </div>
                   )}
-                  <button onClick={handleProvisionAdmin} disabled={isProvisioning} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20 transition-all">
+                  <button onClick={handleProvisionAdmin} disabled={isProvisioning} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-blue-500/20 transition-all">
                     {isProvisioning ? (<><div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div> Provisioning...</>) : (<><CheckCircle className="w-5 h-5" /> Provision Admin Account</>)}
                   </button>
                 </div>
@@ -1833,7 +1823,7 @@ export function SuperAdmin() {
               </div>
             </div>
             <div className="p-6 space-y-4">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                 <div className="flex items-center gap-2 text-amber-700 mb-2">
                   <AlertCircle className="w-4 h-4" />
                   <span className="font-semibold text-sm">Warning: Read-Only Mode</span>
@@ -1841,29 +1831,29 @@ export function SuperAdmin() {
                 <p className="text-amber-600 text-xs">You will view the admin portal as this institution. All actions are audited. The token expires automatically.</p>
               </div>
 
-              <div className="bg-gray-50 rounded-xl p-4 space-y-2 border border-gray-200">
+              <div className="bg-slate-50 rounded-lg p-4 space-y-2 border border-slate-200">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Institution</span>
-                  <span className="font-semibold text-gray-900">{impersonateTarget.name}</span>
+                  <span className="text-slate-500">Institution</span>
+                  <span className="font-semibold text-slate-900">{impersonateTarget.name}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Admin Email</span>
-                  <span className="font-mono text-gray-900 text-xs">{impersonateTarget.adminEmail}</span>
+                  <span className="text-slate-500">Admin Email</span>
+                  <span className="font-mono text-slate-900 text-xs">{impersonateTarget.adminEmail}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Status</span>
-                  <span className={cn('px-2 py-0.5 rounded text-xs font-semibold', impersonateTarget.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600')}>{impersonateTarget.status}</span>
+                  <span className="text-slate-500">Status</span>
+                  <span className={cn('px-2 py-0.5 rounded text-xs font-semibold', impersonateTarget.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600')}>{impersonateTarget.status}</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Reason</label>
-                <input type="text" value={impersonateReason} onChange={(e) => setImpersonateReason(e.target.value)} placeholder="Why are you impersonating?" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Reason</label>
+                <input type="text" value={impersonateReason} onChange={(e) => setImpersonateReason(e.target.value)} placeholder="Why are you impersonating?" className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Token Expiry</label>
-                <select value={impersonateTTL} onChange={(e) => setImpersonateTTL(Number(e.target.value))} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-amber-500">
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Token Expiry</label>
+                <select value={impersonateTTL} onChange={(e) => setImpersonateTTL(Number(e.target.value))} className="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-white/80 focus:ring-2 focus:ring-amber-500">
                   <option value={1}>1 Hour</option>
                   <option value={2}>2 Hours</option>
                   <option value={4}>4 Hours</option>
@@ -1872,8 +1862,8 @@ export function SuperAdmin() {
               </div>
 
               <div className="flex gap-3">
-                <button onClick={() => setImpersonateModalOpen(false)} className="flex-1 py-2.5 bg-gray-100 text-gray-700 rounded-xl text-sm font-semibold hover:bg-gray-200 transition-colors">Cancel</button>
-                <button onClick={handleGenerateImpersonationToken} disabled={isGeneratingToken} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-sm font-semibold hover:from-amber-600 hover:to-orange-600 disabled:opacity-50 transition-all shadow-lg shadow-amber-500/25">
+                <button onClick={() => setImpersonateModalOpen(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-200 transition-colors">Cancel</button>
+                <button onClick={handleGenerateImpersonationToken} disabled={isGeneratingToken} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg text-sm font-semibold hover:from-amber-600 hover:to-orange-600 disabled:opacity-50 transition-all shadow-sm shadow-amber-500/25">
                   {isGeneratingToken ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Eye className="w-4 h-4" />}
                   {isGeneratingToken ? 'Generating...' : 'Start Impersonation'}
                 </button>
@@ -1899,18 +1889,18 @@ export function SuperAdmin() {
             <div className="p-6 max-h-96 overflow-y-auto">
               {activeTokens.length === 0 ? (
                 <div className="text-center py-8">
-                  <KeyRound className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-500">No active tokens</p>
+                  <KeyRound className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                  <p className="text-slate-500">No active tokens</p>
                 </div>
               ) : (
                 <div className="space-y-3">
                   {activeTokens.map(token => (
-                    <div key={token.id} className="border border-gray-200 rounded-xl p-4 space-y-2">
+                    <div key={token.id} className="border border-slate-200 rounded-lg p-4 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-gray-900 text-sm">{token.institutionName}</span>
+                        <span className="font-semibold text-slate-900 text-sm">{token.institutionName}</span>
                         <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs font-semibold">Active</span>
                       </div>
-                      <div className="text-xs text-gray-500 space-y-1">
+                      <div className="text-xs text-slate-500 space-y-1">
                         <div className="flex justify-between"><span>Admin:</span><span className="font-mono">{token.adminEmail}</span></div>
                         <div className="flex justify-between"><span>Created by:</span><span>{token.createdBy}</span></div>
                         <div className="flex justify-between"><span>Expires:</span><span>{token.expiresAt?.toDate?.()?.toLocaleString() || '-'}</span></div>

@@ -8,20 +8,153 @@
 
 @layer base {
   body {
-    @apply antialiased text-slate-900 bg-slate-50;
+    @apply antialiased text-slate-800 bg-slate-50;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight font-semibold;
+    @apply font-display tracking-tight font-semibold text-slate-900;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
   }
 }
 
 @layer components {
-  .dashboard-card {
-    @apply bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all duration-300;
+  /* ─── ERP Card System ─── */
+  .erp-card {
+    @apply bg-white rounded-lg border border-slate-200 shadow-sm;
   }
 
-  .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-slate-200/60 shadow-sm rounded-xl;
+  .erp-card-header {
+    @apply px-5 py-4 border-b border-slate-100 flex items-center justify-between;
+  }
+
+  .erp-card-body {
+    @apply p-5;
+  }
+
+  /* ─── ERP Table ─── */
+  .erp-table {
+    @apply w-full text-sm text-left;
+  }
+
+  .erp-table thead {
+    @apply bg-slate-50 border-b border-slate-200;
+  }
+
+  .erp-table thead th {
+    @apply px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap;
+  }
+
+  .erp-table tbody {
+    @apply divide-y divide-slate-100;
+  }
+
+  .erp-table tbody td {
+    @apply px-4 py-3 text-slate-700;
+  }
+
+  .erp-table tbody tr {
+    @apply hover:bg-slate-50 transition-colors;
+  }
+
+  /* ─── ERP Button (base) ─── */
+  .erp-btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors;
+  }
+
+  .erp-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .erp-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+  }
+
+  .erp-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-slate-600 hover:bg-slate-100;
+  }
+
+  .erp-btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-red-600 text-white hover:bg-red-700;
+  }
+
+  /* ─── ERP Input ─── */
+  .erp-input {
+    @apply w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors;
+  }
+
+  .erp-select {
+    @apply w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors appearance-none bg-no-repeat bg-[right_0.5rem_center] bg-[length:1.25rem_1.25rem] pr-10;
+  }
+
+  .erp-label {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+
+  /* ─── ERP Badge ─── */
+  .erp-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .erp-badge-blue {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700;
+  }
+
+  .erp-badge-green {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-700;
+  }
+
+  .erp-badge-red {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-50 text-red-700;
+  }
+
+  .erp-badge-amber {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-700;
+  }
+
+  .erp-badge-slate {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600;
+  }
+
+  /* ─── ERP Page Header ─── */
+  .erp-page-header {
+    @apply flex items-center justify-between mb-6;
+  }
+
+  .erp-page-title {
+    @apply text-xl font-semibold text-slate-900;
+  }
+
+  .erp-page-subtitle {
+    @apply text-sm text-slate-500 mt-0.5;
+  }
+
+  /* ─── ERP Stat Card ─── */
+  .erp-stat {
+    @apply bg-white rounded-lg border border-slate-200 p-4;
+  }
+
+  /* ─── ERP Empty State ─── */
+  .erp-empty {
+    @apply flex flex-col items-center justify-center py-12 text-center;
+  }
+
+  /* Mobile sidebar overlay */
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black/40 z-40 lg:hidden;
   }
 }

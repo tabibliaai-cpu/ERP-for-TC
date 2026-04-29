@@ -171,7 +171,7 @@ function GlassCard({ children, className }: { children: React.ReactNode; classNa
   return (
     <div
       className={cn(
-        'bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20',
+        'bg-white rounded-lg shadow-sm border border-white/20',
         className,
       )}
     >
@@ -188,9 +188,9 @@ function GradientButton({
   return (
     <button
       className={cn(
-        'bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold',
-        'hover:from-blue-700 hover:to-indigo-700 transition-all duration-200',
-        'shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40',
+        'bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold',
+        'hover:bg-blue-700 transition-all duration-200',
+        'shadow-sm hover:shadow-sm',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none',
         'flex items-center justify-center gap-2',
         className,
@@ -210,7 +210,7 @@ function OutlineButton({
   return (
     <button
       className={cn(
-        'border border-blue-200 text-blue-600 px-6 py-3 rounded-xl font-semibold',
+        'border border-blue-200 text-blue-600 px-6 py-3 rounded-lg font-semibold',
         'hover:bg-blue-50 transition-all duration-200',
         'disabled:opacity-40 disabled:cursor-not-allowed',
         'flex items-center justify-center gap-2',
@@ -251,7 +251,7 @@ function InputField({
 
 function inputClasses(error?: string) {
   return cn(
-    'w-full px-4 py-3 bg-white/60 border rounded-xl text-sm text-slate-800 placeholder:text-slate-400',
+    'w-full px-4 py-3 bg-white border rounded-lg text-sm text-slate-800 placeholder:text-slate-400',
     'focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400',
     'transition-all duration-200',
     error ? 'border-rose-300 bg-rose-50/40' : 'border-slate-200 hover:border-slate-300',
@@ -306,14 +306,14 @@ function WelcomeStep({ onProceed }: { onProceed: () => void }) {
         transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
         className="relative mb-8"
       >
-        <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/30">
+        <div className="w-28 h-28 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
           <Church className="w-14 h-14 text-white" />
         </div>
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.4 }}
-          className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full shadow-lg border-2 border-blue-100 flex items-center justify-center"
+          className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full shadow-sm border-2 border-blue-100 flex items-center justify-center"
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -509,7 +509,7 @@ function BasicInfoStep({ data, onChange }: { data: FormData; onChange: (d: FormD
 
       {/* Logo upload placeholder */}
       <InputField label="Institution Logo" icon={Upload}>
-        <div className="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-blue-300 hover:bg-blue-50/30 transition-all cursor-pointer group">
+        <div className="border-2 border-dashed border-slate-200 rounded-lg p-6 text-center hover:border-blue-300 hover:bg-blue-50/30 transition-all cursor-pointer group">
           <Upload className="w-8 h-8 text-slate-300 mx-auto mb-2 group-hover:text-blue-400 transition-colors" />
           <p className="text-sm text-slate-400 group-hover:text-blue-500 transition-colors">
             Click to upload logo
@@ -694,10 +694,10 @@ function AcademicProgramsStep({ data, onChange }: { data: FormData; onChange: (d
               type="button"
               onClick={() => toggleProgram(prog)}
               className={cn(
-                'px-3 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 text-left',
+                'px-3 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200 text-left',
                 data.programs.includes(prog)
                   ? 'bg-blue-50 border-blue-300 text-blue-700 shadow-sm'
-                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-white/80',
+                  : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-white',
               )}
             >
               <span className="flex items-center gap-2">
@@ -787,7 +787,7 @@ function AdminContactStep({ data, onChange }: { data: FormData; onChange: (d: Fo
       </div>
 
       {/* Primary admin */}
-      <div className="space-y-4 p-4 bg-blue-50/40 border border-blue-100 rounded-xl">
+      <div className="space-y-4 p-4 bg-blue-50/40 border border-blue-100 rounded-lg">
         <p className="text-xs font-bold uppercase tracking-wider text-blue-600">
           Primary Administrator
         </p>
@@ -827,7 +827,7 @@ function AdminContactStep({ data, onChange }: { data: FormData; onChange: (d: Fo
       </div>
 
       {/* Secondary contact */}
-      <div className="space-y-4 p-4 bg-slate-50/60 border border-slate-100 rounded-xl">
+      <div className="space-y-4 p-4 bg-slate-50/60 border border-slate-100 rounded-lg">
         <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
           Secondary Contact
           <span className="ml-2 text-slate-400 font-normal normal-case">(optional)</span>
@@ -959,7 +959,7 @@ function ProgressBar({
         <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200 mx-8" />
         {/* Active track */}
         <motion.div
-          className="absolute top-5 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-8"
+          className="absolute top-5 h-0.5 bg-blue-600 mx-8"
           initial={false}
           animate={{
             left: `${(currentStep / (STEPS.length - 1)) * 100}%`,
@@ -991,7 +991,7 @@ function ProgressBar({
                 className={cn(
                   'w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300',
                   isCurrent
-                    ? 'bg-gradient-to-br from-blue-500 to-indigo-600 border-transparent shadow-lg shadow-blue-500/30'
+                    ? 'bg-blue-600 border-transparent shadow-sm0/30'
                     : isActive
                       ? 'bg-blue-100 border-blue-400 text-blue-600'
                       : 'bg-white border-slate-200 text-slate-300',
@@ -1185,7 +1185,7 @@ export function OnboardingWizard({ userEmail, userId, onComplete }: OnboardingWi
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="mt-4 p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2"
+                  className="mt-4 p-3 bg-rose-50 border border-rose-200 rounded-lg flex items-center gap-2"
                 >
                   <div className="w-2 h-2 rounded-full bg-rose-500 shrink-0" />
                   <p className="text-sm text-rose-600 font-medium">{error}</p>

@@ -108,11 +108,11 @@ interface Institution {
 const PROGRAM_TYPES = ['B.Th', 'M.Div', 'Th.M', 'PhD', 'D.Min'];
 
 const PROGRAM_COLORS: Record<string, { gradient: string; bg: string; text: string; badge: string }> = {
-  'B.Th':  { gradient: 'from-blue-500 to-indigo-500', bg: 'bg-blue-50', text: 'text-blue-700', badge: 'bg-blue-100 text-blue-700' },
-  'M.Div': { gradient: 'from-indigo-500 to-purple-500', bg: 'bg-indigo-50', text: 'text-indigo-700', badge: 'bg-indigo-100 text-indigo-700' },
-  'Th.M':  { gradient: 'from-purple-500 to-blue-500', bg: 'bg-purple-50', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-700' },
-  'PhD':   { gradient: 'from-rose-500 to-blue-500', bg: 'bg-rose-50', text: 'text-rose-700', badge: 'bg-rose-100 text-rose-700' },
-  'D.Min': { gradient: 'from-amber-500 to-orange-500', bg: 'bg-amber-50', text: 'text-amber-700', badge: 'bg-amber-100 text-amber-700' },
+  'B.Th':  { gradient: 'bg-blue-600', bg: 'bg-blue-50', text: 'text-blue-700', badge: 'bg-blue-100 text-blue-700' },
+  'M.Div': { gradient: 'bg-indigo-600', bg: 'bg-indigo-50', text: 'text-indigo-700', badge: 'bg-indigo-100 text-indigo-700' },
+  'Th.M':  { gradient: 'bg-indigo-600', bg: 'bg-indigo-50', text: 'text-indigo-700', badge: 'bg-indigo-100 text-indigo-700' },
+  'PhD':   { gradient: 'bg-rose-600', bg: 'bg-rose-50', text: 'text-rose-700', badge: 'bg-rose-100 text-rose-700' },
+  'D.Min': { gradient: 'bg-amber-600', bg: 'bg-amber-50', text: 'text-amber-700', badge: 'bg-amber-100 text-amber-700' },
 };
 
 const DEFAULT_GRADE_SCALES: GradeScale[] = [
@@ -300,7 +300,7 @@ const DEFAULT_CURRICULUM: Omit<CurriculumStandard, 'id' | 'createdAt' | 'updated
 
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('bg-white/80 backdrop-blur-xl rounded-lg shadow-lg border border-white/20', className)}>
+    <div className={cn('bg-white rounded-lg shadow-sm border border-white/20', className)}>
       {children}
     </div>
   );
@@ -316,7 +316,7 @@ function StatCard({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className={cn('rounded-lg bg-gradient-to-br p-4 text-white shadow-lg', gradient)}
+      className={cn('rounded-lg bg p-4 text-white shadow-md', gradient)}
     >
       <div className="flex items-center justify-between">
         <div>
@@ -335,9 +335,9 @@ function SectionHeader({
   icon: React.ElementType; title: string; badge?: number; children?: React.ReactNode;
 }) {
   return (
-    <div className="p-6 border-b border-gray-100">
+    <div className="p-6 border-b border-slate-100">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
           <Icon className="w-5 h-5 text-blue-600" />
           {title}
           {badge !== undefined && (
@@ -366,8 +366,8 @@ function GradeBarChart({ grades, scaleType }: { grades: GradeRange[]; scaleType:
             transition={{ delay: i * 0.05 }}
             className="flex items-center gap-3"
           >
-            <span className="text-xs font-bold text-gray-700 w-12 text-right shrink-0">{g.grade}</span>
-            <div className="flex-1 h-6 bg-gray-100 rounded-lg overflow-hidden relative">
+            <span className="text-xs font-bold text-slate-700 w-12 text-right shrink-0">{g.grade}</span>
+            <div className="flex-1 h-6 bg-slate-100 rounded-lg overflow-hidden relative">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${width}%` }}
@@ -380,7 +380,7 @@ function GradeBarChart({ grades, scaleType }: { grades: GradeRange[]; scaleType:
                 </span>
               </motion.div>
             </div>
-            <span className={cn('text-[10px] font-medium w-20 truncate shrink-0', g.isPassing ? 'text-gray-600' : 'text-rose-500')}>
+            <span className={cn('text-[10px] font-medium w-20 truncate shrink-0', g.isPassing ? 'text-slate-600' : 'text-rose-500')}>
               {g.description}
             </span>
             {!g.isPassing && <span className="text-[9px] font-bold bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded shrink-0">FAIL</span>}
@@ -394,9 +394,9 @@ function GradeBarChart({ grades, scaleType }: { grades: GradeRange[]; scaleType:
 function EmptyState({ icon: Icon, title, description }: { icon: React.ElementType; title: string; description: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <Icon className="w-12 h-12 text-gray-300 mb-3" />
-      <p className="text-gray-500 font-medium">{title}</p>
-      <p className="text-xs text-gray-400 mt-1 max-w-sm">{description}</p>
+      <Icon className="w-12 h-12 text-slate-300 mb-3" />
+      <p className="text-slate-500 font-medium">{title}</p>
+      <p className="text-xs text-slate-400 mt-1 max-w-sm">{description}</p>
     </div>
   );
 }
@@ -808,7 +808,7 @@ export function AcademicsControlTab() {
     return (
       <div className="flex flex-col items-center justify-center py-24">
         <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mb-4" />
-        <p className="text-gray-500 font-medium">Loading academics configuration...</p>
+        <p className="text-slate-500 font-medium">Loading academics configuration...</p>
       </div>
     );
   }
@@ -827,10 +827,10 @@ export function AcademicsControlTab() {
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -20, x: '-50%' }}
             className={cn(
-              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-xl shadow-sm flex items-center gap-2 text-sm font-semibold',
+              'fixed top-6 left-1/2 z-50 px-5 py-3 rounded-lg shadow-sm flex items-center gap-2 text-sm font-semibold',
               toast.type === 'success'
-                ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white'
-                : 'bg-gradient-to-r from-rose-500 to-red-600 text-white'
+                ? 'bg-emerald-600 text-white'
+                : 'bg-rose-600 text-white'
             )}
           >
             {toast.type === 'success' ? <CheckCircle className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
@@ -846,13 +846,13 @@ export function AcademicsControlTab() {
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
       >
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg p-1.5">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <div className="bg-blue-600 rounded-lg p-1.5">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             Academics Control
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Manage academic templates, grade scales, policies, and curriculum standards across all institutions.
           </p>
         </div>
@@ -860,7 +860,7 @@ export function AcademicsControlTab() {
           {activeSection === 'templates' && (
             <button
               onClick={() => setShowCreateTemplate(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-sm text-sm"
             >
               <Plus className="w-4 h-4" />
               New Template
@@ -869,7 +869,7 @@ export function AcademicsControlTab() {
           {activeSection === 'grades' && (
             <button
               onClick={() => setShowCreateGradeScale(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 text-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-sm text-sm"
             >
               <Plus className="w-4 h-4" />
               New Grade Scale
@@ -881,9 +881,9 @@ export function AcademicsControlTab() {
       {/* ─── Stats Row ─── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard label="Total Templates" value={stats.totalTemplates} icon={LayoutGrid} gradient="" delay={0} />
-        <StatCard label="Active Templates" value={stats.activeTemplates} icon={BookOpen} gradient="from-indigo-500 to-purple-600" delay={0.06} />
-        <StatCard label="Global Policies" value={stats.activePolicies} icon={Shield} gradient="from-amber-500 to-orange-500" delay={0.12} />
-        <StatCard label="Grade Scales" value={stats.gradeScales} icon={BarChart3} gradient="from-emerald-500 to-green-600" delay={0.18} />
+        <StatCard label="Active Templates" value={stats.activeTemplates} icon={BookOpen} gradient="bg-indigo-600" delay={0.06} />
+        <StatCard label="Global Policies" value={stats.activePolicies} icon={Shield} gradient="bg-amber-600" delay={0.12} />
+        <StatCard label="Grade Scales" value={stats.gradeScales} icon={BarChart3} gradient="bg-emerald-600" delay={0.18} />
       </div>
 
       {/* ─── Section Tabs ─── */}
@@ -906,10 +906,10 @@ export function AcademicsControlTab() {
               key={tab.key}
               onClick={() => setActiveSection(tab.key)}
               className={cn(
-                'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap',
+                'flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all whitespace-nowrap',
                 isActive
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
-                  : 'bg-white/80 text-gray-600 hover:bg-gray-100 border border-gray-200'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
               )}
             >
               <Icon className="w-4 h-4" />
@@ -925,9 +925,9 @@ export function AcademicsControlTab() {
       {activeSection === 'templates' && (
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <GlassCard className="overflow-hidden">
-            <div className="p-6 border-b border-gray-100">
+            <div className="p-6 border-b border-slate-100">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <LayoutGrid className="w-5 h-5 text-blue-600" />
                   Academic Templates
                   <span className="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
@@ -935,19 +935,19 @@ export function AcademicsControlTab() {
                   </span>
                 </h3>
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
                     placeholder="Search templates..."
-                    className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-full sm:w-64"
+                    className="pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-full sm:w-64"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="divide-y divide-gray-100 max-h-[520px] overflow-y-auto">
+            <div className="divide-y divide-slate-100 max-h-[520px] overflow-y-auto">
               {filteredTemplates.length === 0 ? (
                 <EmptyState
                   icon={GraduationCap}
@@ -972,13 +972,13 @@ export function AcademicsControlTab() {
                         onClick={() => setExpandedTemplate(isExpanded ? null : template.id!)}
                         className="w-full px-6 py-4 flex items-center gap-4 hover:bg-blue-50/40 transition-colors text-left"
                       >
-                        <div className={cn('rounded-xl p-2.5 bg-gradient-to-br shadow-sm', colors.gradient)}>
+                        <div className={cn('rounded-lg p-2.5 bg shadow-sm', colors.gradient)}>
                           <GraduationCap className="w-5 h-5 text-white" />
                         </div>
 
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="font-semibold text-gray-900">{template.name}</span>
+                            <span className="font-semibold text-slate-900">{template.name}</span>
                             <span className={cn('text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full', colors.badge)}>
                               {template.programType}
                             </span>
@@ -987,12 +987,12 @@ export function AcademicsControlTab() {
                                 <ToggleRight className="w-3 h-3" /> Active
                               </span>
                             ) : (
-                              <span className="text-[10px] font-medium bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full flex items-center gap-1">
+                              <span className="text-[10px] font-medium bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full flex items-center gap-1">
                                 <ToggleLeft className="w-3 h-3" /> Inactive
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-slate-500 mt-1">
                             {template.totalCredits} credits &middot; {template.totalSemesters} semesters &middot; {template.gradingScale} grading
                           </p>
                         </div>
@@ -1000,29 +1000,29 @@ export function AcademicsControlTab() {
                         <div className="flex items-center gap-2 shrink-0">
                           <button
                             onClick={e => { e.stopPropagation(); handleDuplicateTemplate(template); }}
-                            className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Duplicate"
                           >
                             <Copy className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={e => { e.stopPropagation(); setShowPushModal(template.id!); }}
-                            className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                             title="Push to Institution"
                           >
                             <Send className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={e => { e.stopPropagation(); handleDeleteTemplate(template.id!); }}
-                            className="p-1.5 text-gray-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
                             title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                           {isExpanded ? (
-                            <ChevronDown className="w-4 h-4 text-gray-400" />
+                            <ChevronDown className="w-4 h-4 text-slate-400" />
                           ) : (
-                            <ChevronRight className="w-4 h-4 text-gray-400" />
+                            <ChevronRight className="w-4 h-4 text-slate-400" />
                           )}
                         </div>
                       </button>
@@ -1037,32 +1037,32 @@ export function AcademicsControlTab() {
                             transition={{ duration: 0.25 }}
                             className="overflow-hidden"
                           >
-                            <div className="px-6 pb-5 bg-gray-50/50 space-y-4">
+                            <div className="px-6 pb-5 bg-slate-50/50 space-y-4">
                               {/* Credit Distribution */}
                               <div>
-                                <h4 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                                <h4 className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
                                   <PieChart className="w-3.5 h-3.5 text-blue-500" />
                                   Credit Distribution
                                 </h4>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                   {[
-                                    { label: 'Core', value: totalCred.core, color: 'from-blue-500 to-indigo-500', pct: distTotal > 0 ? Math.round(totalCred.core / distTotal * 100) : 0 },
-                                    { label: 'Elective', value: totalCred.elective, color: 'from-indigo-500 to-purple-500', pct: distTotal > 0 ? Math.round(totalCred.elective / distTotal * 100) : 0 },
-                                    { label: 'Ministry', value: totalCred.ministry, color: 'from-purple-500 to-blue-500', pct: distTotal > 0 ? Math.round(totalCred.ministry / distTotal * 100) : 0 },
-                                    { label: 'Thesis', value: totalCred.thesis, color: 'from-rose-500 to-blue-500', pct: distTotal > 0 ? Math.round(totalCred.thesis / distTotal * 100) : 0 },
+                                    { label: 'Core', value: totalCred.core, color: 'bg-blue-600', pct: distTotal > 0 ? Math.round(totalCred.core / distTotal * 100) : 0 },
+                                    { label: 'Elective', value: totalCred.elective, color: 'bg-indigo-600', pct: distTotal > 0 ? Math.round(totalCred.elective / distTotal * 100) : 0 },
+                                    { label: 'Ministry', value: totalCred.ministry, color: 'bg-indigo-600', pct: distTotal > 0 ? Math.round(totalCred.ministry / distTotal * 100) : 0 },
+                                    { label: 'Thesis', value: totalCred.thesis, color: 'bg-rose-600', pct: distTotal > 0 ? Math.round(totalCred.thesis / distTotal * 100) : 0 },
                                   ].map(d => (
-                                    <div key={d.label} className="bg-white rounded-xl p-3 border border-gray-100">
-                                      <p className="text-[10px] font-medium text-gray-500 uppercase">{d.label}</p>
-                                      <p className="text-lg font-bold text-gray-900 mt-0.5">{d.value}</p>
-                                      <div className="mt-1.5 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                    <div key={d.label} className="bg-white rounded-lg p-3 border border-slate-100">
+                                      <p className="text-[10px] font-medium text-slate-500 uppercase">{d.label}</p>
+                                      <p className="text-lg font-bold text-slate-900 mt-0.5">{d.value}</p>
+                                      <div className="mt-1.5 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                                         <motion.div
                                           initial={{ width: 0 }}
                                           animate={{ width: `${d.pct}%` }}
                                           transition={{ duration: 0.5 }}
-                                          className={cn('h-full rounded-full bg-gradient-to-r', d.color)}
+                                          className={cn('h-full rounded-full bg-blue-600', d.color)}
                                         />
                                       </div>
-                                      <p className="text-[10px] text-gray-400 mt-1">{d.pct}%</p>
+                                      <p className="text-[10px] text-slate-400 mt-1">{d.pct}%</p>
                                     </div>
                                   ))}
                                 </div>
@@ -1070,16 +1070,16 @@ export function AcademicsControlTab() {
 
                               {/* Semester Breakdown */}
                               <div>
-                                <h4 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                                <h4 className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
                                   <ListChecks className="w-3.5 h-3.5 text-blue-500" />
                                   Semester Breakdown
                                 </h4>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                   {template.semesters.map(sem => (
-                                    <div key={sem.semester} className="bg-white rounded-lg p-2.5 border border-gray-100 text-center">
-                                      <p className="text-[10px] font-medium text-gray-500">Sem {sem.semester}</p>
-                                      <p className="text-sm font-bold text-gray-900">{sem.credits} <span className="text-[10px] font-normal text-gray-400">cr</span></p>
-                                      <p className="text-[9px] text-gray-400">{sem.courses.length} courses</p>
+                                    <div key={sem.semester} className="bg-white rounded-lg p-2.5 border border-slate-100 text-center">
+                                      <p className="text-[10px] font-medium text-slate-500">Sem {sem.semester}</p>
+                                      <p className="text-sm font-bold text-slate-900">{sem.credits} <span className="text-[10px] font-normal text-slate-400">cr</span></p>
+                                      <p className="text-[9px] text-slate-400">{sem.courses.length} courses</p>
                                     </div>
                                   ))}
                                 </div>
@@ -1090,7 +1090,7 @@ export function AcademicsControlTab() {
                                 <button
                                   onClick={() => handleToggleTemplate(template.id!, template.isActive)}
                                   className={cn(
-                                    'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all',
+                                    'flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all',
                                     template.isActive
                                       ? 'bg-amber-50 text-amber-700 hover:bg-amber-100'
                                       : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
@@ -1101,7 +1101,7 @@ export function AcademicsControlTab() {
                                 </button>
                                 <button
                                   onClick={() => setShowPushModal(template.id!)}
-                                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-blue-500/20"
+                                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition-all shadow-sm"
                                 >
                                   <Send className="w-3.5 h-3.5" />
                                   Push to Institution
@@ -1133,15 +1133,15 @@ export function AcademicsControlTab() {
               transition={{ delay: idx * 0.08 }}
             >
               <GlassCard className="overflow-hidden">
-                <div className="p-6 border-b border-gray-100">
+                <div className="p-6 border-b border-slate-100">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-2.5 shadow-sm">
+                      <div className="bg-blue-600 rounded-lg p-2.5 shadow-sm">
                         <BarChart3 className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h4 className="font-bold text-gray-900">{scale.name}</h4>
+                          <h4 className="font-bold text-slate-900">{scale.name}</h4>
                           {scale.isDefault && (
                             <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">DEFAULT</span>
                           )}
@@ -1150,10 +1150,10 @@ export function AcademicsControlTab() {
                               <CheckCircle className="w-2.5 h-2.5" /> Active
                             </span>
                           ) : (
-                            <span className="text-[10px] font-medium bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Inactive</span>
+                            <span className="text-[10px] font-medium bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Inactive</span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500 mt-0.5">
+                        <p className="text-xs text-slate-500 mt-0.5">
                           {scale.scaleType.toUpperCase()} scale &middot; Pass threshold: {scale.passThreshold}{scale.scaleType === 'gpa' ? ' GPA' : '%'} &middot; {scale.grades.length} grades
                         </p>
                       </div>
@@ -1174,7 +1174,7 @@ export function AcademicsControlTab() {
                       {!scale.isDefault && (
                         <button
                           onClick={() => handleDeleteGradeScale(scale.id!)}
-                          className="p-1.5 text-gray-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
+                          className="p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
                           title="Delete"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -1208,14 +1208,14 @@ export function AcademicsControlTab() {
           <GlassCard className="overflow-hidden">
             <SectionHeader icon={Shield} title="Cross-Institution Academic Policies" badge={policies.length}>
               <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-gray-400" />
-                <span className="text-xs text-gray-500">
+                <Globe className="w-4 h-4 text-slate-400" />
+                <span className="text-xs text-slate-500">
                   {policies.filter(p => p.isGlobal).length} global, {policies.filter(p => !p.isGlobal).length} local
                 </span>
               </div>
             </SectionHeader>
 
-            <div className="divide-y divide-gray-100 max-h-[520px] overflow-y-auto">
+            <div className="divide-y divide-slate-100 max-h-[520px] overflow-y-auto">
               {policies.length === 0 ? (
                 <EmptyState
                   icon={Shield}
@@ -1246,7 +1246,7 @@ export function AcademicsControlTab() {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-semibold text-gray-900 text-sm">
+                          <span className="font-semibold text-slate-900 text-sm">
                             {formatPolicyLabel(policy.policyKey)}
                           </span>
                           <span className={cn(
@@ -1263,12 +1263,12 @@ export function AcademicsControlTab() {
                               <Globe className="w-2.5 h-2.5" /> Global
                             </span>
                           ) : (
-                            <span className="text-[10px] font-medium bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span className="text-[10px] font-medium bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full flex items-center gap-1">
                               <Building2 className="w-2.5 h-2.5" /> Local
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">{policy.description}</p>
+                        <p className="text-xs text-slate-500 mt-1">{policy.description}</p>
                       </div>
 
                       <div className="flex items-center gap-3 shrink-0">
@@ -1296,7 +1296,7 @@ export function AcademicsControlTab() {
                             </button>
                             <button
                               onClick={() => { setEditingPolicy(null); setEditedPolicyValue(null); }}
-                              className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors"
+                              className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-lg transition-colors"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -1315,7 +1315,7 @@ export function AcademicsControlTab() {
                             </div>
                             <button
                               onClick={() => { setEditingPolicy(policy.id!); setEditedPolicyValue(policy.policyValue); }}
-                              className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                              className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                               title="Edit"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
@@ -1326,7 +1326,7 @@ export function AcademicsControlTab() {
                                 'p-1.5 rounded-lg transition-colors',
                                 policy.isGlobal
                                   ? 'text-blue-600 hover:bg-blue-50'
-                                  : 'text-gray-400 hover:bg-gray-100'
+                                  : 'text-slate-400 hover:bg-slate-100'
                               )}
                               title={policy.isGlobal ? 'Set as local' : 'Set as global'}
                             >
@@ -1371,15 +1371,15 @@ export function AcademicsControlTab() {
                   transition={{ delay: idx * 0.08 }}
                 >
                   <GlassCard className="overflow-hidden">
-                    <div className="p-6 border-b border-gray-100">
+                    <div className="p-6 border-b border-slate-100">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <div className={cn('rounded-xl p-2.5 bg-gradient-to-br shadow-sm', colors.gradient)}>
+                          <div className={cn('rounded-lg p-2.5 bg shadow-sm', colors.gradient)}>
                             <BookMarked className="w-5 h-5 text-white" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <h4 className="font-bold text-gray-900">{cs.programType} Curriculum Standards</h4>
+                              <h4 className="font-bold text-slate-900">{cs.programType} Curriculum Standards</h4>
                               <span className={cn('text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full', colors.badge)}>
                                 {cs.programType}
                               </span>
@@ -1389,7 +1389,7 @@ export function AcademicsControlTab() {
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-gray-500 mt-0.5">
+                            <p className="text-xs text-slate-500 mt-0.5">
                               {cs.totalCredits} total credits &middot; {cs.minSemesterLoad}-{cs.maxSemesterLoad} credits/semester
                             </p>
                           </div>
@@ -1399,77 +1399,77 @@ export function AcademicsControlTab() {
                     <div className="p-6">
                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {/* Core Credits */}
-                        <div className="bg-white rounded-xl p-4 border border-gray-100">
+                        <div className="bg-white rounded-lg p-4 border border-slate-100">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="bg-blue-50 rounded-lg p-1.5">
                               <BookOpen className="w-3.5 h-3.5 text-blue-600" />
                             </div>
-                            <span className="text-[10px] font-semibold text-gray-500 uppercase">Core Courses</span>
+                            <span className="text-[10px] font-semibold text-slate-500 uppercase">Core Courses</span>
                           </div>
-                          <p className="text-xl font-bold text-gray-900">{cs.corePercentage}%</p>
-                          <p className="text-[10px] text-gray-400 mt-0.5">{Math.round(cs.totalCredits * cs.corePercentage / 100)} credits</p>
-                          <div className="mt-2 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                          <p className="text-xl font-bold text-slate-900">{cs.corePercentage}%</p>
+                          <p className="text-[10px] text-slate-400 mt-0.5">{Math.round(cs.totalCredits * cs.corePercentage / 100)} credits</p>
+                          <div className="mt-2 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${cs.corePercentage}%` }}
                               transition={{ duration: 0.5, delay: 0.1 }}
-                              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500"
+                              className="h-full rounded-full bg-blue-600"
                             />
                           </div>
                         </div>
 
                         {/* Elective Credits */}
-                        <div className="bg-white rounded-xl p-4 border border-gray-100">
+                        <div className="bg-white rounded-lg p-4 border border-slate-100">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="bg-indigo-50 rounded-lg p-1.5">
                               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                             </div>
-                            <span className="text-[10px] font-semibold text-gray-500 uppercase">Electives</span>
+                            <span className="text-[10px] font-semibold text-slate-500 uppercase">Electives</span>
                           </div>
-                          <p className="text-xl font-bold text-gray-900">{cs.electivePercentage}%</p>
-                          <p className="text-[10px] text-gray-400 mt-0.5">{Math.round(cs.totalCredits * cs.electivePercentage / 100)} credits</p>
-                          <div className="mt-2 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                          <p className="text-xl font-bold text-slate-900">{cs.electivePercentage}%</p>
+                          <p className="text-[10px] text-slate-400 mt-0.5">{Math.round(cs.totalCredits * cs.electivePercentage / 100)} credits</p>
+                          <div className="mt-2 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${cs.electivePercentage}%` }}
                               transition={{ duration: 0.5, delay: 0.15 }}
-                              className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                              className="h-full rounded-full bg-indigo-600"
                             />
                           </div>
                         </div>
 
                         {/* Ministry / Practicum */}
-                        <div className="bg-white rounded-xl p-4 border border-gray-100">
+                        <div className="bg-white rounded-lg p-4 border border-slate-100">
                           <div className="flex items-center gap-2 mb-2">
-                            <div className="bg-purple-50 rounded-lg p-1.5">
-                              <Award className="w-3.5 h-3.5 text-purple-600" />
+                            <div className="bg-indigo-50 rounded-lg p-1.5">
+                              <Award className="w-3.5 h-3.5 text-indigo-600" />
                             </div>
-                            <span className="text-[10px] font-semibold text-gray-500 uppercase">Ministry/Practicum</span>
+                            <span className="text-[10px] font-semibold text-slate-500 uppercase">Ministry/Practicum</span>
                           </div>
-                          <p className="text-xl font-bold text-gray-900">{cs.ministryCredits}</p>
-                          <p className="text-[10px] text-gray-400 mt-0.5">credits</p>
-                          <p className="text-[10px] text-purple-500 mt-1 font-medium">{cs.practicumHours} practicum hours</p>
+                          <p className="text-xl font-bold text-slate-900">{cs.ministryCredits}</p>
+                          <p className="text-[10px] text-slate-400 mt-0.5">credits</p>
+                          <p className="text-[10px] text-indigo-500 mt-1 font-medium">{cs.practicumHours} practicum hours</p>
                         </div>
 
                         {/* Thesis */}
-                        <div className="bg-white rounded-xl p-4 border border-gray-100">
+                        <div className="bg-white rounded-lg p-4 border border-slate-100">
                           <div className="flex items-center gap-2 mb-2">
-                            <div className={cn('rounded-lg p-1.5', cs.thesisRequired ? 'bg-rose-50' : 'bg-gray-50')}>
-                              <FileText className={cn('w-3.5 h-3.5', cs.thesisRequired ? 'text-rose-600' : 'text-gray-400')} />
+                            <div className={cn('rounded-lg p-1.5', cs.thesisRequired ? 'bg-rose-50' : 'bg-slate-50')}>
+                              <FileText className={cn('w-3.5 h-3.5', cs.thesisRequired ? 'text-rose-600' : 'text-slate-400')} />
                             </div>
-                            <span className="text-[10px] font-semibold text-gray-500 uppercase">Thesis</span>
+                            <span className="text-[10px] font-semibold text-slate-500 uppercase">Thesis</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <p className="text-xl font-bold text-gray-900">
+                            <p className="text-xl font-bold text-slate-900">
                               {cs.thesisRequired ? `${cs.thesisCredits}` : '—'}
                             </p>
-                            {cs.thesisRequired && <span className="text-[10px] text-gray-400">credits</span>}
+                            {cs.thesisRequired && <span className="text-[10px] text-slate-400">credits</span>}
                           </div>
                           <span className={cn(
                             'text-[10px] font-medium px-2 py-0.5 rounded-full mt-1 inline-block',
                             cs.thesisRequired
                               ? 'bg-rose-100 text-rose-700'
-                              : 'bg-gray-100 text-gray-500'
+                              : 'bg-slate-100 text-slate-500'
                           )}>
                             {cs.thesisRequired ? 'Required' : 'Not Required'}
                           </span>
@@ -1479,16 +1479,16 @@ export function AcademicsControlTab() {
                       {/* Chapel Credits & Additional Info */}
                       <div className="mt-4 flex flex-wrap items-center gap-4">
                         {cs.chapelCredits > 0 && (
-                          <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-gray-100">
+                          <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-slate-100">
                             <Award className="w-3.5 h-3.5 text-amber-500" />
-                            <span className="text-xs text-gray-600">
+                            <span className="text-xs text-slate-600">
                               <span className="font-semibold">{cs.chapelCredits}</span> chapel credits required
                             </span>
                           </div>
                         )}
-                        <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-gray-100">
+                        <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-slate-100">
                           <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-slate-600">
                             Semester load: <span className="font-semibold">{cs.minSemesterLoad}–{cs.maxSemesterLoad} credits</span>
                           </span>
                         </div>
@@ -1521,12 +1521,12 @@ export function AcademicsControlTab() {
               className="bg-white rounded-lg shadow-md w-full max-w-lg max-h-[85vh] overflow-y-auto"
               onClick={e => e.stopPropagation()}
             >
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <GraduationCap className="w-5 h-5 text-blue-600" />
                   Create Academic Template
                 </h3>
-                <button onClick={() => setShowCreateTemplate(false)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors">
+                <button onClick={() => setShowCreateTemplate(false)} className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-lg transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -1534,19 +1534,19 @@ export function AcademicsControlTab() {
               <div className="p-6 space-y-5">
                 {/* Template Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Template Name</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Template Name</label>
                   <input
                     type="text"
                     value={templateForm.name || ''}
                     onChange={e => setTemplateForm(f => ({ ...f, name: e.target.value }))}
                     placeholder="e.g. B.Th Standard Curriculum"
-                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Program Type */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Program Type</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Program Type</label>
                   <div className="flex flex-wrap gap-2">
                     {PROGRAM_TYPES.map(pt => {
                       const colors = PROGRAM_COLORS[pt];
@@ -1556,10 +1556,10 @@ export function AcademicsControlTab() {
                           key={pt}
                           onClick={() => setTemplateForm(f => ({ ...f, programType: pt }))}
                           className={cn(
-                            'px-3 py-2 rounded-xl text-xs font-bold transition-all',
+                            'px-3 py-2 rounded-lg text-xs font-bold transition-all',
                             isSelected
-                              ? cn('text-white bg-gradient-to-r shadow-md', colors.gradient)
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              ? cn('text-white shadow-sm', colors.gradient)
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                           )}
                         >
                           {pt}
@@ -1572,32 +1572,32 @@ export function AcademicsControlTab() {
                 {/* Credits & Semesters */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Total Credits</label>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Total Credits</label>
                     <input
                       type="number"
                       value={templateForm.totalCredits || ''}
                       onChange={e => setTemplateForm(f => ({ ...f, totalCredits: parseInt(e.target.value) || 0 }))}
-                      className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Total Semesters</label>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Total Semesters</label>
                     <input
                       type="number"
                       value={templateForm.totalSemesters || ''}
                       onChange={e => setTemplateForm(f => ({ ...f, totalSemesters: parseInt(e.target.value) || 0 }))}
-                      className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Grading Scale */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Grading Scale</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Grading Scale</label>
                   <select
                     value={templateForm.gradingScale || 'letter'}
                     onChange={e => setTemplateForm(f => ({ ...f, gradingScale: e.target.value }))}
-                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   >
                     <option value="letter">Letter Grade (A-F)</option>
                     <option value="percentage">Percentage (0-100)</option>
@@ -1607,17 +1607,17 @@ export function AcademicsControlTab() {
 
                 {/* Credit Distribution */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Credit Distribution</label>
-                  <p className="text-[10px] text-gray-400 mb-2">Leave empty to auto-calculate based on defaults (60% core, 20% elective, 15% ministry, 5% other)</p>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Credit Distribution</label>
+                  <p className="text-[10px] text-slate-400 mb-2">Leave empty to auto-calculate based on defaults (60% core, 20% elective, 15% ministry, 5% other)</p>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { key: 'core' as const, label: 'Core', color: 'from-blue-500 to-indigo-500' },
-                      { key: 'elective' as const, label: 'Elective', color: 'from-indigo-500 to-purple-500' },
-                      { key: 'ministry' as const, label: 'Ministry', color: 'from-purple-500 to-blue-500' },
-                      { key: 'thesis' as const, label: 'Thesis', color: 'from-rose-500 to-blue-500' },
+                      { key: 'core' as const, label: 'Core', color: 'bg-blue-600' },
+                      { key: 'elective' as const, label: 'Elective', color: 'bg-indigo-600' },
+                      { key: 'ministry' as const, label: 'Ministry', color: 'bg-indigo-600' },
+                      { key: 'thesis' as const, label: 'Thesis', color: 'bg-rose-600' },
                     ].map(d => (
-                      <div key={d.key} className="bg-gray-50 rounded-xl p-3">
-                        <label className="text-[10px] font-semibold text-gray-500 uppercase">{d.label}</label>
+                      <div key={d.key} className="bg-slate-50 rounded-lg p-3">
+                        <label className="text-[10px] font-semibold text-slate-500 uppercase">{d.label}</label>
                         <input
                           type="number"
                           value={templateForm.creditDistribution?.[d.key] || ''}
@@ -1628,7 +1628,7 @@ export function AcademicsControlTab() {
                               [d.key]: parseInt(e.target.value) || 0,
                             }
                           }))}
-                          className="w-full mt-1 px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          className="w-full mt-1 px-3 py-1.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="0"
                         />
                       </div>
@@ -1637,17 +1637,17 @@ export function AcademicsControlTab() {
                 </div>
               </div>
 
-              <div className="p-6 border-t border-gray-100 flex items-center justify-end gap-3">
+              <div className="p-6 border-t border-slate-100 flex items-center justify-end gap-3">
                 <button
                   onClick={() => { setShowCreateTemplate(false); resetTemplateForm(); }}
-                  className="px-5 py-2.5 text-sm font-semibold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all"
+                  className="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateTemplate}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-sm disabled:opacity-60"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                   Create Template
@@ -1677,12 +1677,12 @@ export function AcademicsControlTab() {
               className="bg-white rounded-lg shadow-md w-full max-w-lg max-h-[85vh] overflow-y-auto"
               onClick={e => e.stopPropagation()}
             >
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-blue-600" />
                   Create Grade Scale
                 </h3>
-                <button onClick={() => setShowCreateGradeScale(false)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors">
+                <button onClick={() => setShowCreateGradeScale(false)} className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-lg transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -1690,19 +1690,19 @@ export function AcademicsControlTab() {
               <div className="p-6 space-y-5">
                 {/* Scale Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Scale Name</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Scale Name</label>
                   <input
                     type="text"
                     value={gradeScaleForm.name || ''}
                     onChange={e => setGradeScaleForm(f => ({ ...f, name: e.target.value }))}
                     placeholder="e.g. Custom Theological Grading"
-                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Scale Type */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Scale Type</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Scale Type</label>
                   <div className="flex gap-2">
                     {[
                       { key: 'letter' as const, label: 'Letter' },
@@ -1713,10 +1713,10 @@ export function AcademicsControlTab() {
                         key={t.key}
                         onClick={() => setGradeScaleForm(f => ({ ...f, scaleType: t.key }))}
                         className={cn(
-                          'px-4 py-2 rounded-xl text-xs font-bold transition-all',
+                          'px-4 py-2 rounded-lg text-xs font-bold transition-all',
                           gradeScaleForm.scaleType === t.key
                             ? 'bg-blue-600 text-white shadow-md'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                         )}
                       >
                         {t.label}
@@ -1727,26 +1727,26 @@ export function AcademicsControlTab() {
 
                 {/* Pass Threshold */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Pass Threshold</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Pass Threshold</label>
                   <input
                     type="number"
                     value={gradeScaleForm.passThreshold || ''}
                     onChange={e => setGradeScaleForm(f => ({ ...f, passThreshold: parseFloat(e.target.value) || 0 }))}
-                    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Add Grade Row */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Grade Ranges</label>
-                  <p className="text-[10px] text-gray-400 mb-2">Define each grade level and its score range</p>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Grade Ranges</label>
+                  <p className="text-[10px] text-slate-400 mb-2">Define each grade level and its score range</p>
 
                   {gradeScaleForm.grades && gradeScaleForm.grades.length > 0 && (
                     <div className="space-y-2 mb-3">
                       {gradeScaleForm.grades.map((g, i) => (
-                        <div key={i} className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
-                          <span className="text-sm font-bold text-gray-700 w-12">{g.grade}</span>
-                          <span className="text-xs text-gray-500 flex-1">
+                        <div key={i} className="flex items-center gap-2 bg-slate-50 rounded-lg px-3 py-2">
+                          <span className="text-sm font-bold text-slate-700 w-12">{g.grade}</span>
+                          <span className="text-xs text-slate-500 flex-1">
                             {g.minScore}–{g.maxScore} &middot; {g.description}
                           </span>
                           {g.isPassing ? (
@@ -1759,7 +1759,7 @@ export function AcademicsControlTab() {
                               ...f,
                               grades: f.grades!.filter((_, idx) => idx !== i)
                             }))}
-                            className="p-1 text-gray-400 hover:text-rose-500 transition-colors"
+                            className="p-1 text-slate-400 hover:text-rose-500 transition-colors"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
@@ -1768,35 +1768,35 @@ export function AcademicsControlTab() {
                     </div>
                   )}
 
-                  <div className="bg-gray-50 rounded-xl p-3 space-y-2">
+                  <div className="bg-slate-50 rounded-lg p-3 space-y-2">
                     <div className="grid grid-cols-2 gap-2">
                       <input
                         type="text"
                         value={newGradeRow.grade}
                         onChange={e => setNewGradeRow(r => ({ ...r, grade: e.target.value }))}
                         placeholder="Grade (e.g. A+)"
-                        className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="px-3 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                       <input
                         type="text"
                         value={newGradeRow.description}
                         onChange={e => setNewGradeRow(r => ({ ...r, description: e.target.value }))}
                         placeholder="Description"
-                        className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="px-3 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                       <input
                         type="number"
                         value={newGradeRow.minScore}
                         onChange={e => setNewGradeRow(r => ({ ...r, minScore: parseFloat(e.target.value) || 0 }))}
                         placeholder="Min Score"
-                        className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="px-3 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                       <input
                         type="number"
                         value={newGradeRow.maxScore}
                         onChange={e => setNewGradeRow(r => ({ ...r, maxScore: parseFloat(e.target.value) || 0 }))}
                         placeholder="Max Score"
-                        className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="px-3 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
                     <div className="flex items-center justify-between">
@@ -1805,9 +1805,9 @@ export function AcademicsControlTab() {
                           type="checkbox"
                           checked={newGradeRow.isPassing}
                           onChange={e => setNewGradeRow(r => ({ ...r, isPassing: e.target.checked }))}
-                          className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
                         />
-                        <span className="text-xs font-medium text-gray-600">Passing grade</span>
+                        <span className="text-xs font-medium text-slate-600">Passing grade</span>
                       </label>
                       <button
                         onClick={() => {
@@ -1818,7 +1818,7 @@ export function AcademicsControlTab() {
                           }));
                           setNewGradeRow({ grade: '', minScore: 0, maxScore: 100, description: '', isPassing: true, color: 'bg-blue-500' });
                         }}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition-all"
                       >
                         <Plus className="w-3 h-3" />
                         Add
@@ -1828,17 +1828,17 @@ export function AcademicsControlTab() {
                 </div>
               </div>
 
-              <div className="p-6 border-t border-gray-100 flex items-center justify-end gap-3">
+              <div className="p-6 border-t border-slate-100 flex items-center justify-end gap-3">
                 <button
                   onClick={() => { setShowCreateGradeScale(false); resetGradeScaleForm(); }}
-                  className="px-5 py-2.5 text-sm font-semibold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all"
+                  className="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateGradeScale}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-60"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-sm disabled:opacity-60"
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                   Create Scale
@@ -1868,26 +1868,26 @@ export function AcademicsControlTab() {
               className="bg-white rounded-lg shadow-md w-full max-w-md"
               onClick={e => e.stopPropagation()}
             >
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <Send className="w-5 h-5 text-blue-600" />
                   Push to Institution
                 </h3>
-                <button onClick={() => setShowPushModal(null)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors">
+                <button onClick={() => setShowPushModal(null)} className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-lg transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <div className="p-6">
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-slate-500 mb-4">
                   Select an institution to deploy this template. The institution will receive the full academic configuration.
                 </p>
 
                 {institutions.length === 0 ? (
                   <div className="text-center py-8">
-                    <Building2 className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">No institutions found</p>
-                    <p className="text-xs text-gray-400 mt-1">Institutions need to be registered on the platform first.</p>
+                    <Building2 className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                    <p className="text-sm text-slate-500">No institutions found</p>
+                    <p className="text-xs text-slate-400 mt-1">Institutions need to be registered on the platform first.</p>
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -1895,26 +1895,26 @@ export function AcademicsControlTab() {
                       <button
                         key={inst.id}
                         onClick={() => handlePushToInstitution(showPushModal, inst.id)}
-                        className="w-full flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all text-left group"
+                        className="w-full flex items-center gap-3 p-3 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all text-left group"
                       >
-                        <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg p-2">
+                        <div className="bg-blue-100 rounded-lg p-2">
                           <Building2 className="w-4 h-4 text-blue-600" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-900 truncate">{inst.name || inst.id}</p>
-                          <p className="text-[10px] text-gray-400">{inst.id}</p>
+                          <p className="text-sm font-semibold text-slate-900 truncate">{inst.name || inst.id}</p>
+                          <p className="text-[10px] text-slate-400">{inst.id}</p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" />
+                        <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors" />
                       </button>
                     ))}
                   </div>
                 )}
               </div>
 
-              <div className="p-6 border-t border-gray-100 flex justify-end">
+              <div className="p-6 border-t border-slate-100 flex justify-end">
                 <button
                   onClick={() => setShowPushModal(null)}
-                  className="px-5 py-2.5 text-sm font-semibold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all"
+                  className="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all"
                 >
                   Close
                 </button>

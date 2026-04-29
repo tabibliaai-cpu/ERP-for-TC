@@ -99,7 +99,7 @@ export function Settings() {
             key={section.title}
             className="flex items-start gap-4 p-5 bg-white rounded-lg border border-slate-200 hover:border-blue-300 shadow-sm transition-all text-left group"
           >
-            <div className="p-3 rounded-xl bg-slate-50 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+            <div className="p-3 rounded-lg bg-slate-50 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
               <section.icon className="w-6 h-6" />
             </div>
             <div>
@@ -174,7 +174,7 @@ export function Settings() {
                     type="text" 
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-bold "
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-bold "
                  />
               </div>
               <div className="space-y-1">
@@ -183,18 +183,18 @@ export function Settings() {
                     type="text" 
                     value={formData.deanName}
                     onChange={e => setFormData({...formData, deanName: e.target.value})}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-medium"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium"
                  />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                    <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Official Email</label>
-                   <input type="email" value={formData.contactEmail} onChange={e => setFormData({...formData, contactEmail: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2" />
+                   <input type="email" value={formData.contactEmail} onChange={e => setFormData({...formData, contactEmail: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2" />
                 </div>
                 <div className="space-y-1">
                    <label className="text-xs font-medium text-slate-300 uppercase tracking-wide">Official Phone</label>
-                   <input type="tel" value={formData.contactPhone} onChange={e => setFormData({...formData, contactPhone: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2" />
+                   <input type="tel" value={formData.contactPhone} onChange={e => setFormData({...formData, contactPhone: e.target.value})} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2" />
                 </div>
               </div>
 
@@ -204,7 +204,7 @@ export function Settings() {
                    <select 
                       value={formData.tradition}
                       onChange={e => setFormData({...formData, tradition: e.target.value})}
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"
                    >
                      <option value="Reformed">Reformed</option>
                      <option value="Catholic">Catholic</option>
@@ -221,7 +221,7 @@ export function Settings() {
                       type="text" 
                       value={formData.location}
                       onChange={e => setFormData({...formData, location: e.target.value})}
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"
                    />
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function Settings() {
                  <textarea 
                     value={formData.missionStatement}
                     onChange={e => setFormData({...formData, missionStatement: e.target.value})}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none h-24 text-sm leading-relaxed"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg outline-none h-24 text-sm leading-relaxed"
                     placeholder="State the theological mission of the college..."
                  />
               </div>
@@ -246,7 +246,7 @@ export function Settings() {
                <select 
                 value={formData.timezone}
                 onChange={e => setFormData({...formData, timezone: e.target.value})}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-medium text-sm"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-sm"
                >
                  <option value="UTC">Universal Coordinated Time (UTC)</option>
                  <option value="EST">Eastern Standard Time (EST)</option>
@@ -261,7 +261,7 @@ export function Settings() {
               <p className="text-xs text-slate-400 mt-1">Status of military-grade encryption layers.</p>
             </div>
             <div className="col-span-2 flex items-center gap-2">
-              <div className="flex-1 px-4 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 font-bold text-xs uppercase tracking-wide flex items-center gap-2">
+              <div className="flex-1 px-4 py-2.5 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 font-bold text-xs uppercase tracking-wide flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                 Active: Zero-Trust Backend
               </div>
@@ -275,7 +275,7 @@ export function Settings() {
               <p className="text-xs text-slate-400 mt-1">Physical location of your tenant instance.</p>
             </div>
             <div className="col-span-2">
-               <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-500 font-medium">
+               <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-500 font-medium">
                 <MapPin className="w-4 h-4" />
                 <span>US-West (Oregon) Cluster</span>
               </div>
@@ -285,12 +285,12 @@ export function Settings() {
         <div className="p-6 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
           <button 
             disabled={isSaving}
-            className="px-6 py-2.5 font-bold text-slate-600 hover:bg-slate-200 rounded-xl transition-all"
+            className="px-6 py-2.5 font-bold text-slate-600 hover:bg-slate-200 rounded-lg transition-all"
           >Discard</button>
           <button 
             onClick={handleSave}
             disabled={isSaving}
-            className="px-8 py-2.5 bg-slate-900 text-white rounded-xl font-bold shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all flex items-center gap-2"
+            className="px-8 py-2.5 bg-slate-900 text-white rounded-lg font-bold shadow-sm hover:bg-slate-800 transition-all flex items-center gap-2"
           >
             {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             {isSaving ? 'Synchronizing...' : 'Save Changes'}

@@ -150,7 +150,7 @@ export function ChurchManagement() {
           {activeTab === 'events' && (
             <button 
               onClick={() => setIsEventModalOpen(true)}
-              className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 "
+              className="px-6 py-3 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2 "
             >
               <Plus className="w-4 h-4" />
               <span>Schedule Event</span>
@@ -159,7 +159,7 @@ export function ChurchManagement() {
           {activeTab === 'prayer' && (
             <button 
               onClick={() => setIsRequestModalOpen(true)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2 shadow-sm shadow-blue-100"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition-all uppercase tracking-wide flex items-center gap-2 shadow-sm"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Submit Request</span>
@@ -168,7 +168,7 @@ export function ChurchManagement() {
           {activeTab === 'congregation' && (
             <button 
               onClick={() => setIsMemberModalOpen(true)}
-              className="px-6 py-3 bg-slate-950 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2 "
+              className="px-6 py-3 bg-slate-950 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition-all uppercase tracking-wide flex items-center gap-2 "
             >
               <Users className="w-4 h-4" />
               <span>Register Member</span>
@@ -200,10 +200,10 @@ export function ChurchManagement() {
             ))}
           </div>
           <div className="flex gap-2">
-            <button className="p-2.5 border border-slate-200 rounded-xl text-slate-400 hover:bg-white transition-all shadow-sm">
+            <button className="p-2.5 border border-slate-200 rounded-lg text-slate-400 hover:bg-white transition-all shadow-sm">
               <Filter className="w-4 h-4" />
             </button>
-            <button className="p-2.5 border border-slate-200 rounded-xl text-slate-400 hover:bg-white transition-all shadow-sm">
+            <button className="p-2.5 border border-slate-200 rounded-lg text-slate-400 hover:bg-white transition-all shadow-sm">
               <Download className="w-4 h-4" />
             </button>
           </div>
@@ -231,7 +231,7 @@ export function ChurchManagement() {
                     </div>
                   ) : (
                     events.map((event) => (
-                      <div key={event.id} className="p-6 bg-white border border-slate-100 rounded-lg shadow-sm hover:shadow-sm hover:shadow-blue-500/5 transition-all group">
+                      <div key={event.id} className="p-6 bg-white border border-slate-100 rounded-lg shadow-sm hover:shadow-sm0/5 transition-all group">
                          <div className="flex items-center justify-between mb-6">
                             <span className={cn(
                               "px-3 py-1.5 rounded-lg text-xs font-medium uppercase tracking-wide",
@@ -276,7 +276,7 @@ export function ChurchManagement() {
                         <div key={prayer.id} className="p-6 bg-slate-50/50 border border-slate-100 rounded-lg hover:bg-white hover:border-blue-200 transition-all group">
                            <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-3">
-                                 <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center">
+                                 <div className="w-10 h-10 rounded-lg bg-white border border-slate-100 flex items-center justify-center">
                                     <Sparkles className="w-5 h-5 text-blue-400" />
                                  </div>
                                  <div>
@@ -332,7 +332,7 @@ export function ChurchManagement() {
                           <tr key={member.id} className="hover:bg-slate-50/50 transition-colors cursor-pointer group">
                             <td className="px-4 py-3">
                                <div className="flex items-center gap-4">
-                                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all uppercase">
+                                  <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:bg-blue-700 group-hover:text-white transition-all uppercase">
                                     {member.name.split(' ').map(n => n[0]).join('')}
                                   </div>
                                   <div>
@@ -383,21 +383,21 @@ export function ChurchManagement() {
                 <form onSubmit={handleAddEvent} className="space-y-4">
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Title</label>
-                      <input required type="text" value={newEvent.title} onChange={e => setNewEvent({...newEvent, title: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white outline-none font-bold " />
+                      <input required type="text" value={newEvent.title} onChange={e => setNewEvent({...newEvent, title: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white outline-none font-bold " />
                    </div>
                    <div className="grid grid-cols-2 gap-4">
                        <div className="space-y-1">
                           <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Date</label>
-                          <input required type="date" value={newEvent.date} onChange={e => setNewEvent({...newEvent, date: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none" />
+                          <input required type="date" value={newEvent.date} onChange={e => setNewEvent({...newEvent, date: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none" />
                        </div>
                        <div className="space-y-1">
                           <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Time</label>
-                          <input required type="time" value={newEvent.time} onChange={e => setNewEvent({...newEvent, time: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none" />
+                          <input required type="time" value={newEvent.time} onChange={e => setNewEvent({...newEvent, time: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none" />
                        </div>
                    </div>
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Type</label>
-                      <select value={newEvent.type} onChange={e => setNewEvent({...newEvent, type: e.target.value as any})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none uppercase font-black text-[10px] tracking-wide">
+                      <select value={newEvent.type} onChange={e => setNewEvent({...newEvent, type: e.target.value as any})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none uppercase font-black text-[10px] tracking-wide">
                          <option value="liturgy">Liturgy</option>
                          <option value="academic">Academic Event</option>
                          <option value="community">Community Service</option>
@@ -407,16 +407,16 @@ export function ChurchManagement() {
                    {(newEvent.type === 'liturgy' || newEvent.type === 'academic') && (
                      <div className="space-y-1">
                         <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Location</label>
-                        <input required type="text" value={newEvent.location} onChange={e => setNewEvent({...newEvent, location: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none font-medium" />
+                        <input required type="text" value={newEvent.location} onChange={e => setNewEvent({...newEvent, location: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none font-medium" />
                      </div>
                    )}
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Short Description</label>
-                      <textarea value={newEvent.description} onChange={e => setNewEvent({...newEvent, description: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none h-24 text-sm" />
+                      <textarea value={newEvent.description} onChange={e => setNewEvent({...newEvent, description: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none h-24 text-sm" />
                    </div>
                    <div className="pt-4 flex gap-3">
-                      <button type="button" onClick={() => setIsEventModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Cancel</button>
-                      <button type="submit" className="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm shadow-sm shadow-blue-100">Establish Registry</button>
+                      <button type="button" onClick={() => setIsEventModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-lg font-bold text-sm">Cancel</button>
+                      <button type="submit" className="flex-1 py-3 bg-blue-600 text-white rounded-lg font-bold text-sm shadow-sm">Establish Registry</button>
                    </div>
                 </form>
             </motion.div>
@@ -431,15 +431,15 @@ export function ChurchManagement() {
                 <form onSubmit={handleAddRequest} className="space-y-4">
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Petition Source</label>
-                      <input required type="text" value={newRequest.userName} onChange={e => setNewRequest({...newRequest, userName: e.target.value})} placeholder="Full name for intercession..." className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white outline-none font-bold " />
+                      <input required type="text" value={newRequest.userName} onChange={e => setNewRequest({...newRequest, userName: e.target.value})} placeholder="Full name for intercession..." className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white outline-none font-bold " />
                    </div>
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Petition Content</label>
-                      <textarea required value={newRequest.content} onChange={e => setNewRequest({...newRequest, content: e.target.value})} placeholder="Explain the focus for communal prayer..." className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none h-40 text-sm leading-relaxed" />
+                      <textarea required value={newRequest.content} onChange={e => setNewRequest({...newRequest, content: e.target.value})} placeholder="Explain the focus for communal prayer..." className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none h-40 text-sm leading-relaxed" />
                    </div>
                    <div className="pt-4 flex gap-3">
-                      <button type="button" onClick={() => setIsRequestModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Cancel</button>
-                      <button type="submit" className="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm shadow-sm shadow-blue-100">Submit for Intercession</button>
+                      <button type="button" onClick={() => setIsRequestModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-lg font-bold text-sm">Cancel</button>
+                      <button type="submit" className="flex-1 py-3 bg-blue-600 text-white rounded-lg font-bold text-sm shadow-sm">Submit for Intercession</button>
                    </div>
                 </form>
             </motion.div>
@@ -454,29 +454,29 @@ export function ChurchManagement() {
                 <form onSubmit={handleAddMember} className="space-y-4">
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Full Legal Name</label>
-                      <input required type="text" value={newMember.name} onChange={e => setNewMember({...newMember, name: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:bg-white outline-none font-bold " />
+                      <input required type="text" value={newMember.name} onChange={e => setNewMember({...newMember, name: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white outline-none font-bold " />
                    </div>
                    <div className="grid grid-cols-2 gap-4">
                        <div className="space-y-1">
                           <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Email (Optional)</label>
-                          <input type="email" value={newMember.email} onChange={e => setNewMember({...newMember, email: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none text-xs" />
+                          <input type="email" value={newMember.email} onChange={e => setNewMember({...newMember, email: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none text-xs" />
                        </div>
                        <div className="space-y-1">
                           <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Phone (Optional)</label>
-                          <input type="tel" value={newMember.phone} onChange={e => setNewMember({...newMember, phone: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none text-xs" />
+                          <input type="tel" value={newMember.phone} onChange={e => setNewMember({...newMember, phone: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none text-xs" />
                        </div>
                    </div>
                    <div className="space-y-1">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide">Commitment Category</label>
-                      <select value={newMember.category} onChange={e => setNewMember({...newMember, category: e.target.value as any})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none uppercase font-black text-[10px] tracking-wide">
+                      <select value={newMember.category} onChange={e => setNewMember({...newMember, category: e.target.value as any})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-lg outline-none uppercase font-black text-[10px] tracking-wide">
                          <option value="frequent">Frequent Attendant</option>
                          <option value="occasional">Occasional Visitor</option>
                          <option value="leader">Institutional Leader</option>
                       </select>
                    </div>
                    <div className="pt-4 flex gap-3">
-                      <button type="button" onClick={() => setIsMemberModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Cancel</button>
-                      <button type="submit" className="flex-1 py-3 bg-slate-900 text-white rounded-xl font-bold text-sm ">Finalize Registration</button>
+                      <button type="button" onClick={() => setIsMemberModalOpen(false)} className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-lg font-bold text-sm">Cancel</button>
+                      <button type="submit" className="flex-1 py-3 bg-slate-900 text-white rounded-lg font-bold text-sm ">Finalize Registration</button>
                    </div>
                 </form>
             </motion.div>

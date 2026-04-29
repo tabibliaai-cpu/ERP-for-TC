@@ -173,7 +173,7 @@ export function FacultyManagement() {
             className="overflow-hidden"
           >
             <div className={cn(
-              "p-4 rounded-lg flex items-center justify-between shadow-lg",
+              "p-4 rounded-lg flex items-center justify-between shadow-md",
               errorHeader.type === 'error' ? "bg-rose-50 border border-rose-100 text-rose-700" : "bg-amber-50 border border-amber-100 text-amber-700"
             )}>
               <div className="flex items-center gap-3">
@@ -199,7 +199,7 @@ export function FacultyManagement() {
           <p className="text-slate-500 text-sm mt-1 max-w-lg">Secure records for institution staff and researchers. All PII is vaulted.</p>
         </div>
         <div className="flex items-center gap-4">
-          <button className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all uppercase tracking-wide flex items-center gap-2 shadow-sm">
+          <button className="px-6 py-3 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all uppercase tracking-wide flex items-center gap-2 shadow-sm">
             <Download className="w-4 h-4" />
             <span>Export List</span>
           </button>
@@ -223,7 +223,7 @@ export function FacultyManagement() {
                 });
                 setIsAddModalOpen(true);
               }}
-              className="px-6 py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2  group"
+              className="px-6 py-3 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-all uppercase tracking-wide flex items-center gap-2  group"
             >
               <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
               <span>Add Member</span>
@@ -242,10 +242,10 @@ export function FacultyManagement() {
                 placeholder="Search staff registry..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50/50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300 font-medium"
               />
             </div>
-            <button className="px-5 py-3 border border-slate-200 rounded-xl text-slate-500 hover:bg-white text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-all">
+            <button className="px-5 py-3 border border-slate-200 rounded-lg text-slate-500 hover:bg-white text-xs font-medium uppercase tracking-wide flex items-center gap-2 transition-all">
               <Filter className="w-4 h-4" />
               <span>Filters</span>
             </button>
@@ -280,7 +280,7 @@ export function FacultyManagement() {
                     <tr key={member.id} className="hover:bg-slate-50/50 transition-colors group cursor-pointer">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 overflow-hidden rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:from-blue-700 hover:to-indigo-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase">
+                          <div className="w-12 h-12 overflow-hidden rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-400 group-hover:bg-blue-700 group-hover:text-white transition-all duration-500 shadow-sm uppercase">
                             {member.photoUrl ? (
                               <img src={member.photoUrl} alt={member.name} className="w-full h-full object-cover" />
                             ) : (
@@ -322,7 +322,7 @@ export function FacultyManagement() {
                       <td className="px-4 py-3 text-right">
                         <button 
                           onClick={() => setSelectedFaculty(member)}
-                          className="px-4 py-2 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 rounded-xl text-xs font-medium uppercase tracking-wide transition-all shadow-sm border border-slate-100"
+                          className="px-4 py-2 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 rounded-lg text-xs font-medium uppercase tracking-wide transition-all shadow-sm border border-slate-100"
                         >
                           Open Vault
                         </button>
@@ -355,7 +355,7 @@ export function FacultyManagement() {
 
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-6">
-                    <div className="w-24 h-24 rounded-[40%] bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-sm shadow-blue-100/20 overflow-hidden">
+                    <div className="w-24 h-24 rounded-full bg-blue-50 border-2 border-blue-200 flex items-center justify-center shadow-sm/20 overflow-hidden">
                       {selectedFaculty.photoUrl ? (
                          <img src={selectedFaculty.photoUrl} alt={selectedFaculty.name} className="w-full h-full object-cover" />
                       ) : (
@@ -377,7 +377,7 @@ export function FacultyManagement() {
                   <div className="flex items-center gap-2 mt-4 w-full justify-center">
                     <button 
                       onClick={() => alert(`Printing ID Card for ${selectedFaculty.name}...`)}
-                      className="flex-1 px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-blue-700 hover:text-white transition-colors flex items-center justify-center gap-2"
                     >
                       <Download className="w-3 h-3" />
                       Print ID Card
@@ -388,7 +388,7 @@ export function FacultyManagement() {
                           setNewMember(selectedFaculty);
                           setIsAddModalOpen(true);
                         }}
-                        className="flex-1 px-4 py-2 bg-white text-slate-600 border border-slate-200 rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
+                        className="flex-1 px-4 py-2 bg-white text-slate-600 border border-slate-200 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
                       >
                         Edit Profile
                       </button>
@@ -399,7 +399,7 @@ export function FacultyManagement() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 gap-3">
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
                         <Phone className="w-4 h-4" />
                       </div>
                       <div>
@@ -411,7 +411,7 @@ export function FacultyManagement() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
                         <Mail className="w-4 h-4" />
                       </div>
                       <div>
@@ -423,7 +423,7 @@ export function FacultyManagement() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100 group transition-colors hover:bg-white">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-blue-600 transition-colors">
                         <Briefcase className="w-4 h-4" />
                       </div>
                       <div>
@@ -437,7 +437,7 @@ export function FacultyManagement() {
 
                     {selectedFaculty.expertise && (
                       <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100 group transition-colors hover:bg-white">
-                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-amber-500 transition-colors">
+                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-amber-500 transition-colors">
                           <Award className="w-4 h-4" />
                         </div>
                         <div>
@@ -452,7 +452,7 @@ export function FacultyManagement() {
 
                     {selectedFaculty.officeHours && (
                       <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100 group transition-colors hover:bg-white">
-                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-emerald-500 transition-colors">
+                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-slate-400 shadow-sm group-hover:text-emerald-500 transition-colors">
                           <Clock className="w-4 h-4" />
                         </div>
                         <div>
@@ -511,7 +511,7 @@ export function FacultyManagement() {
                       <div className="p-5 bg-blue-50/30 rounded-lg border border-blue-200 group">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-blue-400 shadow-sm group-hover:text-blue-600 transition-all">
+                            <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-blue-400 shadow-sm group-hover:text-blue-600 transition-all">
                               <Lock className="w-5 h-5" />
                             </div>
                             <span className="text-xs font-medium text-slate-700 uppercase tracking-wide">Financial Vault</span>
@@ -544,7 +544,7 @@ export function FacultyManagement() {
                             ))}
                           </motion.div>
                         ) : (
-                          <div className="py-6 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-blue-200 rounded-xl bg-white/50 opacity-60">
+                          <div className="py-6 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-blue-200 rounded-lg bg-white opacity-60">
                             <Shield className="w-6 h-6 text-indigo-300" />
                             <span className="text-xs font-medium uppercase  text-blue-400 font-mono">Secured Layer 4</span>
                           </div>
@@ -556,7 +556,7 @@ export function FacultyManagement() {
                   {isAdmin && (
                     <button 
                       onClick={() => setIsPermissionModalOpen(true)}
-                      className="w-full py-5 bg-slate-950 text-white rounded-lg font-bold text-[11px] uppercase  hover:from-blue-700 hover:to-indigo-700  transition-all flex items-center justify-center gap-3 group"
+                      className="w-full py-5 bg-slate-950 text-white rounded-lg font-bold text-[11px] uppercase  hover:bg-blue-700  transition-all flex items-center justify-center gap-3 group"
                     >
                       <Lock className="w-4 h-4 group-hover:animate-pulse" />
                       <span>Configure Access</span>
@@ -591,7 +591,7 @@ export function FacultyManagement() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-xl w-full max-w-lg p-10 relative z-10 shadow-md border border-slate-100"
+              className="bg-white rounded-lg w-full max-w-lg p-10 relative z-10 shadow-md border border-slate-100"
             >
               <div className="mb-8 border-b border-slate-50 pb-8">
                 <h2 className="text-xl font-semibold text-slate-900">{newMember.id ? 'Edit Faculty Member' : 'Add Faculty Member'}</h2>
@@ -632,7 +632,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-bold text-xs transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" : "opacity-70 cursor-not-allowed"
                       )}
                     />
                   </div>
@@ -643,7 +643,7 @@ export function FacultyManagement() {
                       value={newMember.photoUrl || ''}
                       onChange={(e) => setNewMember({...newMember, photoUrl: e.target.value})}
                       placeholder="https://..."
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none font-bold text-xs"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none font-bold text-xs"
                     />
                   </div>
                 </div>
@@ -659,7 +659,7 @@ export function FacultyManagement() {
                     disabled={!isAdmin}
                     className={cn(
                       "w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg outline-none font-medium italic-serif text-xl placeholder:text-slate-200 transition-all",
-                      isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-100" : "opacity-70 cursor-not-allowed"
+                      isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" : "opacity-70 cursor-not-allowed"
                     )}
                   />
                 </div>
@@ -673,7 +673,7 @@ export function FacultyManagement() {
                       value={newMember.email}
                       onChange={(e) => setNewMember({...newMember, email: e.target.value})}
                       placeholder="email@covenant.edu"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold"
                     />
                   </div>
                   <div className="space-y-2">
@@ -684,7 +684,7 @@ export function FacultyManagement() {
                       value={newMember.phone}
                       onChange={(e) => setNewMember({...newMember, phone: e.target.value})}
                       placeholder="+1 (555) 000-0000"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold font-mono"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold font-mono"
                     />
                   </div>
                 </div>
@@ -698,7 +698,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-xs font-medium uppercase tracking-wide appearance-none transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" : "opacity-70 cursor-not-allowed"
                       )}
                     >
                       <option>Theology</option>
@@ -716,7 +716,7 @@ export function FacultyManagement() {
                       disabled={!isAdmin}
                       className={cn(
                         "w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-xs font-medium uppercase tracking-wide appearance-none transition-all",
-                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-100" : "opacity-70 cursor-not-allowed"
+                        isAdmin ? "focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" : "opacity-70 cursor-not-allowed"
                       )}
                     >
                       <option>Professor</option>
@@ -735,7 +735,7 @@ export function FacultyManagement() {
                     value={newMember.expertise}
                     onChange={(e) => setNewMember({...newMember, expertise: e.target.value})}
                     placeholder="e.g. Reformation History, Systematic Theology"
-                    className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold"
+                    className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold"
                   />
                 </div>
 
@@ -747,7 +747,7 @@ export function FacultyManagement() {
                       value={newMember.officeHours}
                       onChange={(e) => setNewMember({...newMember, officeHours: e.target.value})}
                       placeholder="e.g. Mon/Wed 2pm-4pm"
-                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold"
+                      className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold"
                     />
                   </div>
                 </div>
@@ -759,7 +759,7 @@ export function FacultyManagement() {
                     onChange={(e) => setNewMember({...newMember, bio: e.target.value})}
                     placeholder="Brief academic background and research focus..."
                     rows={3}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-medium resize-none"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-medium resize-none"
                   />
                 </div>
 
@@ -775,7 +775,7 @@ export function FacultyManagement() {
                          value={newMember.salary}
                          onChange={(e) => setNewMember({...newMember, salary: Number(e.target.value)})}
                          placeholder="72000"
-                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold"
+                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold"
                        />
                     </div>
                     <div className="space-y-2">
@@ -788,7 +788,7 @@ export function FacultyManagement() {
                          value={newMember.bankAccount}
                          onChange={(e) => setNewMember({...newMember, bankAccount: e.target.value})}
                          placeholder="XXXX-XXXX-XXXX"
-                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-xs font-bold font-mono"
+                         className="w-full px-6 py-3 bg-slate-50/50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-xs font-bold font-mono"
                        />
                     </div>
                   </div>
@@ -804,7 +804,7 @@ export function FacultyManagement() {
                   </button>
                   <button 
                     type="submit"
-                    className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-wide text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-slate-200 transition-all flex items-center justify-center gap-2"
+                    className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-wide text-[10px] hover:bg-blue-700 shadow-sm transition-all flex items-center justify-center gap-2"
                   >
                     <Plus className="w-4 h-4" />
                     <span>{newMember.id ? 'Save Changes' : 'Integrate Staff'}</span>
@@ -831,7 +831,7 @@ export function FacultyManagement() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-xl w-full max-w-xl p-10 relative z-10 shadow-md border border-slate-100"
+              className="bg-white rounded-lg w-full max-w-xl p-10 relative z-10 shadow-md border border-slate-100"
             >
               <div className="mb-8 flex items-start justify-between">
                 <div>
@@ -866,7 +866,7 @@ export function FacultyManagement() {
                       className={cn(
                         "p-4 rounded-lg border text-left transition-all flex items-center justify-between group",
                         isActive 
-                          ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-100" 
+                          ? "bg-blue-600 border-blue-500 text-white shadow-sm" 
                           : "bg-slate-50 border-slate-100 text-slate-600 hover:border-blue-300"
                       )}
                     >
@@ -900,7 +900,7 @@ export function FacultyManagement() {
                 <button 
                   onClick={() => handleUpdatePermissions(selectedFaculty.permissions || [])}
                   disabled={isUpdatingPermissions}
-                  className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-wide text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-slate-200 transition-all flex items-center justify-center gap-2"
+                  className="flex-2 py-4 bg-slate-900 text-white rounded-full font-black uppercase tracking-wide text-[10px] hover:bg-blue-700 shadow-sm transition-all flex items-center justify-center gap-2"
                 >
                   {isUpdatingPermissions ? (
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />

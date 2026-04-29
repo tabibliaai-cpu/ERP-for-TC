@@ -143,7 +143,7 @@ const HOW_STEPS = [
     description:
       "Sign up with your institutional email, verify in under 60 seconds. No credit card required. Your 14-day free trial starts immediately with full access to every module.",
     icon: Globe,
-    gradient: "from-indigo-500 to-indigo-500",
+    gradient: "bg-indigo-600",
   },
   {
     num: "02",
@@ -151,7 +151,7 @@ const HOW_STEPS = [
     description:
       "Use the guided setup wizard to define programs, configure grading systems, set up departments, and invite faculty. Import existing data with the CSV migration tool.",
     icon: Layers,
-    gradient: "from-indigo-500 to-purple-500",
+    gradient: "bg-indigo-600",
   },
   {
     num: "03",
@@ -159,7 +159,7 @@ const HOW_STEPS = [
     description:
       "Begin enrolling students, scheduling classes, managing library resources, and tracking finances from day one. Your entire institution runs on one secure platform.",
     icon: Monitor,
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "bg-amber-600",
   },
 ];
 
@@ -356,7 +356,7 @@ function GradientText({
   return (
     <span
       className={cn(
-        "bg-gradient-to-r from-indigo-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent",
+        "bg-gradient-to-r from-indigo-600 via-indigo-600 to-indigo-600 bg-clip-text text-transparent",
         className
       )}
     >
@@ -373,7 +373,7 @@ function BrowserChrome({ url }: { url: string }) {
         <div className="h-2.5 w-2.5 rounded-full bg-amber-400" />
         <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
       </div>
-      <div className="ml-3 flex-1 rounded-md bg-white/80 px-3 py-1 text-[10px] text-slate-400">
+      <div className="ml-3 flex-1 rounded-md bg-white px-3 py-1 text-[10px] text-slate-400">
         {url}
       </div>
     </div>
@@ -409,8 +409,8 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
         className={cn(
           "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
           scrolled
-            ? "border-b border-slate-200/80 bg-white/90 backdrop-blur-xl shadow-sm"
-            : "bg-white/70 backdrop-blur-lg"
+            ? "border-b border-slate-200/80 bg-white shadow-sm"
+            : "bg-white backdrop-blur-lg"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -422,7 +422,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2.5"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg shadow-indigo-500/25">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 shadow-sm">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-bold text-slate-900">
@@ -453,7 +453,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
             </button>
             <button
               onClick={() => onNavigate("/login")}
-              className="rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-sm hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
+              className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-sm  active:scale-[0.98]"
             >
               Get Started
             </button>
@@ -484,7 +484,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
                 <motion.button
                   key={link}
                   onClick={() => scrollToSection(link)}
-                  className="w-full rounded-xl py-3.5 text-left text-base font-medium text-slate-700 hover:bg-slate-50"
+                  className="w-full rounded-lg py-3.5 text-left text-base font-medium text-slate-700 hover:bg-slate-50"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04 + 0.05 }}
@@ -498,7 +498,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
                     setMobileOpen(false);
                     onNavigate("/login");
                   }}
-                  className="w-full rounded-xl border border-slate-200 py-3.5 text-sm font-semibold text-slate-700"
+                  className="w-full rounded-lg border border-slate-200 py-3.5 text-sm font-semibold text-slate-700"
                 >
                   Sign In
                 </button>
@@ -507,7 +507,7 @@ function Navbar({ onNavigate }: { onNavigate: (path: string) => void }) {
                     setMobileOpen(false);
                     onNavigate("/login");
                   }}
-                  className="w-full rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 py-3.5 text-sm font-semibold text-white shadow-lg"
+                  className="w-full rounded-lg bg-indigo-600 py-3.5 text-sm font-semibold text-white shadow-md"
                 >
                   Get Started
                 </button>
@@ -531,7 +531,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 top-20 h-[600px] w-[600px] rounded-full bg-indigo-200/30 blur-[120px]" />
         <div className="absolute -right-40 top-40 h-[500px] w-[500px] rounded-full bg-indigo-200/25 blur-[120px]" />
-        <div className="absolute left-1/3 bottom-0 h-[300px] w-[400px] rounded-full bg-purple-100/20 blur-[100px]" />
+        <div className="absolute left-1/3 bottom-0 h-[300px] w-[400px] rounded-full bg-indigo-100/20 blur-[100px]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 lg:px-8">
@@ -583,13 +583,13 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             >
               <button
                 onClick={() => onNavigate("/login")}
-                className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-sm hover:shadow-indigo-500/35 hover:brightness-110 active:scale-[0.98]"
+                className="group flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-sm  active:scale-[0.98]"
               >
                 Get Started
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <button
-                className="group flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md"
+                className="group flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-indigo-200 hover:shadow-sm"
               >
                 <Play className="h-4 w-4 text-indigo-500" />
                 Request Demo
@@ -627,8 +627,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
-            <div className="absolute -inset-4 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-200 to-purple-200 opacity-40 blur-2xl" />
-            <div className="relative overflow-hidden rounded-lg border border-slate-200/80 bg-white shadow-md shadow-indigo-500/10">
+            <div className="absolute -inset-4 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-200 to-indigo-200 opacity-40 blur-2xl" />
+            <div className="relative overflow-hidden rounded-lg border border-slate-200/80 bg-white shadow-sm">
               <BrowserChrome url="app.covenanterp.com/dashboard" />
               <img
                 src={dashboardPreview}
@@ -661,8 +661,8 @@ function TrustSection() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {TRUST_MODULES.map((m, i) => (
             <FadeIn key={m.label} delay={i * 0.06}>
-              <div className="group flex flex-col items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-center transition-all hover:border-indigo-200 hover:bg-indigo-50/30 hover:shadow-sm">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-500 shadow-sm">
+              <div className="group flex flex-col items-center gap-2 rounded-lg border border-slate-100 bg-slate-50/50 p-4 text-center transition-all hover:border-indigo-200 hover:bg-indigo-50/30 hover:shadow-sm">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 shadow-sm">
                   <m.icon className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -718,10 +718,10 @@ function FeaturesSection() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.07}>
-              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all duration-300 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 hover:-translate-y-1">
+              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all duration-300 hover:border-indigo-200 hover:shadow-sm hover:-translate-y-1">
                 <div
                   className={cn(
-                    "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl shadow-sm",
+                    "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg shadow-sm",
                     f.bg
                   )}
                 >
@@ -777,8 +777,8 @@ function UniqueValueSection() {
               delay={i * 0.08}
               direction={i % 2 === 0 ? "right" : "left"}
             >
-              <div className="h-full rounded-lg border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-lg hover:border-indigo-100">
-                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg shadow-indigo-500/15">
+              <div className="h-full rounded-lg border border-slate-100 bg-slate-50/50 p-8 transition-all hover:shadow-sm hover:border-indigo-100">
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-600 shadow-sm">
                   <v.icon className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="mb-3 text-lg font-bold text-slate-900">
@@ -804,7 +804,7 @@ function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="relative bg-gradient-to-b from-slate-50 to-white py-24 px-5"
+      className="relative bg-slate-50 py-24 px-5"
     >
       <div className="mx-auto max-w-5xl">
         <FadeIn className="mb-16 text-center">
@@ -827,7 +827,7 @@ function HowItWorksSection() {
                   <div className="relative mb-7">
                     <div
                       className={cn(
-                        "flex h-[76px] w-[76px] items-center justify-center rounded-lg bg-gradient-to-br shadow-sm shadow-indigo-500/15",
+                        "flex h-[76px] w-[76px] items-center justify-center rounded-lg bg shadow-sm",
                         s.gradient
                       )}
                     >
@@ -881,9 +881,9 @@ function ScreensPreviewSection() {
                 key={s.title}
                 onClick={() => setActive(i)}
                 className={cn(
-                  "rounded-xl px-5 py-2.5 text-sm font-semibold transition-all",
+                  "rounded-lg px-5 py-2.5 text-sm font-semibold transition-all",
                   active === i
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/20"
+                    ? "bg-indigo-600 text-white shadow-sm"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 )}
               >
@@ -903,7 +903,7 @@ function ScreensPreviewSection() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 /50">
-                  <div className="mb-3 rounded-xl border border-slate-100 bg-white p-2.5">
+                  <div className="mb-3 rounded-lg border border-slate-100 bg-white p-2.5">
                     <BrowserChrome
                       url={`app.covenanterp.com/${SCREENS[active].title.toLowerCase().replace(/\s+/g, "-")}`}
                     />
@@ -911,7 +911,7 @@ function ScreensPreviewSection() {
                   <img
                     src={SCREENS[active].src}
                     alt={SCREENS[active].title}
-                    className="w-full rounded-xl object-cover"
+                    className="w-full rounded-lg object-cover"
                   />
                 </div>
                 <p className="mt-4 text-center text-sm text-slate-500">
@@ -947,7 +947,7 @@ function TestimonialsSection() {
         <div className="grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all hover:shadow-lg hover:border-indigo-100 md:p-8">
+              <div className="group h-full rounded-lg border border-slate-200/80 bg-white p-7 transition-all hover:shadow-sm hover:border-indigo-100 md:p-8">
                 <Quote className="mb-5 h-7 w-7 text-indigo-100" />
                 <p className="mb-6 text-sm leading-relaxed text-slate-600 italic">
                   &ldquo;{t.quote}&rdquo;
@@ -961,7 +961,7 @@ function TestimonialsSection() {
                   ))}
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 text-xs font-bold text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
                     {t.avatar}
                   </div>
                   <div>
@@ -1006,13 +1006,13 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
                 className={cn(
                   "relative flex h-full flex-col rounded-lg border p-7 md:p-8 transition-all hover:shadow-sm",
                   plan.highlighted
-                    ? "border-indigo-200 bg-white shadow-md shadow-indigo-500/10 scale-[1.02]"
+                    ? "border-indigo-200 bg-white shadow-sm scale-[1.02]"
                     : "border-slate-200 bg-white hover:border-indigo-100"
                 )}
               >
                 {plan.highlighted && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <div className="rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 px-5 py-1.5 text-xs font-semibold text-white shadow-lg shadow-indigo-500/25">
+                    <div className="rounded-full bg-indigo-600 px-5 py-1.5 text-xs font-semibold text-white shadow-sm">
                       Most Popular
                     </div>
                   </div>
@@ -1053,9 +1053,9 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
                 <button
                   onClick={() => onNavigate("/login")}
                   className={cn(
-                    "w-full rounded-xl py-3.5 text-sm font-semibold transition-all active:scale-[0.98]",
+                    "w-full rounded-lg py-3.5 text-sm font-semibold transition-all active:scale-[0.98]",
                     plan.highlighted
-                      ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-sm hover:shadow-indigo-500/30 hover:brightness-110"
+                      ? "bg-indigo-600 text-white shadow-sm hover:shadow-sm "
                       : "border border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50"
                   )}
                 >
@@ -1076,7 +1076,7 @@ function PricingSection({ onNavigate }: { onNavigate: (path: string) => void }) 
 
 function FinalCTASection({ onNavigate }: { onNavigate: (path: string) => void }) {
   return (
-    <section className="relative bg-gradient-to-br from-indigo-600 via-indigo-600 to-purple-700 py-24 px-5 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-indigo-600 via-indigo-600 to-indigo-700 py-24 px-5 overflow-hidden">
       {/* Background pattern */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-20 top-0 h-[400px] w-[400px] rounded-full bg-white/5 blur-[80px]" />
@@ -1095,7 +1095,7 @@ function FinalCTASection({ onNavigate }: { onNavigate: (path: string) => void })
           </p>
           <button
             onClick={() => onNavigate("/login")}
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-indigo-700 shadow-sm transition-all hover:bg-indigo-50 hover:shadow-md active:scale-[0.98]"
+            className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-4 text-base font-semibold text-indigo-700 shadow-sm transition-all hover:bg-indigo-50 hover:shadow-sm active:scale-[0.98]"
           >
             Get Started
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -1124,7 +1124,7 @@ function Footer({ onNavigate }: { onNavigate: (path: string) => void }) {
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
             <span className="text-base font-bold text-white">

@@ -83,7 +83,7 @@ function InputField({ label, value, onChange, type = 'text', placeholder, requir
       <input type={type} value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} disabled={disabled}
         className={cn(
           "w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-bold text-sm transition-all",
-          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-2 focus:ring-blue-100",
+          disabled ? "opacity-50 cursor-not-allowed" : "focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500",
           type === 'number' && "font-mono"
         )} />
     </FormField>
@@ -97,7 +97,7 @@ function SelectField({ label, value, onChange, options, required, span }: {
   return (
     <FormField label={label} required={required} span={span}>
       <select value={value ?? ''} onChange={e => onChange(e.target.value)}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-[11px] font-black uppercase tracking-wide appearance-none transition-all focus:bg-white focus:ring-2 focus:ring-blue-100">
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none text-[11px] font-black uppercase tracking-wide appearance-none transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
         <option value="">Select...</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -112,7 +112,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3, span }: 
   return (
     <FormField label={label} span={span}>
       <textarea value={value ?? ''} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-medium text-sm transition-all focus:bg-white focus:ring-2 focus:ring-blue-100 resize-none placeholder:text-slate-300" />
+        className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-100 rounded-lg outline-none font-medium text-sm transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none placeholder:text-slate-300" />
     </FormField>
   );
 }
@@ -125,7 +125,7 @@ function CheckboxGroup({ label, options, selected, onToggle }: {
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onToggle(opt)}
-            className={cn("px-3 py-1.5 rounded-xl text-xs font-medium uppercase tracking-wider transition-all border",
+            className={cn("px-3 py-1.5 rounded-lg text-xs font-medium uppercase tracking-wider transition-all border",
               selected.includes(opt)
                 ? "bg-blue-50 text-blue-600 border-blue-200"
                 : "bg-slate-50 text-slate-400 border-slate-100 hover:bg-slate-100"
@@ -305,7 +305,7 @@ export function TeacherEnrollment() {
       <AnimatePresence>
         {error && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-lg flex items-center justify-between shadow-lg bg-rose-50 border border-rose-100 text-rose-700">
+            <div className="p-4 rounded-lg flex items-center justify-between shadow-sm bg-rose-50 border border-rose-100 text-rose-700">
               <div className="flex items-center gap-3"><X className="w-5 h-5" /><span className="text-xs font-medium uppercase tracking-wide">{error}</span></div>
               <button onClick={() => setError(null)}><X className="w-4 h-4" /></button>
             </div>
@@ -313,7 +313,7 @@ export function TeacherEnrollment() {
         )}
         {success && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="p-4 rounded-lg shadow-lg bg-emerald-50 border border-emerald-100 text-emerald-700">
+            <div className="p-4 rounded-lg shadow-sm bg-emerald-50 border border-emerald-100 text-emerald-700">
               <span className="text-xs font-medium uppercase tracking-wide">Teacher profile saved successfully! Redirecting...</span>
             </div>
           </motion.div>
@@ -397,7 +397,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('spiritual') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-100 space-y-6">
+                <div className="p-8 bg-indigo-50 rounded-lg border border-indigo-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField label="Date of Conversion" value={formData.spiritual?.conversionDate} onChange={v => updateNested('spiritual', 'conversionDate', v)} type="date" />
                     <div className="space-y-2">
@@ -502,7 +502,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('ministry') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg border border-amber-100 space-y-6">
+                <div className="p-8 bg-amber-50 rounded-lg border border-amber-100 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Calling Type" value={formData.ministry?.callingType} onChange={v => updateNested('ministry', 'callingType', v)}
                       options={[
@@ -537,7 +537,7 @@ export function TeacherEnrollment() {
             {openSections.has('payroll') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                 <div className="p-8 bg-white rounded-lg border border-slate-100 space-y-6">
-                  <p className="text-xs font-medium text-blue-600 uppercase tracking-wide bg-blue-50 p-3 rounded-xl flex items-center gap-2">
+                  <p className="text-xs font-medium text-blue-600 uppercase tracking-wide bg-blue-50 p-3 rounded-lg flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4" /> All financial data is encrypted end-to-end
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -578,7 +578,7 @@ export function TeacherEnrollment() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Hostel / Staff Quarters Assigned</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.accommodation?.hostelAssigned || false}
                           onChange={e => updateNested('accommodation', 'hostelAssigned', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -587,7 +587,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Transport Facility</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.accommodation?.transportFacility || false}
                           onChange={e => updateNested('accommodation', 'transportFacility', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -728,7 +728,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('permissions') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-blue-50 to-blue-50 rounded-lg border border-blue-200 space-y-6">
+                <div className="p-8 bg-blue-50 rounded-lg border border-blue-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="System Role" value={formData.adminConfig?.systemRole} onChange={v => updateNested('adminConfig', 'systemRole', v)}
                       options={[
@@ -767,7 +767,7 @@ export function TeacherEnrollment() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Upload Lecture Notes</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.contentConfig?.canUploadLectureNotes || false}
                           onChange={e => updateNested('contentConfig', 'canUploadLectureNotes', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -776,7 +776,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Video Classes</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateVideoClasses || false}
                           onChange={e => updateNested('contentConfig', 'canCreateVideoClasses', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -785,7 +785,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Assignments</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateAssignments || false}
                           onChange={e => updateNested('contentConfig', 'canCreateAssignments', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -794,7 +794,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Create Exams</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.contentConfig?.canCreateExams || false}
                           onChange={e => updateNested('contentConfig', 'canCreateExams', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -803,7 +803,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Can Submit Grades</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-xl">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-slate-50 rounded-lg">
                         <input type="checkbox" checked={formData.contentConfig?.canSubmitGrades || false}
                           onChange={e => updateNested('contentConfig', 'canSubmitGrades', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -832,7 +832,7 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('admin') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-slate-50 to-gray-50 rounded-lg border border-slate-200 space-y-6">
+                <div className="p-8 bg-slate-50 rounded-lg border border-slate-200 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField label="Approval Status" value={formData.status} onChange={v => updateField('status', v)}
                       options={[
@@ -845,7 +845,7 @@ export function TeacherEnrollment() {
                     <TextAreaField label="Assigned Institutions (comma-separated)" value={formData.adminConfig?.assignedInstitutions} onChange={v => updateNested('adminConfig', 'assignedInstitutions', v)} placeholder="e.g. Main Campus, Extension Center" />
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Activity Monitoring Enabled</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.activityMonitoring || false}
                           onChange={e => updateNested('adminConfig', 'activityMonitoring', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -854,7 +854,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Login Tracking Enabled</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.loginTracking || false}
                           onChange={e => updateNested('adminConfig', 'loginTracking', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -863,7 +863,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Two-Factor Authentication Required</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-slate-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-slate-100">
                         <input type="checkbox" checked={formData.adminConfig?.twoFactorAuth || false}
                           onChange={e => updateNested('adminConfig', 'twoFactorAuth', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -887,14 +887,14 @@ export function TeacherEnrollment() {
           <AnimatePresence>
             {openSections.has('security') && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                <div className="p-8 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-emerald-100 space-y-6">
-                  <p className="text-xs font-medium text-emerald-600 uppercase tracking-wide bg-emerald-50 p-3 rounded-xl flex items-center gap-2 border border-emerald-100">
+                <div className="p-8 bg-emerald-50 rounded-lg border border-emerald-100 space-y-6">
+                  <p className="text-xs font-medium text-emerald-600 uppercase tracking-wide bg-emerald-50 p-3 rounded-lg flex items-center gap-2 border border-emerald-100">
                     <Lock className="w-4 h-4" /> All sensitive data is encrypted end-to-end by default
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Personal Data Encrypted</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.personalDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
@@ -902,7 +902,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Spiritual Records Encrypted</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.spiritualDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
@@ -910,7 +910,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Financial Data Encrypted</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.financialDataEncrypted ?? true} disabled
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
                         <span className="text-sm font-bold text-emerald-700">Always encrypted (default)</span>
@@ -925,7 +925,7 @@ export function TeacherEnrollment() {
                       ]} />
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">Data Sharing Consent</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.dataSharingConsent || false}
                           onChange={e => updateNested('securityConfig', 'dataSharingConsent', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -934,7 +934,7 @@ export function TeacherEnrollment() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-slate-400 uppercase tracking-wide pl-1 block">GDPR / Data Protection Compliant</label>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-xl border border-emerald-100">
+                      <label className="flex items-center gap-3 cursor-pointer p-3 bg-white rounded-lg border border-emerald-100">
                         <input type="checkbox" checked={formData.securityConfig?.gdprCompliant || false}
                           onChange={e => updateNested('securityConfig', 'gdprCompliant', e.target.checked)}
                           className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -951,11 +951,11 @@ export function TeacherEnrollment() {
         {/* ============================== SUBMIT ============================== */}
         <div className="flex items-center justify-between pt-6 border-t border-slate-100">
           <button type="button" onClick={() => navigate('/teachers')}
-            className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-wide">
+            className="px-6 py-3 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all uppercase tracking-wide">
             Cancel
           </button>
           <button type="submit" disabled={isSaving}
-            className="px-8 py-3.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:from-blue-700 hover:to-indigo-700 transition-all uppercase tracking-wide flex items-center gap-2  disabled:opacity-50 disabled:cursor-not-allowed">
+            className="px-8 py-3.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition-all uppercase tracking-wide flex items-center gap-2  disabled:opacity-50 disabled:cursor-not-allowed">
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Saving...' : editId ? 'Update Profile' : 'Enroll Teacher'}</span>
           </button>

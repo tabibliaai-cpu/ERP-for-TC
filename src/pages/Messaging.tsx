@@ -223,11 +223,11 @@ export function Messaging() {
                         value={passphrase}
                         onChange={(e) => setPassphrase(e.target.value)}
                         onKeyPress={e => e.key === 'Enter' && handleUnlock()}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-100 transition-all text-center"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center"
                       />
                       <button 
                         onClick={handleUnlock}
-                        className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all"
+                        className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold text-sm shadow-sm hover:bg-blue-700 transition-all"
                       >
                         Unlock Conversation
                       </button>
@@ -253,7 +253,7 @@ export function Messaging() {
                         <div className={cn(
                           "px-4 py-3 rounded-lg text-sm relative group",
                           msg.senderId === user?.uid 
-                            ? "bg-blue-600 text-white rounded-tr-none shadow-md shadow-blue-100" 
+                            ? "bg-blue-600 text-white rounded-tr-none shadow-sm" 
                             : "bg-white text-slate-900 border border-slate-100 rounded-tl-none shadow-sm"
                         )}>
                           {isUnlocked && msg.id ? (decryptedTexts[msg.id] || '[Decrypting...]') : '[Encrypted Payload]'}
@@ -284,14 +284,14 @@ export function Messaging() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                      className="w-full pl-4 pr-12 py-3 bg-slate-50 border-none rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/10 transition-all"
+                      className="w-full pl-4 pr-12 py-3 bg-slate-50 border-none rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500/10 transition-all"
                     />
                     <ShieldCheck className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-500 opacity-50" title="Auto-encrypted" />
                   </div>
                   <button 
                     onClick={handleSend}
                     disabled={!input}
-                    className="p-3 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-100 hover:from-blue-700 hover:to-indigo-700 transition-all group disabled:opacity-50"
+                    className="p-3 bg-blue-600 text-white rounded-lg shadow-sm hover:bg-blue-700 transition-all group disabled:opacity-50"
                   >
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>

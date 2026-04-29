@@ -43,25 +43,25 @@ const SORTS = [
 const CITE_STYLES = ['APA 7th', 'MLA 9th', 'Chicago', 'Turabian', 'SBL'];
 
 const TABS = [
-  { id: 'catalog', label: 'Catalog', icon: BookOpen, gradient: 'from-blue-500 to-cyan-400' },
-  { id: 'categories', label: 'Categories', icon: Layers, gradient: 'from-indigo-500 to-purple-400' },
-  { id: 'authors', label: 'Authors', icon: Users, gradient: 'from-blue-500 to-pink-400' },
-  { id: 'borrowing', label: 'Circulation', icon: History, gradient: 'from-amber-500 to-orange-400' },
-  { id: 'bookmarks', label: 'Bookmarks', icon: Star, gradient: 'from-yellow-500 to-amber-400' },
-  { id: 'notes', label: 'Notes', icon: PenLine, gradient: 'from-emerald-500 to-teal-400' },
-  { id: 'analytics', label: 'Analytics', icon: BarChart3, gradient: 'from-rose-500 to-red-400' },
-  { id: 'settings', label: 'Settings', icon: Shield, gradient: 'from-slate-500 to-gray-400' },
+  { id: 'catalog', label: 'Catalog', icon: BookOpen, gradient: 'bg-blue-600' },
+  { id: 'categories', label: 'Categories', icon: Layers, gradient: 'bg-indigo-600' },
+  { id: 'authors', label: 'Authors', icon: Users, gradient: 'bg-blue-600' },
+  { id: 'borrowing', label: 'Circulation', icon: History, gradient: 'bg-amber-600' },
+  { id: 'bookmarks', label: 'Bookmarks', icon: Star, gradient: 'bg-amber-600' },
+  { id: 'notes', label: 'Notes', icon: PenLine, gradient: 'bg-emerald-600' },
+  { id: 'analytics', label: 'Analytics', icon: BarChart3, gradient: 'bg-rose-600' },
+  { id: 'settings', label: 'Settings', icon: Shield, gradient: 'bg-slate-600' },
 ];
 
 const CAT_COLORS = [
-  'from-blue-500 to-indigo-500', 'from-emerald-500 to-teal-500', 'from-indigo-500 to-purple-500',
-  'from-amber-500 to-orange-500', 'from-rose-500 to-pink-500', 'from-cyan-500 to-sky-500',
-  'from-blue-500 to-pink-500', 'from-lime-500 to-green-500', 'from-orange-500 to-red-500',
+  'bg-blue-600', 'bg-emerald-600', 'bg-indigo-600',
+  'bg-amber-600', 'bg-rose-600', 'bg-cyan-600',
+  'bg-blue-500', 'bg-emerald-600', 'bg-orange-600',
 ];
 
 const STAT_GRADIENTS = [
-  'from-blue-600 to-cyan-500', 'from-emerald-600 to-teal-500', 'from-amber-500 to-orange-500',
-  'from-indigo-600 to-purple-500', 'from-rose-600 to-pink-500', 'from-indigo-600 to-blue-500',
+  'bg-blue-600', 'bg-emerald-600', 'bg-amber-600',
+  'bg-indigo-600', 'bg-rose-600', 'bg-indigo-600',
 ];
 
 function genCite(m: Manuscript, style: string): string {
@@ -77,17 +77,17 @@ function genCite(m: Manuscript, style: string): string {
 }
 
 const TYPE_GRADIENT: Record<string, string> = {
-  book: 'from-blue-500 to-indigo-600', sermon: 'from-amber-500 to-orange-600',
-  research_paper: 'from-emerald-500 to-teal-600', thesis: 'from-indigo-500 to-purple-600',
-  commentary: 'from-cyan-500 to-sky-600', journal: 'from-rose-500 to-pink-600',
-  manuscript: 'from-slate-400 to-gray-600',
+  book: 'bg-blue-600', sermon: 'bg-amber-600',
+  research_paper: 'bg-emerald-600', thesis: 'bg-indigo-600',
+  commentary: 'bg-cyan-600', journal: 'bg-rose-600',
+  manuscript: 'bg-slate-500',
 };
 
 const STATUS_COLOR: Record<string, string> = {
-  available: 'bg-emerald-400 shadow-emerald-400/50', published: 'bg-emerald-400 shadow-emerald-400/50',
-  borrowed: 'bg-amber-400 shadow-amber-400/50', under_review: 'bg-blue-400 shadow-blue-400/50',
-  reserved: 'bg-indigo-400 shadow-indigo-400/50', draft: 'bg-slate-300 shadow-slate-300/50',
-  overdue: 'bg-red-400 shadow-red-400/50', returned: 'bg-emerald-400 shadow-emerald-400/50',
+  available: 'bg-emerald-400 ', published: 'bg-emerald-400 ',
+  borrowed: 'bg-amber-400 ', under_review: 'bg-blue-400 ',
+  reserved: 'bg-indigo-400 ', draft: 'bg-slate-300 ',
+  overdue: 'bg-red-400 ', returned: 'bg-emerald-400 ',
 };
 
 export function Library() {
@@ -225,8 +225,8 @@ export function Library() {
   );
 
   const Empty = ({ icon: Icon, msg, sub }: { icon: React.ElementType; msg: string; sub?: string }) => (
-    <div className="bg-gradient-to-br from-slate-50 to-white rounded-lg border border-slate-100 p-12 text-center">
-      <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center mx-auto mb-4">
+    <div className="bg-slate-50 rounded-lg border border-slate-100 p-12 text-center">
+      <div className="w-14 h-14 rounded-lg bg-slate-100 flex items-center justify-center mx-auto mb-4">
         <Icon className="w-7 h-7 text-slate-300" />
       </div>
       <p className="text-sm font-bold text-slate-500">{msg}</p>
@@ -242,7 +242,7 @@ export function Library() {
           className={cn("bg-white rounded-lg relative z-10 shadow-md max-h-[85vh] overflow-y-auto", wide ? "w-full max-w-3xl p-6" : "w-full max-w-md p-6")}>
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-base font-bold text-slate-900 tracking-tight">{title}</h2>
-            <button onClick={onClose} className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-rose-100 hover:text-rose-500 transition-all"><X className="w-4 h-4" /></button>
+            <button onClick={onClose} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400 hover:bg-rose-100 hover:text-rose-500 transition-all"><X className="w-4 h-4" /></button>
           </div>
           {children}
         </motion.div>
@@ -253,7 +253,7 @@ export function Library() {
   const Input = ({ label, ...props }: React.InputHTMLAttributes<HTMLInputElement> & { label?: string }) => (
     <div className="space-y-1.5">
       {label && <label className="text-xs font-semibold text-slate-500">{label}</label>}
-      <input {...props} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300 transition-all outline-none text-sm placeholder:text-slate-400" />
+      <input {...props} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-sm placeholder:text-slate-400" />
     </div>
   );
 
@@ -261,7 +261,7 @@ export function Library() {
     <div className="space-y-5">
 
       {/* ═══ HERO HEADER ═══ */}
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-600 via-indigo-500 to-indigo-600 p-6 md:p-8">
+      <div className="relative overflow-hidden rounded-lg bg-blue-600 p-6 md:p-8">
         {/* Animated background orbs */}
         <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-pink-400/40 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-cyan-400/40 to-transparent rounded-full blur-3xl" />
@@ -278,21 +278,21 @@ export function Library() {
               <span className="text-[10px] font-bold uppercase  text-blue-200">Theological Repository</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
-              Library <span className="bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 bg-clip-text text-transparent">Portal</span>
+              Library <span className="bg-amber-500 bg-clip-text text-transparent">Portal</span>
             </h1>
             <p className="text-sm text-blue-100/80 mt-1.5 max-w-md">Sacred knowledge, organized. Search, cite, and manage theological works across every discipline.</p>
           </div>
           <div className="flex items-center gap-2">
             {notifs.length > 0 && (
-              <button className="relative w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 text-white hover:bg-white/20 transition-all">
+              <button className="relative w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 text-white hover:bg-slate-50 transition-all">
                 <Bell className="w-4 h-4 mx-auto" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-rose-500 to-orange-500 rounded-full text-[9px] text-white font-bold flex items-center justify-center shadow-lg">{notifs.length}</span>
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-600 rounded-full text-[9px] text-white font-bold flex items-center justify-center shadow-md">{notifs.length}</span>
               </button>
             )}
-            <button onClick={() => setShowBorrow(true)} className="px-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl text-xs font-semibold text-white hover:bg-white/20 transition-all flex items-center gap-1.5">
+            <button onClick={() => setShowBorrow(true)} className="px-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg text-xs font-semibold text-white hover:bg-slate-50 transition-all flex items-center gap-1.5">
               <History className="w-4 h-4" />Circulation
             </button>
-            <button onClick={() => { setStep(1); setShowAdd(true); }} className="px-4 py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-xl text-xs font-bold text-slate-900 hover:from-amber-300 hover:to-orange-400 transition-all flex items-center gap-1.5 shadow-lg shadow-amber-500/25">
+            <button onClick={() => { setStep(1); setShowAdd(true); }} className="px-4 py-2.5 bg-amber-500 rounded-lg text-xs font-bold text-slate-900 hover:bg-amber-400 transition-all flex items-center gap-1.5 shadow-sm">
               <Plus className="w-4 h-4" />Add Manuscript
             </button>
           </div>
@@ -310,14 +310,14 @@ export function Library() {
           { l: 'Categories', v: st.catCount, g: STAT_GRADIENTS[5], icon: Layers },
         ].map((s, i) => (
           <motion.div key={s.l} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-            className="relative overflow-hidden rounded-xl p-3 group cursor-default shadow-lg">
-            <div className={cn("absolute inset-0 bg-gradient-to-br opacity-90 group-hover:opacity-100 transition-opacity", s.g)} />
-            <div className={cn("absolute inset-0 border border-slate-200 rounded-xl", `hover:border-transparent transition-colors`)} />
-            <div className={cn("w-7 h-7 rounded-lg bg-gradient-to-br flex items-center justify-center mb-1.5", s.g)}>
+            className="relative overflow-hidden rounded-lg p-3 group cursor-default shadow-md">
+            <div className={cn("absolute inset-0 bg-blue-600 group-hover:opacity-100 transition-opacity", s.g)} />
+            <div className={cn("absolute inset-0 border border-slate-200 rounded-lg", `hover:border-transparent transition-colors`)} />
+            <div className={cn("w-7 h-7 rounded-lg bg flex items-center justify-center mb-1.5", s.g)}>
               <s.icon className="w-4 h-4 text-white" />
             </div>
             <span className="text-xs font-semibold text-white/80 block">{s.l}</span>
-            <span className={cn("text-xl font-black bg-gradient-to-br bg-clip-text text-transparent", s.g)}>{s.v}</span>
+            <span className={cn("text-xl font-black bg-clip-text text-transparent", s.g)}>{s.v}</span>
           </motion.div>
         ))}
       </div>
@@ -328,18 +328,18 @@ export function Library() {
           const isActive = tab === t.id;
           return (
             <button key={t.id} onClick={() => setTab(t.id)}
-              className={cn("relative flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap",
+              className={cn("relative flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap",
                 isActive
-                  ? "bg-gradient-to-r text-white shadow-lg " + t.gradient
-                  : "text-slate-500 hover:text-slate-600 hover:bg-white/50")}>
+                  ? "bg-blue-600 text-white shadow-sm " + t.gradient
+                  : "text-slate-500 hover:text-slate-600 hover:bg-white")}>
               
               <t.icon className={cn("w-4 h-4 relative z-10", isActive && "text-white")} />
               <span className="relative z-10">{t.label}</span>
               {t.id === 'bookmarks' && bms.length > 0 && (
-                <span className="relative z-10 min-w-[18px] h-[18px] bg-gradient-to-r from-amber-400 to-orange-400 rounded-full text-[9px] text-white font-bold flex items-center justify-center px-1">{bms.length}</span>
+                <span className="relative z-10 min-w-[18px] h-[18px] bg-amber-500 rounded-full text-[9px] text-white font-bold flex items-center justify-center px-1">{bms.length}</span>
               )}
               {t.id === 'borrowing' && st.activeB > 0 && (
-                <span className="relative z-10 min-w-[18px] h-[18px] bg-gradient-to-r from-rose-400 to-red-500 rounded-full text-[9px] text-white font-bold flex items-center justify-center px-1">{st.activeB}</span>
+                <span className="relative z-10 min-w-[18px] h-[18px] bg-rose-500 rounded-full text-[9px] text-white font-bold flex items-center justify-center px-1">{st.activeB}</span>
               )}
             </button>
           );
@@ -361,17 +361,17 @@ export function Library() {
                     <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Categories</span>
                   </div>
                   <button onClick={() => setFCat('all')}
-                    className={cn("w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-between",
-                      fCat === 'all' ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-indigo-300" : "text-slate-600 hover:bg-slate-50")}>
+                    className={cn("w-full text-left px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-between",
+                      fCat === 'all' ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-50")}>
                     <span>All Works</span>
                     <span className={cn("text-[10px] font-bold px-1.5 py-0.5 rounded-md", fCat === 'all' ? "bg-white/20" : "bg-slate-100 text-slate-400")}>{ms.length}</span>
                   </button>
                   {activeCats.filter(c => c.isActive).map((c, idx) => (
                     <button key={c.id} onClick={() => setFCat(c.name)}
-                      className={cn("w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-between group",
-                        cn(fCat === c.name && "bg-gradient-to-r text-white shadow-lg", fCat === c.name && CAT_COLORS[idx % CAT_COLORS.length]) || "text-slate-600 hover:bg-slate-50")}>
+                      className={cn("w-full text-left px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-between group",
+                        cn(fCat === c.name && "bg-blue-600 text-white shadow-md", fCat === c.name && CAT_COLORS[idx % CAT_COLORS.length]) || "text-slate-600 hover:bg-slate-50")}>
                       <span className="truncate flex items-center gap-2">
-                        <span className={cn("w-2 h-2 rounded-full shrink-0", fCat === c.name ? "bg-white/50" : `bg-gradient-to-br ${CAT_COLORS[idx % CAT_COLORS.length]}`)} />
+                        <span className={cn("w-2 h-2 rounded-full shrink-0", fCat === c.name ? "bg-white" : CAT_COLORS[idx % CAT_COLORS.length])} />
                         {c.name}
                       </span>
                       <span className={cn("text-[10px] font-bold px-1.5 py-0.5 rounded-md", fCat === c.name ? "bg-white/20" : "bg-slate-100 text-slate-400")}>{ms.filter(m => m.category === c.name).length}</span>
@@ -383,7 +383,7 @@ export function Library() {
                   <div className="absolute -left-4 -top-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl" />
                   <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
                   <div className="relative z-10">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center mb-3">
                       <Sparkles className="w-5 h-5 text-cyan-200" />
                     </div>
                     <p className="font-bold text-sm leading-tight">Digital Archives</p>
@@ -400,16 +400,16 @@ export function Library() {
                     <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
                     <input type="text" placeholder="Search title, author, scripture, topic..."
                       value={q} onChange={e => setQ(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl outline-none shadow-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all text-sm placeholder:text-slate-400" />
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-lg outline-none shadow-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:border-blue-400 transition-all text-sm placeholder:text-slate-400" />
                   </div>
-                  <button onClick={() => setShowF(!showF)} className={cn("px-3.5 py-3 bg-white border rounded-xl transition-all flex items-center gap-1.5 shadow-sm",
+                  <button onClick={() => setShowF(!showF)} className={cn("px-3.5 py-3 bg-white border rounded-lg transition-all flex items-center gap-1.5 shadow-sm",
                     showF ? "border-blue-300 text-blue-600 bg-blue-50" : "border-slate-200 text-slate-400 hover:text-slate-600")}>
                     <Filter className="w-4 h-4" />
                   </button>
                   <div className="relative">
                     <SortAsc className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                     <select value={sort} onChange={e => setSort(e.target.value)}
-                      className="pl-9 pr-4 py-3 bg-white border border-slate-200 rounded-xl outline-none shadow-sm text-xs font-semibold cursor-pointer appearance-none hover:border-slate-300">
+                      className="pl-9 pr-4 py-3 bg-white border border-slate-200 rounded-lg outline-none shadow-sm text-xs font-semibold cursor-pointer appearance-none hover:border-slate-300">
                       {SORTS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                     </select>
                   </div>
@@ -418,7 +418,7 @@ export function Library() {
                 <AnimatePresence>
                   {showF && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                      <div className="bg-white px-4 py-3 rounded-xl border border-slate-100 shadow-sm flex flex-wrap items-end gap-4">
+                      <div className="bg-white px-4 py-3 rounded-lg border border-slate-100 shadow-sm flex flex-wrap items-end gap-4">
                         <div>
                           <label className="text-[10px] font-semibold text-slate-500 block mb-1">Type</label>
                           <select value={fType} onChange={e => setFType(e.target.value)} className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold cursor-pointer">
@@ -446,8 +446,8 @@ export function Library() {
                 {notifs.length > 0 && (
                   <div className="space-y-2">{notifs.map(n => (
                     <motion.div key={n.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                      className={cn("flex items-center gap-2.5 px-4 py-3 rounded-xl text-xs font-semibold border",
-                        n.type === 'warning' ? "bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 text-amber-800" : "bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 text-blue-800")}>
+                      className={cn("flex items-center gap-2.5 px-4 py-3 rounded-lg text-xs font-semibold border",
+                        n.type === 'warning' ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-blue-50 border-blue-200 text-blue-800")}>
                       {n.type === 'warning' ? <AlertTriangle className="w-4 h-4 shrink-0" /> : <Bell className="w-4 h-4 shrink-0" />}{n.msg}
                     </motion.div>
                   ))}</div>
@@ -465,13 +465,13 @@ export function Library() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {filtered.map((m, i) => {
                       const bk = bms.some(b => b.manuscriptId === m.id);
-                      const typeGrad = TYPE_GRADIENT[m.type] || 'from-slate-400 to-gray-500';
+                      const typeGrad = TYPE_GRADIENT[m.type] || 'bg-slate-500';
                       return (
                         <motion.div key={m.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
                           className="bg-white p-4 rounded-lg border border-transparent hover:border-slate-200 shadow-sm hover:shadow-sm hover:scale-[1.02] transition-all group flex gap-4">
                           {/* Cover */}
-                          <div className={cn("w-[52px] h-[68px] rounded-xl shrink-0 flex flex-col items-center justify-center relative overflow-hidden cursor-pointer shadow-inner group-hover:shadow-lg transition-shadow",
-                            "bg-gradient-to-br", typeGrad)} onClick={() => openDet(m)}>
+                          <div className={cn("w-[52px] h-[68px] rounded-lg shrink-0 flex flex-col items-center justify-center relative overflow-hidden cursor-pointer shadow-inner group-hover:shadow-sm transition-shadow",
+                            typeGrad)} onClick={() => openDet(m)}>
                             <div className="absolute inset-0 bg-white/5" />
                             <BookOpen className="w-5 h-5 text-white/80 group-hover:scale-110 transition-transform relative z-10" />
                             <span className="text-[7px] font-bold uppercase text-white/60 mt-0.5 tracking-wider relative z-10">{m.type.replace('_', ' ')}</span>
@@ -514,7 +514,7 @@ export function Library() {
                                 </button>
                                 {(m.status === 'available' || m.status === 'published') && (
                                   <button onClick={() => borrow(m.id!, m.title)}
-                                    className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:from-blue-600 hover:to-indigo-700 transition-all shadow-sm shadow-blue-300">
+                                    className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-blue-700 transition-all shadow-sm">
                                     Borrow
                                   </button>
                                 )}
@@ -535,7 +535,7 @@ export function Library() {
             <div className="space-y-5">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-slate-900">Categories</h2>
-                {isAdmin && <button onClick={() => setShowAddCat(true)} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-300"><Plus className="w-4 h-4" />Add</button>}
+                {isAdmin && <button onClick={() => setShowAddCat(true)} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm"><Plus className="w-4 h-4" />Add</button>}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {activeCats.filter(c => c.isActive).map((c, idx) => {
@@ -543,10 +543,10 @@ export function Library() {
                   const grad = CAT_COLORS[idx % CAT_COLORS.length];
                   return (
                     <motion.div key={c.id} whileHover={{ y: -2 }}
-                      className="bg-white p-4 rounded-lg border border-slate-100 hover:border-slate-200 transition-all group cursor-pointer shadow-sm hover:shadow-lg"
+                      className="bg-white p-4 rounded-lg border border-slate-100 hover:border-slate-200 transition-all group cursor-pointer shadow-sm hover:shadow-sm"
                       onClick={() => { setTab('catalog'); setFCat(c.name); }}>
                       <div className="flex items-center justify-between mb-3">
-                        <div className={cn("w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center shadow-sm", grad)}>
+                        <div className={cn("w-10 h-10 rounded-lg bg flex items-center justify-center shadow-sm", grad)}>
                           <Layers className="w-5 h-5 text-white" />
                         </div>
                         <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
@@ -569,7 +569,7 @@ export function Library() {
             <div className="space-y-5">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-slate-900">Authors</h2>
-                <button onClick={() => setShowAddAuth(true)} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-200"><Plus className="w-4 h-4" />Add</button>
+                <button onClick={() => setShowAddAuth(true)} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm"><Plus className="w-4 h-4" />Add</button>
               </div>
               {authors.length === 0 ? <Empty icon={Users} msg="No authors yet" sub="Tracked automatically from manuscript entries" /> : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -578,9 +578,9 @@ export function Library() {
                     const grad = CAT_COLORS[idx % CAT_COLORS.length];
                     return (
                       <motion.div key={a.id} whileHover={{ y: -2 }}
-                        className="bg-white p-4 rounded-lg border border-slate-100 hover:border-slate-200 transition-all shadow-sm hover:shadow-lg">
+                        className="bg-white p-4 rounded-lg border border-slate-100 hover:border-slate-200 transition-all shadow-sm hover:shadow-sm">
                         <div className="flex items-center gap-3 mb-3">
-                          <div className={cn("w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center text-white font-bold text-sm shadow-sm", grad)}>
+                          <div className={cn("w-11 h-11 rounded-lg bg flex items-center justify-center text-white font-bold text-sm shadow-sm", grad)}>
                             {a.name[0]}
                           </div>
                           <div className="min-w-0">
@@ -611,8 +611,8 @@ export function Library() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-slate-900">Circulation Registry</h2>
                 <div className="flex items-center gap-2">
-                  {st.overdueB > 0 && <span className="px-3 py-1.5 bg-gradient-to-r from-rose-100 to-red-100 text-rose-700 rounded-xl text-xs font-bold border border-rose-200 flex items-center gap-1.5"><AlertTriangle className="w-3.5 h-3.5" />{st.overdueB} overdue</span>}
-                  <span className="px-3 py-1.5 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 rounded-xl text-xs font-bold border border-emerald-200">{st.activeB} active</span>
+                  {st.overdueB > 0 && <span className="px-3 py-1.5 bg-rose-100 text-rose-700 rounded-lg text-xs font-bold border border-rose-200 flex items-center gap-1.5"><AlertTriangle className="w-3.5 h-3.5" />{st.overdueB} overdue</span>}
+                  <span className="px-3 py-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-xs font-bold border border-emerald-200">{st.activeB} active</span>
                 </div>
               </div>
               {logs.length === 0 ? <Empty icon={History} msg="No borrowing activity" sub="Borrow a manuscript from the catalog" /> : (
@@ -620,7 +620,7 @@ export function Library() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left">
                       <thead>
-                        <tr className="bg-gradient-to-r from-slate-50 to-slate-100/50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100">
+                        <tr className="bg-slate-50/50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100">
                           <th className="px-5 py-3">Manuscript</th>
                           <th className="px-5 py-3 text-center">Borrowed</th>
                           <th className="px-5 py-3 text-center">Due</th>
@@ -646,7 +646,7 @@ export function Library() {
                             </td>
                             <td className="px-5 py-3.5 text-right">
                               {(l.status === 'borrowed' || l.status === 'overdue') ? (
-                                <button onClick={() => ret(l.id!, l.manuscriptId)} className="px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:from-blue-600 hover:to-indigo-700 transition-all shadow-sm">Return</button>
+                                <button onClick={() => ret(l.id!, l.manuscriptId)} className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-blue-700 transition-all shadow-sm">Return</button>
                               ) : <CheckCircle2 className="w-5 h-5 text-emerald-300 mx-auto" />}
                             </td>
                           </tr>
@@ -667,10 +667,10 @@ export function Library() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {bms.map(b => (
                     <motion.div key={b.id} whileHover={{ y: -2 }}
-                      className="bg-white p-4 rounded-lg border border-slate-100 hover:border-amber-200 transition-all group shadow-sm hover:shadow-lg">
+                      className="bg-white p-4 rounded-lg border border-slate-100 hover:border-amber-200 transition-all group shadow-sm hover:shadow-sm">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center"><Star className="w-3 h-3 text-white fill-white" /></div>
+                          <div className="w-6 h-6 rounded-lg bg-amber-500 flex items-center justify-center"><Star className="w-3 h-3 text-white fill-white" /></div>
                           <span className="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Saved</span>
                         </div>
                         <button onClick={() => libraryBookmarkService.delete(b.id!).then(load)} className="w-6 h-6 rounded-lg flex items-center justify-center hover:bg-rose-50 text-slate-300 hover:text-rose-500 transition-colors"><X className="w-3.5 h-3.5" /></button>
@@ -692,7 +692,7 @@ export function Library() {
               {nts.length === 0 ? <Empty icon={PenLine} msg="No notes yet" sub="Open a manuscript detail to add annotations" /> : (
                 <div className="space-y-3">
                   {nts.map(n => (
-                    <div key={n.id} className="bg-white p-4 rounded-lg border border-slate-100 hover:border-emerald-200 transition-all shadow-sm hover:shadow-md">
+                    <div key={n.id} className="bg-white p-4 rounded-lg border border-slate-100 hover:border-emerald-200 transition-all shadow-sm hover:shadow-sm">
                       <div className="flex items-start justify-between">
                         <div>
                           <p className="text-sm font-bold text-slate-900">{n.manuscriptTitle || 'Untitled'}</p>
@@ -704,7 +704,7 @@ export function Library() {
                         </div>
                         <button onClick={() => libraryNoteService.delete(n.id!).then(load)} className="w-6 h-6 rounded-lg flex items-center justify-center hover:bg-rose-50 text-slate-300 hover:text-rose-500 transition-colors"><X className="w-3.5 h-3.5" /></button>
                       </div>
-                      {n.highlightText && <div className="mt-3 px-4 py-2.5 bg-gradient-to-r from-amber-50 to-orange-50 border-l-[3px] border-amber-400 rounded-r-xl"><p className="text-xs text-amber-800 italic">"{n.highlightText}"</p></div>}
+                      {n.highlightText && <div className="mt-3 px-4 py-2.5 bg-amber-50 border-l-[3px] border-amber-400 rounded-r-xl"><p className="text-xs text-amber-800 italic">"{n.highlightText}"</p></div>}
                       {n.content && <p className="text-xs text-slate-500 mt-3 leading-relaxed">{n.content}</p>}
                     </div>
                   ))}
@@ -719,15 +719,15 @@ export function Library() {
               <h2 className="text-lg font-bold text-slate-900">Analytics</h2>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { l: 'Total Views', v: st.views, icon: Eye, sub: 'All manuscripts', g: 'from-blue-500 to-cyan-500' },
-                  { l: 'Avg Views', v: ms.length ? Math.round(st.views / ms.length) : 0, icon: TrendingUp, sub: 'Per manuscript', g: 'from-emerald-500 to-teal-500' },
-                  { l: 'Circulation', v: logs.length, icon: Clock, sub: 'Total events', g: 'from-amber-500 to-orange-500' },
-                  { l: 'Your Activity', v: st.bk + st.notes, icon: Star, sub: 'Bookmarks & notes', g: 'from-blue-500 to-pink-500' },
+                  { l: 'Total Views', v: st.views, icon: Eye, sub: 'All manuscripts', g: 'bg-blue-600' },
+                  { l: 'Avg Views', v: ms.length ? Math.round(st.views / ms.length) : 0, icon: TrendingUp, sub: 'Per manuscript', g: 'bg-emerald-600' },
+                  { l: 'Circulation', v: logs.length, icon: Clock, sub: 'Total events', g: 'bg-amber-600' },
+                  { l: 'Your Activity', v: st.bk + st.notes, icon: Star, sub: 'Bookmarks & notes', g: 'bg-blue-500' },
                 ].map((s, i) => (
                   <motion.div key={s.l} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                     className="bg-white p-4 rounded-lg border border-slate-100 shadow-sm">
                     <div className="flex items-center gap-2.5 mb-3">
-                      <div className={cn("w-9 h-9 rounded-xl bg-gradient-to-br flex items-center justify-center shadow-sm", s.g)}>
+                      <div className={cn("w-9 h-9 rounded-lg bg flex items-center justify-center shadow-sm", s.g)}>
                         <s.icon className="w-4 h-4 text-white" />
                       </div>
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{s.l}</span>
@@ -744,7 +744,7 @@ export function Library() {
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide block mb-4">Most Read</span>
                   {ms.length === 0 ? <p className="text-xs text-slate-300 text-center py-6">No data</p> : [...ms].sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0)).slice(0, 5).map((m, i) => (
                     <div key={m.id} className="flex items-center gap-3 py-2.5 border-b border-slate-50 last:border-0">
-                      <span className={cn("w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold", i === 0 ? "bg-gradient-to-br from-amber-400 to-orange-500 text-white" : i === 1 ? "bg-gradient-to-br from-slate-300 to-slate-400 text-white" : i === 2 ? "bg-gradient-to-br from-amber-600 to-amber-700 text-white" : "bg-slate-100 text-slate-400")}>{i + 1}</span>
+                      <span className={cn("w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold", i === 0 ? "bg-amber-500 text-white" : i === 1 ? "bg-slate-400 text-white" : i === 2 ? "bg-amber-700 text-white" : "bg-slate-100 text-slate-400")}>{i + 1}</span>
                       <div className="flex-1 min-w-0"><p className="text-xs font-bold text-slate-900 truncate">{m.title}</p><p className="text-[10px] text-slate-400">{m.author}</p></div>
                       <span className="text-xs font-bold text-blue-500 font-mono">{m.viewCount || 0}</span>
                     </div>
@@ -759,7 +759,7 @@ export function Library() {
                     return s.length === 0 ? <p className="text-xs text-slate-300 text-center py-6">No data</p> : s.map(([c, n], idx) => (
                       <div key={c} className="py-2.5 border-b border-slate-50 last:border-0">
                         <div className="flex items-center justify-between mb-1.5"><span className="text-xs font-bold text-slate-700">{c}</span><span className="text-[10px] font-bold text-slate-400 font-mono">{n}</span></div>
-                        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden"><div className={cn("h-2 rounded-full transition-all bg-gradient-to-r", CAT_COLORS[idx % CAT_COLORS.length])} style={{ width: `${(n / mx) * 100}%` }} /></div>
+                        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden"><div className={cn("h-2 rounded-full transition-all bg-blue-600", CAT_COLORS[idx % CAT_COLORS.length])} style={{ width: `${(n / mx) * 100}%` }} /></div>
                       </div>
                     ));
                   })()}
@@ -774,11 +774,11 @@ export function Library() {
                   </span>
                   <div className="space-y-2">
                     {ms.filter(m => m.status === 'under_review').map(m => (
-                      <div key={m.id} className="flex items-center justify-between p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border border-amber-100">
+                      <div key={m.id} className="flex items-center justify-between p-3.5 bg-amber-50 rounded-lg border border-amber-100">
                         <div><p className="text-xs font-bold text-slate-900">{m.title}</p><p className="text-[10px] text-slate-500 mt-0.5">{m.author}</p></div>
                         <div className="flex items-center gap-1.5">
-                          <button onClick={() => approve(m.id!)} className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg text-[10px] font-bold uppercase hover:from-emerald-600 hover:to-teal-600 shadow-sm">Approve</button>
-                          <button onClick={() => manuscriptService.delete(m.id!).then(load)} className="px-3 py-1.5 bg-gradient-to-r from-rose-500 to-red-500 text-white rounded-lg text-[10px] font-bold uppercase hover:from-rose-600 hover:to-red-600 shadow-sm">Reject</button>
+                          <button onClick={() => approve(m.id!)} className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-[10px] font-bold uppercase hover:bg-emerald-700 shadow-sm">Approve</button>
+                          <button onClick={() => manuscriptService.delete(m.id!).then(load)} className="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-[10px] font-bold uppercase hover:from-rose-600 hover:to-red-600 shadow-sm">Reject</button>
                         </div>
                       </div>
                     ))}
@@ -799,10 +799,10 @@ export function Library() {
                   <div className="grid grid-cols-2 gap-2.5">
                     {ACCESS.map((a, i) => {
                       const cnt = ms.filter(m => m.accessLevel === a.value).length;
-                      const grad = ['from-emerald-500 to-teal-500', 'from-blue-500 to-cyan-500', 'from-indigo-500 to-purple-500', 'from-rose-500 to-pink-500'][i];
+                      const grad = ['bg-emerald-600', 'bg-blue-600', 'bg-indigo-600', 'bg-rose-600'][i];
                       return (
-                        <div key={a.value} className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 hover:border-slate-200 transition-all">
-                          <div className={cn("w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center mb-2 shadow-sm", grad)}>
+                        <div key={a.value} className="p-3.5 bg-slate-50 rounded-lg border border-slate-100 hover:border-slate-200 transition-all">
+                          <div className={cn("w-8 h-8 rounded-lg bg flex items-center justify-center mb-2 shadow-sm", grad)}>
                             {i === 0 ? <Globe className="w-4 h-4 text-white" /> : i === 1 ? <Users className="w-4 h-4 text-white" /> : i === 2 ? <Shield className="w-4 h-4 text-white" /> : <Lock className="w-4 h-4 text-white" />}
                           </div>
                           <p className="text-xs font-bold text-slate-700">{a.label}</p>
@@ -817,8 +817,8 @@ export function Library() {
                 <div className="space-y-4">
                   <div className="bg-white p-5 rounded-lg border border-slate-100 shadow-sm">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide block mb-4">Faculty Contribution Flow</span>
-                    <div className="p-4 bg-gradient-to-r from-indigo-50 to-indigo-50 rounded-xl border border-indigo-100 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shrink-0 shadow-sm">
+                    <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-100 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-sm">
                         <Upload className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1">
@@ -834,7 +834,7 @@ export function Library() {
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide block mb-4">Citation Styles</span>
                     <div className="flex flex-wrap gap-2">
                       {CITE_STYLES.map(s => (
-                        <span key={s} className="px-3 py-2 bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl text-xs font-semibold text-slate-600 border border-slate-200">{s}</span>
+                        <span key={s} className="px-3 py-2 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 border border-slate-200">{s}</span>
                       ))}
                     </div>
                   </div>
@@ -853,7 +853,7 @@ export function Library() {
         <div className="flex gap-1.5 mb-5">{[1, 2, 3].map(s => (
           <div key={s} className="flex-1 h-1.5 rounded-full overflow-hidden bg-slate-100">
             <motion.div initial={{ width: 0 }} animate={{ width: step >= s ? '100%' : '0%' }} transition={{ duration: 0.3 }}
-              className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" />
+              className="h-full bg-blue-600 rounded-full" />
           </div>
         ))}</div>
         {step === 1 && (
@@ -863,20 +863,20 @@ export function Library() {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-500">Type</label>
-                <select value={fm.type} onChange={e => setFm({ ...fm, type: e.target.value as Manuscript['type'] })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-semibold cursor-pointer">
+                <select value={fm.type} onChange={e => setFm({ ...fm, type: e.target.value as Manuscript['type'] })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs font-semibold cursor-pointer">
                   {TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                 </select>
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-500">Category</label>
-                <select value={fm.category} onChange={e => setFm({ ...fm, category: e.target.value })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-semibold cursor-pointer">
+                <select value={fm.category} onChange={e => setFm({ ...fm, category: e.target.value })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs font-semibold cursor-pointer">
                   {DEFAULT_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
             </div>
             <div className="flex gap-2 pt-4">
-              <button onClick={() => setShowAdd(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-xl text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
-              <button onClick={() => setStep(2)} disabled={!fm.title || !fm.author} className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-xs font-bold uppercase hover:from-blue-600 hover:to-indigo-700 disabled:opacity-30 transition-all flex items-center justify-center gap-1 shadow-md shadow-blue-300">Next <ArrowRight className="w-3.5 h-3.5" /></button>
+              <button onClick={() => setShowAdd(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-lg text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
+              <button onClick={() => setStep(2)} disabled={!fm.title || !fm.author} className="flex-1 py-2.5 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase hover:bg-blue-700 disabled:opacity-30 transition-all flex items-center justify-center gap-1 shadow-sm">Next <ArrowRight className="w-3.5 h-3.5" /></button>
             </div>
           </div>
         )}
@@ -889,11 +889,11 @@ export function Library() {
             <Input label="ISBN" value={fm.isbn} onChange={e => setFm({ ...fm, isbn: e.target.value })} placeholder="978-..." />
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-500">Abstract</label>
-              <textarea value={fm.abstract} onChange={e => setFm({ ...fm, abstract: e.target.value })} rows={3} placeholder="Brief description..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs placeholder:text-slate-400 resize-none" />
+              <textarea value={fm.abstract} onChange={e => setFm({ ...fm, abstract: e.target.value })} rows={3} placeholder="Brief description..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs placeholder:text-slate-400 resize-none" />
             </div>
             <div className="flex gap-2 pt-4">
-              <button onClick={() => setStep(1)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-xl text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Back</button>
-              <button onClick={() => setStep(3)} className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-xs font-bold uppercase hover:from-blue-600 hover:to-indigo-700 transition-all flex items-center justify-center gap-1 shadow-md shadow-blue-300">Next <ArrowRight className="w-3.5 h-3.5" /></button>
+              <button onClick={() => setStep(1)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-lg text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Back</button>
+              <button onClick={() => setStep(3)} className="flex-1 py-2.5 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase hover:bg-blue-700 transition-all flex items-center justify-center gap-1 shadow-sm">Next <ArrowRight className="w-3.5 h-3.5" /></button>
             </div>
           </div>
         )}
@@ -901,25 +901,25 @@ export function Library() {
           <div className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-500 flex items-center gap-1.5"><Cross className="w-3.5 h-3.5 text-amber-500" />Scripture References</label>
-              <input value={fm.refs} onChange={e => setFm({ ...fm, refs: e.target.value })} placeholder="John 3:16, Romans 8:28..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs placeholder:text-slate-400" />
+              <input value={fm.refs} onChange={e => setFm({ ...fm, refs: e.target.value })} placeholder="John 3:16, Romans 8:28..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs placeholder:text-slate-400" />
               <p className="text-[10px] text-slate-400 pl-0.5">Comma-separated</p>
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-500 flex items-center gap-1.5"><Tag className="w-3.5 h-3.5 text-blue-500" />Keywords</label>
-              <input value={fm.keywords} onChange={e => setFm({ ...fm, keywords: e.target.value })} placeholder="Grace, Salvation, Trinity..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs placeholder:text-slate-400" />
+              <input value={fm.keywords} onChange={e => setFm({ ...fm, keywords: e.target.value })} placeholder="Grace, Salvation, Trinity..." className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs placeholder:text-slate-400" />
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-500 flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-indigo-500" />Access Level</label>
-              <select value={fm.accessLevel} onChange={e => setFm({ ...fm, accessLevel: e.target.value as Manuscript['accessLevel'] })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-semibold cursor-pointer">
+              <select value={fm.accessLevel} onChange={e => setFm({ ...fm, accessLevel: e.target.value as Manuscript['accessLevel'] })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs font-semibold cursor-pointer">
                 {ACCESS.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
               </select>
             </div>
-            <div className="p-3.5 bg-gradient-to-r from-indigo-50 to-indigo-50 rounded-xl border border-indigo-100">
+            <div className="p-3.5 bg-indigo-50 rounded-lg border border-indigo-100">
               <p className="text-xs text-slate-600">{isFaculty ? 'Published immediately (faculty/admin).' : 'Submitted for admin review.'}</p>
             </div>
             <div className="flex gap-2 pt-4">
-              <button onClick={() => setStep(2)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-xl text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Back</button>
-              <button onClick={addMs} disabled={!fm.title || !fm.author} className="flex-1 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold uppercase hover:from-emerald-600 hover:to-teal-600 disabled:opacity-30 transition-all flex items-center justify-center gap-1 shadow-md shadow-emerald-200"><Plus className="w-3.5 h-3.5" />Submit</button>
+              <button onClick={() => setStep(2)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-lg text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Back</button>
+              <button onClick={addMs} disabled={!fm.title || !fm.author} className="flex-1 py-2.5 bg-emerald-600 text-white rounded-lg text-xs font-bold uppercase hover:bg-emerald-700 disabled:opacity-30 transition-all flex items-center justify-center gap-1 shadow-sm"><Plus className="w-3.5 h-3.5" />Submit</button>
             </div>
           </div>
         )}
@@ -954,7 +954,7 @@ export function Library() {
                     </td>
                     <td className="px-4 py-3 text-right">
                       {(l.status === 'borrowed' || l.status === 'overdue') ? (
-                        <button onClick={() => ret(l.id!, l.manuscriptId)} className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg text-[10px] font-bold uppercase hover:from-blue-600 hover:to-indigo-700 shadow-sm">Return</button>
+                        <button onClick={() => ret(l.id!, l.manuscriptId)} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold uppercase hover:bg-blue-700 shadow-sm">Return</button>
                       ) : <CheckCircle2 className="w-4 h-4 text-emerald-300 mx-auto" />}
                     </td>
                   </tr>
@@ -969,14 +969,14 @@ export function Library() {
       <ModalShell show={showCite && !!sel} onClose={() => setShowCite(false)} title="Citation Generator">
         <div className="flex flex-wrap gap-1.5 mb-4">
           {CITE_STYLES.map(s => (
-            <button key={s} onClick={() => setCiteStyle(s)} className={cn("px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition-all",
-              citeStyle === s ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-transparent shadow-md shadow-blue-300" : "bg-white text-slate-500 border-slate-200 hover:border-blue-200")}>{s}</button>
+            <button key={s} onClick={() => setCiteStyle(s)} className={cn("px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all",
+              citeStyle === s ? "bg-blue-600 text-white border-transparent shadow-sm" : "bg-white text-slate-500 border-slate-200 hover:border-blue-200")}>{s}</button>
           ))}
         </div>
-        <div className="p-4 bg-gradient-to-r from-slate-50 to-indigo-50/30 rounded-xl border border-slate-100 mb-4">
+        <div className="p-4 bg-slate-50 rounded-lg border border-slate-100 mb-4">
           <p className="text-sm text-slate-700 italic leading-relaxed">{sel && genCite(sel, citeStyle)}</p>
         </div>
-        <button onClick={() => copy(sel ? genCite(sel, citeStyle) : '')} className="w-full py-3 bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-xl text-xs font-bold uppercase hover:from-slate-700 hover:to-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg">
+        <button onClick={() => copy(sel ? genCite(sel, citeStyle) : '')} className="w-full py-3 bg-slate-900 text-white rounded-lg text-xs font-bold uppercase hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-md">
           {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}{copied ? 'Copied!' : 'Copy Citation'}
         </button>
       </ModalShell>
@@ -997,12 +997,12 @@ export function Library() {
           </div>
           <div className="grid grid-cols-4 gap-2">
             {[
-              { l: 'Language', v: sel?.language, g: 'from-blue-500 to-cyan-500' },
-              { l: 'Year', v: sel?.publicationYear, g: 'from-emerald-500 to-teal-500' },
-              { l: 'ISBN', v: sel?.isbn || 'N/A', g: 'from-indigo-500 to-purple-500' },
-              { l: 'Views', v: sel?.viewCount || 0, g: 'from-amber-500 to-orange-500' },
+              { l: 'Language', v: sel?.language, g: 'bg-blue-600' },
+              { l: 'Year', v: sel?.publicationYear, g: 'bg-emerald-600' },
+              { l: 'ISBN', v: sel?.isbn || 'N/A', g: 'bg-indigo-600' },
+              { l: 'Views', v: sel?.viewCount || 0, g: 'bg-amber-600' },
             ].map(x => (
-              <div key={x.l} className="p-3 bg-slate-50 rounded-xl">
+              <div key={x.l} className="p-3 bg-slate-50 rounded-lg">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">{x.l}</span>
                 <span className="text-sm font-bold text-slate-700">{x.v}</span>
               </div>
@@ -1020,12 +1020,12 @@ export function Library() {
             </div>
           )}
           <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
-            {(sel?.status === 'available' || sel?.status === 'published') && <button onClick={() => { if (sel) { borrow(sel.id!, sel.title); setShowDetail(false); } }} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-xs font-bold uppercase hover:from-blue-600 hover:to-indigo-700 transition-all flex items-center gap-1.5 shadow-md shadow-blue-300"><BookMarked className="w-4 h-4" />Borrow</button>}
-            <button onClick={() => { if (sel) toggleBk(sel.id!, sel.title); }} className={cn("px-4 py-2 rounded-xl text-xs font-bold uppercase flex items-center gap-1.5 border transition-all",
+            {(sel?.status === 'available' || sel?.status === 'published') && <button onClick={() => { if (sel) { borrow(sel.id!, sel.title); setShowDetail(false); } }} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase hover:bg-blue-700 transition-all flex items-center gap-1.5 shadow-sm"><BookMarked className="w-4 h-4" />Borrow</button>}
+            <button onClick={() => { if (sel) toggleBk(sel.id!, sel.title); }} className={cn("px-4 py-2 rounded-lg text-xs font-bold uppercase flex items-center gap-1.5 border transition-all",
               bms.some(b => b.manuscriptId === sel?.id) ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-white text-slate-500 border-slate-200 hover:border-amber-200")}>
               <Star className={cn("w-4 h-4", bms.some(b => b.manuscriptId === sel?.id) && "fill-amber-400")} />{bms.some(b => b.manuscriptId === sel?.id) ? 'Saved' : 'Save'}
             </button>
-            <button onClick={() => { setShowDetail(false); setShowCite(true); }} className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold uppercase text-slate-500 hover:border-blue-200 hover:text-blue-600 transition-all flex items-center gap-1.5"><Copy className="w-4 h-4" />Cite</button>
+            <button onClick={() => { setShowDetail(false); setShowCite(true); }} className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold uppercase text-slate-500 hover:border-blue-200 hover:text-blue-600 transition-all flex items-center gap-1.5"><Copy className="w-4 h-4" />Cite</button>
           </div>
         </div>
       </ModalShell>
@@ -1036,11 +1036,11 @@ export function Library() {
           <Input label="Name *" value={newCat.name} onChange={e => setNewCat({ ...newCat, name: e.target.value })} placeholder="e.g., Hermeneutics" />
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-slate-500">Description</label>
-            <textarea value={newCat.desc} onChange={e => setNewCat({ ...newCat, desc: e.target.value })} rows={2} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs placeholder:text-slate-400 resize-none" />
+            <textarea value={newCat.desc} onChange={e => setNewCat({ ...newCat, desc: e.target.value })} rows={2} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs placeholder:text-slate-400 resize-none" />
           </div>
           <div className="flex gap-2 pt-3">
-            <button onClick={() => setShowAddCat(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-xl text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
-            <button onClick={addCat} disabled={!newCat.name} className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-xs font-bold uppercase hover:from-blue-600 hover:to-indigo-700 disabled:opacity-30 shadow-md shadow-blue-300">Add</button>
+            <button onClick={() => setShowAddCat(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-lg text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
+            <button onClick={addCat} disabled={!newCat.name} className="flex-1 py-2.5 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase hover:bg-blue-700 disabled:opacity-30 shadow-sm">Add</button>
           </div>
         </div>
       </ModalShell>
@@ -1053,11 +1053,11 @@ export function Library() {
           <Input label="Expertise (comma-separated)" value={newAuth.expertise} onChange={e => setNewAuth({ ...newAuth, expertise: e.target.value })} placeholder="Systematic Theology, Soteriology" />
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-slate-500">Bio</label>
-            <textarea value={newAuth.bio} onChange={e => setNewAuth({ ...newAuth, bio: e.target.value })} rows={2} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs placeholder:text-slate-400 resize-none" />
+            <textarea value={newAuth.bio} onChange={e => setNewAuth({ ...newAuth, bio: e.target.value })} rows={2} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-xs placeholder:text-slate-400 resize-none" />
           </div>
           <div className="flex gap-2 pt-3">
-            <button onClick={() => setShowAddAuth(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-xl text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
-            <button onClick={addAuth} disabled={!newAuth.name} className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-xl text-xs font-bold uppercase hover:from-blue-600 hover:to-pink-600 disabled:opacity-30 shadow-md shadow-blue-200">Add</button>
+            <button onClick={() => setShowAddAuth(false)} className="flex-1 py-2.5 bg-slate-100 text-slate-500 rounded-lg text-xs font-bold uppercase border border-slate-200 hover:bg-slate-200 transition-colors">Cancel</button>
+            <button onClick={addAuth} disabled={!newAuth.name} className="flex-1 py-2.5 bg-blue-500 text-white rounded-lg text-xs font-bold uppercase hover:from-blue-600 hover:to-pink-600 disabled:opacity-30 shadow-sm">Add</button>
           </div>
         </div>
       </ModalShell>

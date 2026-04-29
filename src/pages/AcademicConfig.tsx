@@ -682,7 +682,7 @@ export default function AcademicConfig() {
             <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
               {user?.name || 'Administrator'}
             </span>
-            <div className="w-8 h-8 bg-slate-900 text-white rounded-xl flex items-center justify-center text-[10px] font-bold">
+            <div className="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center text-[10px] font-bold">
               {(user?.name || 'A')[0]}
             </div>
           </div>
@@ -698,7 +698,7 @@ export default function AcademicConfig() {
             { label: 'Total Credits', value: totalCredits, icon: CreditCard, color: 'text-amber-600', bg: 'bg-amber-50' },
             { label: 'Curriculum Maps', value: curriculums.length, icon: LayoutGrid, color: 'text-rose-600', bg: 'bg-rose-50' },
           ].map((s, i) => (
-            <div key={i} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+            <div key={i} className="bg-white rounded-lg border border-slate-100 shadow-sm p-5 flex items-center gap-4">
               <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', s.bg)}>
                 <s.icon className={cn('w-5 h-5', s.color)} />
               </div>
@@ -711,7 +711,7 @@ export default function AcademicConfig() {
         </div>
 
         {/* ── Tab Navigation ── */}
-        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-3">
+        <div className="bg-white rounded-lg border border-slate-100 shadow-sm p-3">
           <div className="flex items-center gap-2 overflow-x-auto">
             {TABS.map((tab) => {
               const Icon = tab.icon;
@@ -722,7 +722,7 @@ export default function AcademicConfig() {
                   className={cn(
                     'flex items-center gap-2.5 px-5 py-3 rounded-lg text-xs font-medium uppercase  transition-all whitespace-nowrap',
                     activeTab === tab.id
-                      ? 'bg-slate-900 text-white shadow-lg'
+                      ? 'bg-slate-900 text-white shadow-md'
                       : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50'
                   )}
                 >
@@ -753,7 +753,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search programs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all w-64"
                   />
                 </div>
                 <button
@@ -772,7 +772,7 @@ export default function AcademicConfig() {
                   !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((p) => (
-                  <div key={p.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
+                  <div key={p.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium tracking-wide uppercase">
@@ -783,13 +783,13 @@ export default function AcademicConfig() {
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           onClick={() => { fillProgramForm(p); openDrawer('program', p); }}
-                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDeleteProgram(p.id!)}
-                          className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -819,7 +819,7 @@ export default function AcademicConfig() {
                         <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Internship</span>
                       )}
                       {p.enableThesis && (
-                        <span className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Thesis</span>
+                        <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-lg text-[7px] font-black uppercase tracking-wide">Thesis</span>
                       )}
                     </div>
                     <div className="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between">
@@ -839,7 +839,7 @@ export default function AcademicConfig() {
               {programs.filter((p) =>
                 !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase())
               ).length === 0 && (
-                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                   <div className="text-center">
                     <GraduationCap className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                     <p className="text-xs font-medium uppercase  text-slate-300">No programs configured yet</p>
@@ -869,7 +869,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search courses..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all w-64"
                   />
                 </div>
                 <button
@@ -887,7 +887,7 @@ export default function AcademicConfig() {
                   !searchQuery || c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.code.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((c) => (
-                  <div key={c.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
+                  <div key={c.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <span className={cn(
                         'px-2.5 py-1 rounded-lg text-xs font-medium tracking-wide uppercase',
@@ -898,8 +898,8 @@ export default function AcademicConfig() {
                         {c.courseType}
                       </span>
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillCourseForm(c); openDrawer('course', c); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
-                        <button onClick={() => handleDeleteCourse(c.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillCourseForm(c); openDrawer('course', c); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => handleDeleteCourse(c.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{c.name}</h3>
@@ -935,7 +935,7 @@ export default function AcademicConfig() {
               {courses.filter((c) =>
                 !searchQuery || c.name.toLowerCase().includes(searchQuery.toLowerCase())
               ).length === 0 && (
-                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                   <div className="text-center">
                     <BookOpen className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                     <p className="text-xs font-medium uppercase  text-slate-300">No courses configured yet</p>
@@ -975,7 +975,7 @@ export default function AcademicConfig() {
                       });
                     }
                   }}
-                  className="px-5 py-3 bg-white border border-slate-100 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer font-medium"
+                  className="px-5 py-3 bg-white border border-slate-100 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none cursor-pointer font-medium"
                 >
                   <option value="">Select Program</option>
                   {programs.map((p) => (
@@ -986,7 +986,7 @@ export default function AcademicConfig() {
                   <button
                     onClick={handleAIGenerateCurriculum}
                     disabled={!selectedProgramId || isGeneratingAI}
-                    className="px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-purple-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-100"
+                    className="px-5 py-3 bg-blue-600 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-blue-700 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
                   >
                     {isGeneratingAI ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -1044,7 +1044,7 @@ export default function AcademicConfig() {
 
               {/* AI Suggestions Panel */}
               {showAiSuggestions && aiSuggestions.length > 0 && (
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] border border-blue-200 p-6">
+                <div className="bg-blue-50 rounded-lg border border-blue-200 p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-blue-600" />
@@ -1063,7 +1063,7 @@ export default function AcademicConfig() {
                         <button
                           onClick={() => handleImportAISuggestion(s)}
                           disabled={!canEdit}
-                          className="ml-3 p-2 bg-blue-50 text-blue-600 rounded-xl hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all disabled:opacity-40"
+                          className="ml-3 p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-700 hover:text-white transition-all disabled:opacity-40"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
@@ -1079,7 +1079,7 @@ export default function AcademicConfig() {
               {curriculums
                 .filter((c) => !selectedProgramId || c.programId === selectedProgramId)
                 .map((cur) => (
-                  <div key={cur.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300">
+                  <div key={cur.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300">
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <StatusBadge status={cur.status} />
@@ -1096,13 +1096,13 @@ export default function AcademicConfig() {
                             });
                             openDrawer('curriculum', cur);
                           }}
-                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleCloneCurriculum(cur)}
-                          className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all"
+                          className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
                         >
                           <Copy className="w-3.5 h-3.5" />
                         </button>
@@ -1114,7 +1114,7 @@ export default function AcademicConfig() {
                     </p>
                     <div className="space-y-2 max-h-48 overflow-y-auto">
                       {cur.semesters.map((sem, idx) => (
-                        <div key={idx} className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl">
+                        <div key={idx} className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg">
                           <span className="text-[10px] font-bold text-slate-600">{sem.semesterName}</span>
                           <span className="text-[10px] font-bold text-blue-600">{sem.courseIds.length} courses &middot; {sem.totalCredits} cr</span>
                         </div>
@@ -1127,7 +1127,7 @@ export default function AcademicConfig() {
                 ))}
 
               {curriculums.filter((c) => !selectedProgramId || c.programId === selectedProgramId).length === 0 && (
-                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                   <div className="text-center">
                     <LayoutGrid className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                     <p className="text-xs font-medium uppercase  text-slate-300">
@@ -1159,7 +1159,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search electives..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all w-64"
                   />
                 </div>
                 <button
@@ -1177,12 +1177,12 @@ export default function AcademicConfig() {
                   !searchQuery || e.name.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((e) => (
-                  <div key={e.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
+                  <div key={e.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm hover:border-blue-200 transition-all duration-300 group">
                     <div className="flex items-start justify-between mb-4">
                       <StatusBadge status={e.status} />
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillElectiveForm(e); openDrawer('elective', e); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
-                        <button onClick={() => handleDeleteElective(e.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillElectiveForm(e); openDrawer('elective', e); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => handleDeleteElective(e.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-1">{e.name}</h3>
@@ -1220,7 +1220,7 @@ export default function AcademicConfig() {
                 ))}
 
               {electives.length === 0 && (
-                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                   <div className="text-center">
                     <Puzzle className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                     <p className="text-xs font-medium uppercase  text-slate-300">No elective groups configured</p>
@@ -1253,7 +1253,7 @@ export default function AcademicConfig() {
 
             <div className="space-y-5">
               {gradingConfigs.map((gc) => (
-                <div key={gc.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
+                <div key={gc.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
@@ -1271,8 +1271,8 @@ export default function AcademicConfig() {
                         <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">Default</span>
                       )}
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => { fillGradingForm(gc); openDrawer('grading', gc); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><Pencil className="w-3.5 h-3.5" /></button>
-                        <button onClick={() => handleDeleteGrading(gc.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { fillGradingForm(gc); openDrawer('grading', gc); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"><Pencil className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => handleDeleteGrading(gc.id!)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
                   </div>
@@ -1313,7 +1313,7 @@ export default function AcademicConfig() {
               ))}
 
               {gradingConfigs.length === 0 && (
-                <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                   <div className="text-center">
                     <Award className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                     <p className="text-xs font-medium uppercase  text-slate-300">No grading configurations yet</p>
@@ -1343,7 +1343,7 @@ export default function AcademicConfig() {
                     type="text" placeholder="Search assignments..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all w-64"
+                    className="pl-11 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-lg text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all w-64"
                   />
                 </div>
                 <button
@@ -1359,12 +1359,12 @@ export default function AcademicConfig() {
             <div className="grid grid-cols-12 gap-6">
               {/* Left: Courses */}
               <div className="col-span-12 lg:col-span-4">
-                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5">
+                <div className="bg-white rounded-lg border border-slate-100 shadow-sm p-5">
                   <h3 className="text-sm font-bold text-slate-900 mb-1">Available Courses</h3>
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{courses.length} total</p>
                   <div className="space-y-2 max-h-96 overflow-y-auto">
                     {courses.map((c) => (
-                      <div key={c.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+                      <div key={c.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-slate-900 truncate">{c.name}</p>
                           <p className="text-xs font-medium uppercase text-slate-400">{c.code} &middot; {c.credits}cr</p>
@@ -1379,14 +1379,14 @@ export default function AcademicConfig() {
               {/* Right: Faculty + Assignments */}
               <div className="col-span-12 lg:col-span-8">
                 {/* Faculty Panel */}
-                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5 mb-5">
+                <div className="bg-white rounded-lg border border-slate-100 shadow-sm p-5 mb-5">
                   <h3 className="text-sm font-bold text-slate-900 mb-1">Faculty Members</h3>
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-400 mb-4">{faculty.filter(f => f.status === 'active').length} active</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto">
                     {faculty.filter((f) => f.status === 'active').map((f) => {
                       const workload = assignments.filter((a) => a.facultyId === f.id && a.status === 'active').length;
                       return (
-                        <div key={f.id} className="flex items-center gap-2.5 p-3 bg-slate-50 rounded-xl">
+                        <div key={f.id} className="flex items-center gap-2.5 p-3 bg-slate-50 rounded-lg">
                           <div className="w-8 h-8 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] font-bold text-slate-600 shrink-0">
                             {f.name.split(' ').map((n) => n[0]).join('')}
                           </div>
@@ -1409,9 +1409,9 @@ export default function AcademicConfig() {
                       getFacultyName(a.facultyId).toLowerCase().includes(searchQuery.toLowerCase())
                     )
                     .map((a) => (
-                      <div key={a.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-4 flex items-center justify-between hover:shadow-md transition-all">
+                      <div key={a.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-4 flex items-center justify-between hover:shadow-sm transition-all">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 font-bold text-sm">
+                          <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 font-bold text-sm">
                             {a.subjectCode?.[0] || '?'}
                           </div>
                           <div>
@@ -1424,7 +1424,7 @@ export default function AcademicConfig() {
                         <div className="flex items-center gap-3">
                           <span className={cn(
                             'text-xs font-medium uppercase tracking-wide',
-                            a.mode === 'Online' ? 'text-blue-500' : a.mode === 'Hybrid' ? 'text-purple-500' : 'text-slate-400'
+                            a.mode === 'Online' ? 'text-blue-500' : a.mode === 'Hybrid' ? 'text-indigo-500' : 'text-slate-400'
                           )}>{a.mode}</span>
                           <StatusBadge status={a.status || 'active'} />
                         </div>
@@ -1432,7 +1432,7 @@ export default function AcademicConfig() {
                     ))}
 
                   {assignments.length === 0 && (
-                    <div className="flex items-center justify-center py-16 border-4 border-dashed border-slate-100 rounded-[2rem]">
+                    <div className="flex items-center justify-center py-16 border-4 border-dashed border-slate-100 rounded-lg">
                       <div className="text-center">
                         <Users className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                         <p className="text-xs font-medium uppercase  text-slate-300">No course assignments yet</p>
@@ -1488,7 +1488,7 @@ export default function AcademicConfig() {
                       </div>
 
                       {/* Content card */}
-                      <div className="flex-1 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
+                      <div className="flex-1 bg-white rounded-lg border border-slate-100 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group">
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-lg font-bold text-slate-900">{v.programName}</h3>
@@ -1527,7 +1527,7 @@ export default function AcademicConfig() {
                   ))}
 
                 {versions.length === 0 && (
-                  <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-[2.5rem]">
+                  <div className="flex items-center justify-center py-20 border-4 border-dashed border-slate-100 rounded-lg">
                     <div className="text-center">
                       <GitBranch className="w-12 h-12 text-slate-200 mx-auto mb-3" />
                       <p className="text-xs font-medium uppercase  text-slate-300">No versions created yet</p>
@@ -1584,7 +1584,7 @@ export default function AcademicConfig() {
                 {courses
                   .filter((c) => c.isMasterCourse || (c.sharedWithTenants && c.sharedWithTenants.length > 0))
                   .map((c) => (
-                    <div key={c.id} className="bg-white rounded-[2.5rem] border border-blue-200 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group relative overflow-hidden">
+                    <div key={c.id} className="bg-white rounded-lg border border-blue-200 shadow-sm p-6 hover:shadow-sm transition-all duration-300 group relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 -translate-y-8 translate-x-8 rounded-full" />
                       <div className="relative">
                         <div className="flex items-start justify-between mb-4">
@@ -1616,12 +1616,12 @@ export default function AcademicConfig() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => { fillCourseForm(c); openDrawer('course', c); }}
-                            className="flex-1 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-xs font-medium uppercase tracking-wide hover:from-blue-700 hover:to-indigo-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-blue-700 hover:text-white transition-all flex items-center justify-center gap-1.5"
                           >
                             <Eye className="w-3.5 h-3.5" /> View Details
                           </button>
                           {canEdit && (
-                            <button className="flex-1 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5">
+                            <button className="flex-1 py-2.5 bg-slate-900 text-white rounded-lg text-xs font-medium uppercase tracking-wide hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5">
                               <Download className="w-3.5 h-3.5" /> Import
                             </button>
                           )}
@@ -1631,7 +1631,7 @@ export default function AcademicConfig() {
                   ))}
 
                 {courses.filter((c) => c.isMasterCourse || (c.sharedWithTenants && c.sharedWithTenants.length > 0)).length === 0 && (
-                  <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-blue-200 rounded-[2.5rem] bg-blue-50/10">
+                  <div className="col-span-full flex items-center justify-center py-20 border-4 border-dashed border-blue-200 rounded-lg bg-blue-50/10">
                     <div className="text-center">
                       <Globe className="w-12 h-12 text-indigo-200 mx-auto mb-3" />
                       <p className="text-xs font-medium uppercase  text-indigo-300">No shared courses available yet</p>
@@ -1655,7 +1655,7 @@ export default function AcademicConfig() {
                   {programs
                     .filter((p) => p.isMasterProgram)
                     .map((p) => (
-                      <div key={p.id} className="bg-white rounded-[2.5rem] border border-emerald-100 shadow-sm p-6">
+                      <div key={p.id} className="bg-white rounded-lg border border-emerald-100 shadow-sm p-6">
                         <div className="flex items-center gap-2 mb-3">
                           <span className="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium tracking-wide uppercase">Master</span>
                           <StatusBadge status={p.status} />
@@ -1670,7 +1670,7 @@ export default function AcademicConfig() {
                     ))}
 
                   {programs.filter((p) => p.isMasterProgram).length === 0 && (
-                    <div className="col-span-full flex items-center justify-center py-12 border-4 border-dashed border-emerald-100 rounded-[2rem]">
+                    <div className="col-span-full flex items-center justify-center py-12 border-4 border-dashed border-emerald-100 rounded-lg">
                       <div className="text-center">
                         <Share2 className="w-8 h-8 text-emerald-200 mx-auto mb-2" />
                         <p className="text-xs font-medium uppercase  text-emerald-300">No programs shared yet</p>
@@ -1815,7 +1815,7 @@ export default function AcademicConfig() {
                                 key={c.id} type="button"
                                 onClick={() => togglePrerequisite(c.id!)}
                                 className={cn(
-                                  'flex items-center gap-2 p-3 rounded-xl text-left text-xs font-medium transition-all border',
+                                  'flex items-center gap-2 p-3 rounded-lg text-left text-xs font-medium transition-all border',
                                   selected
                                     ? 'bg-slate-900 border-slate-900 text-white'
                                     : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50'
@@ -1906,7 +1906,7 @@ export default function AcademicConfig() {
                           <div className="relative">
                             {addCourseSemesterIdx === idx ? (
                               <div className="space-y-2">
-                                <div className="grid grid-cols-1 gap-1.5 max-h-32 overflow-y-auto bg-white rounded-xl border border-slate-100 p-2">
+                                <div className="grid grid-cols-1 gap-1.5 max-h-32 overflow-y-auto bg-white rounded-lg border border-slate-100 p-2">
                                   {courses
                                     .filter((c) => !sem.courseIds.includes(c.id!))
                                     .map((c) => (
@@ -1979,7 +1979,7 @@ export default function AcademicConfig() {
                               key={c.id} type="button"
                               onClick={() => toggleElectiveCourse(c.id!)}
                               className={cn(
-                                'flex items-center gap-2 p-3 rounded-xl text-left text-xs font-medium transition-all border',
+                                'flex items-center gap-2 p-3 rounded-lg text-left text-xs font-medium transition-all border',
                                 selected
                                   ? 'bg-slate-900 border-slate-900 text-white'
                                   : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50'
@@ -2036,23 +2036,23 @@ export default function AcademicConfig() {
                             <input
                               type="text" value={gm.grade}
                               onChange={(e) => updateGradeMapping(idx, 'grade', e.target.value)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-bold"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-lg text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-bold"
                             />
                             <input
                               type="number" value={gm.minMarks}
                               onChange={(e) => updateGradeMapping(idx, 'minMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-lg text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center"
                             />
                             <input
                               type="number" value={gm.maxMarks}
                               onChange={(e) => updateGradeMapping(idx, 'maxMarks', parseInt(e.target.value) || 0)}
-                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-center"
+                              className="px-3 py-2 bg-slate-50/50 border border-slate-100 rounded-lg text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center"
                             />
                             <div className="flex items-center gap-1 justify-end">
                               <input
                                 type="number" step="0.1" value={gm.gradePoints}
                                 onChange={(e) => updateGradeMapping(idx, 'gradePoints', parseFloat(e.target.value) || 0)}
-                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-xl text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all text-right font-bold text-blue-600"
+                                className="w-16 px-2 py-2 bg-slate-50/50 border border-slate-100 rounded-lg text-xs outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-right font-bold text-blue-600"
                               />
                               <button
                                 type="button" onClick={() => removeGradeMappingRow(idx)}
@@ -2152,7 +2152,7 @@ function InputField({ label, value, onChange, placeholder, type = 'text', requir
         type={type} required={required} disabled={disabled}
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
         className={cn(
-          'w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm',
+          'w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-sm',
           disabled && 'opacity-50 cursor-not-allowed bg-slate-100'
         )}
       />
@@ -2170,7 +2170,7 @@ function SelectField({ label, value, onChange, options, required = false }: {
       <select
         value={value} required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm appearance-none cursor-pointer"
+        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-sm appearance-none cursor-pointer"
       >
         {typeof options[0] === 'string'
           ? (options as string[]).map((o) => <option key={o} value={o}>{o}</option>)
@@ -2189,7 +2189,7 @@ function TextAreaField({ label, value, onChange, placeholder, rows = 3 }: {
       <label className="text-xs font-medium uppercase  text-slate-400 pl-1">{label}</label>
       <textarea
         value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm resize-none"
+        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-sm resize-none"
       />
     </div>
   );
@@ -2229,7 +2229,7 @@ function DrawerFooter({ onCancel, onDelete, submitting }: { onCancel: () => void
       )}
       <button
         type="submit" disabled={submitting}
-        className="flex-2 py-4 bg-slate-900 text-white rounded-lg font-black uppercase tracking-wide text-[10px] hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+        className="flex-2 py-4 bg-slate-900 text-white rounded-lg font-black uppercase tracking-wide text-[10px] hover:bg-blue-700 shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {submitting ? (
           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
